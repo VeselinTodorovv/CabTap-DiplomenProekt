@@ -9,5 +9,8 @@ namespace WebTaxiApp.Infrastructure.Data.Domain
 
         [Required]
         public string Name { get; set; } = null!;
+
+        //TODO: decide if one driver can drive many taxis later
+        public virtual IEnumerable<Driver> Drivers { get; set;}
     }
 }

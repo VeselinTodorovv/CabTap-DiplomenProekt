@@ -22,7 +22,7 @@ namespace WebTaxiApp.Infrastructure.Data.Domain
         public Driver Driver { get; set; } = null!;
 
         //what
-        [Required]
+       
         public string Description { get; set; } = null!;
 
         [Required]
@@ -33,7 +33,5 @@ namespace WebTaxiApp.Infrastructure.Data.Domain
         public TaxiStatus TaxiStatus { get; set; }
 
         public int PassengerSeats { get; set; }
-
-        public RideStatus RideStatus { get; set; }
     }
 }

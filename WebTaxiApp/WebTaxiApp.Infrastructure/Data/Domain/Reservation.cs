@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using WebTaxiApp.Infrastructure.Data.Domain.Enum;
+
 namespace WebTaxiApp.Infrastructure.Data.Domain
 {
     public class Reservation
@@ -30,7 +32,10 @@ namespace WebTaxiApp.Infrastructure.Data.Domain
         public string Destination { get; set; } = null!;
 
         [Display(Name = "Passengers Count")]
+        //TODO: Check if this value is less or equal to the taxi's max seats
         public int PassengersCount { get; set; }
 
+        [Required]
+        public RideStatus RideStatus { get; set; }
     }
 }

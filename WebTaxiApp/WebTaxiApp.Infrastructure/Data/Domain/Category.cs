@@ -9,5 +9,7 @@ namespace WebTaxiApp.Infrastructure.Data.Domain
 
         [Required]
         public string Name { get; set; } = null!;
+
+        public virtual IEnumerable<Taxi> Taxis { get; set; }
     }
 }
