@@ -1,17 +1,24 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Security.Claims;
+using System.Text;
 using CabTap.Api.Contracts;
 using CabTap.Api.Models;
 using CabTap.Shared.Authentication;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CabTap.Api.Services;
 
 public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IConfiguration _configuration;
 
-    public UserService(UserManager<ApplicationUser> userManager)
+    public UserService(UserManager<ApplicationUser> userManager, IConfiguration configuration)
     {
         _userManager = userManager;
+        _configuration = configuration;
     }
 
     public async Task<UserManagerResponse> RegisterUserAsync(RegisterViewModel model)
@@ -61,9 +68,58 @@ public class UserService : IUserService
             IsSuccessful = true
         };
     }
-
-    public Task<UserManagerResponse> LoginUserAsync(LoginViewModel model)
+    
+    public async Task<UserManagerResponse> LoginUserAsync(LoginViewModel model)
     {
-        throw new NotImplementedException();
+        var authSettings = _configuration.GetSection("AuthSettings"); 
+        
+        var user = await _userManager.FindByNameAsync(model.UserName);
+        if (user == null)
+        {
+            return new UserManagerResponse
+            {
+                Message = $"User with username: {model.UserName} was not found",
+                IsSuccessful = false,
+                StatusCode = HttpStatusCode.NotFound
+            };
+        }
+
+        var result = await _userManager.CheckPasswordAsync(user, model.Password);
+        if (!result)
+        {
+            return new UserManagerResponse
+            {
+                Message = "Invalid password",
+                IsSuccessful = false,
+                StatusCode = HttpStatusCode.BadRequest
+            };
+        }
+
+        var claims = new[]
+        {
+            new Claim("UserName", model.UserName),
+            new Claim(ClaimTypes.NameIdentifier, user.Id)
+        };
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authSettings["Key"]));
+
+        var token = new JwtSecurityToken(
+            authSettings["Issuer"],
+            authSettings["Audience"],
+            claims,
+            expires: DateTime.Now.AddDays(30),
+            signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+        );
+
+        var tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);
+
+        return new UserManagerResponse
+        {
+            Message = "Authentication Successful",
+            IsSuccessful = true,
+            Token = tokenAsString,
+            ExpireDate = token.ValidTo,
+            StatusCode = HttpStatusCode.OK
+        };
     }
 }

@@ -26,12 +26,30 @@ public class AuthController : ControllerBase
         }
 
         var result = await _userService.RegisterUserAsync(model);
-
-        if (result.IsSuccessful)
+        if (!result.IsSuccessful)
         {
-            return Ok(result); // Status code 200
+            return BadRequest(result);
+        }
+        
+        return Ok(result); // Status code 200
+
+    }
+
+    // /auth/login
+    [HttpPost("login")]
+    public async Task<IActionResult> LoginAsync([FromBody] LoginViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest("Invalid model"); // Status code 400
+        }
+        
+        var result = await _userService.LoginUserAsync(model);
+        if (!result.IsSuccessful)
+        {
+            return BadRequest(result);
         }
 
-        return BadRequest(result);
+        return Ok(result); // Status code 200
     }
 }
