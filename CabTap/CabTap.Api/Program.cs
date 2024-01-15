@@ -24,6 +24,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Seed roles and an admin user
+await app.PrepareDatabase();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

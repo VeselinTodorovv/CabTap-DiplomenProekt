@@ -8,8 +8,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/CabTap.Api/Infrastructure/ApplicationBuilderExtension.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Category.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Enums/RideStatus.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Enums/TaxiStatus.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Reservation.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Api/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Api/Services/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.sln" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +27,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/CabTap.Infrastructure/Class1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Core/Class1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Class1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Data/Class1.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -112,7 +120,7 @@
       <updated>1705255956236</updated>
       <workItem from="1705255965278" duration="304000" />
       <workItem from="1705325358593" duration="8195000" />
-      <workItem from="1705340540525" duration="3912000" />
+      <workItem from="1705340540525" duration="8261000" />
     </task>
     <servers />
   </component>
