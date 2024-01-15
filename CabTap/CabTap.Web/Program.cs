@@ -1,19 +1,49 @@
+using CabTap.Contracts.Repositories;
+using CabTap.Contracts.Services;
 using CabTap.Data;
-
-using Microsoft.AspNetCore.Identity;
+using CabTap.Data.Repositories;
+using CabTap.Services.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+builder.Services.AddTransient<ITaxiRepository, TaxiRepository>();
+builder.Services.AddTransient<ITaxiService, TaxiService>();
+
+// HTTP Settings
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient("CabTapApi", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7006/");
+    client.Timeout = TimeSpan.FromSeconds(30);
+});
+
+// Auth Settings
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "access_token";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                
+        options.ExpireTimeSpan = TimeSpan.FromDays(30);
+        options.SlidingExpiration = true;
+    });
 
 var app = builder.Build();
 

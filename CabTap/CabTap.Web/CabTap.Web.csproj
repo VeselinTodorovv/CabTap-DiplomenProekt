@@ -21,6 +21,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CabTap.Data\CabTap.Data.csproj" />
+    <ProjectReference Include="..\CabTap.Services\CabTap.Services.csproj" />
+    <ProjectReference Include="..\CabTap.Shared\CabTap.Shared.csproj" />
   </ItemGroup>
 
 </Project>
