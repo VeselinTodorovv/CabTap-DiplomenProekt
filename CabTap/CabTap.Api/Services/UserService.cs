@@ -33,7 +33,8 @@ public class UserService : IUserService
             return new UserManagerResponse
             {
                 Message = "Passwords do not match",
-                IsSuccessful = false
+                IsSuccessful = false,
+                StatusCode = HttpStatusCode.BadRequest
             };
         }
 
@@ -55,7 +56,8 @@ public class UserService : IUserService
             {
                 Message = "User was not created",
                 IsSuccessful = false,
-                Errors = result.Errors.Select(error => error.Description)
+                Errors = result.Errors.Select(error => error.Description),
+                StatusCode = HttpStatusCode.BadRequest
             };
         }
 
@@ -65,7 +67,8 @@ public class UserService : IUserService
         return new UserManagerResponse
         {
             Message = "User created successfully",
-            IsSuccessful = true
+            IsSuccessful = true,
+            StatusCode = HttpStatusCode.Created
         };
     }
     
