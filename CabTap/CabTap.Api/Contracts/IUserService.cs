@@ -4,7 +4,7 @@ namespace CabTap.Api.Contracts
 {
     public interface IUserService
     {
-        internal Task<UserManagerResponse> RegisterUserAsync();
-        internal Task<UserManagerResponse> LoginUserAsync();
+        public Task<UserManagerResponse> RegisterUserAsync(RegisterViewModel model);
+        public Task<UserManagerResponse> LoginUserAsync(LoginViewModel model);
     }
 }
