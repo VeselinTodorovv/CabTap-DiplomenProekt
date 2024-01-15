@@ -1,3 +1,7 @@
-﻿namespace CabTap.Services;
+﻿namespace CabTap.Services
+{
+    public class Class1
+    {
 
-public class Class1 { }
+    }
+}

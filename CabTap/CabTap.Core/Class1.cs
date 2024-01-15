@@ -1,3 +1,7 @@
-﻿namespace CabTap.Core;
+﻿namespace CabTap.Core
+{
+    public class Class1
+    {
 
-public class Class1 { }
+    }
+}

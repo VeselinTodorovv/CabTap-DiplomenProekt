@@ -1,3 +1,7 @@
-﻿namespace CabTap.Data;
+﻿namespace CabTap.Data
+{
+    public class Class1
+    {
 
-public class Class1 { }
+    }
+}
