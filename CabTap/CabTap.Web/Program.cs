@@ -1,4 +1,4 @@
-using CabTap.Web.Data;
+using CabTap.Data;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CabTap.Contracts\CabTap.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

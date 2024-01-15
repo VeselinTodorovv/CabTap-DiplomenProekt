@@ -24,8 +24,6 @@ public class Taxi
     public string DriverId { get; set; } = null!;
     public Driver Driver { get; set; } = null!;
 
-    //what
-       
     public string Description { get; set; } = null!;
 
     [Required]

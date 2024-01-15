@@ -8,17 +8,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CabTap.Api/Infrastructure/ApplicationBuilderExtension.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Category.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Enums/RideStatus.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Enums/TaxiStatus.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Reservation.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/ITaxiRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/ITaxiService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/TaxiRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Services/Services/TaxiService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/TaxiController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Core/Class1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.sln" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/CabTap.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/CabTap.Data.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/CabTap.Services.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/CabTap.Services.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/CabTap.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/CabTap.Web.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Data/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Data/Migrations/00000000000000_CreateIdentitySchema.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Data/Migrations/00000000000000_CreateIdentitySchema.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Data/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +33,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/CabTap.Infrastructure/Class1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Services/Class1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Data/Class1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Taxi.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -120,7 +126,7 @@
       <updated>1705255956236</updated>
       <workItem from="1705255965278" duration="304000" />
       <workItem from="1705325358593" duration="8195000" />
-      <workItem from="1705340540525" duration="8261000" />
+      <workItem from="1705340540525" duration="9344000" />
     </task>
     <servers />
   </component>
