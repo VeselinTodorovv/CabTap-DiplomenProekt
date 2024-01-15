@@ -20,8 +20,4 @@
     <ProjectReference Include="..\CabTap.Shared\CabTap.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure" />
-  </ItemGroup>
-
 </Project>
