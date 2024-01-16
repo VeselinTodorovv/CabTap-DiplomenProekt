@@ -16,6 +16,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ITaxiRepository, TaxiRepository>();
 builder.Services.AddTransient<ITaxiService, TaxiService>();
 
@@ -43,6 +44,8 @@ builder.Services.AddAuthentication(options =>
                 
         options.ExpireTimeSpan = TimeSpan.FromDays(30);
         options.SlidingExpiration = true;
+        
+        options.LoginPath = "/Account/Login";
     });
 
 var app = builder.Build();

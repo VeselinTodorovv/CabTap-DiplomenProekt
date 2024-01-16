@@ -10,4 +10,8 @@
     <ProjectReference Include="..\CabTap.Contracts\CabTap.Contracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+  </ItemGroup>
+
 </Project>
