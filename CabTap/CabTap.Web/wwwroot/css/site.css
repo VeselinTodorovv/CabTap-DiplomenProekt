@@ -16,3 +16,23 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*OWN*/
+html, body {
+  height: 100%;
+  width: 100vw;
+  margin: 0;
+}
+
+#map {
+  height: 70vh;
+  width: 100%;
+}
+
+.leaflet-popup-content {
+  max-width: 300px;
+}
+
+.leaflet-top {
+  display: none !important;
+}
