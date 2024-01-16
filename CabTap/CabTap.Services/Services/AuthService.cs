@@ -38,4 +38,18 @@ public class AuthService : IAuthService
             authProperties
         );
     }
+
+    public async Task SignOutUserAsync()
+    {
+        var authProperties = new AuthenticationProperties
+        {
+            IssuedUtc = DateTimeOffset.UtcNow,
+            RedirectUri = "/"
+        };
+
+        await _httpContextAccessor.HttpContext.SignOutAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            authProperties
+        );
+    }
 }

@@ -46,6 +46,7 @@ builder.Services.AddAuthentication(options =>
         options.SlidingExpiration = true;
         
         options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Logout"; 
     });
 
 var app = builder.Build();

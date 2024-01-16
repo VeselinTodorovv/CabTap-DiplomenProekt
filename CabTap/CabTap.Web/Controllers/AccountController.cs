@@ -69,4 +69,16 @@ public class AccountController : Controller
 
         return RedirectToAction("Index", "Home");
     }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Logout()
+    {
+        if (User.Identity is {IsAuthenticated: true})
+        {
+            await _authService.SignOutUserAsync();
+        }
+
+        return RedirectToAction("Index", "Home");
+    }
 }
