@@ -9,11 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/IAuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/AuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/CabTap.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/CabTap.Web.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/AccountController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +26,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/CabTap.Infrastructure/Class1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/AuthService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Contracts/Services/IAuthService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -122,7 +122,7 @@
       <workItem from="1705255965278" duration="304000" />
       <workItem from="1705325358593" duration="8195000" />
       <workItem from="1705340540525" duration="15989000" />
-      <workItem from="1705407376883" duration="1368000" />
+      <workItem from="1705407376883" duration="2592000" />
     </task>
     <servers />
   </component>

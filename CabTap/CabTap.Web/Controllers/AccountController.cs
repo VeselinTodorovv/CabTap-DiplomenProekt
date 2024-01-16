@@ -31,12 +31,25 @@ public class AccountController : Controller
         }
 
         var registerResponse = await _apiClient.PostAsJsonAsync("auth/register", model);
-
         if (!registerResponse.IsSuccessStatusCode)
         {
             ModelState.AddModelError("", "Registration failed. Please try again.");
             return View(model);
         }
+        
+        var loginResponse = await _apiClient.PostAsJsonAsync("auth/login", new LoginViewModel
+        {
+            UserName = model.UserName,
+            Password = model.Password
+        });
+        
+        if (!loginResponse.IsSuccessStatusCode)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        
+        var token = await loginResponse.Content.ReadAsStringAsync();
+        await _authService.SignInUserAsync(model.UserName, token);
 
         return RedirectToAction("Index", "Home");
     }
