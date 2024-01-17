@@ -1,5 +1,7 @@
 using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
+using CabTap.Core.Entities;
+using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Taxi;
 
 namespace CabTap.Services.Services;
@@ -15,26 +17,60 @@ public class TaxiService : ITaxiService
 
     public async Task<IEnumerable<TaxiAllViewModel>> GetAllAvailableTaxisAsync()
     {
-        throw new NotImplementedException();
+        var taxis = await _taxiRepository.GetAllTaxisAsync();
+
+        var taxiViewModels = taxis.Select(taxi => new TaxiAllViewModel
+        {
+            Id = taxi!.Id,
+            Brand = taxi.Brand,
+            RegNumber = taxi.RegNumber,
+            Description = taxi.Description,
+            Picture = taxi.Picture,
+            TaxiStatus = taxi.TaxiStatus,
+            PassengerSeats = taxi.PassengerSeats,
+            DriverId = taxi.DriverId,
+            CategoryId = taxi.CategoryId
+        })
+            .Where(x => x.TaxiStatus == TaxiStatus.Available)
+            .ToList();
+        
+        return taxiViewModels;
     }
 
     public async Task<TaxiDetailsViewModel> GetTaxiByIdAsync(int taxiId)
     {
-        throw new NotImplementedException();
+        var taxi = await _taxiRepository.GetTaxiByIdAsync(taxiId);
+        
+        var model = new TaxiDetailsViewModel
+        {
+            // bind later
+        };
+
+        return model;
     }
 
     public async Task AddTaxiAsync(TaxiCreateViewModel taxiViewModel)
     {
-        throw new NotImplementedException();
+        var taxi = new Taxi
+        {
+            //bind view model
+        };
+        
+        await _taxiRepository.AddTaxiAsync(taxi);
     }
 
     public async Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel)
     {
-        throw new NotImplementedException();
+        var taxi = new Taxi
+        {
+            //bind view model
+        };
+        
+        await _taxiRepository.UpdateTaxiAsync(taxi);
     }
 
     public async Task DeleteTaxiAsync(int taxiId)
     {
-        throw new NotImplementedException();
+        await _taxiRepository.DeleteTaxiAsync(taxiId);
     }
 }
