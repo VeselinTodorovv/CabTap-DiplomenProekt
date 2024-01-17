@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CabTap.Core\CabTap.Core.csproj" />
+      <ProjectReference Include="..\CabTap.Shared\CabTap.Shared.csproj" />
+    </ItemGroup>
+
 </Project>
