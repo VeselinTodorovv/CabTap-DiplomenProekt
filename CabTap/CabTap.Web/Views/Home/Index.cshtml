@@ -20,6 +20,10 @@
 @if (User.Identity is {IsAuthenticated: true})
 {
     <div id="map"></div>
+
+    <div id="confirmButton" style="display: none;">
+        <button id="confirmRoute" class="btn btn-primary">Confirm Route</button>
+    </div>
     
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>

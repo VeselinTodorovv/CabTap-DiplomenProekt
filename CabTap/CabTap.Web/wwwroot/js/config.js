@@ -5,6 +5,6 @@ const GEOLOCATION_OPTIONS = {
     maximumAge: 60000
 };
 const PROVIDER_OPTIONS = {
-    'accept-language': 'BG',
-    countrycodes: 'BG',
+    'accept-language': 'bg',
+    countrycodes: 'bg',
 };

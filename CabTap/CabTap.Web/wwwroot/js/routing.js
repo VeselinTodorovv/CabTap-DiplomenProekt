@@ -27,22 +27,10 @@ function calculateRoute(currentLat, currentLng, destinationLat, destinationLng) 
 }
 
 function onRouteFound(e) {
-    const routes = e.routes;
+    routes = e.routes;
     if (routes.length > 0) {
-        const routeSummary = routes[0].summary;
-        logRouteSummary(routeSummary);
+        showConfirmButton();
     }
-}
-
-function logRouteSummary(routeSummary) {
-    let distance = (routeSummary.totalDistance / 1000).toFixed(2);
-    let duration = (routeSummary.totalTime / 60).toFixed(2);
-
-    const unitDistance = distance > 1 ? "Distance: " + distance + " km" : "Distance: " + distance * 1000 + " m";
-    const unitDuration = duration > 60 ? "ETA: " + (duration / 60).toFixed(2) + " hours" : "ETA: " + duration + " minutes";
-
-    console.log(unitDistance);
-    console.log(unitDuration);
 }
 
 function resetDestination() {
@@ -50,5 +38,17 @@ function resetDestination() {
         map.removeControl(routingControl);
         destinationSet = false;
         console.log("destination reset");
+
+        hideConfirmButton();
     }
+}
+
+function showConfirmButton() {
+    const confirmButton = document.getElementById('confirmButton');
+    confirmButton.style.display = 'block';
+}
+
+function hideConfirmButton() {
+    const confirmButton = document.getElementById('confirmButton');
+    confirmButton.style.display = 'none';
 }
