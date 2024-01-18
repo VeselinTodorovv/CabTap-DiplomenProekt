@@ -29,7 +29,7 @@ function calculateRoute(currentLat, currentLng, destinationLat, destinationLng) 
 function onRouteFound(e) {
     routes = e.routes;
     if (routes.length > 0) {
-        showConfirmButton();
+        toggleConfirmButton(true);
     }
 }
 
@@ -53,16 +53,11 @@ function resetDestination() {
         destinationSet = false;
         console.log("destination reset");
 
-        hideConfirmButton();
+        toggleConfirmButton(false);
     }
 }
 
-function showConfirmButton() {
+function toggleConfirmButton(show) {
     const confirmButton = document.getElementById('confirmButton');
-    confirmButton.style.display = 'block';
-}
-
-function hideConfirmButton() {
-    const confirmButton = document.getElementById('confirmButton');
-    confirmButton.style.display = 'none';
+    confirmButton.style.display = show ? 'block' : 'none';
 }
