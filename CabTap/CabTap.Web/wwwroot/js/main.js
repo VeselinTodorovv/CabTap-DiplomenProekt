@@ -23,17 +23,3 @@ map.addControl(search);
 
 const confirmButton = document.getElementById('confirmRoute');
 confirmButton.addEventListener('click', sendRouteData);
-
-// Will only log the data in the console for now
-function sendRouteData() {
-    // TODO: Implement remaining services, so you can send this data to the controller
-    const routeSummary = routes[0].summary;  
-    let distance = (routeSummary.totalDistance / 1000).toFixed(2);
-    let duration = (routeSummary.totalTime / 60).toFixed(2);
-
-    unitDistance = distance > 1 ? "Distance: " + distance + " km" : "Distance: " + distance * 1000 + " m";
-    unitDuration = duration > 60 ? "ETA: " + (duration / 60).toFixed(2) + " hours" : "ETA: " + duration + " minutes";
-
-    console.log(unitDistance);
-    console.log(unitDuration);
-}
