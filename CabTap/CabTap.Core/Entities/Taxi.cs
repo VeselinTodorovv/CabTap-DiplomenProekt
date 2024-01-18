@@ -4,7 +4,7 @@ using CabTap.Core.Entities.Enums;
 
 namespace CabTap.Core.Entities;
 
-public class Taxi
+public class Taxi : BaseEntity
 {
     [Key]
     public int Id { get; set; }
@@ -24,14 +24,19 @@ public class Taxi
     public string DriverId { get; set; } = null!;
     public Driver Driver { get; set; } = null!;
 
-    public string Description { get; set; } = null!;
+    public string? Description { get; set; } = null!;
 
     [Required]
+    [Url(ErrorMessage = "Please enter a valid URL")]
     [DataType(DataType.ImageUrl)]
     public string? Picture { get; set; }
 
     [Display(Name = "Status")]
+    [EnumDataType(typeof(TaxiStatus))]
     public TaxiStatus TaxiStatus { get; set; }
 
+    [Range(1, 8, ErrorMessage = "Passenger Seats must be between 1 and 8")]
     public int PassengerSeats { get; set; }
+
+    public virtual ICollection<Reservation> Reservations { get; set; }
 }

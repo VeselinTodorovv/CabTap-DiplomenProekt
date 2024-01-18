@@ -4,24 +4,18 @@ using CabTap.Core.Entities.Enums;
 
 namespace CabTap.Core.Entities;
 
-public class Reservation
+public class Reservation : BaseEntity
 {
     [Key]
     public string Id { get; set; } = null!;
 
     [Required]
-    // If using one database, make it a foreign key
     public string UserId { get; set; } = null!;
 
     [ForeignKey(nameof(Taxi))]
     public int TaxiId { get; set; }
-    public Taxi Taxi { get; set; } = null!;
-
-    [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
-    [Display(Name = "Time and Date of Reservation")]
-    public DateTime ReservationTime { get; set; }
-
+    public virtual Taxi Taxi { get; set; } = null!;
+    
     [Required]
     //start location
     public string Origin { get; set; } = null!;
@@ -34,5 +28,6 @@ public class Reservation
     public int PassengersCount { get; set; }
 
     [Required]
+    [EnumDataType(typeof(RideStatus))]
     public RideStatus RideStatus { get; set; }
 }

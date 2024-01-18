@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CabTap.Core.Entities;
 
-public class Driver
+public class Driver : BaseEntity
 {
     [Key]
     public string Id { get; set; } = null!;
@@ -10,5 +10,5 @@ public class Driver
     [Required]
     public string Name { get; set; } = null!;
     
-    public virtual IEnumerable<Taxi> Taxis { get; set; }
+    public virtual ICollection<Taxi> Taxis { get; set; }
 }

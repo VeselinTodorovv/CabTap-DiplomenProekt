@@ -7,14 +7,26 @@
     <projectFile profileName="IIS Express">CabTap.Web/CabTap.Web.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="">
+    <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="merge hide/show confirm button functions into one.">
+      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/BaseEntity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/AccountController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Category.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Reservation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Reservation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/AuthService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -26,10 +38,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/CabTap.Infrastructure/Class1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/AuthService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Contracts/Services/IAuthService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Taxi.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -122,8 +131,95 @@
       <workItem from="1705255965278" duration="304000" />
       <workItem from="1705325358593" duration="8195000" />
       <workItem from="1705340540525" duration="15989000" />
-      <workItem from="1705407376883" duration="2592000" />
+      <workItem from="1705407376883" duration="2951000" />
+      <workItem from="1705420644230" duration="6705000" />
+      <workItem from="1705442913431" duration="1581000" />
+      <workItem from="1705498217739" duration="4112000" />
+      <workItem from="1705504077557" duration="2527000" />
+      <workItem from="1705519980345" duration="6429000" />
+      <workItem from="1705577077849" duration="1954000" />
+      <workItem from="1705579083147" duration="29000" />
+      <workItem from="1705599890953" duration="381000" />
+      <workItem from="1705603627684" duration="4714000" />
     </task>
+    <task id="LOCAL-00001" summary="implement leaflet map with routing">
+      <created>1705443031280</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1705443031280</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add empty taxi viewmodels">
+      <created>1705498367130</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1705498367130</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Implement Taxi Repository">
+      <created>1705498536713</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1705498536713</updated>
+    </task>
+    <task id="LOCAL-00004" summary="define taxi service">
+      <created>1705502511289</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1705502511289</updated>
+    </task>
+    <task id="LOCAL-00005" summary="refactor WebApp's configuration.">
+      <created>1705504752280</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1705504752280</updated>
+    </task>
+    <task id="LOCAL-00006" summary="implement dummy taxi service">
+      <created>1705505553765</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1705505553765</updated>
+    </task>
+    <task id="LOCAL-00007" summary="edit .gitignore">
+      <created>1705577212321</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1705577212321</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add .vscode to .gitignore">
+      <created>1705577257192</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1705577257192</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add a confirm route button (will serve for sending data to the controller later on)">
+      <created>1705578560090</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1705578560090</updated>
+    </task>
+    <task id="LOCAL-00010" summary="move sendRouteData() function from main.js to routing.js">
+      <created>1705578981176</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1705578981176</updated>
+    </task>
+    <task id="LOCAL-00011" summary="merge hide/show confirm button functions into one.">
+      <created>1705607360801</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1705607360801</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,5 +238,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="implement leaflet map with routing" />
+    <MESSAGE value="add empty taxi viewmodels" />
+    <MESSAGE value="Implement Taxi Repository" />
+    <MESSAGE value="define taxi service" />
+    <MESSAGE value="refactor WebApp's configuration." />
+    <MESSAGE value="implement dummy taxi service" />
+    <MESSAGE value="edit .gitignore" />
+    <MESSAGE value="add .vscode to .gitignore" />
+    <MESSAGE value="add a confirm route button (will serve for sending data to the controller later on)" />
+    <MESSAGE value="move sendRouteData() function from main.js to routing.js" />
+    <MESSAGE value="merge hide/show confirm button functions into one." />
+    <option name="LAST_COMMIT_MESSAGE" value="merge hide/show confirm button functions into one." />
   </component>
 </project>
