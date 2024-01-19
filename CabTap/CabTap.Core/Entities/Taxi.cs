@@ -24,7 +24,7 @@ public class Taxi : BaseEntity
     public string DriverId { get; set; } = null!;
     public Driver Driver { get; set; } = null!;
 
-    public string? Description { get; set; } = null!;
+    public string? Description { get; set; }
 
     [Url(ErrorMessage = "Please enter a valid URL")]
     [DataType(DataType.ImageUrl)]
@@ -37,5 +37,5 @@ public class Taxi : BaseEntity
     [Range(1, 8, ErrorMessage = "Passenger Seats must be between 1 and 8")]
     public int PassengerSeats { get; set; }
 
-    public virtual ICollection<Reservation> Reservations { get; set; }
+    public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 }
