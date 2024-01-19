@@ -26,7 +26,6 @@ public class Taxi : BaseEntity
 
     public string? Description { get; set; } = null!;
 
-    [Required]
     [Url(ErrorMessage = "Please enter a valid URL")]
     [DataType(DataType.ImageUrl)]
     public string? Picture { get; set; }

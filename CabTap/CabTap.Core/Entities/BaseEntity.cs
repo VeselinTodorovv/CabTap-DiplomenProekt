@@ -4,8 +4,6 @@ namespace CabTap.Core.Entities;
 
 public abstract class BaseEntity
 {
-    // TODO: Consider implementing a DateTime service
-    
     [Required]
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
