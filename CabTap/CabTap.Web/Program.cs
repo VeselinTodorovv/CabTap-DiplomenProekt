@@ -16,9 +16,12 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ITaxiRepository, TaxiRepository>();
+builder.Services.AddTransient<IDriverRepository, DriverRepository>();
+
+builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ITaxiService, TaxiService>();
+builder.Services.AddTransient<IDriverService, DriverService>();
 
 // HTTP Settings
 builder.Services.ConfigureHttpSettings();
