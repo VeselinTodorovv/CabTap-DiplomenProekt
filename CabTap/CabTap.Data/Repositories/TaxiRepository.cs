@@ -25,7 +25,7 @@ public class TaxiRepository : ITaxiRepository
 
     public async Task AddTaxiAsync(Taxi taxi)
     {
-        _context.Taxis.Add(taxi);
+        await _context.Taxis.AddAsync(taxi);
         await _context.SaveChangesAsync();
     }
 

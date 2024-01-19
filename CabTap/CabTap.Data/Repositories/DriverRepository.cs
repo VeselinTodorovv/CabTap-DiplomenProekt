@@ -25,7 +25,7 @@ public class DriverRepository : IDriverRepository
 
     public async Task AddDriverAsync(Driver driver)
     {
-        _context.Drivers.Add(driver);
+        await _context.Drivers.AddAsync(driver);
         await _context.SaveChangesAsync();
     }
 
