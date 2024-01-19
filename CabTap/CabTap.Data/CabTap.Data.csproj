@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CabTap.Contracts\CabTap.Contracts.csproj" />
     <ProjectReference Include="..\CabTap.Core\CabTap.Core.csproj" />
+    <ProjectReference Include="..\CabTap.Services\CabTap.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

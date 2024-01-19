@@ -1,3 +1,7 @@
+using CabTap.Contracts.Repositories;
+using CabTap.Contracts.Services;
+using CabTap.Data.Repositories;
+using CabTap.Services.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,8 +10,6 @@ namespace CabTap.Data.Infrastructure;
 
 public static class ServiceCollectionExtension
 {
-    private static IHttpClientFactory _httpClientFactory;
-    
     public static void ConfigureAuthentication(this IServiceCollection services)
     {
         services.AddAuthentication(options =>
@@ -39,5 +41,19 @@ public static class ServiceCollectionExtension
             client.BaseAddress = new Uri("https://localhost:7006/");
             client.Timeout = TimeSpan.FromSeconds(30);
         });
+    }
+
+    public static void RegisterServices(this IServiceCollection services)
+    {
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        
+        services.AddTransient<ITaxiRepository, TaxiRepository>();
+        services.AddTransient<IDriverRepository, DriverRepository>();
+        services.AddTransient<ICategoryRepository, CategoryRepository>();
+
+        services.AddTransient<IAuthService, AuthService>();
+        services.AddTransient<ITaxiService, TaxiService>();
+        services.AddTransient<IDriverService, DriverService>();
+        services.AddTransient<ICategoryService, CategoryService>();
     }
 }
