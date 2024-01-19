@@ -38,7 +38,12 @@ public class DriverService : IDriverService
 
         var model = new DriverDetailsViewModel
         {
-            // bind later
+            Id = driver.Id,
+            Name = driver.Name,
+            CreatedBy = driver.CreatedBy,
+            CreatedOn = driver.CreatedOn,
+            LastModifiedBy = driver.LastModifiedBy,
+            LastModifiedOn = driver.LastModifiedOn
         };
 
         return model;
@@ -48,7 +53,12 @@ public class DriverService : IDriverService
     {
         var driver = new Driver
         {
-            // bind view model
+            Id = driverViewModel.Id,
+            Name = driverViewModel.Name,
+            CreatedBy = driverViewModel.CreatedBy,
+            CreatedOn = driverViewModel.CreatedOn,
+            LastModifiedBy = driverViewModel.LastModifiedBy,
+            LastModifiedOn = driverViewModel.LastModifiedOn
         };
         
         await _driverRepository.AddDriverAsync(driver);
@@ -58,7 +68,12 @@ public class DriverService : IDriverService
     {
         var driver = new Driver
         {
-            //bind view model
+            Id = driverViewModel.Id,
+            Name = driverViewModel.Name,
+            CreatedBy = driverViewModel.CreatedBy,
+            CreatedOn = driverViewModel.CreatedOn,
+            LastModifiedBy = driverViewModel.LastModifiedBy,
+            LastModifiedOn = driverViewModel.LastModifiedOn
         };
         
         await _driverRepository.UpdateDriverAsync(driver);
