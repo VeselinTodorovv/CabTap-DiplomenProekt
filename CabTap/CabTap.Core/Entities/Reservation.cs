@@ -23,6 +23,12 @@ public class Reservation : BaseEntity
     [Required]
     public string Destination { get; set; } = null!;
 
+    [Required]
+    public double Duration { get; set; }
+
+    [Required]
+    public decimal Price { get; set; }
+    
     [Display(Name = "Passengers Count")]
     //TODO: Check if this value is less or equal to the taxi's max seats
     public int PassengersCount { get; set; }

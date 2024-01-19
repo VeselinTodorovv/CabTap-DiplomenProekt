@@ -29,7 +29,9 @@ public class AuthService : IAuthService
         {
             ExpiresUtc = DateTimeOffset.UtcNow.Add(TimeSpan.FromDays(30)),
             IsPersistent = true,
-            AllowRefresh = true
+            AllowRefresh = true,
+            IssuedUtc = DateTimeOffset.Now,
+            RedirectUri = "/"
         };
 
         await _httpContextAccessor.HttpContext.SignInAsync(
