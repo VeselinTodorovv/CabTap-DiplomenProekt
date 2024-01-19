@@ -31,9 +31,14 @@ public class TaxiRepository : ITaxiRepository
 
     public async Task UpdateTaxiAsync(Taxi taxi)
     {
-        _context.Entry(taxi).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
+        var existingTaxi = await _context.Drivers.FindAsync(taxi.Id);
 
+        if (existingTaxi != null)
+        {
+            _context.Entry(existingTaxi).CurrentValues.SetValues(taxi);
+            _context.Entry(existingTaxi).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
     }
 
     public async Task DeleteTaxiAsync(int taxiId)

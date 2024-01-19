@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CabTap.Web.Controllers;
 
-public class TaxiController : Controller
+public class TaxisController : Controller
 {
     private readonly ITaxiService _taxiService;
     
-    public TaxiController(ITaxiService taxiService)
+    public TaxisController(ITaxiService taxiService)
     {
         _taxiService = taxiService;
     }
