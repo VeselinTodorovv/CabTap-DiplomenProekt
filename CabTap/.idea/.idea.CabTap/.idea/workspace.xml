@@ -7,14 +7,9 @@
     <projectFile profileName="IIS Express">CabTap.Web/CabTap.Web.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="merge hide/show confirm button functions into one.">
-      <change afterPath="$PROJECT_DIR$/CabTap.Core/Entities/BaseEntity.cs" afterDir="false" />
+    <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="Implemented reservation service and added respective controller">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Category.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Reservation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Reservation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/AuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Infrastructure/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Infrastructure/ServiceCollectionExtension.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +32,43 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/CabTap.Infrastructure/Class1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Taxi/TaxiCreateViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Taxi/TaxiDeleteViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Data/Infrastructure/ServiceCollectionExtension.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/DriverService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Taxi.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Driver/DriverEditViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea95343b9387b73062a9b61b7538f826c54ce3529632b4472ba4494044d23/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Data/Repositories/TaxiRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Data/Infrastructure/ServiceCollectionExtension.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c1da7b6c7c71a954fe3eb2531c6476711b3e6d93a8d76795386d326bb9dbc/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Category.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Data/Repositories/DriverRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/DriverService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Taxi.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Driver/DriverCreateViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Category.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Driver.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Data/Repositories/CategoryRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Driver.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Infrastructure/Class1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/AuthService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Data/Repositories/TaxiRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/BaseEntity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Data/Repositories/TaxiRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/TaxiService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Taxi.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Category.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Data/Repositories/TaxiRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Taxi/TaxiAllViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Reservation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Driver/DriverDetailsViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Taxi/TaxiDetailsViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Taxi/TaxiEditViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Driver/DriverDeleteViewModel.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -56,6 +86,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.CabTap.Api">
@@ -140,7 +171,10 @@
       <workItem from="1705577077849" duration="1954000" />
       <workItem from="1705579083147" duration="29000" />
       <workItem from="1705599890953" duration="381000" />
-      <workItem from="1705603627684" duration="4714000" />
+      <workItem from="1705603627684" duration="6620000" />
+      <workItem from="1705614062326" duration="2861000" />
+      <workItem from="1705618431719" duration="319000" />
+      <workItem from="1705662971938" duration="16226000" />
     </task>
     <task id="LOCAL-00001" summary="implement leaflet map with routing">
       <created>1705443031280</created>
@@ -219,7 +253,119 @@
       <option name="project" value="LOCAL" />
       <updated>1705607360801</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="implement base entity class and improve core entities">
+      <created>1705608795274</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1705608795274</updated>
+    </task>
+    <task id="LOCAL-00013" summary="add Duration and Price properties for Reservations">
+      <created>1705664078651</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1705664078651</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added Driver ViewModels">
+      <created>1705666383704</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1705666383704</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Implemented Driver repository, service and controller">
+      <created>1705666537947</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1705666537947</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Small taxi repository and controller refactor">
+      <created>1705666583034</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1705666583034</updated>
+    </task>
+    <task id="LOCAL-00017" summary="bind driver viewModels and models in DriverService">
+      <created>1705674160194</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1705674160194</updated>
+    </task>
+    <task id="LOCAL-00018" summary="bind taxi models and viewModels">
+      <created>1705675190585</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1705675190585</updated>
+    </task>
+    <task id="LOCAL-00019" summary="register services in ServiceCollectionExtension.cs, instead of Program.cs">
+      <created>1705676482407</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1705676482407</updated>
+    </task>
+    <task id="LOCAL-00020" summary="set default values on driver objects create/edit">
+      <created>1705676617847</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1705676617847</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Category ViewModels">
+      <created>1705676915333</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1705676915333</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Implement category repository &amp; service">
+      <created>1705678536404</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1705678536404</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Initialize navigation properties">
+      <created>1705681443800</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1705681443800</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Implement reservation repository">
+      <created>1705682464857</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1705682464857</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Use 'AddAsync' instead of 'Add'">
+      <created>1705682896097</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1705682896097</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added reservation viewModels">
+      <created>1705686635798</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1705686635798</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Implemented reservation service and added respective controller">
+      <created>1705686660015</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1705686660015</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,6 +374,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="6a5aa1f1-a707-469b-92ab-4b747f7da567">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:E:/DEV/c#/repos/DiplomenProekt/CabTap/.idea" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -235,11 +406,14 @@
         </entry>
       </map>
     </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="6a5aa1f1-a707-469b-92ab-4b747f7da567" value="TOOL_WINDOW" />
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="implement leaflet map with routing" />
-    <MESSAGE value="add empty taxi viewmodels" />
     <MESSAGE value="Implement Taxi Repository" />
     <MESSAGE value="define taxi service" />
     <MESSAGE value="refactor WebApp's configuration." />
@@ -249,6 +423,22 @@
     <MESSAGE value="add a confirm route button (will serve for sending data to the controller later on)" />
     <MESSAGE value="move sendRouteData() function from main.js to routing.js" />
     <MESSAGE value="merge hide/show confirm button functions into one." />
-    <option name="LAST_COMMIT_MESSAGE" value="merge hide/show confirm button functions into one." />
+    <MESSAGE value="implement base entity class and improve core entities" />
+    <MESSAGE value="add Duration and Price properties for Reservations" />
+    <MESSAGE value="added Driver ViewModels" />
+    <MESSAGE value="Implemented Driver repository, service and controller" />
+    <MESSAGE value="Small taxi repository and controller refactor" />
+    <MESSAGE value="bind driver viewModels and models in DriverService" />
+    <MESSAGE value="bind taxi models and viewModels" />
+    <MESSAGE value="register services in ServiceCollectionExtension.cs, instead of Program.cs" />
+    <MESSAGE value="set default values on driver objects create/edit" />
+    <MESSAGE value="Category ViewModels" />
+    <MESSAGE value="Implement category repository &amp; service" />
+    <MESSAGE value="Initialize navigation properties" />
+    <MESSAGE value="Implement reservation repository" />
+    <MESSAGE value="Use 'AddAsync' instead of 'Add'" />
+    <MESSAGE value="Added reservation viewModels" />
+    <MESSAGE value="Implemented reservation service and added respective controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented reservation service and added respective controller" />
   </component>
 </project>
