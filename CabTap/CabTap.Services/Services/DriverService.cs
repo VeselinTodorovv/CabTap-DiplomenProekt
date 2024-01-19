@@ -2,19 +2,21 @@ using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Shared.Driver;
+using Microsoft.AspNetCore.Http;
 
 namespace CabTap.Services.Services;
 
 public class DriverService : IDriverService
 {
     private readonly IDriverRepository _driverRepository;
+    private readonly IHttpContextAccessor _contextAccessor;
     
-    public DriverService(IDriverRepository driverRepository)
+    public DriverService(IDriverRepository driverRepository, IHttpContextAccessor contextAccessor)
     {
         _driverRepository = driverRepository;
+        _contextAccessor = contextAccessor;
     }
-
-
+    
     public async Task<IEnumerable<DriverAllViewModel>> GetAllDriversAsync()
     {
         var drivers = await _driverRepository.GetAllDriversAsync();
@@ -51,29 +53,38 @@ public class DriverService : IDriverService
 
     public async Task AddDriverAsync(DriverCreateViewModel driverViewModel)
     {
-        var driver = new Driver
+        var user = _contextAccessor.HttpContext.User.Identity?.Name;
+
+        if (user != null)
         {
-            Id = driverViewModel.Id,
-            Name = driverViewModel.Name,
-            CreatedBy = driverViewModel.CreatedBy,
-            CreatedOn = driverViewModel.CreatedOn,
-            LastModifiedBy = driverViewModel.LastModifiedBy,
-            LastModifiedOn = driverViewModel.LastModifiedOn
-        };
+            var driver = new Driver
+            {
+                Id = driverViewModel.Id,
+                Name = driverViewModel.Name,
+                CreatedBy = user,
+                CreatedOn = DateTime.Now,
+                LastModifiedBy = user,
+                LastModifiedOn = DateTime.Now
+            };
         
-        await _driverRepository.AddDriverAsync(driver);
+            await _driverRepository.AddDriverAsync(driver);
+        }
     }
 
     public async Task UpdateDriverAsync(DriverEditViewModel driverViewModel)
     {
+        var user = _contextAccessor.HttpContext.User.Identity?.Name;
+        
         var driver = new Driver
         {
             Id = driverViewModel.Id,
             Name = driverViewModel.Name,
+            
+            // Don't let these be edited
             CreatedBy = driverViewModel.CreatedBy,
             CreatedOn = driverViewModel.CreatedOn,
-            LastModifiedBy = driverViewModel.LastModifiedBy,
-            LastModifiedOn = driverViewModel.LastModifiedOn
+            LastModifiedBy = user,
+            LastModifiedOn = DateTime.Now
         };
         
         await _driverRepository.UpdateDriverAsync(driver);
