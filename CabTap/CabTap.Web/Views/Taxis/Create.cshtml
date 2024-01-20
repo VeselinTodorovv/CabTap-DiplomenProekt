@@ -6,57 +6,59 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-
-<form asp-controller="Taxis" asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="RegNumber" class="control-label"></label>
-        <input asp-for="RegNumber" class="form-control" />
-        <span asp-validation-for="RegNumber" class="text-danger"></span>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Taxis" asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="RegNumber" class="control-label"></label>
+                <input asp-for="RegNumber" class="form-control" />
+                <span asp-validation-for="RegNumber" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+        
+            @* TODO: Category *@
+        
+            <div class="form-group">
+                <label asp-for="DriverId" class="control-label"></label>
+                <input asp-for="DriverId" class="form-control" />
+                <span asp-validation-for="DriverId" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <label asp-for="Picture" class="control-label"></label>
+                <input asp-for="Picture" class="form-control" />
+                <span asp-validation-for="Picture" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <label asp-for="TaxiStatus" class="control-label"></label>
+                <select asp-for="TaxiStatus" asp-items="@(new SelectList(Enum.GetValues(typeof(TaxiStatus))))" class="form-control"></select>
+                <span asp-validation-for="TaxiStatus" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <label asp-for="PassengerSeats" class="control-label"></label>
+                <input asp-for="PassengerSeats" class="form-control" />
+                <span asp-validation-for="PassengerSeats" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Brand" class="control-label"></label>
-        <input asp-for="Brand" class="form-control" />
-        <span asp-validation-for="Brand" class="text-danger"></span>
-    </div>
-
-    @* TODO: Category *@
-
-    <div class="form-group">
-        <label asp-for="DriverId" class="control-label"></label>
-        <input asp-for="DriverId" class="form-control" />
-        <span asp-validation-for="DriverId" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Description" class="control-label"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Picture" class="control-label"></label>
-        <input asp-for="Picture" class="form-control" />
-        <span asp-validation-for="Picture" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="TaxiStatus" class="control-label"></label>
-        <select asp-for="TaxiStatus" asp-items="@(new SelectList(Enum.GetValues(typeof(TaxiStatus))))" class="form-control"></select>
-        <span asp-validation-for="TaxiStatus" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="PassengerSeats" class="control-label"></label>
-        <input asp-for="PassengerSeats" class="form-control" />
-        <span asp-validation-for="PassengerSeats" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
-</form>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
