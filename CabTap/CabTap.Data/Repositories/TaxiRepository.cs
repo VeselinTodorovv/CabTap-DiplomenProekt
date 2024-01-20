@@ -31,7 +31,7 @@ public class TaxiRepository : ITaxiRepository
 
     public async Task UpdateTaxiAsync(Taxi taxi)
     {
-        var existingTaxi = await _context.Drivers.FindAsync(taxi.Id);
+        var existingTaxi = await _context.Taxis.FindAsync(taxi.Id);
 
         if (existingTaxi != null)
         {
