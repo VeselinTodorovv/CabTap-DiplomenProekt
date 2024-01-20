@@ -11,4 +11,9 @@ public class TaxisController : Controller
     {
         _taxiService = taxiService;
     }
+
+    public async Task<IActionResult> Create()
+    {
+        return View();
+    }
 }

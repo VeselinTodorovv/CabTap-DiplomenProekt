@@ -20,7 +20,7 @@ public class TaxiCreateViewModel
     [Required]
     public string DriverId { get; set; } = null!;
     
-    public string? Description { get; set; } = null!;
+    public string? Description { get; set; }
     
     [Url(ErrorMessage = "Please enter a valid URL")]
     [DataType(DataType.ImageUrl)]
@@ -33,7 +33,6 @@ public class TaxiCreateViewModel
     [Required]
     [Range(1, 8, ErrorMessage = "Passenger Seats must be between 1 and 8")]
     public int PassengerSeats { get; set; }
-    
     
     [Required]
     [DataType(DataType.DateTime)]
