@@ -98,7 +98,7 @@ CabTap/
 |   |-- CabTap.Core/       # Core business logic and entities
 |   |-- CabTap.Data/       # Data access layer
 |   |-- CabTap.Services/   # Application services
-|   |-- CabTap.Shared/     # Shared models for the Api and Web app
+|   |-- CabTap.Shared/     # Shared models for the Api and Web apps
 |   |-- CabTap.Web/        # ASP.NET Core Web Application
 |-- .gitignore
 |-- LICENSE
