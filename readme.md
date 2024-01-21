@@ -93,12 +93,13 @@ dotnet run
 ```plaintext
 CabTap/
 |-- src/
-|   |-- CabTap.Web/        # ASP.NET Core Web Application
+|   |-- CabTap.Api/        # API
+|   |-- CabTap.Contracts/  # Shared interfaces and models
 |   |-- CabTap.Core/       # Core business logic and entities
 |   |-- CabTap.Data/       # Data access layer
 |   |-- CabTap.Services/   # Application services
-|   |-- CabTap.Contracts/  # Shared interfaces and models
-|   |-- CabTap.Tests/      # Unit tests
+|   |-- CabTap.Shared/     # Shared models for the Api and Web app
+|   |-- CabTap.Web/        # ASP.NET Core Web Application
 |-- .gitignore
 |-- LICENSE
 |-- README.md
