@@ -18,6 +18,8 @@ builder.Services.RegisterServices();
 
 var app = builder.Build();
 
+await app.PrepareDatabase();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
