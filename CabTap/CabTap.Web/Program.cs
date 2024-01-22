@@ -12,7 +12,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-builder.Services.ConfigureHttpSettings();
+builder.Services.ConfigureHttpSettings(builder.Configuration);
 builder.Services.ConfigureAuthentication();
 builder.Services.RegisterServices();
 

@@ -4,6 +4,7 @@ using CabTap.Data.Repositories;
 using CabTap.Services.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CabTap.Data.Infrastructure;
@@ -13,11 +14,11 @@ public static class ServiceCollectionExtension
     public static void ConfigureAuthentication(this IServiceCollection services)
     {
         services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            })
+        {
+            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        })
             .AddCookie(options =>
             {
                 options.Cookie.Name = "access_token";
@@ -33,20 +34,20 @@ public static class ServiceCollectionExtension
             });
     }
 
-    public static void ConfigureHttpSettings(this IServiceCollection services)
+    public static void ConfigureHttpSettings(this IServiceCollection services, IConfiguration configuration)
     {
+        var apiSettings = configuration.GetSection("ApiSettings");
+        
         services.AddHttpContextAccessor();
         services.AddHttpClient("CabTapApi", client =>
         {
-            client.BaseAddress = new Uri("https://localhost:7006/");
+            client.BaseAddress = new Uri(apiSettings["BaseAddress"]);
             client.Timeout = TimeSpan.FromSeconds(30);
         });
     }
 
     public static void RegisterServices(this IServiceCollection services)
     {
-        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        
         services.AddTransient<ITaxiRepository, TaxiRepository>();
         services.AddTransient<IDriverRepository, DriverRepository>();
         services.AddTransient<ICategoryRepository, CategoryRepository>();
