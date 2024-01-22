@@ -2,6 +2,7 @@ using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Shared.Category;
+using CabTap.Shared.Taxi;
 using Microsoft.AspNetCore.Http;
 
 namespace CabTap.Services.Services;
@@ -9,12 +10,10 @@ namespace CabTap.Services.Services;
 public class CategoryService : ICategoryService
 {
     private readonly ICategoryRepository _categoryRepository;
-    private readonly IHttpContextAccessor _contextAccessor;
 
-    public CategoryService(ICategoryRepository categoryRepository, IHttpContextAccessor contextAccessor)
+    public CategoryService(ICategoryRepository categoryRepository)
     {
         _categoryRepository = categoryRepository;
-        _contextAccessor = contextAccessor;
     }
 
     public async Task<IEnumerable<CategoryAllViewModel>> GetAllCategoriesAsync()
@@ -52,50 +51,27 @@ public class CategoryService : ICategoryService
         return model;
     }
 
-    public async Task AddCategoryAsync(CategoryCreateViewModel categoryViewModel)
+    public async Task<IEnumerable<TaxiAllViewModel>> GetTaxisByCategoryIdAsync(int categoryId)
     {
-        var user = _contextAccessor.HttpContext.User.Identity?.Name;
+        var taxis = await _categoryRepository.GetTaxisByCategoryIdAsync(categoryId);
 
-        if (user != null)
+        var model = taxis.Select(x => new TaxiAllViewModel
         {
-            var category = new Category
-            {
-                Id = categoryViewModel.Id,
-                Name = categoryViewModel.Name,
-                
-                CreatedBy = user,
-                CreatedOn = categoryViewModel.CreatedOn,
-                LastModifiedBy = user,
-                LastModifiedOn = DateTime.Now
-            };
+            Id = x.Id,
+            Brand = x.Brand,
+            Description = x.Description,
+            Picture = x.Picture,
+            CategoryId = x.CategoryId,
+            CreatedBy = x.CreatedBy,
+            CreatedOn = x.CreatedOn,
+            DriverId = x.DriverId,
+            PassengerSeats = x.PassengerSeats,
+            RegNumber = x.RegNumber,
+            TaxiStatus = x.TaxiStatus,
+            LastModifiedBy = x.LastModifiedBy,
+            LastModifiedOn = x.LastModifiedOn
+        });
 
-            await _categoryRepository.AddCategoryAsync(category);
-        }
-    }
-
-    public async Task UpdateCategoryAsync(CategoryEditViewModel categoryViewModel)
-    {
-        var user = _contextAccessor.HttpContext.User.Identity?.Name;
-
-        if (user != null)
-        {
-            var category = new Category
-            {
-                Id = categoryViewModel.Id,
-                Name = categoryViewModel.Name,
-                
-                CreatedBy = categoryViewModel.CreatedBy,
-                CreatedOn = categoryViewModel.CreatedOn,
-                LastModifiedBy = user,
-                LastModifiedOn = DateTime.Now
-            };
-        
-            await _categoryRepository.UpdateCategoryAsync(category);
-        }
-    }
-
-    public async Task DeleteCategoryAsync(int categoryId)
-    {
-        await _categoryRepository.DeleteCategoryAsync(categoryId);
+        return model;
     }
 }

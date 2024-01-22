@@ -23,31 +23,8 @@ public class CategoryRepository : ICategoryRepository
         return await _context.Categories.FindAsync(categoryId);
     }
 
-    public async Task AddCategoryAsync(Category category)
+    public async Task<IEnumerable<Taxi>> GetTaxisByCategoryIdAsync(int categoryId)
     {
-        await _context.Categories.AddAsync(category);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task UpdateCategoryAsync(Category category)
-    {
-        var existingCategory = await _context.Categories.FindAsync(category.Id);
-
-        if (existingCategory != null)
-        {
-            _context.Entry(existingCategory).CurrentValues.SetValues(category);
-            _context.Entry(existingCategory).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-        }
-    }
-
-    public async Task DeleteCategoryAsync(int categoryId)
-    {
-        var categoryToRemove = await _context.Categories.FindAsync(categoryId);
-        if (categoryToRemove != null)
-        {
-            _context.Categories.Remove(categoryToRemove);
-            await _context.SaveChangesAsync();
-        }
+        return await _context.Taxis.Where(t => t.CategoryId == categoryId).ToListAsync();
     }
 }
