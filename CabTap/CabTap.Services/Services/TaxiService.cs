@@ -25,7 +25,7 @@ public class TaxiService : ITaxiService
         var taxiViewModels = taxis.Select(taxi => new TaxiAllViewModel
         {
             Id = taxi!.Id,
-            Manufacturer = taxi.Manufacturer,
+            Brand = taxi.Brand,
             RegNumber = taxi.RegNumber,
             Description = taxi.Description,
             Picture = taxi.Picture,
@@ -51,7 +51,7 @@ public class TaxiService : ITaxiService
         var model = new TaxiDetailsViewModel
         {
             Id = taxi.Id,
-            Manufacturer = taxi.Manufacturer,
+            Brand = taxi.Brand,
             Description = taxi.Description,
             Picture = taxi.Picture,
             CategoryId = taxi.CategoryId,
@@ -77,7 +77,7 @@ public class TaxiService : ITaxiService
             var taxi = new Taxi
             {
                 Id = taxiViewModel.Id,
-                Manufacturer = taxiViewModel.Manufacturer,
+                Brand = taxiViewModel.Brand,
                 Description = taxiViewModel.Description,
                 Picture = taxiViewModel.Picture,
                 CategoryId = taxiViewModel.CategoryId,
@@ -104,7 +104,7 @@ public class TaxiService : ITaxiService
             var taxi = new Taxi
             {
                 Id = taxiViewModel.Id,
-                Manufacturer = taxiViewModel.Manufacturer,
+                Brand = taxiViewModel.Brand,
                 Description = taxiViewModel.Description,
                 Picture = taxiViewModel.Picture,
                 CategoryId = taxiViewModel.CategoryId,

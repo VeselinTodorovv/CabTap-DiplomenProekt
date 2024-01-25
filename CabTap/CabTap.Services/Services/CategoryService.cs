@@ -58,7 +58,7 @@ public class CategoryService : ICategoryService
         var model = taxis.Select(x => new TaxiAllViewModel
         {
             Id = x.Id,
-            Manufacturer = x.Manufacturer,
+            Brand = x.Brand,
             Description = x.Description,
             Picture = x.Picture,
             CategoryId = x.CategoryId,

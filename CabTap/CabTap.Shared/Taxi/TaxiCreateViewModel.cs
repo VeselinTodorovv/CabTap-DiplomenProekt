@@ -12,7 +12,7 @@ public class TaxiCreateViewModel
     public string RegNumber { get; set; } = null!;
     
     [Required]
-    public string Manufacturer { get; set; } = null!;
+    public string Brand { get; set; } = null!;
     
     [Required]
     public int CategoryId { get; set; }
