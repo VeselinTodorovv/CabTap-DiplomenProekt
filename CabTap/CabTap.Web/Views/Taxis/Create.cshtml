@@ -62,7 +62,7 @@
 
             <div class="form-group">
                 <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" disabled>
+                <input asp-for="CreatedBy" class="form-control" placeholder="@Context.User.Identity.Name" disabled>
                 <span asp-validation-for="CreatedBy" class="text-danger"></span>
             </div>
     
@@ -74,7 +74,7 @@
 
             <div class="form-group">
                 <label asp-for="LastModifiedBy" class="control-label"></label>
-                <input asp-for="LastModifiedBy" class="form-control" disabled>
+                <input asp-for="LastModifiedBy" class="form-control" placeholder="@Context.User.Identity.Name" disabled>
                 <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
             </div>
         
