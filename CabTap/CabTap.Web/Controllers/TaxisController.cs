@@ -12,7 +12,27 @@ public class TaxisController : Controller
         _taxiService = taxiService;
     }
 
+    public async Task<IActionResult> Index()
+    {
+        return View();
+    }
+    
     public async Task<IActionResult> Create()
+    {
+        return View();
+    }
+    
+    public async Task<IActionResult> Details()
+    {
+        return View();
+    }
+
+    public async Task<IActionResult> Edit()
+    {
+        return View();
+    }
+    
+    public async Task<IActionResult> Delete()
     {
         return View();
     }

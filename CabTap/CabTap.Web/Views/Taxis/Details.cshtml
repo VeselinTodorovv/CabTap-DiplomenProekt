@@ -1,0 +1,91 @@
+@model CabTap.Shared.Taxi.TaxiDetailsViewModel
+
+@{
+    ViewData["Title"] = "Taxi Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.RegNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RegNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Manufacturer)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Manufacturer)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CategoryId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DriverId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DriverId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Picture)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Picture)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TaxiStatus)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TaxiStatus)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PassengerSeats)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PassengerSeats)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModifiedOn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastModifiedOn)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModifiedBy)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastModifiedBy)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-controller="Taxis" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
