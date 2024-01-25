@@ -14,7 +14,7 @@ public class Taxi : BaseEntity
     public string RegNumber { get; set; } = null!;
     
     [Required]
-    public string Brand { get; set; } = null!;
+    public string Manufacturer { get; set; } = null!;
 
     [ForeignKey(nameof(Category))]
     public int CategoryId { get; set; }

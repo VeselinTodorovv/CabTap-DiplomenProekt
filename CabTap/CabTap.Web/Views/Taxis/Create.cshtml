@@ -16,9 +16,9 @@
             </div>
         
             <div class="form-group">
-                <label asp-for="Brand" class="control-label"></label>
-                <input asp-for="Brand" class="form-control" />
-                <span asp-validation-for="Brand" class="text-danger"></span>
+                <label asp-for="Manufacturer" class="control-label"></label>
+                <input asp-for="Manufacturer" class="form-control" />
+                <span asp-validation-for="Manufacturer" class="text-danger"></span>
             </div>
         
             @* TODO: Category *@
@@ -51,6 +51,31 @@
                 <label asp-for="PassengerSeats" class="control-label"></label>
                 <input asp-for="PassengerSeats" class="form-control" />
                 <span asp-validation-for="PassengerSeats" class="text-danger"></span>
+            </div>
+            
+            @* disabled form fields *@
+            <div class="form-group">
+                <label asp-for="CreatedOn" class="control-label"></label>
+                <input asp-for="CreatedOn" class="form-control" placeholder="@Model.CreatedOn" disabled>
+                <span asp-validation-for="PassengerSeats" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label"></label>
+                <input asp-for="CreatedBy" class="form-control" placeholder="@Model.CreatedBy" disabled>
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="LastModifiedOn" class="control-label"></label>
+                <input asp-for="LastModifiedOn" class="form-control" placeholder="@Model.LastModifiedOn" disabled>
+                <span asp-validation-for="LastModifiedOn" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="LastModifiedBy" class="control-label"></label>
+                <input asp-for="LastModifiedBy" class="form-control" placeholder="@Model.LastModifiedBy" disabled>
+                <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
             </div>
         
             <div class="form-group">
