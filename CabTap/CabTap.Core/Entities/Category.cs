@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CabTap.Core.Entities;
 
-public class Category : BaseEntity
+public class Category
 {
     [Key]
     public int Id { get; set; }
