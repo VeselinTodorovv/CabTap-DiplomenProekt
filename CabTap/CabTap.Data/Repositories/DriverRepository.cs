@@ -41,7 +41,7 @@ public class DriverRepository : IDriverRepository
         }
     }
 
-    public async Task DeleteDriverAsync(int driverId)
+    public async Task DeleteDriverAsync(string driverId)
     {
         var driverToRemove = await _context.Drivers.FindAsync(driverId);
         if (driverToRemove != null)

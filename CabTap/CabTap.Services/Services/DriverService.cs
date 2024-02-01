@@ -59,8 +59,8 @@ public class DriverService : IDriverService
         {
             var driver = new Driver
             {
-                Id = driverViewModel.Id,
                 Name = driverViewModel.Name,
+                
                 CreatedBy = user,
                 CreatedOn = DateTime.Now,
                 LastModifiedBy = user,
@@ -90,7 +90,7 @@ public class DriverService : IDriverService
         await _driverRepository.UpdateDriverAsync(driver);
     }
 
-    public async Task DeleteDriverAsync(int driverId)
+    public async Task DeleteDriverAsync(string driverId)
     {
         await _driverRepository.DeleteDriverAsync(driverId);
     }

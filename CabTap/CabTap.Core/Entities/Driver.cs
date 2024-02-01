@@ -4,6 +4,11 @@ namespace CabTap.Core.Entities;
 
 public class Driver : BaseEntity
 {
+    public Driver()
+    {
+        Id = Guid.NewGuid().ToString();
+    }
+    
     [Key]
     public string Id { get; set; } = null!;
 
