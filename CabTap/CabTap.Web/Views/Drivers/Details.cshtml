@@ -1,0 +1,50 @@
+@model CabTap.Shared.Driver.DriverDetailsViewModel
+
+@{
+    ViewData["Title"] = "Taxi Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModifiedOn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastModifiedOn)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModifiedBy)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastModifiedBy)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Drivers" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
