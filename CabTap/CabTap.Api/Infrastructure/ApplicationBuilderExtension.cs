@@ -50,7 +50,7 @@ internal static class ApplicationBuilderExtension
 
             if (result.Succeeded)
             {
-                userManager.AddToRoleAsync(user, "Administrator").Wait();
+                await userManager.AddToRoleAsync(user, "Administrator");
             }
         }
     }
