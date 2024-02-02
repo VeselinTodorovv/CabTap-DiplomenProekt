@@ -20,7 +20,7 @@ public class DriversController : Controller
         return View(drivers);
     }
     
-    public async Task<IActionResult> Details(int id)
+    public async Task<IActionResult> Details(string id)
     {
         var driver = await _driverService.GetDriverByIdAsync(id);
         if (driver == null)
@@ -49,7 +49,7 @@ public class DriversController : Controller
         return RedirectToAction(nameof(Index));
     }
     
-    public async Task<IActionResult> Edit(int id)
+    public async Task<IActionResult> Edit(string id)
     {
         var driver = await _driverService.GetDriverByIdAsync(id);
         if (driver == null)
@@ -83,7 +83,7 @@ public class DriversController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(string id)
     {
         var driver = await _driverService.GetDriverByIdAsync(id);
         if (driver == null)
@@ -108,12 +108,8 @@ public class DriversController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(DriverDeleteViewModel viewModel)
     {
-        if (!ModelState.IsValid)
-        {
-            return View(viewModel);
-        }
-        
         await _driverService.DeleteDriverAsync(viewModel.Id);
+        
         return RedirectToAction(nameof(Index));
     }
 }

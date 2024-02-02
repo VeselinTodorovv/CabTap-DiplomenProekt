@@ -34,7 +34,7 @@ public class DriverService : IDriverService
         return driverViewModels;
     }
 
-    public async Task<DriverDetailsViewModel> GetDriverByIdAsync(int driverId)
+    public async Task<DriverDetailsViewModel> GetDriverByIdAsync(string driverId)
     {
         var driver = await _driverRepository.GetDriverByIdAsync(driverId);
 

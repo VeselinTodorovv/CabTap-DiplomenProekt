@@ -18,7 +18,7 @@ public class DriverRepository : IDriverRepository
         return await _context.Drivers.ToListAsync();
     }
 
-    public async Task<Driver> GetDriverByIdAsync(int driverId)
+    public async Task<Driver> GetDriverByIdAsync(string driverId)
     {
         return await _context.Drivers.FindAsync(driverId);
     }
