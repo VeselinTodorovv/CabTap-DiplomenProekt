@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace CabTap.Api.Models;
+namespace CabTap.Core.Entities;
 
 public class ApplicationUser : IdentityUser
 {

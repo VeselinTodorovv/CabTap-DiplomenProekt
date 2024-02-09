@@ -1,9 +1,12 @@
+using System.Security.Claims;
 using CabTap.Contracts.Services;
 using CabTap.Shared.Driver;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CabTap.Web.Controllers;
 
+[Authorize(Roles = "Administrator")]
 public class DriversController : Controller
 {
     private readonly IDriverService _driverService;
@@ -16,6 +19,10 @@ public class DriversController : Controller
     public async Task<IActionResult> Index()
     {
         var drivers = await _driverService.GetAllDriversAsync();
+        
+        var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
+        Console.WriteLine("Test");
+        Console.WriteLine($"User Roles: {string.Join(", ", roles)}");
         
         return View(drivers);
     }
