@@ -74,20 +74,22 @@ public class DriverService : IDriverService
     public async Task UpdateDriverAsync(DriverEditViewModel driverViewModel)
     {
         var user = _contextAccessor.HttpContext.User.Identity?.Name;
-        
-        var driver = new Driver
+
+        if (user != null)
         {
-            Id = driverViewModel.Id,
-            Name = driverViewModel.Name,
+            var driver = new Driver
+            {
+                Id = driverViewModel.Id,
+                Name = driverViewModel.Name,
             
-            // Don't let these be edited
-            CreatedBy = driverViewModel.CreatedBy,
-            CreatedOn = driverViewModel.CreatedOn,
-            LastModifiedBy = user,
-            LastModifiedOn = DateTime.Now
-        };
-        
-        await _driverRepository.UpdateDriverAsync(driver);
+                CreatedBy = driverViewModel.CreatedBy,
+                CreatedOn = driverViewModel.CreatedOn,
+                LastModifiedBy = user,
+                LastModifiedOn = DateTime.Now
+            };
+            
+            await _driverRepository.UpdateDriverAsync(driver);
+        }
     }
 
     public async Task DeleteDriverAsync(string driverId)

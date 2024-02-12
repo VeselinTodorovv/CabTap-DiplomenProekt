@@ -81,12 +81,13 @@ public class TaxiService : ITaxiService
                 Description = taxiViewModel.Description,
                 Picture = taxiViewModel.Picture,
                 CategoryId = taxiViewModel.CategoryId,
-                CreatedBy = user,
-                CreatedOn = DateTime.Now,
                 DriverId = taxiViewModel.DriverId,
                 PassengerSeats = taxiViewModel.PassengerSeats,
                 RegNumber = taxiViewModel.RegNumber,
                 TaxiStatus = taxiViewModel.TaxiStatus,
+                
+                CreatedBy = user,
+                CreatedOn = DateTime.Now,
                 LastModifiedBy = user,
                 LastModifiedOn = DateTime.Now
             };
@@ -108,15 +109,13 @@ public class TaxiService : ITaxiService
                 Description = taxiViewModel.Description,
                 Picture = taxiViewModel.Picture,
                 CategoryId = taxiViewModel.CategoryId,
-                
-                // Maybe don't let the user edit these 2 values in the view?
-                CreatedBy = taxiViewModel.CreatedBy,
-                CreatedOn = taxiViewModel.CreatedOn,
-                
                 DriverId = taxiViewModel.DriverId,
                 PassengerSeats = taxiViewModel.PassengerSeats,
                 RegNumber = taxiViewModel.RegNumber,
                 TaxiStatus = taxiViewModel.TaxiStatus,
+                CreatedBy = taxiViewModel.CreatedBy,
+                CreatedOn = taxiViewModel.CreatedOn,
+                
                 LastModifiedBy = user,
                 LastModifiedOn = DateTime.Now
             };

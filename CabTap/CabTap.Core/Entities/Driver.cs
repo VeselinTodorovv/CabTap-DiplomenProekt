@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CabTap.Core.Entities;
 
@@ -14,6 +15,8 @@ public class Driver : BaseEntity
 
     [Required]
     public string Name { get; set; } = null!;
-
-    public virtual ICollection<Taxi> Taxis { get; set; } = new List<Taxi>();
+    
+    [ForeignKey(nameof(Taxi))]
+    public int TaxiId { get; set; }
+    public virtual Taxi Taxi { get; set; }
 }

@@ -9,7 +9,7 @@ public class Taxi : BaseEntity
     [Key]
     public int Id { get; set; }
 
-    //use regex to validate format
+    //TODO: use regex to validate format
     [Required]
     public string RegNumber { get; set; } = null!;
     
@@ -18,11 +18,11 @@ public class Taxi : BaseEntity
 
     [ForeignKey(nameof(Category))]
     public int CategoryId { get; set; }
-    public Category Category { get; set; } = null!;
+    public virtual Category Category { get; set; } = null!;
 
     [ForeignKey(nameof(Driver))]
     public string DriverId { get; set; } = null!;
-    public Driver Driver { get; set; } = null!;
+    public virtual Driver Driver { get; set; } = null!;
 
     public string? Description { get; set; }
 
