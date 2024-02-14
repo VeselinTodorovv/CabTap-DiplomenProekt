@@ -13,9 +13,11 @@ public static class ServiceCollectionExtension
         services.AddTransient<ITaxiRepository, TaxiRepository>();
         services.AddTransient<IDriverRepository, DriverRepository>();
         services.AddTransient<IReservationRepository, ReservationRepository>();
+        services.AddTransient<ICategoryRepository, CategoryRepository>();
 
         services.AddTransient<ITaxiService, TaxiService>();
         services.AddTransient<IDriverService, DriverService>();
         services.AddTransient<IReservationService, ReservationService>();
+        services.AddTransient<ICategoryService, CategoryService>();
     }
 }
