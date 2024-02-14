@@ -19,12 +19,12 @@ public class TaxiCreateViewModel
     [Required]
     public int CategoryId { get; set; }
 
-    public virtual IEnumerable<CategoryPairViewModel> Categories { get; set; } = null!;
+    public virtual List<CategoryPairViewModel> Categories { get; set; } = new();
     
     [Required]
     public string DriverId { get; set; } = null!;
-    
-    public virtual IEnumerable<DriverPairViewModel> Drivers { get; set; } = null!;
+
+    public virtual List<DriverPairViewModel> Drivers { get; set; } = new();
     
     public string? Description { get; set; }
     

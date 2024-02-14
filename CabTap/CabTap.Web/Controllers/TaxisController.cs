@@ -48,6 +48,7 @@ public class TaxisController : Controller
                 Id = x.Id,
                 Name = x.Name
             })
+                .ToList(),
             
             // TODO: Add Drivers
         };
