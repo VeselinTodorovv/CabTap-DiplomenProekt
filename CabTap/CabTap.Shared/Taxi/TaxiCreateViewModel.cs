@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using CabTap.Core.Entities.Enums;
+using CabTap.Shared.Category;
+using CabTap.Shared.Driver;
 
 namespace CabTap.Shared.Taxi;
 
@@ -16,9 +18,13 @@ public class TaxiCreateViewModel
     
     [Required]
     public int CategoryId { get; set; }
+
+    public virtual List<CategoryPairViewModel> Categories { get; set; } = new();
     
     [Required]
     public string DriverId { get; set; } = null!;
+    
+    public virtual List<DriverPairViewModel> Drivers { get; set; } = new();
     
     public string? Description { get; set; }
     

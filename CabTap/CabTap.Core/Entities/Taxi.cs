@@ -26,15 +26,14 @@ public class Taxi : BaseEntity
 
     public string? Description { get; set; }
 
-    [Url(ErrorMessage = "Please enter a valid URL")]
+    [Url]
     [DataType(DataType.ImageUrl)]
     public string? Picture { get; set; }
 
-    [Display(Name = "Status")]
     [EnumDataType(typeof(TaxiStatus))]
     public TaxiStatus TaxiStatus { get; set; }
 
-    [Range(1, 8, ErrorMessage = "Passenger Seats must be between 1 and 8")]
+    [Range(4, 8)]
     public int PassengerSeats { get; set; }
 
     public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();

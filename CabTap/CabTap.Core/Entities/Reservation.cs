@@ -10,7 +10,9 @@ public class Reservation : BaseEntity
     public string Id { get; set; } = null!;
 
     [Required]
+    [ForeignKey(nameof(User))]
     public string UserId { get; set; } = null!;
+    public virtual ApplicationUser User { get; set; } = null!;
 
     [ForeignKey(nameof(Taxi))]
     public int TaxiId { get; set; }
@@ -29,7 +31,6 @@ public class Reservation : BaseEntity
     [Required]
     public decimal Price { get; set; }
     
-    [Display(Name = "Passengers Count")]
     //TODO: Check if this value is less or equal to the taxi's max seats
     public int PassengersCount { get; set; }
 
