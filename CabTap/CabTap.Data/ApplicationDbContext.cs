@@ -10,9 +10,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         : base(options)
     {
     }
-        
-    public DbSet<Taxi> Taxis { get; set; }
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<Driver> Drivers { get; set; }
-    public DbSet<Reservation> Reservations { get; set; }
+
+    public DbSet<Taxi> Taxis { get; set; } = null!;
+    public DbSet<Category> Categories { get; set; } = null!;
+    public DbSet<Driver> Drivers { get; set; } = null!;
+    public DbSet<Reservation> Reservations { get; set; } = null!;
 }
