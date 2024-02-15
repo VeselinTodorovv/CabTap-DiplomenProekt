@@ -16,6 +16,7 @@ public static class ApplicationBuilderExtension
         await SeedAdministratorUser(services);
 
         await SeedCategoriesAsync(services.GetRequiredService<ApplicationDbContext>());
+        await SeedManufacturersAsync(services.GetRequiredService<ApplicationDbContext>());
 
         return app;
     }
@@ -74,6 +75,26 @@ public static class ApplicationBuilderExtension
             new Category { Name = "Economy" },
             new Category { Name = "Eco-friendly" },
             new Category { Name = "Business" }
+        );
+
+        await context.SaveChangesAsync();
+    }
+
+    private static async Task SeedManufacturersAsync(ApplicationDbContext context)
+    {
+        if (context.Manufacturers.Any())
+        {
+            return;
+        }
+        
+        context.Manufacturers.AddRange(
+            new Manufacturer { Name = "Toyota" },
+            new Manufacturer { Name = "BMW" },
+            new Manufacturer { Name = "Mercedes" },
+            new Manufacturer { Name = "Audi" },
+            new Manufacturer { Name = "Volkswagen" },
+            new Manufacturer { Name = "Volvo" },
+            new Manufacturer { Name = "Honda" }
         );
 
         await context.SaveChangesAsync();
