@@ -15,7 +15,7 @@ public class Taxi : BaseEntity
     [Required]
     [ForeignKey(nameof(Manufacturer))]
     public int ManufacturerId { get; set; }
-    public Manufacturer Manufacturer { get; set; } = null!; 
+    public virtual Manufacturer Manufacturer { get; set; } = null!; 
 
     [Required]
     [ForeignKey(nameof(Category))]
