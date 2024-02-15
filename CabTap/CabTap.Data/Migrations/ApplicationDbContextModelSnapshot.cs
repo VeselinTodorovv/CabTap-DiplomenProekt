@@ -148,6 +148,23 @@ namespace CabTap.Data.Migrations
                     b.ToTable("Drivers");
                 });
 
+            modelBuilder.Entity("CabTap.Core.Entities.Manufacturer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Manufacturers");
+                });
+
             modelBuilder.Entity("CabTap.Core.Entities.Reservation", b =>
                 {
                     b.Property<string>("Id")
@@ -239,6 +256,9 @@ namespace CabTap.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ManufacturerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PassengerSeats")
                         .HasColumnType("int");
 
@@ -257,6 +277,8 @@ namespace CabTap.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("DriverId");
+
+                    b.HasIndex("ManufacturerId");
 
                     b.ToTable("Taxis");
                 });
@@ -431,6 +453,10 @@ namespace CabTap.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CabTap.Core.Entities.Manufacturer", null)
+                        .WithMany("Taxis")
+                        .HasForeignKey("ManufacturerId");
+
                     b.Navigation("Category");
 
                     b.Navigation("Driver");
@@ -493,6 +519,11 @@ namespace CabTap.Data.Migrations
                 });
 
             modelBuilder.Entity("CabTap.Core.Entities.Driver", b =>
+                {
+                    b.Navigation("Taxis");
+                });
+
+            modelBuilder.Entity("CabTap.Core.Entities.Manufacturer", b =>
                 {
                     b.Navigation("Taxis");
                 });
