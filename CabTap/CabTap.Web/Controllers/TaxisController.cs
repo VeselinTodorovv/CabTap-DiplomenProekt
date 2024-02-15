@@ -81,7 +81,7 @@ public class TaxisController : Controller
         {
             Id = taxi.Id,
             RegNumber = taxi.RegNumber,
-            Manufacturer = taxi.Manufacturer,
+            ManufacturerId = taxi.ManufacturerId,
             CategoryId = taxi.CategoryId,
             DriverId = taxi.DriverId,
             Description = taxi.Description,
@@ -121,7 +121,7 @@ public class TaxisController : Controller
         {
             Id = taxi.Id,
             RegNumber = taxi.RegNumber,
-            Manufacturer = taxi.Manufacturer,
+            ManufacturerId = taxi.ManufacturerId,
             CategoryId = taxi.CategoryId,
             DriverId = taxi.DriverId,
             Description = taxi.Description,
