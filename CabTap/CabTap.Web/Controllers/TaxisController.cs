@@ -1,5 +1,6 @@
 using CabTap.Contracts.Services;
 using CabTap.Shared.Category;
+using CabTap.Shared.Manufacturer;
 using CabTap.Shared.Taxi;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,13 @@ public class TaxisController : Controller
 {
     private readonly ITaxiService _taxiService;
     private readonly ICategoryService _categoryService;
+    private readonly IManufacturerService _manufacturerService;
     
-    public TaxisController(ITaxiService taxiService, ICategoryService categoryService)
+    public TaxisController(ITaxiService taxiService, ICategoryService categoryService, IManufacturerService manufacturerService)
     {
         _taxiService = taxiService;
         _categoryService = categoryService;
+        _manufacturerService = manufacturerService;
     }
 
     [AllowAnonymous]
@@ -40,10 +43,18 @@ public class TaxisController : Controller
     public async Task<IActionResult> Create()
     {
         var categories = await _categoryService.GetAllCategories();
+        var manufacturers = await _manufacturerService.GetAllManufacturers();
         
         var taxi = new TaxiCreateViewModel
         {
             Categories = categories.Select(x => new CategoryPairViewModel
+            {
+                Id = x.Id,
+                Name = x.Name
+            })
+                .ToList(),
+            
+            Manufacturers = manufacturers.Select(x => new ManufacturerPairViewModel
             {
                 Id = x.Id,
                 Name = x.Name
