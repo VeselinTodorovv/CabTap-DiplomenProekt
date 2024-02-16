@@ -2,19 +2,18 @@ using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Shared.Driver;
-using Microsoft.AspNetCore.Http;
 
 namespace CabTap.Services.Services;
 
 public class DriverService : IDriverService
 {
     private readonly IDriverRepository _driverRepository;
-    private readonly IHttpContextAccessor _contextAccessor;
+    private readonly IUserService _userService;
     
-    public DriverService(IDriverRepository driverRepository, IHttpContextAccessor contextAccessor)
+    public DriverService(IDriverRepository driverRepository, IUserService userService)
     {
         _driverRepository = driverRepository;
-        _contextAccessor = contextAccessor;
+        _userService = userService;
     }
     
     public async Task<IEnumerable<DriverAllViewModel>> GetAllDriversAsync()
@@ -53,7 +52,7 @@ public class DriverService : IDriverService
 
     public async Task AddDriverAsync(DriverCreateViewModel driverViewModel)
     {
-        var user = _contextAccessor.HttpContext.User.Identity?.Name;
+        var user = _userService.GetCurrentUserName();
 
         if (user != null)
         {
@@ -73,7 +72,7 @@ public class DriverService : IDriverService
 
     public async Task UpdateDriverAsync(DriverEditViewModel driverViewModel)
     {
-        var user = _contextAccessor.HttpContext.User.Identity?.Name;
+        var user = _userService.GetCurrentUserName();
 
         if (user != null)
         {

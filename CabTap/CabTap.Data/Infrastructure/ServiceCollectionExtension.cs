@@ -21,5 +21,6 @@ public static class ServiceCollectionExtension
         services.AddTransient<IReservationService, ReservationService>();
         services.AddTransient<ICategoryService, CategoryService>();
         services.AddTransient<IManufacturerService, ManufacturerService>();
+        services.AddTransient<IUserService, UserService>();
     }
 }
