@@ -19,11 +19,10 @@ public class CategoryService : ICategoryService
         var categories = await _categoryRepository.GetAllCategories();
 
         var model = categories.Select(x => new CategoryPairViewModel
-            {
-                Id = x.Id,
-                Name = x.Name
-            })
-            .ToList();
+        {
+            Id = x.Id,
+            Name = x.Name
+        });
 
         return model;
     }
@@ -46,23 +45,22 @@ public class CategoryService : ICategoryService
         var taxisByCategory = await _categoryRepository.GetTaxisByCategory(categoryId);
 
         var model = taxisByCategory.Select(x => new TaxiAllViewModel
-            {
-                Id = x.Id,
-                ManufacturerId = x.ManufacturerId,
-                RegNumber = x.RegNumber,
-                Description = x.Description,
-                Picture = x.Picture,
-                TaxiStatus = x.TaxiStatus,
-                PassengerSeats = x.PassengerSeats,
-                DriverId = x.DriverId,
-                CategoryId = x.CategoryId,
-                
-                CreatedBy = x.CreatedBy,
-                CreatedOn = x.CreatedOn,
-                LastModifiedBy = x.LastModifiedBy,
-                LastModifiedOn = x.LastModifiedOn,
-            })
-            .ToList();
+        {
+            Id = x.Id,
+            ManufacturerId = x.ManufacturerId,
+            RegNumber = x.RegNumber,
+            Description = x.Description,
+            Picture = x.Picture,
+            TaxiStatus = x.TaxiStatus,
+            PassengerSeats = x.PassengerSeats,
+            DriverId = x.DriverId,
+            CategoryId = x.CategoryId,
+
+            CreatedBy = x.CreatedBy,
+            CreatedOn = x.CreatedOn,
+            LastModifiedBy = x.LastModifiedBy,
+            LastModifiedOn = x.LastModifiedOn,
+        });
 
         return model;
     }

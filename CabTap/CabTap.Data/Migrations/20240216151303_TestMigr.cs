@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CabTap.Data.Migrations
 {
-    public partial class InitMigration : Migration
+    public partial class TestMigr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -206,14 +206,13 @@ namespace CabTap.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RegNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ManufacturerId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     DriverId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TaxiStatus = table.Column<byte>(type: "tinyint", nullable: false),
                     PassengerSeats = table.Column<int>(type: "int", nullable: false),
-                    ManufacturerId = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -238,7 +237,8 @@ namespace CabTap.Data.Migrations
                         name: "FK_Taxis_Manufacturers_ManufacturerId",
                         column: x => x.ManufacturerId,
                         principalTable: "Manufacturers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

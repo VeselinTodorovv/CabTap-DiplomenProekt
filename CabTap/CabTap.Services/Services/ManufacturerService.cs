@@ -22,8 +22,7 @@ public class ManufacturerService : IManufacturerService
         {
             Id = x.Id,
             Name = x.Name
-        })
-            .ToList();
+        });
 
         return model;
     }
@@ -61,8 +60,7 @@ public class ManufacturerService : IManufacturerService
             CreatedOn = x.CreatedOn,
             LastModifiedBy = x.LastModifiedBy,
             LastModifiedOn = x.LastModifiedOn,
-        })
-            .ToList();
+        });
 
         return model;
     }
