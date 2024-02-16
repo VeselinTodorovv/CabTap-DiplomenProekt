@@ -15,16 +15,19 @@ public class TaxiCreateViewModel
     public string RegNumber { get; set; } = null!;
     
     [Required]
+    [Display(Name = "Manufacturer")]
     public int ManufacturerId { get; set; }
     
     public virtual List<ManufacturerPairViewModel> Manufacturers { get; set; } = new();
     
     [Required]
+    [Display(Name = "Category")]
     public int CategoryId { get; set; }
 
     public virtual List<CategoryPairViewModel> Categories { get; set; } = new();
     
     [Required]
+    [Display(Name = "Driver")]
     public string DriverId { get; set; } = null!;
 
     public virtual List<DriverPairViewModel> Drivers { get; set; } = new();

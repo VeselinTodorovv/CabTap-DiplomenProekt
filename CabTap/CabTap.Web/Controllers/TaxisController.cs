@@ -1,6 +1,5 @@
 using CabTap.Contracts.Services;
-using CabTap.Shared.Category;
-using CabTap.Shared.Manufacturer;
+using CabTap.Shared.Driver;
 using CabTap.Shared.Taxi;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,14 +10,17 @@ namespace CabTap.Web.Controllers;
 public class TaxisController : Controller
 {
     private readonly ITaxiService _taxiService;
+    
     private readonly ICategoryService _categoryService;
     private readonly IManufacturerService _manufacturerService;
+    private readonly IDriverService _driverService;
     
-    public TaxisController(ITaxiService taxiService, ICategoryService categoryService, IManufacturerService manufacturerService)
+    public TaxisController(ITaxiService taxiService, ICategoryService categoryService, IManufacturerService manufacturerService, IDriverService driverService)
     {
         _taxiService = taxiService;
         _categoryService = categoryService;
         _manufacturerService = manufacturerService;
+        _driverService = driverService;
     }
 
     [AllowAnonymous]
@@ -44,24 +46,20 @@ public class TaxisController : Controller
     {
         var categories = await _categoryService.GetAllCategories();
         var manufacturers = await _manufacturerService.GetAllManufacturers();
+        var drivers = await _driverService.GetAllDriversAsync();
         
         var taxi = new TaxiCreateViewModel
         {
-            Categories = categories.Select(x => new CategoryPairViewModel
+            Categories = categories.ToList(),
+            
+            Manufacturers = manufacturers.ToList(),
+            
+            Drivers = drivers.Select(x => new DriverPairViewModel
             {
                 Id = x.Id,
                 Name = x.Name
             })
                 .ToList(),
-            
-            Manufacturers = manufacturers.Select(x => new ManufacturerPairViewModel
-            {
-                Id = x.Id,
-                Name = x.Name
-            })
-                .ToList(),
-            
-            // TODO: Add Drivers
         };
         
         return View(taxi);
