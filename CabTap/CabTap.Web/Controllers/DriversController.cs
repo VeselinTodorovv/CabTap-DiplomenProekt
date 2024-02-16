@@ -24,18 +24,21 @@ public class DriversController : Controller
     
     public async Task<IActionResult> Details(string id)
     {
-        var driver = await _driverService.GetDriverByIdAsync(id);
-        if (driver == null)
+        try
+        {
+            var driver = await _driverService.GetDriverByIdAsync(id);
+
+            return View(driver);
+        }
+        catch (InvalidOperationException)
         {
             return NotFound();
         }
-
-        return View(driver);
     }
     
-    public async Task<IActionResult> Create()
+    public Task<IActionResult> Create()
     {
-        return View();
+        return Task.FromResult<IActionResult>(View());
     }
 
     [HttpPost]
@@ -53,23 +56,26 @@ public class DriversController : Controller
     
     public async Task<IActionResult> Edit(string id)
     {
-        var driver = await _driverService.GetDriverByIdAsync(id);
-        if (driver == null)
+        try
+        {
+            var driver = await _driverService.GetDriverByIdAsync(id);
+
+            var model = new DriverEditViewModel
+            {
+                Id = driver.Id,
+                Name = driver.Name,
+                CreatedBy = driver.CreatedBy,
+                CreatedOn = driver.CreatedOn,
+                LastModifiedBy = driver.LastModifiedBy,
+                LastModifiedOn = driver.LastModifiedOn
+            };
+        
+            return View(model);
+        }
+        catch (InvalidOperationException)
         {
             return NotFound();
         }
-
-        var model = new DriverEditViewModel
-        {
-            Id = driver.Id,
-            Name = driver.Name,
-            CreatedBy = driver.CreatedBy,
-            CreatedOn = driver.CreatedOn,
-            LastModifiedBy = driver.LastModifiedBy,
-            LastModifiedOn = driver.LastModifiedOn
-        };
-        
-        return View(model);
     }
 
     [HttpPost]
@@ -87,23 +93,26 @@ public class DriversController : Controller
 
     public async Task<IActionResult> Delete(string id)
     {
-        var driver = await _driverService.GetDriverByIdAsync(id);
-        if (driver == null)
+        try
+        {
+            var driver = await _driverService.GetDriverByIdAsync(id);
+
+            var model = new DriverDeleteViewModel
+            {
+                Id = driver.Id,
+                Name = driver.Name,
+                CreatedBy = driver.CreatedBy,
+                CreatedOn = driver.CreatedOn,
+                LastModifiedBy = driver.LastModifiedBy,
+                LastModifiedOn = driver.LastModifiedOn
+            };
+        
+            return View(model);
+        }
+        catch (InvalidOperationException)
         {
             return NotFound();
         }
-
-        var model = new DriverDeleteViewModel
-        {
-            Id = driver.Id,
-            Name = driver.Name,
-            CreatedBy = driver.CreatedBy,
-            CreatedOn = driver.CreatedOn,
-            LastModifiedBy = driver.LastModifiedBy,
-            LastModifiedOn = driver.LastModifiedOn
-        };
-        
-        return View(model);
     }
 
     [HttpPost]

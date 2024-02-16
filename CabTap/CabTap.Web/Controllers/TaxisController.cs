@@ -33,13 +33,16 @@ public class TaxisController : Controller
     
     public async Task<IActionResult> Details(int id)
     {
-        var taxi = await _taxiService.GetTaxiByIdAsync(id);
-        if (taxi == null)
+        try
+        {
+            var taxi = await _taxiService.GetTaxiByIdAsync(id);
+        
+            return View(taxi);
+        }
+        catch (InvalidOperationException)
         {
             return NotFound();
         }
-        
-        return View(taxi);
     }
     
     public async Task<IActionResult> Create()
@@ -80,31 +83,34 @@ public class TaxisController : Controller
 
     public async Task<IActionResult> Edit(int id)
     {
-        var taxi = await _taxiService.GetTaxiByIdAsync(id);
-        if (taxi == null)
+        try
+        {
+            var taxi = await _taxiService.GetTaxiByIdAsync(id);
+            
+            var model = new TaxiEditViewModel
+            {
+                Id = taxi.Id,
+                RegNumber = taxi.RegNumber,
+                ManufacturerId = taxi.ManufacturerId,
+                CategoryId = taxi.CategoryId,
+                DriverId = taxi.DriverId,
+                Description = taxi.Description,
+                Picture = taxi.Picture,
+                TaxiStatus = taxi.TaxiStatus,
+                PassengerSeats = taxi.PassengerSeats,
+            
+                CreatedBy = taxi.CreatedBy,
+                CreatedOn = taxi.CreatedOn,
+                LastModifiedBy = taxi.LastModifiedBy,
+                LastModifiedOn = taxi.LastModifiedOn,
+            };
+        
+            return View(model);
+        }
+        catch (InvalidOperationException)
         {
             return NotFound();
         }
-
-        var model = new TaxiEditViewModel
-        {
-            Id = taxi.Id,
-            RegNumber = taxi.RegNumber,
-            ManufacturerId = taxi.ManufacturerId,
-            CategoryId = taxi.CategoryId,
-            DriverId = taxi.DriverId,
-            Description = taxi.Description,
-            Picture = taxi.Picture,
-            TaxiStatus = taxi.TaxiStatus,
-            PassengerSeats = taxi.PassengerSeats,
-            
-            CreatedBy = taxi.CreatedBy,
-            CreatedOn = taxi.CreatedOn,
-            LastModifiedBy = taxi.LastModifiedBy,
-            LastModifiedOn = taxi.LastModifiedOn,
-        };
-        
-        return View(model);
     }
     
     public async Task<IActionResult> Edit(TaxiEditViewModel viewModel)
@@ -120,31 +126,34 @@ public class TaxisController : Controller
     
     public async Task<IActionResult> Delete(int id)
     {
-        var taxi = await _taxiService.GetTaxiByIdAsync(id);
-        if (taxi == null)
+        try
+        {
+            var taxi = await _taxiService.GetTaxiByIdAsync(id);
+
+            var model = new TaxiDeleteViewModel
+            {
+                Id = taxi.Id,
+                RegNumber = taxi.RegNumber,
+                ManufacturerId = taxi.ManufacturerId,
+                CategoryId = taxi.CategoryId,
+                DriverId = taxi.DriverId,
+                Description = taxi.Description,
+                Picture = taxi.Picture,
+                TaxiStatus = taxi.TaxiStatus,
+                PassengerSeats = taxi.PassengerSeats,
+            
+                CreatedBy = taxi.CreatedBy,
+                CreatedOn = taxi.CreatedOn,
+                LastModifiedBy = taxi.LastModifiedBy,
+                LastModifiedOn = taxi.LastModifiedOn,
+            };
+        
+            return View(model);
+        }
+        catch (InvalidOperationException)
         {
             return NotFound();
         }
-
-        var model = new TaxiDeleteViewModel
-        {
-            Id = taxi.Id,
-            RegNumber = taxi.RegNumber,
-            ManufacturerId = taxi.ManufacturerId,
-            CategoryId = taxi.CategoryId,
-            DriverId = taxi.DriverId,
-            Description = taxi.Description,
-            Picture = taxi.Picture,
-            TaxiStatus = taxi.TaxiStatus,
-            PassengerSeats = taxi.PassengerSeats,
-            
-            CreatedBy = taxi.CreatedBy,
-            CreatedOn = taxi.CreatedOn,
-            LastModifiedBy = taxi.LastModifiedBy,
-            LastModifiedOn = taxi.LastModifiedOn,
-        };
-        
-        return View(model);
     }
     
     [HttpPost]

@@ -20,7 +20,13 @@ public class ManufacturerRepository : IManufacturerRepository
 
     public async Task<Manufacturer> GetManufacturerById(int id)
     {
-        return await _context.Manufacturers.FindAsync(id);
+        var manufacturer = await _context.Manufacturers.FindAsync(id);
+        if (manufacturer == null)
+        {
+            throw new InvalidOperationException($"Manufacturer with id {id} not found.");
+        }
+        
+        return manufacturer;
     }
 
     public async Task<IEnumerable<Taxi>> GetTaxisByManufacturer(int manufacturerId)

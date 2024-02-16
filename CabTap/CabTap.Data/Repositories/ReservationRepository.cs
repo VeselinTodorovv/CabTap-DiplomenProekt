@@ -20,7 +20,13 @@ public class ReservationRepository : IReservationRepository
 
     public async Task<Reservation> GetReservationByIdAsync(int reservationId)
     {
-        return await _context.Reservations.FindAsync(reservationId);
+        var reservation = await _context.Reservations.FindAsync(reservationId);
+        if (reservation == null)
+        {
+            throw new InvalidOperationException($"Reservation with id {reservationId} not found.");
+        }
+        
+        return reservation;
     }
 
     public async Task AddReservationAsync(Reservation reservation)

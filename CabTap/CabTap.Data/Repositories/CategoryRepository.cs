@@ -20,7 +20,13 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<Category> GetCategoryById(int id)
     {
-        return await _context.Categories.FindAsync(id);
+        var category = await _context.Categories.FindAsync(id);
+        if (category == null)
+        {
+            throw new InvalidOperationException($"Category with id {id} not found.");
+        }
+
+        return category;
     }
 
     public async Task<IEnumerable<Taxi>> GetTaxisByCategory(int categoryId)

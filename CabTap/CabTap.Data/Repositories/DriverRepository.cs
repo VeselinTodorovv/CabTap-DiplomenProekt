@@ -20,7 +20,13 @@ public class DriverRepository : IDriverRepository
 
     public async Task<Driver> GetDriverByIdAsync(string driverId)
     {
-        return await _context.Drivers.FindAsync(driverId);
+        var driver = await _context.Drivers.FindAsync(driverId);
+        if (driver == null)
+        {
+            throw new InvalidOperationException($"Driver with id {driverId} not found.");
+        }
+
+        return driver;
     }
 
     public async Task AddDriverAsync(Driver driver)

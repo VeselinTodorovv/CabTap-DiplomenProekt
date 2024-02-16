@@ -20,7 +20,13 @@ public class TaxiRepository : ITaxiRepository
 
     public async Task<Taxi> GetTaxiByIdAsync(int taxiId)
     {
-        return await _context.Taxis.FindAsync(taxiId);
+        var taxi = await _context.Taxis.FindAsync(taxiId);
+        if (taxi == null)
+        {
+            throw new InvalidOperationException($"Taxi with id {taxiId} not found.");
+        }
+        
+        return taxi;
     }
 
     public async Task AddTaxiAsync(Taxi taxi)
