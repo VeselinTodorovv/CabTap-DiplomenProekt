@@ -120,25 +120,25 @@ public class RegisterModel : PageModel
             return Page();
         }
 
-        var user = new ApplicationUser
-        {
-            UserName = Input.UserName,
-            Email = Input.Email,
-            Address = Input.Address,
-            FirstName = Input.FirstName,
-            LastName = Input.LastName
-        };
-            
+        var user = await CreateUserAsync();
+
         await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
         var result = await _userManager.CreateAsync(user, Input.Password);
 
         if (result.Succeeded)
         {
             _logger.LogInformation("User created a new account with password.");
-                
+
+            var addUserToRole = await AddUserToRoleAsync(user, "Client");
+
+            if (!addUserToRole.Succeeded)
+            {
+                _logger.LogInformation($"Failed to add user {user.UserName} to Client role.");
+            }
+
             if (_userManager.Options.SignIn.RequireConfirmedAccount)
             {
-                return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl });
             }
 
             await _signInManager.SignInAsync(user, false);
@@ -160,5 +160,22 @@ public class RegisterModel : PageModel
             throw new NotSupportedException("The default UI requires a user store with email support.");
         }
         return (IUserEmailStore<ApplicationUser>)_userStore;
+    }
+
+    private Task<ApplicationUser> CreateUserAsync()
+    {
+        return Task.FromResult(new ApplicationUser
+        {
+            UserName = Input.UserName,
+            Email = Input.Email,
+            Address = Input.Address,
+            FirstName = Input.FirstName,
+            LastName = Input.LastName
+        });
+    }
+
+    private async Task<IdentityResult> AddUserToRoleAsync(ApplicationUser user, string role)
+    {
+        return await _userManager.AddToRoleAsync(user, role);
     }
 }
