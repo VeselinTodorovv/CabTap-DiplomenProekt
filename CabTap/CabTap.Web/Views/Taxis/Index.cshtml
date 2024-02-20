@@ -18,13 +18,13 @@
                 @Html.DisplayNameFor(model => model.RegNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ManufacturerId)
+                @Html.DisplayNameFor(model => model.ManufacturerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
+                @Html.DisplayNameFor(model => model.CategoryName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DriverId)
+                @Html.DisplayNameFor(model => model.DriverName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -48,13 +48,13 @@
                     @Html.DisplayFor(modelItem => item.RegNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ManufacturerId)
+                    @Html.DisplayFor(modelItem => item.ManufacturerName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
+                    @Html.DisplayFor(modelItem => item.CategoryName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DriverId)
+                    @Html.DisplayFor(modelItem => item.DriverName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
@@ -71,7 +71,7 @@
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a>
                     
-                    @if ((User.Identity.IsAuthenticated) && (User.IsInRole("Administrator")))
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                     {
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
                         <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>

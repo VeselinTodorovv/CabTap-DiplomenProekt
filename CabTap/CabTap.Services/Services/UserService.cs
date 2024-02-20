@@ -14,6 +14,11 @@ public class UserService : IUserService
 
     public string? GetCurrentUserName()
     {
+        if (_contextAccessor.HttpContext.User.Identity?.Name == null)
+        {
+            throw new InvalidOperationException("User is not authenticated.");
+        }
+        
         return _contextAccessor.HttpContext.User.Identity?.Name;
     }
 }

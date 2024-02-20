@@ -2,19 +2,18 @@ using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Shared.Reservation;
-using Microsoft.AspNetCore.Http;
 
 namespace CabTap.Services.Services;
 
 public class ReservationService : IReservationService
 {
     private readonly IReservationRepository _reservationRepository;
-    private readonly IHttpContextAccessor _contextAccessor;
+    private readonly IUserService _userService;
 
-    public ReservationService(IReservationRepository reservationRepository, IHttpContextAccessor contextAccessor)
+    public ReservationService(IReservationRepository reservationRepository, IUserService userService)
     {
         _reservationRepository = reservationRepository;
-        _contextAccessor = contextAccessor;
+        _userService = userService;
     }
 
     public async Task<IEnumerable<ReservationAllViewModel>> GetAllReservationsAsync()
@@ -68,7 +67,7 @@ public class ReservationService : IReservationService
 
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
     {
-        var user = _contextAccessor.HttpContext.User.Identity?.Name;
+        var user = _userService.GetCurrentUserName();
 
         if (user != null)
         {
@@ -96,7 +95,7 @@ public class ReservationService : IReservationService
 
     public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
     {
-        var user = _contextAccessor.HttpContext.User.Identity?.Name;
+        var user = _userService.GetCurrentUserName();
 
         if (user != null)
         {

@@ -26,7 +26,7 @@ public class TaxisController : Controller
     [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
-        var taxis = await _taxiService.GetAllAvailableTaxisAsync();
+        var taxis = await _taxiService.GetAllTaxisAsync();
         
         return View(taxis);
     }

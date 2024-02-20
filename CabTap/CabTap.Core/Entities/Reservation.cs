@@ -7,6 +7,7 @@ namespace CabTap.Core.Entities;
 public class Reservation : BaseEntity
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string Id { get; set; } = null!;
 
     [Required]
