@@ -1,0 +1,67 @@
+@model CabTap.Shared.Reservation.ReservationCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Reservation";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Taxis" asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Origin" class="control-label"></label>
+                <input asp-for="Origin" class="form-control" />
+                <span asp-validation-for="Origin" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Destination" class="control-label"></label>
+                <textarea asp-for="Destination" class="form-control"></textarea>
+                <span asp-validation-for="Destination" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" asp-items="ViewBag.CategoryId">
+                    @foreach (var category in Model.TaxiCategories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="PassengersCount" class="control-label"></label>
+                <input asp-for="PassengersCount" class="form-control" />
+                <span asp-validation-for="PassengersCount" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input asp-for="CreatedOn" class="form-control" hidden>
+                <span asp-validation-for="CreatedOn" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="CreatedBy" class="form-control" placeholder="@Context.User.Identity?.Name" hidden>
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+    
+            <div class="form-group">
+                <input asp-for="LastModifiedOn" class="form-control" hidden>
+                <span asp-validation-for="LastModifiedOn" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="LastModifiedBy" class="form-control" placeholder="@Context.User.Identity?.Name" hidden>
+                <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

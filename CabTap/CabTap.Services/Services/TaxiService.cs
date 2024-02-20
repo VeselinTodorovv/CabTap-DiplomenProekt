@@ -4,21 +4,20 @@ using CabTap.Core.Entities;
 using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Category;
 using CabTap.Shared.Taxi;
-using Microsoft.AspNetCore.Http;
 
 namespace CabTap.Services.Services;
 
 public class TaxiService : ITaxiService
 {
     private readonly ITaxiRepository _taxiRepository;
-    private readonly IHttpContextAccessor _contextAccessor;
     private readonly ICategoryService _categoryService;
+    private readonly IUserService _userService;
     
-    public TaxiService(ITaxiRepository taxiRepository, IHttpContextAccessor contextAccessor, ICategoryService categoryService)
+    public TaxiService(ITaxiRepository taxiRepository, ICategoryService categoryService, IUserService userService)
     {
         _taxiRepository = taxiRepository;
-        _contextAccessor = contextAccessor;
         _categoryService = categoryService;
+        _userService = userService;
     }
 
     public async Task<IEnumerable<TaxiAllViewModel>> GetAllTaxisAsync()
@@ -51,16 +50,14 @@ public class TaxiService : ITaxiService
         return taxiViewModels;
     }
 
-    public async Task<IEnumerable<CategoryPairViewModel>> GetAllTaxiTypesAsync()
+    public async Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypes()
     {
         var taxis = await _taxiRepository.GetAllTaxisAsync();
+        var allCategories = await _categoryService.GetAllCategories();
 
         var availableTaxis = taxis.Where(x => x.TaxiStatus == TaxiStatus.Available);
 
         var availableCategoryIds = availableTaxis.Select(x => x.CategoryId).Distinct();
-        
-        var allCategories = await _categoryService.GetAllCategories();
-        
         var availableCategories = allCategories.Where(category => availableCategoryIds.Contains(category.Id));
 
         var categoryViewModels = availableCategories.Select(x => new CategoryPairViewModel
@@ -98,7 +95,7 @@ public class TaxiService : ITaxiService
 
     public async Task AddTaxiAsync(TaxiCreateViewModel taxiViewModel)
     {
-        var user = _contextAccessor.HttpContext.User.Identity?.Name;
+        var user = _userService.GetCurrentUserName();
 
         if (user != null)
         {
@@ -126,7 +123,7 @@ public class TaxiService : ITaxiService
 
     public async Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel)
     {
-        var user = _contextAccessor.HttpContext.User.Identity?.Name;
+        var user = _userService.GetCurrentUserName();
 
         if (user != null)
         {
