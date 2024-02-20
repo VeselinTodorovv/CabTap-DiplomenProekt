@@ -2,6 +2,7 @@ using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Core.Entities.Enums;
+using CabTap.Shared.Category;
 using CabTap.Shared.Taxi;
 using Microsoft.AspNetCore.Http;
 
@@ -11,14 +12,16 @@ public class TaxiService : ITaxiService
 {
     private readonly ITaxiRepository _taxiRepository;
     private readonly IHttpContextAccessor _contextAccessor;
+    private readonly ICategoryService _categoryService;
     
-    public TaxiService(ITaxiRepository taxiRepository, IHttpContextAccessor contextAccessor)
+    public TaxiService(ITaxiRepository taxiRepository, IHttpContextAccessor contextAccessor, ICategoryService categoryService)
     {
         _taxiRepository = taxiRepository;
         _contextAccessor = contextAccessor;
+        _categoryService = categoryService;
     }
 
-    public async Task<IEnumerable<TaxiAllViewModel>> GetAllAvailableTaxisAsync()
+    public async Task<IEnumerable<TaxiAllViewModel>> GetAllTaxisAsync()
     {
         var taxis = await _taxiRepository.GetAllTaxisAsync();
 
@@ -26,13 +29,17 @@ public class TaxiService : ITaxiService
         {
             Id = taxi!.Id,
             ManufacturerId = taxi.ManufacturerId,
+            ManufacturerName = taxi.Manufacturer.Name,
             RegNumber = taxi.RegNumber,
             Description = taxi.Description,
             Picture = taxi.Picture,
             TaxiStatus = taxi.TaxiStatus,
             PassengerSeats = taxi.PassengerSeats,
             DriverId = taxi.DriverId,
+            DriverName = taxi.Driver.Name,
             CategoryId = taxi.CategoryId,
+            CategoryName = taxi.Category.Name,
+            
             CreatedBy = taxi.CreatedBy,
             CreatedOn = taxi.CreatedOn,
             LastModifiedBy = taxi.LastModifiedBy,
@@ -42,6 +49,27 @@ public class TaxiService : ITaxiService
             .ToList();
         
         return taxiViewModels;
+    }
+
+    public async Task<IEnumerable<CategoryPairViewModel>> GetAllTaxiTypesAsync()
+    {
+        var taxis = await _taxiRepository.GetAllTaxisAsync();
+
+        var availableTaxis = taxis.Where(x => x.TaxiStatus == TaxiStatus.Available);
+
+        var availableCategoryIds = availableTaxis.Select(x => x.CategoryId).Distinct();
+        
+        var allCategories = await _categoryService.GetAllCategories();
+        
+        var availableCategories = allCategories.Where(category => availableCategoryIds.Contains(category.Id));
+
+        var categoryViewModels = availableCategories.Select(x => new CategoryPairViewModel
+        {
+            Id = x.Id,
+            Name = x.Name
+        });
+
+        return categoryViewModels;
     }
 
     public async Task<TaxiDetailsViewModel> GetTaxiByIdAsync(int taxiId)
