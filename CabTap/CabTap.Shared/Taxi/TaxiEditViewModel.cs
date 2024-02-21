@@ -34,20 +34,8 @@ public class TaxiEditViewModel
     [Range(1, 8, ErrorMessage = "Passenger Seats must be between 1 and 8")]
     public int PassengerSeats { get; set; }
     
-    
-    [Required]
-    [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
     public DateTime CreatedOn { get; set; }
-
-    [Required]
-    [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
     public DateTime LastModifiedOn { get; set; }
-    
-    [Required]
     public string CreatedBy { get; set; } = null!;
-    
-    [Required]
     public string LastModifiedBy { get; set; } = null!;
 }

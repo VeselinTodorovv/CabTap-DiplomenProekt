@@ -112,7 +112,9 @@ public class TaxisController : Controller
             return NotFound();
         }
     }
-    
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(TaxiEditViewModel viewModel)
     {
         if (!ModelState.IsValid)
