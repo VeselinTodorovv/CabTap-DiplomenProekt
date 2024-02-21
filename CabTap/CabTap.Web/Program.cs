@@ -1,6 +1,6 @@
 using CabTap.Core.Entities;
 using CabTap.Data;
-using CabTap.Data.Infrastructure;
+using CabTap.Web.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +27,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddAutoMapperProfiles();
 
 builder.Services.RegisterServices();
 

@@ -1,9 +1,8 @@
 using CabTap.Core.Entities;
-using Microsoft.AspNetCore.Builder;
+using CabTap.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace CabTap.Data.Infrastructure;
+namespace CabTap.Web.Infrastructure;
 
 public static class ApplicationBuilderExtension
 {

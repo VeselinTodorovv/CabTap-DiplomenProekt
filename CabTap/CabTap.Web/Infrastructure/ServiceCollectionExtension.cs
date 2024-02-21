@@ -1,10 +1,11 @@
+using AutoMapper;
 using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Data.Repositories;
 using CabTap.Services.Services;
-using Microsoft.Extensions.DependencyInjection;
+using CabTap.Web.Profiles;
 
-namespace CabTap.Data.Infrastructure;
+namespace CabTap.Web.Infrastructure;
 
 public static class ServiceCollectionExtension
 {
@@ -22,5 +23,18 @@ public static class ServiceCollectionExtension
         services.AddTransient<ICategoryService, CategoryService>();
         services.AddTransient<IManufacturerService, ManufacturerService>();
         services.AddTransient<IUserService, UserService>();
+    }
+
+    public static void AddAutoMapperProfiles(this IServiceCollection services)
+    {
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.AddProfile(new DriverMappingProfile());
+            cfg.AddProfile(new TaxiMappingProfile());
+            cfg.AddProfile(new ReservationMappingProfile());
+        });
+
+        var mapper = config.CreateMapper();
+        services.AddSingleton(mapper);
     }
 }
