@@ -95,7 +95,7 @@ public class TaxiService : ITaxiService
 
     public async Task AddTaxiAsync(TaxiCreateViewModel taxiViewModel)
     {
-        var user = _userService.GetCurrentUserName();
+        var user = await _userService.GetCurrentUserName();
 
         if (user != null)
         {
@@ -123,7 +123,7 @@ public class TaxiService : ITaxiService
 
     public async Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel)
     {
-        var user = _userService.GetCurrentUserName();
+        var user = await _userService.GetCurrentUserName();
 
         if (user != null)
         {

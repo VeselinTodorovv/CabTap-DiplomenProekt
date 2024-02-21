@@ -67,7 +67,7 @@ public class ReservationService : IReservationService
 
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
     {
-        var user = _userService.GetCurrentUserName();
+        var user = await _userService.GetCurrentUserName();
 
         if (user != null)
         {
@@ -95,7 +95,7 @@ public class ReservationService : IReservationService
 
     public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
     {
-        var user = _userService.GetCurrentUserName();
+        var user = await _userService.GetCurrentUserName();
 
         if (user != null)
         {
