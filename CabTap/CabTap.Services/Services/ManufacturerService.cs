@@ -1,3 +1,4 @@
+using AutoMapper;
 using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Shared.Manufacturer;
@@ -8,10 +9,12 @@ namespace CabTap.Services.Services;
 public class ManufacturerService : IManufacturerService
 {
     private readonly IManufacturerRepository _manufacturerRepository;
+    private readonly IMapper _mapper;
     
-    public ManufacturerService(IManufacturerRepository manufacturerRepository)
+    public ManufacturerService(IManufacturerRepository manufacturerRepository, IMapper mapper)
     {
         _manufacturerRepository = manufacturerRepository;
+        _mapper = mapper;
     }
 
     public async Task<IEnumerable<ManufacturerPairViewModel>> GetAllManufacturers()
@@ -44,23 +47,7 @@ public class ManufacturerService : IManufacturerService
     {
         var taxisByManufacturer = await _manufacturerRepository.GetTaxisByManufacturer(manufacturerId);
 
-        var model = taxisByManufacturer.Select(x => new TaxiAllViewModel
-        {
-            Id = x.Id,
-            ManufacturerId = x.ManufacturerId,
-            RegNumber = x.RegNumber,
-            Description = x.Description,
-            Picture = x.Picture,
-            TaxiStatus = x.TaxiStatus,
-            PassengerSeats = x.PassengerSeats,
-            DriverId = x.DriverId,
-            CategoryId = x.CategoryId,
-
-            CreatedBy = x.CreatedBy,
-            CreatedOn = x.CreatedOn,
-            LastModifiedBy = x.LastModifiedBy,
-            LastModifiedOn = x.LastModifiedOn,
-        });
+        var model = _mapper.Map<IEnumerable<TaxiAllViewModel>>(taxisByManufacturer);
 
         return model;
     }

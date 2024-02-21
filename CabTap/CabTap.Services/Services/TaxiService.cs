@@ -1,3 +1,4 @@
+using AutoMapper;
 using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
@@ -12,38 +13,21 @@ public class TaxiService : ITaxiService
     private readonly ITaxiRepository _taxiRepository;
     private readonly ICategoryService _categoryService;
     private readonly IUserService _userService;
+    private readonly IMapper _mapper;
     
-    public TaxiService(ITaxiRepository taxiRepository, ICategoryService categoryService, IUserService userService)
+    public TaxiService(ITaxiRepository taxiRepository, ICategoryService categoryService, IUserService userService, IMapper mapper)
     {
         _taxiRepository = taxiRepository;
         _categoryService = categoryService;
         _userService = userService;
+        _mapper = mapper;
     }
 
     public async Task<IEnumerable<TaxiAllViewModel>> GetAllTaxisAsync()
     {
         var taxis = await _taxiRepository.GetAllTaxisAsync();
 
-        var taxiViewModels = taxis.Select(taxi => new TaxiAllViewModel
-        {
-            Id = taxi!.Id,
-            ManufacturerId = taxi.ManufacturerId,
-            ManufacturerName = taxi.Manufacturer.Name,
-            RegNumber = taxi.RegNumber,
-            Description = taxi.Description,
-            Picture = taxi.Picture,
-            TaxiStatus = taxi.TaxiStatus,
-            PassengerSeats = taxi.PassengerSeats,
-            DriverId = taxi.DriverId,
-            DriverName = taxi.Driver.Name,
-            CategoryId = taxi.CategoryId,
-            CategoryName = taxi.Category.Name,
-            
-            CreatedBy = taxi.CreatedBy,
-            CreatedOn = taxi.CreatedOn,
-            LastModifiedBy = taxi.LastModifiedBy,
-            LastModifiedOn = taxi.LastModifiedOn
-        });
+        var taxiViewModels = _mapper.Map<IEnumerable<TaxiAllViewModel>>(taxis);
         
         return taxiViewModels;
     }
@@ -53,7 +37,7 @@ public class TaxiService : ITaxiService
         var taxis = await _taxiRepository.GetAllTaxisAsync();
         var allCategories = await _categoryService.GetAllCategories();
 
-        var availableTaxis = taxis.Where(x => x.TaxiStatus == TaxiStatus.Available);
+        var availableTaxis = taxis.Where(x => x is { TaxiStatus: TaxiStatus.Available });
 
         var availableCategoryIds = availableTaxis.Select(x => x.CategoryId).Distinct();
         var availableCategories = allCategories.Where(category => availableCategoryIds.Contains(category.Id));
@@ -70,23 +54,8 @@ public class TaxiService : ITaxiService
     public async Task<TaxiDetailsViewModel> GetTaxiByIdAsync(int taxiId)
     {
         var taxi = await _taxiRepository.GetTaxiByIdAsync(taxiId);
-        
-        var model = new TaxiDetailsViewModel
-        {
-            Id = taxi.Id,
-            ManufacturerId = taxi.ManufacturerId,
-            Description = taxi.Description,
-            Picture = taxi.Picture,
-            CategoryId = taxi.CategoryId,
-            CreatedBy = taxi.CreatedBy,
-            CreatedOn = taxi.CreatedOn,
-            DriverId = taxi.DriverId,
-            PassengerSeats = taxi.PassengerSeats,
-            RegNumber = taxi.RegNumber,
-            TaxiStatus = taxi.TaxiStatus,
-            LastModifiedBy = taxi.LastModifiedBy,
-            LastModifiedOn = taxi.LastModifiedOn
-        };
+
+        var model = _mapper.Map<TaxiDetailsViewModel>(taxi);
 
         return model;
     }
@@ -97,23 +66,12 @@ public class TaxiService : ITaxiService
 
         if (user != null)
         {
-            var taxi = new Taxi
-            {
-                Id = taxiViewModel.Id,
-                ManufacturerId = taxiViewModel.ManufacturerId,
-                Description = taxiViewModel.Description,
-                Picture = taxiViewModel.Picture,
-                CategoryId = taxiViewModel.CategoryId,
-                DriverId = taxiViewModel.DriverId,
-                PassengerSeats = taxiViewModel.PassengerSeats,
-                RegNumber = taxiViewModel.RegNumber,
-                TaxiStatus = taxiViewModel.TaxiStatus,
-                
-                CreatedBy = user,
-                CreatedOn = DateTime.Now,
-                LastModifiedBy = user,
-                LastModifiedOn = DateTime.Now
-            };
+            var taxi = _mapper.Map<Taxi>(taxiViewModel);
+
+            taxi.CreatedBy = user;
+            taxi.CreatedOn = DateTime.Now;
+            taxi.LastModifiedBy = user;
+            taxi.LastModifiedOn = DateTime.Now;
         
             await _taxiRepository.AddTaxiAsync(taxi);
         }
@@ -125,23 +83,10 @@ public class TaxiService : ITaxiService
 
         if (user != null)
         {
-            var taxi = new Taxi
-            {
-                Id = taxiViewModel.Id,
-                ManufacturerId = taxiViewModel.ManufacturerId,
-                Description = taxiViewModel.Description,
-                Picture = taxiViewModel.Picture,
-                CategoryId = taxiViewModel.CategoryId,
-                DriverId = taxiViewModel.DriverId,
-                PassengerSeats = taxiViewModel.PassengerSeats,
-                RegNumber = taxiViewModel.RegNumber,
-                TaxiStatus = taxiViewModel.TaxiStatus,
-                CreatedBy = taxiViewModel.CreatedBy,
-                CreatedOn = taxiViewModel.CreatedOn,
-                
-                LastModifiedBy = user,
-                LastModifiedOn = DateTime.Now
-            };
+            var taxi = _mapper.Map<Taxi>(taxiViewModel);
+
+            taxi.LastModifiedBy = user;
+            taxi.LastModifiedOn = DateTime.Now;
         
             await _taxiRepository.UpdateTaxiAsync(taxi);
         }

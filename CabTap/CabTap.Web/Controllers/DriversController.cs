@@ -1,3 +1,4 @@
+using AutoMapper;
 using CabTap.Contracts.Services;
 using CabTap.Shared.Driver;
 using Microsoft.AspNetCore.Authorization;
@@ -9,10 +10,12 @@ namespace CabTap.Web.Controllers;
 public class DriversController : Controller
 {
     private readonly IDriverService _driverService;
+    private readonly IMapper _mapper;
     
-    public DriversController(IDriverService driverService)
+    public DriversController(IDriverService driverService, IMapper mapper)
     {
         _driverService = driverService;
+        _mapper = mapper;
     }
     
     public async Task<IActionResult> Index()
@@ -60,15 +63,7 @@ public class DriversController : Controller
         {
             var driver = await _driverService.GetDriverByIdAsync(id);
 
-            var model = new DriverEditViewModel
-            {
-                Id = driver.Id,
-                Name = driver.Name,
-                CreatedBy = driver.CreatedBy,
-                CreatedOn = driver.CreatedOn,
-                LastModifiedBy = driver.LastModifiedBy,
-                LastModifiedOn = driver.LastModifiedOn
-            };
+            var model = _mapper.Map<DriverEditViewModel>(driver);
         
             return View(model);
         }
@@ -97,15 +92,7 @@ public class DriversController : Controller
         {
             var driver = await _driverService.GetDriverByIdAsync(id);
 
-            var model = new DriverDeleteViewModel
-            {
-                Id = driver.Id,
-                Name = driver.Name,
-                CreatedBy = driver.CreatedBy,
-                CreatedOn = driver.CreatedOn,
-                LastModifiedBy = driver.LastModifiedBy,
-                LastModifiedOn = driver.LastModifiedOn
-            };
+            var model = _mapper.Map<DriverDeleteViewModel>(driver);
         
             return View(model);
         }

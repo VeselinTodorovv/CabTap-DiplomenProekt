@@ -26,6 +26,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 builder.Services.RegisterServices();
 
 var app = builder.Build();

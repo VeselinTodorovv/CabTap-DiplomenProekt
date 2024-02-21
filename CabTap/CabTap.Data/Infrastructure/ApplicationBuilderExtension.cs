@@ -7,7 +7,7 @@ namespace CabTap.Data.Infrastructure;
 
 public static class ApplicationBuilderExtension
 {
-    public static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)
+    public static async Task PrepareDatabase(this IApplicationBuilder app)
     {
         using var serviceScope = app.ApplicationServices.CreateScope();
         var services = serviceScope.ServiceProvider;
@@ -17,8 +17,6 @@ public static class ApplicationBuilderExtension
 
         await SeedCategoriesAsync(services.GetRequiredService<ApplicationDbContext>());
         await SeedManufacturersAsync(services.GetRequiredService<ApplicationDbContext>());
-
-        return app;
     }
     
     private static async Task RoleSeeder(IServiceProvider serviceProvider)

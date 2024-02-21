@@ -1,3 +1,4 @@
+using AutoMapper;
 using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
@@ -9,34 +10,20 @@ public class ReservationService : IReservationService
 {
     private readonly IReservationRepository _reservationRepository;
     private readonly IUserService _userService;
+    private readonly IMapper _mapper;
 
-    public ReservationService(IReservationRepository reservationRepository, IUserService userService)
+    public ReservationService(IReservationRepository reservationRepository, IUserService userService, IMapper mapper)
     {
         _reservationRepository = reservationRepository;
         _userService = userService;
+        _mapper = mapper;
     }
 
     public async Task<IEnumerable<ReservationAllViewModel>> GetAllReservationsAsync()
     {
         var reservations = await _reservationRepository.GetAllReservationsAsync();
 
-        var reservationViewModels = reservations.Select(reservation => new ReservationAllViewModel
-        {
-            Id = reservation!.Id,
-            Destination = reservation.Destination,
-            Duration = reservation.Duration,
-            Price = reservation.Price,
-            PassengersCount = reservation.PassengersCount,
-            RideStatus = reservation.RideStatus,
-            CreatedBy = reservation.CreatedBy,
-            CreatedOn = reservation.CreatedOn,
-            LastModifiedBy = reservation.LastModifiedBy,
-            LastModifiedOn = reservation.LastModifiedOn,
-            Origin = reservation.Origin,
-            TaxiId = reservation.TaxiId,
-            UserId = reservation.UserId
-        })
-            .ToList();
+        var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
 
         return reservationViewModels;
     }
@@ -45,22 +32,7 @@ public class ReservationService : IReservationService
     {
         var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
 
-        var model = new ReservationDetailsViewModel
-        {
-            Id = reservation.Id,
-            Destination = reservation.Destination,
-            Duration = reservation.Duration,
-            Origin = reservation.Origin,
-            Price = reservation.Price,
-            PassengersCount = reservation.PassengersCount,
-            RideStatus = reservation.RideStatus,
-            UserId = reservation.UserId,
-            TaxiId = reservation.TaxiId,
-            CreatedBy = reservation.CreatedBy,
-            CreatedOn = reservation.CreatedOn,
-            LastModifiedBy = reservation.LastModifiedBy,
-            LastModifiedOn = reservation.LastModifiedOn
-        };
+        var model = _mapper.Map<ReservationDetailsViewModel>(reservation);
 
         return model;
     }
@@ -71,23 +43,12 @@ public class ReservationService : IReservationService
 
         if (user != null)
         {
-            var reservation = new Reservation
-            {
-                Id = reservationViewModel.Id,
-                Destination = reservationViewModel.Destination,
-                Duration = reservationViewModel.Duration,
-                Origin = reservationViewModel.Origin,
-                Price = reservationViewModel.Price,
-                PassengersCount = reservationViewModel.PassengersCount,
-                RideStatus = reservationViewModel.RideStatus,
-                UserId = reservationViewModel.UserId,
-                TaxiId = reservationViewModel.TaxiId,
+            var reservation = _mapper.Map<Reservation>(reservationViewModel);
 
-                CreatedBy = user,
-                CreatedOn = reservationViewModel.CreatedOn,
-                LastModifiedBy = user,
-                LastModifiedOn = DateTime.Now
-            };
+            reservation.CreatedBy = user;
+            reservation.CreatedOn = DateTime.Now;
+            reservation.LastModifiedBy = user;
+            reservation.LastModifiedOn = DateTime.Now;
 
             await _reservationRepository.AddReservationAsync(reservation);
         }
@@ -99,23 +60,10 @@ public class ReservationService : IReservationService
 
         if (user != null)
         {
-            var reservation = new Reservation
-            {
-                Id = reservationViewModel.Id,
-                Destination = reservationViewModel.Destination,
-                Duration = reservationViewModel.Duration,
-                Origin = reservationViewModel.Origin,
-                Price = reservationViewModel.Price,
-                PassengersCount = reservationViewModel.PassengersCount,
-                RideStatus = reservationViewModel.RideStatus,
-                UserId = reservationViewModel.UserId,
-                TaxiId = reservationViewModel.TaxiId,
-
-                CreatedBy = reservationViewModel.CreatedBy,
-                CreatedOn = reservationViewModel.CreatedOn,
-                LastModifiedBy = user,
-                LastModifiedOn = DateTime.Now
-            };
+            var reservation = _mapper.Map<Reservation>(reservationViewModel);
+            
+            reservation.LastModifiedBy = user;
+            reservation.LastModifiedOn = DateTime.Now;
         
             await _reservationRepository.UpdateReservationAsync(reservation);
         }

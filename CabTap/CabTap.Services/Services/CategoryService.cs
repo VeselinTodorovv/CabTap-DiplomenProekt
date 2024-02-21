@@ -1,3 +1,4 @@
+using AutoMapper;
 using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Shared.Category;
@@ -8,10 +9,12 @@ namespace CabTap.Services.Services;
 public class CategoryService : ICategoryService
 {
     private readonly ICategoryRepository _categoryRepository;
+    private readonly IMapper _mapper;
 
-    public CategoryService(ICategoryRepository categoryRepository)
+    public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
     {
         _categoryRepository = categoryRepository;
+        _mapper = mapper;
     }
 
     public async Task<IEnumerable<CategoryPairViewModel>> GetAllCategories()
@@ -44,23 +47,7 @@ public class CategoryService : ICategoryService
     {
         var taxisByCategory = await _categoryRepository.GetTaxisByCategory(categoryId);
 
-        var model = taxisByCategory.Select(x => new TaxiAllViewModel
-        {
-            Id = x.Id,
-            ManufacturerId = x.ManufacturerId,
-            RegNumber = x.RegNumber,
-            Description = x.Description,
-            Picture = x.Picture,
-            TaxiStatus = x.TaxiStatus,
-            PassengerSeats = x.PassengerSeats,
-            DriverId = x.DriverId,
-            CategoryId = x.CategoryId,
-
-            CreatedBy = x.CreatedBy,
-            CreatedOn = x.CreatedOn,
-            LastModifiedBy = x.LastModifiedBy,
-            LastModifiedOn = x.LastModifiedOn,
-        });
+        var model = _mapper.Map<IEnumerable<TaxiAllViewModel>>(taxisByCategory);
 
         return model;
     }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using CabTap.Contracts.Services;
 using CabTap.Shared.Driver;
 using CabTap.Shared.Taxi;
@@ -14,13 +15,15 @@ public class TaxisController : Controller
     private readonly ICategoryService _categoryService;
     private readonly IManufacturerService _manufacturerService;
     private readonly IDriverService _driverService;
+    private readonly IMapper _mapper;
     
-    public TaxisController(ITaxiService taxiService, ICategoryService categoryService, IManufacturerService manufacturerService, IDriverService driverService)
+    public TaxisController(ITaxiService taxiService, ICategoryService categoryService, IManufacturerService manufacturerService, IDriverService driverService, IMapper mapper)
     {
         _taxiService = taxiService;
         _categoryService = categoryService;
         _manufacturerService = manufacturerService;
         _driverService = driverService;
+        _mapper = mapper;
     }
 
     [AllowAnonymous]
@@ -83,39 +86,23 @@ public class TaxisController : Controller
 
     public async Task<IActionResult> Edit(int id)
     {
+        var taxi = await _taxiService.GetTaxiByIdAsync(id);
+        var categories = await _categoryService.GetAllCategories();
+        var manufacturers = await _manufacturerService.GetAllManufacturers();
+        var drivers = await _driverService.GetAllDriversAsync();
+        
         try
         {
-            var taxi = await _taxiService.GetTaxiByIdAsync(id);
-            var categories = await _categoryService.GetAllCategories();
-            var manufacturers = await _manufacturerService.GetAllManufacturers();
-            var drivers = await _driverService.GetAllDriversAsync();
+            var model = _mapper.Map<TaxiEditViewModel>(taxi);
             
-            var model = new TaxiEditViewModel
+            model.Manufacturers = manufacturers.ToList();
+            model.Categories = categories.ToList();
+            model.Drivers = drivers.Select(x => new DriverPairViewModel
             {
-                Id = taxi.Id,
-                RegNumber = taxi.RegNumber,
-                ManufacturerId = taxi.ManufacturerId,
-                CategoryId = taxi.CategoryId,
-                DriverId = taxi.DriverId,
-                Description = taxi.Description,
-                Picture = taxi.Picture,
-                TaxiStatus = taxi.TaxiStatus,
-                PassengerSeats = taxi.PassengerSeats,
-                
-                Manufacturers = manufacturers.ToList(),
-                Categories = categories.ToList(),
-                Drivers = drivers.Select(x => new DriverPairViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                })
-                    .ToList(),
-            
-                CreatedBy = taxi.CreatedBy,
-                CreatedOn = taxi.CreatedOn,
-                LastModifiedBy = taxi.LastModifiedBy,
-                LastModifiedOn = taxi.LastModifiedOn,
-            };
+                Id = x.Id,
+                Name = x.Name
+            })
+                .ToList();
         
             return View(model);
         }
@@ -144,23 +131,7 @@ public class TaxisController : Controller
         {
             var taxi = await _taxiService.GetTaxiByIdAsync(id);
 
-            var model = new TaxiDeleteViewModel
-            {
-                Id = taxi.Id,
-                RegNumber = taxi.RegNumber,
-                ManufacturerId = taxi.ManufacturerId,
-                CategoryId = taxi.CategoryId,
-                DriverId = taxi.DriverId,
-                Description = taxi.Description,
-                Picture = taxi.Picture,
-                TaxiStatus = taxi.TaxiStatus,
-                PassengerSeats = taxi.PassengerSeats,
-            
-                CreatedBy = taxi.CreatedBy,
-                CreatedOn = taxi.CreatedOn,
-                LastModifiedBy = taxi.LastModifiedBy,
-                LastModifiedOn = taxi.LastModifiedOn,
-            };
+            var model = _mapper.Map<TaxiDeleteViewModel>(taxi);
         
             return View(model);
         }

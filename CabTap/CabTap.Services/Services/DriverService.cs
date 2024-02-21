@@ -1,3 +1,4 @@
+using AutoMapper;
 using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
@@ -9,26 +10,20 @@ public class DriverService : IDriverService
 {
     private readonly IDriverRepository _driverRepository;
     private readonly IUserService _userService;
+    private readonly IMapper _mapper;
     
-    public DriverService(IDriverRepository driverRepository, IUserService userService)
+    public DriverService(IDriverRepository driverRepository, IUserService userService, IMapper mapper)
     {
         _driverRepository = driverRepository;
         _userService = userService;
+        _mapper = mapper;
     }
     
     public async Task<IEnumerable<DriverAllViewModel>> GetAllDriversAsync()
     {
         var drivers = await _driverRepository.GetAllDriversAsync();
 
-        var driverViewModels = drivers.Select(driver => new DriverAllViewModel
-        {
-            Id = driver!.Id,
-            Name = driver.Name,
-            CreatedBy = driver.CreatedBy,
-            CreatedOn = driver.CreatedOn,
-            LastModifiedBy = driver.LastModifiedBy,
-            LastModifiedOn = driver.LastModifiedOn
-        });
+        var driverViewModels = _mapper.Map<IEnumerable<DriverAllViewModel>>(drivers);
 
         return driverViewModels;
     }
@@ -37,15 +32,7 @@ public class DriverService : IDriverService
     {
         var driver = await _driverRepository.GetDriverByIdAsync(driverId);
 
-        var model = new DriverDetailsViewModel
-        {
-            Id = driver.Id,
-            Name = driver.Name,
-            CreatedBy = driver.CreatedBy,
-            CreatedOn = driver.CreatedOn,
-            LastModifiedBy = driver.LastModifiedBy,
-            LastModifiedOn = driver.LastModifiedOn
-        };
+        var model = _mapper.Map<DriverDetailsViewModel>(driver);
 
         return model;
     }
@@ -56,15 +43,12 @@ public class DriverService : IDriverService
 
         if (user != null)
         {
-            var driver = new Driver
-            {
-                Name = driverViewModel.Name,
-                
-                CreatedBy = user,
-                CreatedOn = DateTime.Now,
-                LastModifiedBy = user,
-                LastModifiedOn = DateTime.Now
-            };
+            var driver = _mapper.Map<Driver>(driverViewModel);
+
+            driver.CreatedBy = user;
+            driver.CreatedOn = DateTime.Now;
+            driver.LastModifiedBy = user;
+            driver.LastModifiedOn = DateTime.Now;
         
             await _driverRepository.AddDriverAsync(driver);
         }
@@ -76,16 +60,10 @@ public class DriverService : IDriverService
 
         if (user != null)
         {
-            var driver = new Driver
-            {
-                Id = driverViewModel.Id,
-                Name = driverViewModel.Name,
+            var driver = _mapper.Map<Driver>(driverViewModel);
             
-                CreatedBy = driverViewModel.CreatedBy,
-                CreatedOn = driverViewModel.CreatedOn,
-                LastModifiedBy = user,
-                LastModifiedOn = DateTime.Now
-            };
+            driver.LastModifiedBy = user;
+            driver.LastModifiedOn = DateTime.Now;
             
             await _driverRepository.UpdateDriverAsync(driver);
         }
