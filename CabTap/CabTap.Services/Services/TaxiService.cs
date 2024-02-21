@@ -43,9 +43,7 @@ public class TaxiService : ITaxiService
             CreatedOn = taxi.CreatedOn,
             LastModifiedBy = taxi.LastModifiedBy,
             LastModifiedOn = taxi.LastModifiedOn
-        })
-            .Where(x => x.TaxiStatus == TaxiStatus.Available)
-            .ToList();
+        });
         
         return taxiViewModels;
     }

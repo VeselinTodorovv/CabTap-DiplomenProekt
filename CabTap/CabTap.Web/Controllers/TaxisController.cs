@@ -86,6 +86,9 @@ public class TaxisController : Controller
         try
         {
             var taxi = await _taxiService.GetTaxiByIdAsync(id);
+            var categories = await _categoryService.GetAllCategories();
+            var manufacturers = await _manufacturerService.GetAllManufacturers();
+            var drivers = await _driverService.GetAllDriversAsync();
             
             var model = new TaxiEditViewModel
             {
@@ -98,6 +101,15 @@ public class TaxisController : Controller
                 Picture = taxi.Picture,
                 TaxiStatus = taxi.TaxiStatus,
                 PassengerSeats = taxi.PassengerSeats,
+                
+                Manufacturers = manufacturers.ToList(),
+                Categories = categories.ToList(),
+                Drivers = drivers.Select(x => new DriverPairViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+                    .ToList(),
             
                 CreatedBy = taxi.CreatedBy,
                 CreatedOn = taxi.CreatedOn,
