@@ -1,5 +1,3 @@
-using AutoMapper;
-
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Shared.User;
@@ -12,13 +10,11 @@ public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly IMapper _mapper;
 
-    public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, IMapper mapper)
+    public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
     {
         _userManager = userManager;
         _httpContextAccessor = httpContextAccessor;
-        _mapper = mapper;
     }
 
     public async Task<string?> GetCurrentUserName()
@@ -52,8 +48,11 @@ public class UserService : IUserService
             user.IsAdmin = adminIds.Contains(user.Id);
         }
 
-        users = users.Where(x => !x.IsAdmin).OrderBy(u => u.UserName).ToList();
+        var list = users
+            .Where(x => !x.IsAdmin)
+            .OrderBy(u => u.UserName)
+            .ToList();
 
-        return users;
+        return list;
     }
 }

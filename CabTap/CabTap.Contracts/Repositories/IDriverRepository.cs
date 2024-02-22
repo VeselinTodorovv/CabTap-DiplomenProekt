@@ -4,7 +4,7 @@ namespace CabTap.Contracts.Repositories;
 
 public interface IDriverRepository
 {
-    Task<IEnumerable<Driver?>> GetAllDriversAsync();
+    Task<IEnumerable<Driver>> GetAllDriversAsync();
     Task<Driver> GetDriverByIdAsync(string driverId);
     Task AddDriverAsync(Driver driver);
     Task UpdateDriverAsync(Driver driver);

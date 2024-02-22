@@ -13,7 +13,7 @@ public class TaxiRepository : ITaxiRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Taxi?>> GetAllTaxisAsync()
+    public async Task<IEnumerable<Taxi>> GetAllTaxisAsync()
     {
         return await _context.Taxis.ToListAsync();
     }

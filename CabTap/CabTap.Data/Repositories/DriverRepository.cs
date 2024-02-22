@@ -13,7 +13,7 @@ public class DriverRepository : IDriverRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Driver?>> GetAllDriversAsync()
+    public async Task<IEnumerable<Driver>> GetAllDriversAsync()
     {
         return await _context.Drivers.ToListAsync();
     }
