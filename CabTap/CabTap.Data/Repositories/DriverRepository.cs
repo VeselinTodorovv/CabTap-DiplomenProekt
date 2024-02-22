@@ -37,12 +37,12 @@ public class DriverRepository : IDriverRepository
 
     public async Task UpdateDriverAsync(Driver driver)
     {
-        var existingDrier = await _context.Drivers.FindAsync(driver.Id);
+        var existingDriver = await _context.Drivers.FindAsync(driver.Id);
 
-        if (existingDrier != null)
+        if (existingDriver != null)
         {
-            _context.Entry(existingDrier).CurrentValues.SetValues(driver);
-            _context.Entry(existingDrier).State = EntityState.Modified;
+            _context.Entry(existingDriver).CurrentValues.SetValues(driver);
+            _context.Entry(existingDriver).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
     }

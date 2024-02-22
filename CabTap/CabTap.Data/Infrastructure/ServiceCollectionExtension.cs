@@ -1,11 +1,12 @@
 using AutoMapper;
 using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
+using CabTap.Data.Profiles;
 using CabTap.Data.Repositories;
 using CabTap.Services.Services;
-using CabTap.Web.Profiles;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CabTap.Web.Infrastructure;
+namespace CabTap.Data.Infrastructure;
 
 public static class ServiceCollectionExtension
 {

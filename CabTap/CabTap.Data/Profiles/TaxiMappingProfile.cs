@@ -2,7 +2,7 @@ using AutoMapper;
 using CabTap.Core.Entities;
 using CabTap.Shared.Taxi;
 
-namespace CabTap.Web.Profiles;
+namespace CabTap.Data.Profiles;
 
 public class TaxiMappingProfile : Profile
 {

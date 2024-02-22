@@ -2,7 +2,7 @@ using AutoMapper;
 using CabTap.Core.Entities;
 using CabTap.Shared.Driver;
 
-namespace CabTap.Web.Profiles;
+namespace CabTap.Data.Profiles;
 
 public class DriverMappingProfile : Profile
 {

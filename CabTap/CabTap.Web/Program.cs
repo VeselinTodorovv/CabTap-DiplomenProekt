@@ -1,6 +1,6 @@
 using CabTap.Core.Entities;
 using CabTap.Data;
-using CabTap.Web.Infrastructure;
+using CabTap.Data.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
