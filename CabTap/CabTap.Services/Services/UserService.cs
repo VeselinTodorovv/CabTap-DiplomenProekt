@@ -1,3 +1,5 @@
+using AutoMapper;
+
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Shared.User;
@@ -10,11 +12,13 @@ public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IMapper _mapper;
 
-    public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
+    public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, IMapper mapper)
     {
         _userManager = userManager;
         _httpContextAccessor = httpContextAccessor;
+        _mapper = mapper;
     }
 
     public async Task<string?> GetCurrentUserName()
@@ -31,7 +35,7 @@ public class UserService : IUserService
     public async Task<IEnumerable<ClientIndexViewModel>> GetAllClientsAsync()
     {
         var users = _userManager.Users
-            .Select(x => new ClientIndexViewModel 
+            .Select(x => new ClientIndexViewModel
             {
                 Id = x.Id,
                 UserName = x.UserName,
@@ -39,7 +43,8 @@ public class UserService : IUserService
                 Address = x.Address,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
-            });
+            })
+            .ToList();
 
         var adminIds = (await _userManager.GetUsersInRoleAsync("Administrator")).Select(u => u.Id).ToArray();
         foreach (var user in users)
@@ -47,7 +52,7 @@ public class UserService : IUserService
             user.IsAdmin = adminIds.Contains(user.Id);
         }
 
-        users = users.Where(x => !x.IsAdmin).OrderBy(u => u.UserName);
+        users = users.Where(x => !x.IsAdmin).OrderBy(u => u.UserName).ToList();
 
         return users;
     }
