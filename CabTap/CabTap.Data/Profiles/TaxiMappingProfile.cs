@@ -8,11 +8,11 @@ public class TaxiMappingProfile : Profile
 {
     public TaxiMappingProfile()
     {
-        CreateMap<Taxi, TaxiAllViewModel>().ReverseMap();
-        CreateMap<Taxi, TaxiDetailsViewModel>().ReverseMap();
+        CreateMap<Taxi, TaxiAllViewModel>();
+        CreateMap<Taxi, TaxiDetailsViewModel>();
+        CreateMap<Taxi, TaxiDeleteViewModel>();
         CreateMap<Taxi, TaxiCreateViewModel>().ReverseMap();
         CreateMap<Taxi, TaxiEditViewModel>().ReverseMap();
-        CreateMap<Taxi, TaxiDeleteViewModel>().ReverseMap();
 
         CreateMap<TaxiDetailsViewModel, TaxiEditViewModel>();
         CreateMap<TaxiDetailsViewModel, TaxiDeleteViewModel>();
