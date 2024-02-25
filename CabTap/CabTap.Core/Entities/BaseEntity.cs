@@ -6,12 +6,10 @@ public abstract class BaseEntity
 {
     [Required]
     [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
     public DateTime CreatedOn { get; set; }
     
     [Required]
     [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
     public DateTime LastModifiedOn { get; set; }
     
     [Required]

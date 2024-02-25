@@ -47,4 +47,17 @@ public class ReservationsController : Controller
         
         return View(reservationViewModel);
     }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(ReservationCreateViewModel viewModel)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(viewModel);
+        }
+        
+        await _reservationService.AddReservationAsync(viewModel);
+        return RedirectToAction(nameof(Index));
+    }
 }

@@ -6,12 +6,10 @@ namespace CabTap.Shared.Reservation;
 
 public class ReservationCreateViewModel
 {
-    [Key]
-    public string Id { get; set; } = null!;
-
     [Required]
     public string UserId { get; set; } = null!;
 
+    [Required]
     public int TaxiId { get; set; }
     
     [Display(Name = "Taxi Category")]
