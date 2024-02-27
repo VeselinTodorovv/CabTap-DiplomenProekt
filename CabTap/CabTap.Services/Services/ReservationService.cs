@@ -63,6 +63,8 @@ public class ReservationService : IReservationService
 
             // Make up some dummy price calculation
 
+            // Set selected taxi status as busy, so it can't be assigned to other reservations
+
             reservation.CreatedBy = user.UserName;
             reservation.CreatedOn = DateTime.Now;
             reservation.LastModifiedBy = user.UserName;

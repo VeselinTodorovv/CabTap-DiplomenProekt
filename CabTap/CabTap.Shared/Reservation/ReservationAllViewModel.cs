@@ -25,12 +25,8 @@ public class ReservationAllViewModel
     [EnumDataType(typeof(RideStatus))]
     public RideStatus RideStatus { get; set; }
     
-    [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
     public DateTime CreatedOn { get; set; }
     
-    [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
     public DateTime LastModifiedOn { get; set; }
     
     public string CreatedBy { get; set; } = null!;
