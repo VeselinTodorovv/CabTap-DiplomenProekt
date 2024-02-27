@@ -17,15 +17,11 @@ public class UserService : IUserService
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<string?> GetCurrentUserName()
+    public async Task<ApplicationUser?> GetCurrentUser()
     {
-        var userName = (await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User))?.UserName;
-        if (userName == null)
-        {
-            throw new InvalidOperationException("Unable to get username.");
-        }
+        var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
-        return userName;
+        return user ?? throw new InvalidOperationException("Unable to get user.");
     }
 
     public async Task<IEnumerable<ClientIndexViewModel>> GetAllClientsAsync()

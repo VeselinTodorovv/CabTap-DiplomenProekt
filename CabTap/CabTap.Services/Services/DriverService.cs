@@ -39,15 +39,15 @@ public class DriverService : IDriverService
 
     public async Task AddDriverAsync(DriverCreateViewModel driverViewModel)
     {
-        var user = await _userService.GetCurrentUserName();
+        var user = await _userService.GetCurrentUser();
 
         if (user != null)
         {
             var driver = _mapper.Map<Driver>(driverViewModel);
 
-            driver.CreatedBy = user;
+            driver.CreatedBy = user.UserName;
             driver.CreatedOn = DateTime.Now;
-            driver.LastModifiedBy = user;
+            driver.LastModifiedBy = user.UserName;
             driver.LastModifiedOn = DateTime.Now;
         
             await _driverRepository.AddDriverAsync(driver);
@@ -56,13 +56,13 @@ public class DriverService : IDriverService
 
     public async Task UpdateDriverAsync(DriverEditViewModel driverViewModel)
     {
-        var user = await _userService.GetCurrentUserName();
+        var user = await _userService.GetCurrentUser();
 
         if (user != null)
         {
             var driver = _mapper.Map<Driver>(driverViewModel);
             
-            driver.LastModifiedBy = user;
+            driver.LastModifiedBy = user.UserName;
             driver.LastModifiedOn = DateTime.Now;
             
             await _driverRepository.UpdateDriverAsync(driver);

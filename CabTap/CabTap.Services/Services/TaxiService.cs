@@ -62,15 +62,15 @@ public class TaxiService : ITaxiService
 
     public async Task AddTaxiAsync(TaxiCreateViewModel taxiViewModel)
     {
-        var user = await _userService.GetCurrentUserName();
+        var user = await _userService.GetCurrentUser();
 
         if (user != null)
         {
             var taxi = _mapper.Map<Taxi>(taxiViewModel);
 
-            taxi.CreatedBy = user;
+            taxi.CreatedBy = user.UserName;
             taxi.CreatedOn = DateTime.Now;
-            taxi.LastModifiedBy = user;
+            taxi.LastModifiedBy = user.UserName;
             taxi.LastModifiedOn = DateTime.Now;
         
             await _taxiRepository.AddTaxiAsync(taxi);
@@ -79,13 +79,13 @@ public class TaxiService : ITaxiService
 
     public async Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel)
     {
-        var user = await _userService.GetCurrentUserName();
+        var user = await _userService.GetCurrentUser();
 
         if (user != null)
         {
             var taxi = _mapper.Map<Taxi>(taxiViewModel);
 
-            taxi.LastModifiedBy = user;
+            taxi.LastModifiedBy = user.UserName;
             taxi.LastModifiedOn = DateTime.Now;
         
             await _taxiRepository.UpdateTaxiAsync(taxi);

@@ -2,6 +2,7 @@ using AutoMapper;
 using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
+using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Reservation;
 
 namespace CabTap.Services.Services;
@@ -39,15 +40,17 @@ public class ReservationService : IReservationService
 
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
     {
-        var user = await _userService.GetCurrentUserName();
+        var user = await _userService.GetCurrentUser();
 
         if (user != null)
         {
             var reservation = _mapper.Map<Reservation>(reservationViewModel);
 
-            reservation.CreatedBy = user;
+            reservation.UserId = user.UserName;
+
+            reservation.CreatedBy = user.UserName;
             reservation.CreatedOn = DateTime.Now;
-            reservation.LastModifiedBy = user;
+            reservation.LastModifiedBy = user.UserName;
             reservation.LastModifiedOn = DateTime.Now;
 
             await _reservationRepository.AddReservationAsync(reservation);
@@ -56,13 +59,13 @@ public class ReservationService : IReservationService
 
     public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
     {
-        var user = await _userService.GetCurrentUserName();
+        var user = await _userService.GetCurrentUser();
 
         if (user != null)
         {
             var reservation = _mapper.Map<Reservation>(reservationViewModel);
             
-            reservation.LastModifiedBy = user;
+            reservation.LastModifiedBy = user.UserName;
             reservation.LastModifiedOn = DateTime.Now;
         
             await _reservationRepository.UpdateReservationAsync(reservation);
