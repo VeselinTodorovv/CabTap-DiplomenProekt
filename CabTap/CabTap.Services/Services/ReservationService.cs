@@ -11,13 +11,15 @@ public class ReservationService : IReservationService
 {
     private readonly IReservationRepository _reservationRepository;
     private readonly IUserService _userService;
+    private readonly ITaxiService _taxiService;
     private readonly IMapper _mapper;
 
-    public ReservationService(IReservationRepository reservationRepository, IUserService userService, IMapper mapper)
+    public ReservationService(IReservationRepository reservationRepository, IUserService userService, IMapper mapper, ITaxiService taxiService)
     {
         _reservationRepository = reservationRepository;
         _userService = userService;
         _mapper = mapper;
+        _taxiService = taxiService;
     }
 
     public async Task<IEnumerable<ReservationAllViewModel>> GetAllReservationsAsync()
@@ -45,8 +47,21 @@ public class ReservationService : IReservationService
         if (user != null)
         {
             var reservation = _mapper.Map<Reservation>(reservationViewModel);
+            var taxi = (await _taxiService.GetAllTaxisAsync())
+                .Where(x => x.TaxiStatus == TaxiStatus.Available && x.CategoryId == reservationViewModel.CategoryId)
+                .FirstOrDefault();
 
-            reservation.UserId = user.UserName;
+            if (taxi == null) 
+            {
+                throw new InvalidOperationException("There are no available taxis fitting your criteria");
+            }
+
+            reservation.UserId = user.Id;
+            reservation.TaxiId = taxi.Id;
+            
+            // Get duration from leaflet
+
+            // Make up some dummy price calculation
 
             reservation.CreatedBy = user.UserName;
             reservation.CreatedOn = DateTime.Now;

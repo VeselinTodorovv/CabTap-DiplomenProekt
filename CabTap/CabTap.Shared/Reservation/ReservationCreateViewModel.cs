@@ -6,16 +6,14 @@ namespace CabTap.Shared.Reservation;
 
 public class ReservationCreateViewModel
 {
-    [Required]
-    public string UserId { get; set; } = null!;
+    public string? UserId { get; set; }
 
-    [Required]
     public int TaxiId { get; set; }
     
     [Display(Name = "Taxi Category")]
     public int CategoryId { get; set; }
 
-    public virtual IEnumerable<CategoryPairViewModel> TaxiCategories { get; set; } = null!;
+    public virtual List<CategoryPairViewModel> TaxiCategories { get; set; } = new();
 
     [Required]
     public string Origin { get; set; } = null!;
@@ -34,21 +32,18 @@ public class ReservationCreateViewModel
 
     [Required]
     [EnumDataType(typeof(RideStatus))]
-    public RideStatus RideStatus { get; set; }
+    // Set in progress by default
+    public RideStatus RideStatus { get; set; } = RideStatus.InProgress;
     
-    [Required]
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
-    public DateTime CreatedOn { get; set; }
+    public DateTime? CreatedOn { get; set; }
     
-    [Required]
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
-    public DateTime LastModifiedOn { get; set; }
+    public DateTime? LastModifiedOn { get; set; }
     
-    [Required]
-    public string CreatedBy { get; set; } = null!;
+    public string? CreatedBy { get; set; }
     
-    [Required]
-    public string LastModifiedBy { get; set; } = null!;
+    public string? LastModifiedBy { get; set; }
 }

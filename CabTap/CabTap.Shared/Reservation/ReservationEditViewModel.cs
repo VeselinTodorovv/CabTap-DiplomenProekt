@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using CabTap.Core.Entities.Enums;
+using CabTap.Shared.Category;
 
 namespace CabTap.Shared.Reservation;
 
@@ -12,7 +13,12 @@ public class ReservationEditViewModel
     public string UserId { get; set; } = null!;
 
     public int TaxiId { get; set; }
-    
+
+    [Display(Name = "Taxi Category")]
+    public int CategoryId { get; set; }
+
+    public virtual IEnumerable<CategoryPairViewModel> TaxiCategories { get; set; } = null!;
+
     [Required]
     public string Origin { get; set; } = null!;
 

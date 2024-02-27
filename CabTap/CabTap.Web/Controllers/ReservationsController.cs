@@ -1,3 +1,5 @@
+using AutoMapper;
+
 using CabTap.Contracts.Services;
 using CabTap.Shared.Reservation;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +10,13 @@ public class ReservationsController : Controller
 {
     private readonly IReservationService _reservationService;
     private readonly ITaxiService _taxiService;
+    private readonly IMapper _mapper;
     
-    public ReservationsController(IReservationService reservationService, ITaxiService taxiService)
+    public ReservationsController(IReservationService reservationService, ITaxiService taxiService, IMapper mapper)
     {
         _reservationService = reservationService;
         _taxiService = taxiService;
+        _mapper = mapper;
     }
 
     public async Task<IActionResult> Index()
@@ -42,7 +46,7 @@ public class ReservationsController : Controller
 
         var reservationViewModel = new ReservationCreateViewModel
         {
-            TaxiCategories = categories
+            TaxiCategories = categories.ToList()
         };
         
         return View(reservationViewModel);
@@ -59,5 +63,24 @@ public class ReservationsController : Controller
         
         await _reservationService.AddReservationAsync(viewModel);
         return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> Edit(int id)
+    {
+        var reservation = await _reservationService.GetReservationByIdAsync(id);
+        var availableCategories = await _taxiService.GetAvailableTaxiTypes();
+
+        try
+        {
+            var model = _mapper.Map<ReservationEditViewModel>(reservation);
+
+            model.TaxiCategories = availableCategories.ToList();
+
+            return View(model);
+        }
+        catch (InvalidOperationException)
+        {
+            return NotFound(id);
+        }
     }
 }
