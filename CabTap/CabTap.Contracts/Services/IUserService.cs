@@ -5,6 +5,6 @@ namespace CabTap.Contracts.Services;
 
 public interface IUserService
 {
-    Task<ApplicationUser?> GetCurrentUser();
+    Task<ApplicationUser?> GetCurrentUserAsync();
     Task<IEnumerable<ClientIndexViewModel>> GetAllClientsAsync();
 }

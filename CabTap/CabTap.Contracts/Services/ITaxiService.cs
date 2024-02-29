@@ -1,3 +1,4 @@
+using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Category;
 using CabTap.Shared.Taxi;
 
@@ -10,5 +11,6 @@ public interface ITaxiService
     Task<TaxiDetailsViewModel> GetTaxiByIdAsync(int taxiId);
     Task AddTaxiAsync(TaxiCreateViewModel taxiViewModel);
     Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel);
+    Task UpdateTaxiTypeAsync(int taxiId, TaxiStatus newStatus);
     Task DeleteTaxiAsync(int taxiId);
 }

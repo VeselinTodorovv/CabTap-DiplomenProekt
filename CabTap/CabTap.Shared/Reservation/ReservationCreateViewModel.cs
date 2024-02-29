@@ -6,10 +6,6 @@ namespace CabTap.Shared.Reservation;
 
 public class ReservationCreateViewModel
 {
-    public string? UserId { get; set; }
-
-    public int TaxiId { get; set; }
-    
     [Display(Name = "Taxi Category")]
     public int CategoryId { get; set; }
 
@@ -37,13 +33,13 @@ public class ReservationCreateViewModel
     
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
-    public DateTime? CreatedOn { get; set; }
+    public DateTime? CreatedOn { get; init; }
     
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
-    public DateTime? LastModifiedOn { get; set; }
+    public DateTime? LastModifiedOn { get; init; }
     
-    public string? CreatedBy { get; set; }
+    public string? CreatedBy { get; init; }
     
-    public string? LastModifiedBy { get; set; }
+    public string? LastModifiedBy { get; init; }
 }

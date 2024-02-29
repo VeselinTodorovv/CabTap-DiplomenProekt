@@ -42,19 +42,14 @@ public class ReservationService : IReservationService
 
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
     {
-        var user = await _userService.GetCurrentUser();
+        var user = await _userService.GetCurrentUserAsync();
 
         if (user != null)
         {
             var reservation = _mapper.Map<Reservation>(reservationViewModel);
             var taxi = (await _taxiService.GetAllTaxisAsync())
-                .Where(x => x.TaxiStatus == TaxiStatus.Available && x.CategoryId == reservationViewModel.CategoryId)
-                .FirstOrDefault();
-
-            if (taxi == null) 
-            {
-                throw new InvalidOperationException("There are no available taxis fitting your criteria");
-            }
+                .FirstOrDefault(x => x.TaxiStatus == TaxiStatus.Available && x.CategoryId == reservationViewModel.CategoryId) ??
+                        throw new InvalidOperationException("There are no available taxis fitting your criteria");
 
             reservation.UserId = user.Id;
             reservation.TaxiId = taxi.Id;
@@ -64,6 +59,7 @@ public class ReservationService : IReservationService
             // Make up some dummy price calculation
 
             // Set selected taxi status as busy, so it can't be assigned to other reservations
+            await _taxiService.UpdateTaxiTypeAsync(taxi.Id, TaxiStatus.Busy);
 
             reservation.CreatedBy = user.UserName;
             reservation.CreatedOn = DateTime.Now;
@@ -76,7 +72,7 @@ public class ReservationService : IReservationService
 
     public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
     {
-        var user = await _userService.GetCurrentUser();
+        var user = await _userService.GetCurrentUserAsync();
 
         if (user != null)
         {

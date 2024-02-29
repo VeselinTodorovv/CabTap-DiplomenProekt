@@ -39,7 +39,7 @@ public class DriverService : IDriverService
 
     public async Task AddDriverAsync(DriverCreateViewModel driverViewModel)
     {
-        var user = await _userService.GetCurrentUser();
+        var user = await _userService.GetCurrentUserAsync();
 
         if (user != null)
         {
@@ -56,7 +56,7 @@ public class DriverService : IDriverService
 
     public async Task UpdateDriverAsync(DriverEditViewModel driverViewModel)
     {
-        var user = await _userService.GetCurrentUser();
+        var user = await _userService.GetCurrentUserAsync();
 
         if (user != null)
         {

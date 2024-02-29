@@ -17,7 +17,7 @@ public class UserService : IUserService
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<ApplicationUser?> GetCurrentUser()
+    public async Task<ApplicationUser?> GetCurrentUserAsync()
     {
         var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
@@ -46,8 +46,7 @@ public class UserService : IUserService
 
         var list = users
             .Where(x => !x.IsAdmin)
-            .OrderBy(u => u.UserName)
-            .ToList();
+            .OrderBy(u => u.UserName);
 
         return list;
     }
