@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CabTap.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240216151303_TestMigr")]
-    partial class TestMigr
+    [Migration("20240301200835_UpdateReservationPricePrecision")]
+    partial class UpdateReservationPricePrecision
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -170,6 +170,7 @@ namespace CabTap.Data.Migrations
             modelBuilder.Entity("CabTap.Core.Entities.Reservation", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreatedBy")
@@ -201,6 +202,7 @@ namespace CabTap.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<byte>("RideStatus")

@@ -168,6 +168,7 @@ namespace CabTap.Data.Migrations
             modelBuilder.Entity("CabTap.Core.Entities.Reservation", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreatedBy")
@@ -199,6 +200,7 @@ namespace CabTap.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<byte>("RideStatus")

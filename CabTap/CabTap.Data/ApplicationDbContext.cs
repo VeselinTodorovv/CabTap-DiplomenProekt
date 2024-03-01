@@ -16,4 +16,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Manufacturer> Manufacturers { get; set; } = null!;
     public DbSet<Driver> Drivers { get; set; } = null!;
     public DbSet<Reservation> Reservations { get; set; } = null!;
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        
+        builder.Entity<Reservation>()
+            .Property(r => r.Price)
+            .HasPrecision(18, 2);
+    }
 }

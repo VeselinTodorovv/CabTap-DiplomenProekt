@@ -88,6 +88,7 @@ public class ReservationService : IReservationService
         }
 
         var reservation = _mapper.Map<Reservation>(reservationViewModel);
+        
         reservation.TaxiId = newTaxiId;
         reservation.LastModifiedBy = user.UserName;
         reservation.LastModifiedOn = DateTime.Now;
@@ -109,6 +110,6 @@ public class ReservationService : IReservationService
         var taxis = await _taxiService.GetAvailableTaxisAsync(categoryId);
         
         return taxis.FirstOrDefault() ?? 
-               throw new InvalidOperationException("No available taxis found.");
+               throw new InvalidOperationException("No available taxi found.");
     }
 }
