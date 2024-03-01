@@ -60,18 +60,26 @@ public class ReservationsController : Controller
         {
             return View(viewModel);
         }
-        
-        await _reservationService.AddReservationAsync(viewModel);
-        return RedirectToAction(nameof(Index));
+
+        try
+        {
+            await _reservationService.AddReservationAsync(viewModel);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
+        }
     }
 
     public async Task<IActionResult> Edit(string id)
     {
-        var reservation = await _reservationService.GetReservationByIdAsync(id);
-        var availableCategories = await _taxiService.GetAvailableTaxiTypes();
-
         try
         {
+            var reservation = await _reservationService.GetReservationByIdAsync(id);
+            var availableCategories = await _taxiService.GetAvailableTaxiTypes();
+            
             var model = _mapper.Map<ReservationEditViewModel>(reservation);
 
             model.Categories = availableCategories.ToList();
@@ -93,7 +101,16 @@ public class ReservationsController : Controller
             return View(viewModel);
         }
         
-        await _reservationService.UpdateReservationAsync(viewModel);
+        try
+        {
+            await _reservationService.UpdateReservationAsync(viewModel);
+        }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
+        }
+        
         return RedirectToAction(nameof(Index));
     }
     
@@ -117,7 +134,15 @@ public class ReservationsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(ReservationDeleteViewModel viewModel)
     {
-        await _reservationService.DeleteReservationAsync(viewModel.Id);
+        try
+        {
+            await _reservationService.DeleteReservationAsync(viewModel.Id);
+        }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
+        }
         
         return RedirectToAction(nameof(Index));
     }

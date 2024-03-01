@@ -121,8 +121,16 @@ public class TaxisController : Controller
             return View(viewModel);
         }
         
-        await _taxiService.UpdateTaxiAsync(viewModel);
-        return RedirectToAction(nameof(Index));
+        try
+        {
+            await _taxiService.UpdateTaxiAsync(viewModel);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
+        }
     }
     
     public async Task<IActionResult> Delete(int id)
@@ -145,8 +153,16 @@ public class TaxisController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(TaxiDeleteViewModel viewModel)
     {
-        await _taxiService.DeleteTaxiAsync(viewModel.Id);
+        try
+        {
+            await _taxiService.DeleteTaxiAsync(viewModel.Id);
         
-        return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
+        }
     }
 }

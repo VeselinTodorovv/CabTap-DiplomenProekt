@@ -11,14 +11,12 @@ namespace CabTap.Services.Services;
 public class TaxiService : ITaxiService
 {
     private readonly ITaxiRepository _taxiRepository;
-    private readonly ICategoryService _categoryService;
     private readonly IUserService _userService;
     private readonly IMapper _mapper;
     
-    public TaxiService(ITaxiRepository taxiRepository, ICategoryService categoryService, IUserService userService, IMapper mapper)
+    public TaxiService(ITaxiRepository taxiRepository, IUserService userService, IMapper mapper)
     {
         _taxiRepository = taxiRepository;
-        _categoryService = categoryService;
         _userService = userService;
         _mapper = mapper;
     }
@@ -44,21 +42,18 @@ public class TaxiService : ITaxiService
 
     public async Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypes()
     {
-        var taxis = await _taxiRepository.GetAllTaxisAsync();
-        var allCategories = await _categoryService.GetAllCategories();
+        var taxis = (await _taxiRepository.GetAllTaxisAsync()).ToList();
 
-        var availableTaxis = taxis.Where(x => x is { TaxiStatus: TaxiStatus.Available });
+        var availableCategories = taxis
+            .Where(x => x is { TaxiStatus: TaxiStatus.Available })
+            .Select(x => new CategoryPairViewModel
+            {
+                Id = x.Category.Id,
+                Name = x.Category.Name
+            })
+            .Distinct();
 
-        var availableCategoryIds = availableTaxis.Select(x => x.CategoryId).Distinct();
-        var availableCategories = allCategories.Where(category => availableCategoryIds.Contains(category.Id));
-
-        var categoryViewModels = availableCategories.Select(x => new CategoryPairViewModel
-        {
-            Id = x.Id,
-            Name = x.Name
-        });
-
-        return categoryViewModels;
+        return availableCategories;
     }
 
     public async Task<TaxiDetailsViewModel> GetTaxiByIdAsync(int taxiId)

@@ -65,8 +65,7 @@ public class ReservationService : IReservationService
 
     public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
     {
-        var user = await _userService.GetCurrentUserAsync() ??
-                   throw new UnauthorizedAccessException("User is not logged in.");
+        var user = await _userService.GetCurrentUserAsync();
 
         var taxi = await FindAvailableTaxis(reservationViewModel.CategoryId);
         var existingReservation = await _reservationRepository.GetReservationByIdAsync(reservationViewModel.Id);
@@ -74,6 +73,7 @@ public class ReservationService : IReservationService
         var oldTaxiId = existingReservation.TaxiId;
         var newTaxiId = taxi.Id;
 
+        // If a new taxi type is selected, update their statuses
         if (oldTaxiId != newTaxiId)
         {
             await _taxiService.UpdateTaxiStatusAsync(oldTaxiId, TaxiStatus.Available);

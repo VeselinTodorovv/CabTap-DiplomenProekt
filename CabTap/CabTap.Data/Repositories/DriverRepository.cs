@@ -42,7 +42,6 @@ public class DriverRepository : IDriverRepository
         if (existingDriver != null)
         {
             _context.Entry(existingDriver).CurrentValues.SetValues(driver);
-            _context.Entry(existingDriver).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
     }
@@ -50,10 +49,12 @@ public class DriverRepository : IDriverRepository
     public async Task DeleteDriverAsync(string driverId)
     {
         var driverToRemove = await _context.Drivers.FindAsync(driverId);
-        if (driverToRemove != null)
+        if (driverToRemove == null)
         {
-            _context.Drivers.Remove(driverToRemove);
-            await _context.SaveChangesAsync();
+            throw new InvalidOperationException("Driver not found");
         }
+
+        _context.Drivers.Remove(driverToRemove);
+        await _context.SaveChangesAsync();
     }
 }

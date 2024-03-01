@@ -42,7 +42,6 @@ public class TaxiRepository : ITaxiRepository
         if (existingTaxi != null)
         {
             _context.Entry(existingTaxi).CurrentValues.SetValues(taxi);
-            _context.Entry(existingTaxi).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
     }

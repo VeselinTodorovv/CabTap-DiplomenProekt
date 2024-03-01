@@ -52,9 +52,17 @@ public class DriversController : Controller
         {
             return View(viewModel);
         }
-        
-        await _driverService.AddDriverAsync(viewModel);
-        return RedirectToAction(nameof(Index));
+
+        try
+        {
+            await _driverService.AddDriverAsync(viewModel);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
+        }
     }
     
     public async Task<IActionResult> Edit(string id)
@@ -81,9 +89,17 @@ public class DriversController : Controller
         {
             return View(viewModel);
         }
-        
-        await _driverService.UpdateDriverAsync(viewModel);
-        return RedirectToAction(nameof(Index));
+
+        try
+        {
+            await _driverService.UpdateDriverAsync(viewModel);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
+        }
     }
 
     public async Task<IActionResult> Delete(string id)
@@ -106,8 +122,16 @@ public class DriversController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(DriverDeleteViewModel viewModel)
     {
-        await _driverService.DeleteDriverAsync(viewModel.Id);
+        try
+        {
+            await _driverService.DeleteDriverAsync(viewModel.Id);
         
-        return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException e)
+        {            
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
+        }
     }
 }
