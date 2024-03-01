@@ -9,7 +9,6 @@ public class ReservationEditViewModel
     [Key]
     public string Id { get; set; } = null!;
 
-    [Required]
     public string UserId { get; set; } = null!;
 
     public int TaxiId { get; set; }
@@ -17,7 +16,7 @@ public class ReservationEditViewModel
     [Display(Name = "Taxi Category")]
     public int CategoryId { get; set; }
 
-    public virtual IEnumerable<CategoryPairViewModel> TaxiCategories { get; set; } = null!;
+    public virtual List<CategoryPairViewModel> Categories { get; set; } = new();
 
     [Required]
     public string Origin { get; set; } = null!;
@@ -38,19 +37,8 @@ public class ReservationEditViewModel
     [EnumDataType(typeof(RideStatus))]
     public RideStatus RideStatus { get; set; }
     
-    [Required]
-    [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
     public DateTime CreatedOn { get; set; }
-    
-    [Required]
-    [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
     public DateTime LastModifiedOn { get; set; }
-    
-    [Required]
     public string CreatedBy { get; set; } = null!;
-    
-    [Required]
     public string LastModifiedBy { get; set; } = null!;
 }

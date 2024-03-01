@@ -4,6 +4,7 @@ using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Reservation;
+using CabTap.Shared.Taxi;
 
 namespace CabTap.Services.Services;
 
@@ -31,7 +32,7 @@ public class ReservationService : IReservationService
         return reservationViewModels;
     }
 
-    public async Task<ReservationDetailsViewModel> GetReservationByIdAsync(int reservationId)
+    public async Task<ReservationDetailsViewModel> GetReservationByIdAsync(string reservationId)
     {
         var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
 
@@ -42,51 +43,65 @@ public class ReservationService : IReservationService
 
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
     {
-        var user = await _userService.GetCurrentUserAsync();
+        var user = await _userService.GetCurrentUserAsync() ??
+                   throw new UnauthorizedAccessException("User is not logged in.");
 
-        if (user != null)
-        {
-            var reservation = _mapper.Map<Reservation>(reservationViewModel);
-            var taxi = (await _taxiService.GetAllTaxisAsync())
-                .FirstOrDefault(x => x.TaxiStatus == TaxiStatus.Available && x.CategoryId == reservationViewModel.CategoryId) ??
-                        throw new InvalidOperationException("There are no available taxis fitting your criteria");
+        var taxi = await FindAvailableTaxis(reservationViewModel.CategoryId);
 
-            reservation.UserId = user.Id;
-            reservation.TaxiId = taxi.Id;
-            
-            // Get duration from leaflet
+        var reservation = _mapper.Map<Reservation>(reservationViewModel);
 
-            // Make up some dummy price calculation
+        reservation.UserId = user.Id;
+        reservation.TaxiId = taxi.Id;
 
-            // Set selected taxi status as busy, so it can't be assigned to other reservations
-            await _taxiService.UpdateTaxiTypeAsync(taxi.Id, TaxiStatus.Busy);
+        reservation.CreatedBy = user.UserName;
+        reservation.CreatedOn = DateTime.Now;
+        reservation.LastModifiedBy = user.UserName;
+        reservation.LastModifiedOn = DateTime.Now;
 
-            reservation.CreatedBy = user.UserName;
-            reservation.CreatedOn = DateTime.Now;
-            reservation.LastModifiedBy = user.UserName;
-            reservation.LastModifiedOn = DateTime.Now;
+        await _taxiService.UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
 
-            await _reservationRepository.AddReservationAsync(reservation);
-        }
+        await _reservationRepository.AddReservationAsync(reservation);
     }
 
     public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
     {
-        var user = await _userService.GetCurrentUserAsync();
+        var user = await _userService.GetCurrentUserAsync() ??
+                   throw new UnauthorizedAccessException("User is not logged in.");
 
-        if (user != null)
+        var taxi = await FindAvailableTaxis(reservationViewModel.CategoryId);
+        var existingReservation = await _reservationRepository.GetReservationByIdAsync(reservationViewModel.Id);
+
+        var oldTaxiId = existingReservation.TaxiId;
+        var newTaxiId = taxi.Id;
+
+        if (oldTaxiId != newTaxiId)
         {
-            var reservation = _mapper.Map<Reservation>(reservationViewModel);
-            
-            reservation.LastModifiedBy = user.UserName;
-            reservation.LastModifiedOn = DateTime.Now;
-        
-            await _reservationRepository.UpdateReservationAsync(reservation);
+            await _taxiService.UpdateTaxiStatusAsync(oldTaxiId, TaxiStatus.Available);
+            await _taxiService.UpdateTaxiStatusAsync(newTaxiId, TaxiStatus.Busy);
         }
+
+        var reservation = _mapper.Map<Reservation>(reservationViewModel);
+        reservation.TaxiId = newTaxiId;
+        reservation.LastModifiedBy = user.UserName;
+        reservation.LastModifiedOn = DateTime.Now;
+
+        await _reservationRepository.UpdateReservationAsync(reservation);
     }
 
-    public async Task DeleteReservationAsync(int reservationId)
+    public async Task DeleteReservationAsync(string id)
     {
-        await _reservationRepository.DeleteReservationAsync(reservationId);
+        var reservation = await _reservationRepository.GetReservationByIdAsync(id);
+        
+        await _taxiService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
+        
+        await _reservationRepository.DeleteReservationAsync(id);
+    }
+
+    private async Task<TaxiAllViewModel> FindAvailableTaxis(int categoryId)
+    {
+        var taxis = await _taxiService.GetAvailableTaxisAsync(categoryId);
+        
+        return taxis.FirstOrDefault() ?? 
+               throw new InvalidOperationException("No available taxis found.");
     }
 }

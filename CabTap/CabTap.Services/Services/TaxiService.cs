@@ -32,6 +32,16 @@ public class TaxiService : ITaxiService
         return taxiViewModels;
     }
 
+    public async Task<IEnumerable<TaxiAllViewModel>> GetAvailableTaxisAsync(int categoryId)
+    {
+        var taxis = (await _taxiRepository.GetAllTaxisAsync()).Where(x =>
+            x.TaxiStatus == TaxiStatus.Available && x.CategoryId == categoryId);
+
+        var model = _mapper.Map<IEnumerable<TaxiAllViewModel>>(taxis);
+
+        return model;
+    }
+
     public async Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypes()
     {
         var taxis = await _taxiRepository.GetAllTaxisAsync();
@@ -92,7 +102,7 @@ public class TaxiService : ITaxiService
         }
     }
 
-    public async Task UpdateTaxiTypeAsync(int taxiId, TaxiStatus newStatus)
+    public async Task UpdateTaxiStatusAsync(int taxiId, TaxiStatus newStatus)
     {
         var taxi = await _taxiRepository.GetTaxiByIdAsync(taxiId);
 

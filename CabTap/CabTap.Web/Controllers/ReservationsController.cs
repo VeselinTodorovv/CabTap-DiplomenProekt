@@ -26,7 +26,7 @@ public class ReservationsController : Controller
         return View(reservations);
     }
 
-    public async Task<IActionResult> Details(int id)
+    public async Task<IActionResult> Details(string id)
     {
         try
         {
@@ -65,7 +65,7 @@ public class ReservationsController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    public async Task<IActionResult> Edit(int id)
+    public async Task<IActionResult> Edit(string id)
     {
         var reservation = await _reservationService.GetReservationByIdAsync(id);
         var availableCategories = await _taxiService.GetAvailableTaxiTypes();
@@ -74,7 +74,7 @@ public class ReservationsController : Controller
         {
             var model = _mapper.Map<ReservationEditViewModel>(reservation);
 
-            model.TaxiCategories = availableCategories.ToList();
+            model.Categories = availableCategories.ToList();
 
             return View(model);
         }
@@ -82,5 +82,43 @@ public class ReservationsController : Controller
         {
             return NotFound(id);
         }
+    }
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(ReservationEditViewModel viewModel)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(viewModel);
+        }
+        
+        await _reservationService.UpdateReservationAsync(viewModel);
+        return RedirectToAction(nameof(Index));
+    }
+    
+    public async Task<IActionResult> Delete(string id)
+    {
+        try
+        {
+            var reservation = await _reservationService.GetReservationByIdAsync(id);
+
+            var model = _mapper.Map<ReservationDeleteViewModel>(reservation);
+        
+            return View(model);
+        }
+        catch (InvalidOperationException)
+        {
+            return NotFound();
+        }
+    }
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete(ReservationDeleteViewModel viewModel)
+    {
+        await _reservationService.DeleteReservationAsync(viewModel.Id);
+        
+        return RedirectToAction(nameof(Index));
     }
 }

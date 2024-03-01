@@ -18,7 +18,7 @@ public class ReservationRepository : IReservationRepository
         return await _context.Reservations.ToListAsync();
     }
 
-    public async Task<Reservation> GetReservationByIdAsync(int reservationId)
+    public async Task<Reservation> GetReservationByIdAsync(string reservationId)
     {
         var reservation = await _context.Reservations.FindAsync(reservationId);
         if (reservation == null)
@@ -38,21 +38,24 @@ public class ReservationRepository : IReservationRepository
     public async Task UpdateReservationAsync(Reservation reservation)
     {
         var existingReservation = await _context.Reservations.FindAsync(reservation.Id);
-        if (existingReservation != null)
+        if (existingReservation == null)
         {
-            _context.Entry(existingReservation).CurrentValues.SetValues(reservation);
-            _context.Entry(existingReservation).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            throw new InvalidOperationException("Reservation not found.");
         }
+
+        _context.Entry(existingReservation).CurrentValues.SetValues(reservation);
+        await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteReservationAsync(int reservationId)
+    public async Task DeleteReservationAsync(string reservationId)
     {
         var reservationToRemove = await _context.Reservations.FindAsync(reservationId);
-        if (reservationToRemove != null)
+        if (reservationToRemove == null)
         {
-            _context.Reservations.Remove(reservationToRemove);
-            await _context.SaveChangesAsync();
+            throw new InvalidOperationException("Reservation not found.");
         }
+
+        _context.Reservations.Remove(reservationToRemove);
+        await _context.SaveChangesAsync();
     }
 }
