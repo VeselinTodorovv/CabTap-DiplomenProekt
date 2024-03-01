@@ -42,16 +42,16 @@ public class TaxiService : ITaxiService
 
     public async Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypes()
     {
-        var taxis = (await _taxiRepository.GetAllTaxisAsync()).ToList();
+        var taxis = await _taxiRepository.GetAllTaxisAsync();
 
         var availableCategories = taxis
-            .Where(x => x is { TaxiStatus: TaxiStatus.Available })
-            .Select(x => new CategoryPairViewModel
+            .Where(x => x.TaxiStatus == TaxiStatus.Available)
+            .GroupBy(x => new { x.Category.Id, x.Category.Name }) // Group by category
+            .Select(group => new CategoryPairViewModel
             {
-                Id = x.Category.Id,
-                Name = x.Category.Name
-            })
-            .Distinct();
+                Id = group.Key.Id,
+                Name = group.Key.Name
+            });
 
         return availableCategories;
     }
@@ -68,33 +68,35 @@ public class TaxiService : ITaxiService
     public async Task AddTaxiAsync(TaxiCreateViewModel taxiViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-
-        if (user != null)
+        if (user == null)
         {
-            var taxi = _mapper.Map<Taxi>(taxiViewModel);
-
-            taxi.CreatedBy = user.UserName;
-            taxi.CreatedOn = DateTime.Now;
-            taxi.LastModifiedBy = user.UserName;
-            taxi.LastModifiedOn = DateTime.Now;
-        
-            await _taxiRepository.AddTaxiAsync(taxi);
+            throw new InvalidOperationException("User is not logged in");
         }
+
+        var taxi = _mapper.Map<Taxi>(taxiViewModel);
+
+        taxi.CreatedBy = user.UserName;
+        taxi.CreatedOn = DateTime.Now;
+        taxi.LastModifiedBy = user.UserName;
+        taxi.LastModifiedOn = DateTime.Now;
+
+        await _taxiRepository.AddTaxiAsync(taxi);
     }
 
     public async Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-
-        if (user != null)
+        if (user == null)
         {
-            var taxi = _mapper.Map<Taxi>(taxiViewModel);
-
-            taxi.LastModifiedBy = user.UserName;
-            taxi.LastModifiedOn = DateTime.Now;
-        
-            await _taxiRepository.UpdateTaxiAsync(taxi);
+            throw new InvalidOperationException("User is not logged in");
         }
+
+        var taxi = _mapper.Map<Taxi>(taxiViewModel);
+
+        taxi.LastModifiedBy = user.UserName;
+        taxi.LastModifiedOn = DateTime.Now;
+
+        await _taxiRepository.UpdateTaxiAsync(taxi);
     }
 
     public async Task UpdateTaxiStatusAsync(int taxiId, TaxiStatus newStatus)

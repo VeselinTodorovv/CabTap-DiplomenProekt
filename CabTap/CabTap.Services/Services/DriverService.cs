@@ -40,33 +40,35 @@ public class DriverService : IDriverService
     public async Task AddDriverAsync(DriverCreateViewModel driverViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-
-        if (user != null)
+        if (user == null)
         {
-            var driver = _mapper.Map<Driver>(driverViewModel);
-
-            driver.CreatedBy = user.UserName;
-            driver.CreatedOn = DateTime.Now;
-            driver.LastModifiedBy = user.UserName;
-            driver.LastModifiedOn = DateTime.Now;
-        
-            await _driverRepository.AddDriverAsync(driver);
+            throw new InvalidOperationException("User is not logged in");
         }
+
+        var driver = _mapper.Map<Driver>(driverViewModel);
+
+        driver.CreatedBy = user.UserName;
+        driver.CreatedOn = DateTime.Now;
+        driver.LastModifiedBy = user.UserName;
+        driver.LastModifiedOn = DateTime.Now;
+
+        await _driverRepository.AddDriverAsync(driver);
     }
 
     public async Task UpdateDriverAsync(DriverEditViewModel driverViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-
-        if (user != null)
+        if (user == null)
         {
-            var driver = _mapper.Map<Driver>(driverViewModel);
-            
-            driver.LastModifiedBy = user.UserName;
-            driver.LastModifiedOn = DateTime.Now;
-            
-            await _driverRepository.UpdateDriverAsync(driver);
+            throw new InvalidOperationException();
         }
+
+        var driver = _mapper.Map<Driver>(driverViewModel);
+
+        driver.LastModifiedBy = user.UserName;
+        driver.LastModifiedOn = DateTime.Now;
+
+        await _driverRepository.UpdateDriverAsync(driver);
     }
 
     public async Task DeleteDriverAsync(string driverId)

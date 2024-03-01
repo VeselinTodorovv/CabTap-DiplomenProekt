@@ -43,10 +43,13 @@ public class ReservationService : IReservationService
 
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
     {
-        var user = await _userService.GetCurrentUserAsync() ??
-                   throw new UnauthorizedAccessException("User is not logged in.");
+        var user = await _userService.GetCurrentUserAsync();
+        if (user == null)
+        {
+            throw new InvalidOperationException("User is not logged in.");
+        }
 
-        var taxi = await FindAvailableTaxis(reservationViewModel.CategoryId);
+        var taxi = await FindAvailableTaxi(reservationViewModel.CategoryId);
 
         var reservation = _mapper.Map<Reservation>(reservationViewModel);
 
@@ -66,8 +69,12 @@ public class ReservationService : IReservationService
     public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
+        if (user == null)
+        {
+            throw new InvalidOperationException("User is not logged in");
+        }
 
-        var taxi = await FindAvailableTaxis(reservationViewModel.CategoryId);
+        var taxi = await FindAvailableTaxi(reservationViewModel.CategoryId);
         var existingReservation = await _reservationRepository.GetReservationByIdAsync(reservationViewModel.Id);
 
         var oldTaxiId = existingReservation.TaxiId;
@@ -97,7 +104,7 @@ public class ReservationService : IReservationService
         await _reservationRepository.DeleteReservationAsync(id);
     }
 
-    private async Task<TaxiAllViewModel> FindAvailableTaxis(int categoryId)
+    private async Task<TaxiAllViewModel> FindAvailableTaxi(int categoryId)
     {
         var taxis = await _taxiService.GetAvailableTaxisAsync(categoryId);
         

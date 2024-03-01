@@ -21,7 +21,7 @@ public class UserService : IUserService
     {
         var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
-        return user ?? throw new InvalidOperationException("Unable to get user.");
+        return user;
     }
 
     public async Task<IEnumerable<ClientIndexViewModel>> GetAllClientsAsync()

@@ -38,12 +38,13 @@ public class DriverRepository : IDriverRepository
     public async Task UpdateDriverAsync(Driver driver)
     {
         var existingDriver = await _context.Drivers.FindAsync(driver.Id);
-
-        if (existingDriver != null)
+        if (existingDriver == null)
         {
-            _context.Entry(existingDriver).CurrentValues.SetValues(driver);
-            await _context.SaveChangesAsync();
+            throw new InvalidOperationException("Driver not found");
         }
+
+        _context.Entry(existingDriver).CurrentValues.SetValues(driver);
+        await _context.SaveChangesAsync();
     }
 
     public async Task DeleteDriverAsync(string driverId)
