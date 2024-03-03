@@ -26,7 +26,6 @@ public class TaxisController : Controller
         _mapper = mapper;
     }
 
-    [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
         var taxis = await _taxiService.GetAllTaxisAsync();
@@ -44,7 +43,7 @@ public class TaxisController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound(id);
+            return NotFound();
         }
     }
     
@@ -116,7 +115,7 @@ public class TaxisController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound(id);
+            return NotFound();
         }
     }
 
@@ -157,7 +156,7 @@ public class TaxisController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound(id);
+            return NotFound();
         }
     }
     

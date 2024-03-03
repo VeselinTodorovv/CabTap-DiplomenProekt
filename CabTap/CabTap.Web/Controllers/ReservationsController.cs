@@ -38,7 +38,7 @@ public class ReservationsController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound(id);
+            return NotFound();
         }
     }
     
@@ -89,7 +89,7 @@ public class ReservationsController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound(id);
+            return NotFound();
         }
     }
     
@@ -130,7 +130,7 @@ public class ReservationsController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound(id);
+            return NotFound();
         }
     }
     

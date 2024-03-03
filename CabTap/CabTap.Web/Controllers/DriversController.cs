@@ -35,7 +35,7 @@ public class DriversController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound(id);
+            return NotFound();
         }
     }
     
@@ -76,7 +76,7 @@ public class DriversController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound(id);
+            return NotFound();
         }
     }
 
@@ -117,7 +117,7 @@ public class DriversController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound(id);
+            return NotFound();
         }
     }
 
