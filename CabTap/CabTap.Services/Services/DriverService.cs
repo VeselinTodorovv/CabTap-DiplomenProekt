@@ -42,7 +42,7 @@ public class DriverService : IDriverService
         var user = await _userService.GetCurrentUserAsync();
         if (user == null)
         {
-            throw new InvalidOperationException("User is not logged in");
+            throw new UnauthorizedAccessException("User is not logged in");
         }
 
         var driver = _mapper.Map<Driver>(driverViewModel);

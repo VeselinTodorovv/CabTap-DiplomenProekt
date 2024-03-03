@@ -12,13 +12,15 @@ public class TaxiService : ITaxiService
 {
     private readonly ITaxiRepository _taxiRepository;
     private readonly IUserService _userService;
+    private readonly ICategoryService _categoryService;
     private readonly IMapper _mapper;
     
-    public TaxiService(ITaxiRepository taxiRepository, IUserService userService, IMapper mapper)
+    public TaxiService(ITaxiRepository taxiRepository, IUserService userService, IMapper mapper, ICategoryService categoryService)
     {
         _taxiRepository = taxiRepository;
         _userService = userService;
         _mapper = mapper;
+        _categoryService = categoryService;
     }
 
     public async Task<IEnumerable<TaxiAllViewModel>> GetAllTaxisAsync()
@@ -43,17 +45,20 @@ public class TaxiService : ITaxiService
     public async Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypes()
     {
         var taxis = await _taxiRepository.GetAllTaxisAsync();
+        var allCategories = await _categoryService.GetAllCategories();
 
-        var availableCategories = taxis
-            .Where(x => x.TaxiStatus == TaxiStatus.Available)
-            .GroupBy(x => new { x.Category.Id, x.Category.Name }) // Group by category
-            .Select(group => new CategoryPairViewModel
-            {
-                Id = group.Key.Id,
-                Name = group.Key.Name
-            });
+        var availableTaxis = taxis.Where(x => x is { TaxiStatus: TaxiStatus.Available });
 
-        return availableCategories;
+        var availableCategoryIds = availableTaxis.Select(x => x.CategoryId).Distinct();
+        var availableCategories = allCategories.Where(category => availableCategoryIds.Contains(category.Id));
+
+        var categoryViewModels = availableCategories.Select(x => new CategoryPairViewModel
+        {
+            Id = x.Id,
+            Name = x.Name
+        });
+
+        return categoryViewModels;
     }
 
     public async Task<TaxiDetailsViewModel> GetTaxiByIdAsync(int taxiId)
@@ -70,7 +75,7 @@ public class TaxiService : ITaxiService
         var user = await _userService.GetCurrentUserAsync();
         if (user == null)
         {
-            throw new InvalidOperationException("User is not logged in");
+            throw new UnauthorizedAccessException("User is not logged in");
         }
 
         var taxi = _mapper.Map<Taxi>(taxiViewModel);
@@ -88,7 +93,7 @@ public class TaxiService : ITaxiService
         var user = await _userService.GetCurrentUserAsync();
         if (user == null)
         {
-            throw new InvalidOperationException("User is not logged in");
+            throw new UnauthorizedAccessException("User is not logged in");
         }
 
         var taxi = _mapper.Map<Taxi>(taxiViewModel);

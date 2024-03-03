@@ -44,7 +44,7 @@ public class TaxisController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound();
+            return NotFound(id);
         }
     }
     
@@ -79,20 +79,28 @@ public class TaxisController : Controller
         {
             return View(viewModel);
         }
-        
-        await _taxiService.AddTaxiAsync(viewModel);
-        return RedirectToAction(nameof(Index));
+
+        try
+        {
+            await _taxiService.AddTaxiAsync(viewModel);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized();
+        }
     }
 
     public async Task<IActionResult> Edit(int id)
     {
-        var taxi = await _taxiService.GetTaxiByIdAsync(id);
-        var categories = await _categoryService.GetAllCategories();
-        var manufacturers = await _manufacturerService.GetAllManufacturers();
-        var drivers = await _driverService.GetAllDriversAsync();
-        
         try
         {
+            var taxi = await _taxiService.GetTaxiByIdAsync(id);
+            
+            var categories = await _categoryService.GetAllCategories();
+            var manufacturers = await _manufacturerService.GetAllManufacturers();
+            var drivers = await _driverService.GetAllDriversAsync();
+            
             var model = _mapper.Map<TaxiEditViewModel>(taxi);
             
             model.Manufacturers = manufacturers.ToList();
@@ -108,7 +116,7 @@ public class TaxisController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound();
+            return NotFound(id);
         }
     }
 
@@ -131,6 +139,10 @@ public class TaxisController : Controller
             ModelState.AddModelError(string.Empty, e.Message);
             return View(viewModel);
         }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized();
+        }
     }
     
     public async Task<IActionResult> Delete(int id)
@@ -145,7 +157,7 @@ public class TaxisController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound();
+            return NotFound(id);
         }
     }
     
@@ -156,13 +168,16 @@ public class TaxisController : Controller
         try
         {
             await _taxiService.DeleteTaxiAsync(viewModel.Id);
-        
             return RedirectToAction(nameof(Index));
         }
         catch (InvalidOperationException e)
         {
             ModelState.AddModelError(string.Empty, e.Message);
             return View(viewModel);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized();
         }
     }
 }

@@ -46,7 +46,7 @@ public class ReservationService : IReservationService
         var user = await _userService.GetCurrentUserAsync();
         if (user == null)
         {
-            throw new InvalidOperationException("User is not logged in.");
+            throw new UnauthorizedAccessException("User is not logged in.");
         }
 
         var taxi = await FindAvailableTaxi(reservationViewModel.CategoryId);
@@ -71,7 +71,7 @@ public class ReservationService : IReservationService
         var user = await _userService.GetCurrentUserAsync();
         if (user == null)
         {
-            throw new InvalidOperationException("User is not logged in");
+            throw new UnauthorizedAccessException("User is not logged in");
         }
 
         var taxi = await FindAvailableTaxi(reservationViewModel.CategoryId);

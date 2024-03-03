@@ -35,7 +35,7 @@ public class DriversController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound();
+            return NotFound(id);
         }
     }
     
@@ -58,10 +58,9 @@ public class DriversController : Controller
             await _driverService.AddDriverAsync(viewModel);
             return RedirectToAction(nameof(Index));
         }
-        catch (InvalidOperationException e)
+        catch (UnauthorizedAccessException)
         {
-            ModelState.AddModelError(string.Empty, e.Message);
-            return View(viewModel);
+            return Unauthorized();
         }
     }
     
@@ -77,7 +76,7 @@ public class DriversController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound();
+            return NotFound(id);
         }
     }
 
@@ -100,6 +99,10 @@ public class DriversController : Controller
             ModelState.AddModelError(string.Empty, e.Message);
             return View(viewModel);
         }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized();
+        }
     }
 
     public async Task<IActionResult> Delete(string id)
@@ -114,7 +117,7 @@ public class DriversController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound();
+            return NotFound(id);
         }
     }
 
@@ -125,13 +128,16 @@ public class DriversController : Controller
         try
         {
             await _driverService.DeleteDriverAsync(viewModel.Id);
-        
             return RedirectToAction(nameof(Index));
         }
         catch (InvalidOperationException e)
         {            
             ModelState.AddModelError(string.Empty, e.Message);
             return View(viewModel);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized();
         }
     }
 }

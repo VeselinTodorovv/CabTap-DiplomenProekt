@@ -2,10 +2,12 @@ using AutoMapper;
 
 using CabTap.Contracts.Services;
 using CabTap.Shared.Reservation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CabTap.Web.Controllers;
 
+[Authorize(Roles = "Administrator")]
 public class ReservationsController : Controller
 {
     private readonly IReservationService _reservationService;
@@ -36,7 +38,7 @@ public class ReservationsController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound();
+            return NotFound(id);
         }
     }
     
@@ -66,10 +68,9 @@ public class ReservationsController : Controller
             await _reservationService.AddReservationAsync(viewModel);
             return RedirectToAction(nameof(Index));
         }
-        catch (InvalidOperationException e)
+        catch (UnauthorizedAccessException)
         {
-            ModelState.AddModelError(string.Empty, e.Message);
-            return View(viewModel);
+            return Unauthorized();
         }
     }
 
@@ -104,14 +105,17 @@ public class ReservationsController : Controller
         try
         {
             await _reservationService.UpdateReservationAsync(viewModel);
+            return RedirectToAction(nameof(Index));
         }
         catch (InvalidOperationException e)
         {
             ModelState.AddModelError(string.Empty, e.Message);
             return View(viewModel);
         }
-        
-        return RedirectToAction(nameof(Index));
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized();
+        }
     }
     
     public async Task<IActionResult> Delete(string id)
@@ -126,7 +130,7 @@ public class ReservationsController : Controller
         }
         catch (InvalidOperationException)
         {
-            return NotFound();
+            return NotFound(id);
         }
     }
     
@@ -137,13 +141,16 @@ public class ReservationsController : Controller
         try
         {
             await _reservationService.DeleteReservationAsync(viewModel.Id);
+            return RedirectToAction(nameof(Index));
         }
         catch (InvalidOperationException e)
         {
             ModelState.AddModelError(string.Empty, e.Message);
             return View(viewModel);
         }
-        
-        return RedirectToAction(nameof(Index));
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized();
+        }
     }
 }
