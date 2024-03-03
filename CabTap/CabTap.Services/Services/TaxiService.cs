@@ -79,11 +79,8 @@ public class TaxiService : ITaxiService
         }
 
         var taxi = _mapper.Map<Taxi>(taxiViewModel);
-
-        taxi.CreatedBy = user.UserName;
-        taxi.CreatedOn = DateTime.Now;
-        taxi.LastModifiedBy = user.UserName;
-        taxi.LastModifiedOn = DateTime.Now;
+        
+        taxi.UpdateAuditInfo(user.UserName);
 
         await _taxiRepository.AddTaxiAsync(taxi);
     }
@@ -96,12 +93,13 @@ public class TaxiService : ITaxiService
             throw new UnauthorizedAccessException("User is not logged in");
         }
 
-        var taxi = _mapper.Map<Taxi>(taxiViewModel);
+        var existingTaxi = await _taxiRepository.GetTaxiByIdAsync(taxiViewModel.Id);
 
-        taxi.LastModifiedBy = user.UserName;
-        taxi.LastModifiedOn = DateTime.Now;
+        _mapper.Map(taxiViewModel, existingTaxi);
 
-        await _taxiRepository.UpdateTaxiAsync(taxi);
+        existingTaxi.UpdateAuditInfo(user.UserName);
+
+        await _taxiRepository.UpdateTaxiAsync(existingTaxi);
     }
 
     public async Task UpdateTaxiStatusAsync(int taxiId, TaxiStatus newStatus)

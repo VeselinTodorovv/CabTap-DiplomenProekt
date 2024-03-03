@@ -45,9 +45,4 @@ public class TaxiCreateViewModel
     [Required]
     [Range(1, 8, ErrorMessage = "Passenger Seats must be between 1 and 8")]
     public int PassengerSeats { get; set; }
-    
-    public DateTime? CreatedOn { get; set; }
-    public DateTime? LastModifiedOn { get; set; }
-    public string? CreatedBy { get; set; }
-    public string? LastModifiedBy { get; set; }
 }

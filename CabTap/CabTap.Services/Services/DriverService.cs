@@ -47,10 +47,7 @@ public class DriverService : IDriverService
 
         var driver = _mapper.Map<Driver>(driverViewModel);
 
-        driver.CreatedBy = user.UserName;
-        driver.CreatedOn = DateTime.Now;
-        driver.LastModifiedBy = user.UserName;
-        driver.LastModifiedOn = DateTime.Now;
+        driver.UpdateAuditInfo(user.UserName);
 
         await _driverRepository.AddDriverAsync(driver);
     }
@@ -63,12 +60,13 @@ public class DriverService : IDriverService
             throw new InvalidOperationException();
         }
 
-        var driver = _mapper.Map<Driver>(driverViewModel);
+        var existingDriver = await _driverRepository.GetDriverByIdAsync(driverViewModel.Id);
 
-        driver.LastModifiedBy = user.UserName;
-        driver.LastModifiedOn = DateTime.Now;
+        _mapper.Map(driverViewModel, existingDriver);
 
-        await _driverRepository.UpdateDriverAsync(driver);
+        existingDriver.UpdateAuditInfo(user.UserName);  
+
+        await _driverRepository.UpdateDriverAsync(existingDriver);
     }
 
     public async Task DeleteDriverAsync(string driverId)

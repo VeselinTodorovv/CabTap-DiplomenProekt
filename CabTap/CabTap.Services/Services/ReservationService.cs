@@ -56,10 +56,7 @@ public class ReservationService : IReservationService
         reservation.UserId = user.Id;
         reservation.TaxiId = taxi.Id;
 
-        reservation.CreatedBy = user.UserName;
-        reservation.CreatedOn = DateTime.Now;
-        reservation.LastModifiedBy = user.UserName;
-        reservation.LastModifiedOn = DateTime.Now;
+        reservation.UpdateAuditInfo(user.UserName);
 
         await _taxiService.UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
 
@@ -74,26 +71,29 @@ public class ReservationService : IReservationService
             throw new UnauthorizedAccessException("User is not logged in");
         }
 
-        var taxi = await FindAvailableTaxi(reservationViewModel.CategoryId);
+        var newTaxiId = 0;
+
         var existingReservation = await _reservationRepository.GetReservationByIdAsync(reservationViewModel.Id);
-
-        var oldTaxiId = existingReservation.TaxiId;
-        var newTaxiId = taxi.Id;
-
-        // If a new taxi type is selected, update their statuses
-        if (oldTaxiId != newTaxiId)
+        if (existingReservation.Taxi.CategoryId != reservationViewModel.CategoryId)
         {
-            await _taxiService.UpdateTaxiStatusAsync(oldTaxiId, TaxiStatus.Available);
+            var taxi = await FindAvailableTaxi(reservationViewModel.CategoryId);
+            
+            var oldId = existingReservation.TaxiId;
+            newTaxiId = taxi.Id;
+            
+            await _taxiService.UpdateTaxiStatusAsync(oldId, TaxiStatus.Available);
             await _taxiService.UpdateTaxiStatusAsync(newTaxiId, TaxiStatus.Busy);
         }
 
-        var reservation = _mapper.Map<Reservation>(reservationViewModel);
-        
-        reservation.TaxiId = newTaxiId;
-        reservation.LastModifiedBy = user.UserName;
-        reservation.LastModifiedOn = DateTime.Now;
+        _mapper.Map(reservationViewModel, existingReservation);
+        if (newTaxiId != 0)
+        {
+            existingReservation.TaxiId = newTaxiId;
+        }
 
-        await _reservationRepository.UpdateReservationAsync(reservation);
+        existingReservation.UpdateAuditInfo(user.UserName);
+        
+        await _reservationRepository.UpdateReservationAsync(existingReservation);
     }
 
     public async Task DeleteReservationAsync(string id)

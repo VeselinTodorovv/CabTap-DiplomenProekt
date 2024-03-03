@@ -30,16 +30,4 @@ public class ReservationCreateViewModel
     [EnumDataType(typeof(RideStatus))]
     // Set in progress by default
     public RideStatus RideStatus { get; set; } = RideStatus.InProgress;
-    
-    [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
-    public DateTime? CreatedOn { get; init; }
-    
-    [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
-    public DateTime? LastModifiedOn { get; init; }
-    
-    public string? CreatedBy { get; init; }
-    
-    public string? LastModifiedBy { get; init; }
 }
