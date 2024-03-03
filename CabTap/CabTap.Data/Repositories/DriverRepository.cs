@@ -37,13 +37,7 @@ public class DriverRepository : IDriverRepository
 
     public async Task UpdateDriverAsync(Driver driver)
     {
-        var existingDriver = await _context.Drivers.FindAsync(driver.Id);
-        if (existingDriver == null)
-        {
-            throw new InvalidOperationException("Driver not found");
-        }
-
-        _context.Entry(existingDriver).CurrentValues.SetValues(driver);
+        _context.Drivers.Update(driver);
         await _context.SaveChangesAsync();
     }
 

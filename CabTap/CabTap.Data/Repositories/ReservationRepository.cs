@@ -37,13 +37,7 @@ public class ReservationRepository : IReservationRepository
 
     public async Task UpdateReservationAsync(Reservation reservation)
     {
-        var existingReservation = await _context.Reservations.FindAsync(reservation.Id);
-        if (existingReservation == null)
-        {
-            throw new InvalidOperationException("Reservation not found.");
-        }
-
-        _context.Entry(existingReservation).CurrentValues.SetValues(reservation);
+        _context.Reservations.Update(reservation);
         await _context.SaveChangesAsync();
     }
 

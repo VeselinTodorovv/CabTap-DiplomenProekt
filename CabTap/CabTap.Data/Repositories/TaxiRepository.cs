@@ -37,13 +37,7 @@ public class TaxiRepository : ITaxiRepository
 
     public async Task UpdateTaxiAsync(Taxi taxi)
     {
-        var existingTaxi = await _context.Taxis.FindAsync(taxi.Id);
-        if (existingTaxi == null)
-        {
-            throw new InvalidOperationException("Taxi not found");
-        }
-
-        _context.Entry(existingTaxi).CurrentValues.SetValues(taxi);
+        _context.Taxis.Update(taxi);
         await _context.SaveChangesAsync();
     }
 
