@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CabTap.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240301200835_UpdateReservationPricePrecision")]
-    partial class UpdateReservationPricePrecision
+    [Migration("20240303183146_InitMigration")]
+    partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
