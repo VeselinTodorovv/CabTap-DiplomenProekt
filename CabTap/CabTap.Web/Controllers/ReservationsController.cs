@@ -1,6 +1,7 @@
 using AutoMapper;
 
 using CabTap.Contracts.Services;
+using CabTap.Shared.Category;
 using CabTap.Shared.Reservation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -79,11 +80,22 @@ public class ReservationsController : Controller
         try
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
-            var availableCategories = await _taxiService.GetAvailableTaxiTypes();
+            var availableCategories = (await _taxiService.GetAvailableTaxiTypes()).ToList();
+
+            // Add current category, if it is not already in the list
+            if (availableCategories.All(c => c.Id != reservation.Taxi.CategoryId))
+            {
+                var currentCategory = new CategoryPairViewModel
+                {
+                    Id = reservation.Taxi.CategoryId,
+                    Name = reservation.Taxi.Category.Name
+                };
+                availableCategories.Add(currentCategory);
+            }
             
             var model = _mapper.Map<ReservationEditViewModel>(reservation);
 
-            model.Categories = availableCategories.ToList();
+            model.Categories = availableCategories;
 
             return View(model);
         }
