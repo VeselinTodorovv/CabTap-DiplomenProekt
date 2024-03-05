@@ -34,11 +34,26 @@ public class ReservationService : IReservationService
 
     public async Task<ReservationDetailsViewModel> GetReservationByIdAsync(string reservationId)
     {
-        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
+        var reservation = await _reservationRepository.GetReservationsByIdAsync(reservationId);
 
         var model = _mapper.Map<ReservationDetailsViewModel>(reservation);
 
         return model;
+    }
+
+    public async Task<IEnumerable<ReservationAllViewModel>> GetReservationsByUserIdAsync()
+    {
+        var user = await _userService.GetCurrentUserAsync();
+        if (user == null)
+        {
+            throw new UnauthorizedAccessException("User is not logged in.");
+        }
+        
+        var reservations = await _reservationRepository.GetReservationsByUserIdAsync(user.Id);
+        
+        var reservationViewModel = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
+        
+        return reservationViewModel;
     }
 
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
@@ -73,7 +88,7 @@ public class ReservationService : IReservationService
 
         var newTaxiId = 0;
 
-        var existingReservation = await _reservationRepository.GetReservationByIdAsync(reservationViewModel.Id);
+        var existingReservation = await _reservationRepository.GetReservationsByIdAsync(reservationViewModel.Id);
         if (existingReservation.Taxi.CategoryId != reservationViewModel.CategoryId)
         {
             var taxi = await FindAvailableTaxi(reservationViewModel.CategoryId);
@@ -98,7 +113,7 @@ public class ReservationService : IReservationService
 
     public async Task DeleteReservationAsync(string id)
     {
-        var reservation = await _reservationRepository.GetReservationByIdAsync(id);
+        var reservation = await _reservationRepository.GetReservationsByIdAsync(id);
         
         await _taxiService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
         

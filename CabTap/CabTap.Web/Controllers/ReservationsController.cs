@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CabTap.Web.Controllers;
 
-[Authorize(Roles = "Administrator")]
 public class ReservationsController : Controller
 {
     private readonly IReservationService _reservationService;
@@ -22,6 +21,7 @@ public class ReservationsController : Controller
         _mapper = mapper;
     }
 
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> Index()
     {
         var reservations = await _reservationService.GetAllReservationsAsync();
@@ -29,6 +29,15 @@ public class ReservationsController : Controller
         return View(reservations);
     }
 
+    [Authorize(Roles = "Administrator, Client")]
+    public async Task<IActionResult> MyReservations()
+    {
+        var reservations = await _reservationService.GetReservationsByUserIdAsync();
+        
+        return View(reservations);
+    }
+
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> Details(string id)
     {
         try
@@ -43,6 +52,7 @@ public class ReservationsController : Controller
         }
     }
     
+    [Authorize(Roles = "Administrator, Client")]
     public async Task<IActionResult> Create()
     {
         var categories = await _taxiService.GetAvailableTaxiTypes();
@@ -55,6 +65,7 @@ public class ReservationsController : Controller
         return View(reservationViewModel);
     }
 
+    [Authorize(Roles = "Administrator, Client")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(ReservationCreateViewModel viewModel)
@@ -67,7 +78,7 @@ public class ReservationsController : Controller
         try
         {
             await _reservationService.AddReservationAsync(viewModel);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(MyReservations));
         }
         catch (UnauthorizedAccessException)
         {
@@ -75,6 +86,7 @@ public class ReservationsController : Controller
         }
     }
 
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> Edit(string id)
     {
         try
@@ -105,6 +117,7 @@ public class ReservationsController : Controller
         }
     }
     
+    [Authorize(Roles = "Administrator")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(ReservationEditViewModel viewModel)
@@ -130,6 +143,7 @@ public class ReservationsController : Controller
         }
     }
     
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> Delete(string id)
     {
         try
@@ -146,6 +160,7 @@ public class ReservationsController : Controller
         }
     }
     
+    [Authorize(Roles = "Administrator")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(ReservationDeleteViewModel viewModel)

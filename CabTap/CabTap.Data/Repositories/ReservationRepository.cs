@@ -18,7 +18,7 @@ public class ReservationRepository : IReservationRepository
         return await _context.Reservations.ToListAsync();
     }
 
-    public async Task<Reservation> GetReservationByIdAsync(string reservationId)
+    public async Task<Reservation> GetReservationsByIdAsync(string reservationId)
     {
         var reservation = await _context.Reservations.FindAsync(reservationId);
         if (reservation == null)
@@ -27,6 +27,15 @@ public class ReservationRepository : IReservationRepository
         }
         
         return reservation;
+    }
+
+    public async Task<IEnumerable<Reservation>> GetReservationsByUserIdAsync(string userId)
+    {
+        var reservations = await _context.Reservations
+            .Where(x => x.UserId == userId)
+            .ToListAsync();
+
+        return reservations;
     }
 
     public async Task AddReservationAsync(Reservation reservation)
