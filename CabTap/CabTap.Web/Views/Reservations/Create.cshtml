@@ -1,46 +1,90 @@
+<style>
+    .autocomplete-dropdown {
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    }
+
+    .autocomplete-dropdown-item {
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .autocomplete-dropdown-item:hover {
+        background-color: #f0f0f0;
+    }
+</style>
+
 @model CabTap.Shared.Reservation.ReservationCreateViewModel
 
 @{
     ViewData["Title"] = "Create Reservation";
 }
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Reservations" asp-action="Create" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Origin" class="control-label"></label>
-                <input asp-for="Origin" class="form-control" />
-                <span asp-validation-for="Origin" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="Destination" class="control-label"></label>
-                <input asp-for="Destination" class="form-control" />
-                <span asp-validation-for="Destination" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" asp-items="ViewBag.CategoryId">
-                    @foreach (var category in Model.TaxiCategories)
-                    {
-                        <option value="@category.Id">@category.Name</option>
-                    }
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="PassengersCount" class="control-label"></label>
-                <input asp-for="PassengersCount" class="form-control" />
-                <span asp-validation-for="PassengersCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<head>
+    <title>@ViewData["Title"]?.ToString()</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.css">
+</head>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 offset-md-3">
+            <h2>@ViewData["Title"]</h2>
+            <hr />
+            <form asp-controller="Reservations" asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Origin" class="control-label">Origin</label>
+                    <input asp-for="Origin" class="form-control" id="origin" />
+                    <div id="origin-dropdown" class="autocomplete-dropdown"></div>
+                    <span asp-validation-for="Origin" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Destination" class="control-label">Destination</label>
+                    <input asp-for="Destination" class="form-control" id="destination" />
+                    <div id="destination-dropdown" class="autocomplete-dropdown"></div>
+                    <span asp-validation-for="Destination" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-label">Category</label>
+                    <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-control">
+                        @foreach (var category in Model.TaxiCategories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PassengersCount" class="control-label">Passengers Count</label>
+                    <input asp-for="PassengersCount" class="form-control" />
+                    <span asp-validation-for="PassengersCount" class="text-danger"></span>
+                </div>
+                
+                <!-- TODO: Figure out how to send this data to the controller -->
+                <!-- Hidden fields for coordinates -->
+                <input type="hidden" id="origin-lat" name="OriginLat" />
+                <input type="hidden" id="origin-lng" name="OriginLng" />
+                <input type="hidden" id="destination-lat" name="DestinationLat" />
+                <input type="hidden" id="destination-lng" name="DestinationLng" />
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+
+        </div>
     </div>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script src="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.umd.js"></script>
+<script src="~/js/site.js"></script>
