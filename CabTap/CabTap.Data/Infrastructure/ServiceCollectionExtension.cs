@@ -17,6 +17,7 @@ public static class ServiceCollectionExtension
         services.AddTransient<IReservationRepository, ReservationRepository>();
         services.AddTransient<ICategoryRepository, CategoryRepository>();
         services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
+        services.AddTransient<IStatisticRepository, StatisticRepository>();
 
         services.AddTransient<ITaxiService, TaxiService>();
         services.AddTransient<IDriverService, DriverService>();
@@ -24,6 +25,7 @@ public static class ServiceCollectionExtension
         services.AddTransient<ICategoryService, CategoryService>();
         services.AddTransient<IManufacturerService, ManufacturerService>();
         services.AddTransient<IUserService, UserService>();
+        services.AddTransient<IStatisticService, StatisticService>();
     }
 
     public static void AddAutoMapperProfiles(this IServiceCollection services)

@@ -1,0 +1,53 @@
+@model CabTap.Shared.Statistic.StatisticViewModel
+@{
+    ViewData["Title"] = "Statistics";
+}
+<h4 class="text-center">Statistic</h4>
+<div class="text-center">
+    <div class="col-xl-8">
+        <div class="card-group pb-0">
+            <div class="card-columns text-center">
+            </div>
+        </div>
+        <table class="table table-striped " style="width:150%">
+            <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CountClients)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CountDrivers)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CountTaxis)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CountReservations)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SumReservations)
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.CountClients)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.CountDrivers)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.CountTaxis)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.CountReservations)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.SumReservations)
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
