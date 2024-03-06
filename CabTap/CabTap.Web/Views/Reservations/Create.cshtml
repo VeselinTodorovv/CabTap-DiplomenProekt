@@ -69,16 +69,15 @@
                 
                 <!-- TODO: Figure out how to send this data to the controller -->
                 <!-- Hidden fields for coordinates -->
-                <input type="hidden" id="origin-lat" name="OriginLat" />
-                <input type="hidden" id="origin-lng" name="OriginLng" />
-                <input type="hidden" id="destination-lat" name="DestinationLat" />
-                <input type="hidden" id="destination-lng" name="DestinationLng" />
+                <input type="hidden" disabled id="origin-lat" name="OriginLat" />
+                <input type="hidden" disabled id="origin-lng" name="OriginLng" />
+                <input type="hidden" disabled id="destination-lat" name="DestinationLat" />
+                <input type="hidden" disabled id="destination-lng" name="DestinationLng" />
 
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
             </form>
-
         </div>
     </div>
 </div>
@@ -87,4 +86,4 @@
 }
 
 <script src="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.umd.js"></script>
-<script src="~/js/site.js"></script>
+<script src="~/js/reservation.js"></script>
