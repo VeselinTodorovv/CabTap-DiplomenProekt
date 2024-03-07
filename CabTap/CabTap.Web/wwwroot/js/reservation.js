@@ -8,8 +8,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const originInput = document.getElementById('origin');
     const destinationInput = document.getElementById('destination');
 
+    let durationInput = document.getElementById('duration');
+    let distanceInput = document.getElementById('distance');
+
+    let originLat, originLng, destinationLat, destinationLng;
+
     let originDropdown = document.getElementById('origin-dropdown');
     let destinationDropdown = document.getElementById('destination-dropdown');
+
+    const confirmButton = document.getElementById('confirmRoute');
+    confirmButton.addEventListener('click', calculateRoute);
 
     originInput.addEventListener('input', async () => {
         const results = await provider.search({query: originInput.value });
@@ -43,23 +51,41 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function logCoordinates(x, y, isOrigin) {
-        const originLatInput = document.getElementById('origin-lat');
-        const originLngInput = document.getElementById('origin-lng');
-        const destinationLatInput = document.getElementById('destination-lat');
-        const destinationLngInput = document.getElementById('destination-lng');
 
         // Assign the values to the corresponding input fields based on the isOrigin parameter
         if (isOrigin) {
-            originLatInput.value = x;
-            originLngInput.value = y;
+            originLat = y;
+            originLng = x;
         } else {
-            destinationLatInput.value = x;
-            destinationLngInput.value = y;
+            destinationLat = y;
+            destinationLng = x;
         }
 
-        console.log(originLatInput.value);
-        console.log(originLngInput.value);
-        console.log(destinationLatInput.value);
-        console.log(destinationLngInput.value);
+        console.log(`${originLat}, ${originLng}\n${destinationLat}, ${destinationLng}`);
+    }
+
+    function calculateRoute() {
+        const map = L.map(document.createElement('div'));
+
+        L.Routing.control({
+            waypoints: [
+                L.latLng(originLat, originLng),
+                L.latLng(destinationLat, destinationLng)
+            ],
+            routeWhileDragging: true,
+            createMarker: function () { return null; },
+        }).on('routesfound', function (e) {
+            const routes = e.routes;
+            if (routes && routes.length > 0) {
+                const route = routes[0];
+                const summary = route.summary;
+
+                distanceInput.value = (summary.totalDistance / 1000).toFixed(2)
+                durationInput.value = (summary.totalTime / 60).toFixed(2);
+
+                console.log(distanceInput.value); // km
+                console.log(durationInput.value); // minutes
+            }
+        }).addTo(map);
     }
 });

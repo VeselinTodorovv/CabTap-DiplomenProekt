@@ -28,6 +28,9 @@
 <head>
     <title>@ViewData["Title"]?.ToString()</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Include Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 </head>
 
 <div class="container mt-5">
@@ -67,13 +70,13 @@
                     <span asp-validation-for="PassengersCount" class="text-danger"></span>
                 </div>
                 
-                <!-- TODO: Figure out how to send this data to the controller -->
-                <!-- Hidden fields for coordinates -->
-                <input type="hidden" disabled id="origin-lat" name="OriginLat" />
-                <input type="hidden" disabled id="origin-lng" name="OriginLng" />
-                <input type="hidden" disabled id="destination-lat" name="DestinationLat" />
-                <input type="hidden" disabled id="destination-lng" name="DestinationLng" />
+                <!-- TODO: Make Duration and Distance properties in the model -->
+                <input type="hidden" disabled id="duration" name="duration" />
+                <input type="hidden" disabled id="distance" name="distance" />
 
+                <div class="form-group">
+                    <input type="button" id="confirmRoute" value="See Prices" class="btn btn-secondary" />
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
@@ -85,5 +88,8 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- Include Leaflet Routing Machine JS -->
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 <script src="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.umd.js"></script>
 <script src="~/js/reservation.js"></script>
