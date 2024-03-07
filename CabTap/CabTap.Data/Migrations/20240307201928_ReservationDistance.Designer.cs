@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CabTap.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240303183146_InitMigration")]
-    partial class InitMigration
+    [Migration("20240307201928_ReservationDistance")]
+    partial class ReservationDistance
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -183,6 +183,9 @@ namespace CabTap.Data.Migrations
                     b.Property<string>("Destination")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Distance")
+                        .HasColumnType("float");
 
                     b.Property<double>("Duration")
                         .HasColumnType("float");

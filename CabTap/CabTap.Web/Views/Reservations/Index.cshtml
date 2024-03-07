@@ -29,6 +29,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Duration)
             </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Distance)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
@@ -60,7 +63,10 @@
                     @Html.DisplayFor(modelItem => item.Destination)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Duration)
+                    @Html.DisplayFor(modelItem => item.Duration) min
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Distance) km
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
@@ -87,8 +93,3 @@
         }
     </tbody>
 </table>
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

@@ -182,6 +182,9 @@ namespace CabTap.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Distance")
+                        .HasColumnType("float");
+
                     b.Property<double>("Duration")
                         .HasColumnType("float");
 

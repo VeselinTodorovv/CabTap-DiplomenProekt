@@ -19,6 +19,9 @@ public class ReservationCreateViewModel
 
     [Required]
     public double Duration { get; set; }
+    
+    [Required]
+    public double Distance { get; set; }
 
     [Required]
     public decimal Price { get; set; }

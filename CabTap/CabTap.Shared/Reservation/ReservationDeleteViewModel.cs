@@ -16,6 +16,8 @@ public class ReservationDeleteViewModel
     public string Destination { get; set; } = null!;
 
     public double Duration { get; set; }
+    
+    public double Distance { get; set; }
 
     public decimal Price { get; set; }
     

@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             item.textContent = result.label;
             item.addEventListener('click', () => {
                 setInputValue(result.label, dropdown);
-                logCoordinates(result.x, result.y, dropdown.id === 'origin-dropdown');
+                setCoordinates(result.x, result.y, dropdown.id === 'origin-dropdown');
             });
             dropdown.appendChild(item);
         });
@@ -50,9 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
         dropdown.innerHTML = '';
     }
 
-    function logCoordinates(x, y, isOrigin) {
-
-        // Assign the values to the corresponding input fields based on the isOrigin parameter
+    function setCoordinates(x, y, isOrigin) {
         if (isOrigin) {
             originLat = y;
             originLng = x;
@@ -60,8 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
             destinationLat = y;
             destinationLng = x;
         }
-
-        console.log(`${originLat}, ${originLng}\n${destinationLat}, ${destinationLng}`);
     }
 
     function calculateRoute() {
@@ -82,9 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 distanceInput.value = (summary.totalDistance / 1000).toFixed(2)
                 durationInput.value = (summary.totalTime / 60).toFixed(2);
-
-                console.log(distanceInput.value); // km
-                console.log(durationInput.value); // minutes
             }
         }).addTo(map);
     }
