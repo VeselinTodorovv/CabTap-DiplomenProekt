@@ -24,7 +24,8 @@ public class CategoryService : ICategoryService
         var model = categories.Select(x => new CategoryPairViewModel
         {
             Id = x.Id,
-            Name = x.Name
+            Name = x.Name,
+            Rate = x.Rate
         });
 
         return model;
@@ -37,7 +38,8 @@ public class CategoryService : ICategoryService
         var model = new CategoryPairViewModel
         {
             Id = category.Id,
-            Name = category.Name
+            Name = category.Name,
+            Rate = category.Rate
         };
 
         return model;

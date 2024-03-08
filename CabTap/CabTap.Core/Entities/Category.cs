@@ -9,6 +9,9 @@ public class Category
 
     [Required]
     public string Name { get; set; } = null!;
+    
+    [Required]
+    public decimal Rate { get; set; }
 
     public virtual ICollection<Taxi> Taxis { get; set; } = new List<Taxi>();
 }

@@ -24,5 +24,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         builder.Entity<Reservation>()
             .Property(r => r.Price)
             .HasPrecision(18, 2);
+        
+        builder.Entity<Category>()
+            .Property(c => c.Rate)
+            .HasPrecision(18, 2);
     }
 }

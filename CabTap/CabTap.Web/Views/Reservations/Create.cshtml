@@ -48,6 +48,11 @@
                     <input asp-for="Distance" id="distance" class="form-control" hidden />
                     <span asp-validation-for="Distance" class="text-danger"></span>
                 </div>
+                           
+                <div class="form-group">
+                    <input asp-for="Price" id="price" class="form-control" hidden />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
 
                 <div class="form-group">
                     <input type="button" id="confirmRoute" value="See Prices" class="btn btn-secondary" />
@@ -55,12 +60,13 @@
                 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-12 mb-4" id="categoryCards" style="display: block;margin-top: 20px;">
+                        <div class="col-md-12 mb-4" id="categoryCards" style="margin-top: 20px;">
                             @foreach (var category in Model.TaxiCategories)
                             {
                                 <div class="card category-card" style="width: 150px;" data-category-id="@category.Id">
                                     <div class="card-body">
                                         <h5 class="card-title">@category.Name</h5>
+                                        <p>Total Price: <span id="totalPrice-@category.Id">Calculating...</span></p>
                                     </div>
                                 </div>
                             }
@@ -84,5 +90,24 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 <script src="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.umd.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="~/js/reservation.js"></script>
 <script src="~/js/reservationCards.js"></script>
+
+<script>
+    $('.category-card').click(function() {
+        const categoryId = $(this).data('category-id');
+        const distance = parseFloat($('#distance').val());
+
+        console.log(`${categoryId} ${distance}`);
+
+        $.get('@Url.Action("GetTotalPrice", "Reservations")', { categoryId: categoryId, distance: distance }, function(data) {
+            $('#totalPrice-' + categoryId).text('$' + data.toFixed(2));
+            
+            console.log(`${data.toFixed(2)}`);
+            
+            let price = document.getElementById('price');
+            price.value = data.toFixed(2);
+        });
+    });
+</script>

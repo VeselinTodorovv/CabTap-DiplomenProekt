@@ -14,14 +14,16 @@ public class ReservationsController : Controller
     private readonly IReservationService _reservationService;
     private readonly ITaxiService _taxiService;
     private readonly IStatisticService _statisticService;
+    private readonly ICategoryService _categoryService;
     private readonly IMapper _mapper;
     
-    public ReservationsController(IReservationService reservationService, ITaxiService taxiService, IMapper mapper, IStatisticService statisticService)
+    public ReservationsController(IReservationService reservationService, ITaxiService taxiService, IMapper mapper, IStatisticService statisticService, ICategoryService categoryService)
     {
         _reservationService = reservationService;
         _taxiService = taxiService;
         _mapper = mapper;
         _statisticService = statisticService;
+        _categoryService = categoryService;
     }
 
     [Authorize(Roles = "Administrator")]
@@ -99,6 +101,17 @@ public class ReservationsController : Controller
         {
             return Unauthorized();
         }
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetTotalPrice(int categoryId, double distance)
+    {
+        var category = await _categoryService.GetCategoryById(categoryId);
+
+        // Perform calculation based on category rate and distance
+        var totalPrice = category.Rate * (decimal) distance / 6;
+
+        return Json(totalPrice);
     }
 
     [Authorize(Roles = "Administrator")]

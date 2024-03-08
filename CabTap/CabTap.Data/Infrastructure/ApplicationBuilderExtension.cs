@@ -67,12 +67,12 @@ public static class ApplicationBuilderExtension
         }
 
         context.Categories.AddRange(
-            new Category { Name = "Standard" },
-            new Category { Name = "Premium" },
-            new Category { Name = "Luxury" },
-            new Category { Name = "Economy" },
-            new Category { Name = "Eco-friendly" },
-            new Category { Name = "Business" }
+            new Category { Name = "Standard", Rate = 2.0m },
+            new Category { Name = "Premium", Rate = 3.0m},
+            new Category { Name = "Luxury", Rate = 5.0m },
+            new Category { Name = "Economy", Rate = 1.5m },
+            new Category { Name = "Eco-friendly", Rate = 1.75m },
+            new Category { Name = "Business", Rate = 4.0m }
         );
 
         await context.SaveChangesAsync();

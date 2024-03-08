@@ -8,4 +8,6 @@ public class CategoryPairViewModel
 
     [Display(Name = "Category")]
     public string Name { get; set; } = null!;
+    
+    public decimal Rate { get; set; }
 }
