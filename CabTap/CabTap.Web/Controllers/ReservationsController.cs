@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using AutoMapper;
 
 using CabTap.Contracts.Services;
@@ -12,27 +13,41 @@ public class ReservationsController : Controller
 {
     private readonly IReservationService _reservationService;
     private readonly ITaxiService _taxiService;
+    private readonly IStatisticService _statisticService;
     private readonly IMapper _mapper;
     
-    public ReservationsController(IReservationService reservationService, ITaxiService taxiService, IMapper mapper)
+    public ReservationsController(IReservationService reservationService, ITaxiService taxiService, IMapper mapper, IStatisticService statisticService)
     {
         _reservationService = reservationService;
         _taxiService = taxiService;
         _mapper = mapper;
+        _statisticService = statisticService;
     }
 
     [Authorize(Roles = "Administrator")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
     {
-        var reservations = await _reservationService.GetAllReservationsAsync();
+        var reservations = await _reservationService.GetPaginatedReservationsAsync(page, pageSize);
+        
+        var totalReservations = _statisticService.CountReservations();
+        var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
+
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = totalPages;
 
         return View(reservations);
     }
 
     [Authorize(Roles = "Administrator, Client")]
-    public async Task<IActionResult> MyReservations()
+    public async Task<IActionResult> MyReservations(int page = 1, int pageSize = 10)
     {
-        var reservations = await _reservationService.GetReservationsByUserIdAsync();
+        var reservations = await _reservationService.GetPaginatedReservationsByUserIdAsync(page, pageSize);
+        
+        var totalReservations = _statisticService.CountReservations(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
+
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = totalPages;
         
         return View(reservations);
     }

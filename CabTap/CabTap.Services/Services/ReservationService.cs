@@ -127,4 +127,25 @@ public class ReservationService : IReservationService
         return taxis.FirstOrDefault() ?? 
                throw new InvalidOperationException("No available taxi found.");
     }
+    
+    public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsAsync(int page, int pageSize)
+    {
+        var reservations = await _reservationRepository.GetPaginatedReservationsAsync(page, pageSize);
+        var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
+        return reservationViewModels;
+    }
+
+    public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsByUserIdAsync(int page, int pageSize)
+    {
+        var user = await _userService.GetCurrentUserAsync();
+        if (user == null)
+        {
+            throw new UnauthorizedAccessException("User is not logged in.");
+        }
+
+        var reservations = await _reservationRepository.GetPaginatedReservationsByUserIdAsync(user.Id, page, pageSize);
+        var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
+        return reservationViewModels;
+    }
+
 }

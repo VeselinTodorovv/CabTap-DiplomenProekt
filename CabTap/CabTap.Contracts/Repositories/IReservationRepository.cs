@@ -10,4 +10,7 @@ public interface IReservationRepository
     Task AddReservationAsync(Reservation reservation);
     Task UpdateReservationAsync(Reservation reservation);
     Task DeleteReservationAsync(string reservationId);
+
+    Task<IEnumerable<Reservation>> GetPaginatedReservationsAsync(int page, int pageSize);
+    Task<IEnumerable<Reservation>> GetPaginatedReservationsByUserIdAsync(string userId, int page, int pageSize);
 }

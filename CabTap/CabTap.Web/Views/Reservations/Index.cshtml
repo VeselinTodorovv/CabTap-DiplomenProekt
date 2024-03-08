@@ -1,8 +1,23 @@
+@{
+    var currentPage = (int)ViewBag.CurrentPage;
+    var totalPages = (int)ViewBag.TotalPages;
+    
+    string TruncateLocation(string location)
+    {
+        const int maxLength = 30;
+        if (location.Length > maxLength)
+        {
+            return location[..maxLength] + "...";
+        }
+        return location;
+    }
+}
+
 @model IEnumerable<CabTap.Shared.Reservation.ReservationAllViewModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All Reservations";
 }
-<h1>Index</h1>
+<h1 style="margin-bottom: 30px;">@ViewData["Title"]?.ToString()</h1>
 
 @if(User.Identity!.IsAuthenticated && User.IsInRole("Administrator"))
 {
@@ -11,85 +26,48 @@
     </p>
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaxiId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Origin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Destination)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-             <th>
-                @Html.DisplayNameFor(model => model.Distance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PassengersCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RideStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div style="padding-bottom: 15px;">
+                        <h5 class="card-title fw-bold">@TruncateLocation(item.Origin)</h5>
+                        <h5 class="card-title fw-bold">@TruncateLocation(item.Destination)</h5>
+                    </div>
+
+                    <p class="card-text">
+                        <strong>@Html.DisplayNameFor(x => x.UserId): </strong>@item.UserId<br>
+                        <strong>@Html.DisplayNameFor(x => x.TaxiId): </strong>@item.TaxiId<br>
+                        <strong>@Html.DisplayNameFor(x => x.Duration): </strong>@item.Duration min<br>
+                        <strong>@Html.DisplayNameFor(x => x.Distance): </strong>@item.Distance km<br>
+                        <strong>@Html.DisplayNameFor(x => x.Price): </strong>@item.Price<br>
+                        <strong>@Html.DisplayNameFor(x => x.PassengersCount): </strong>@item.PassengersCount<br>
+                        <strong>@Html.DisplayNameFor(x => x.RideStatus): </strong>@item.RideStatus<br>
+                        <strong>@Html.DisplayNameFor(x => x.CreatedOn): </strong>@item.CreatedOn
+                    </p>
+                    <div class="text-center">
+                        <a href="@Url.Action("Details", "Reservations", new { id = item.Id })" class="btn btn-primary">Details</a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                        {
+                            <a asp-controller="Reservations" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                            <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (var i = 1; i <= totalPages; i++)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaxiId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Origin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Destination)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Duration) min
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Distance) km
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PassengersCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RideStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedOn)
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a>
-                    
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                    }
-                </td>
-            </tr>
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link" asp-controller="Reservations" asp-action="Index" asp-route-page="@i">@i</a>
+            </li>
         }
-    </tbody>
-</table>
+    </ul>
+</nav>

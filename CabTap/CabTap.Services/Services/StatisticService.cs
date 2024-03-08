@@ -32,6 +32,11 @@ public class StatisticService : IStatisticService
         return _statisticRepository.CountReservations();
     }
 
+    public int CountReservations(string userId)
+    {
+        return _statisticRepository.CountReservations(userId);
+    }
+
     public decimal SumReservations()
     {
         return _statisticRepository.SumReservations();

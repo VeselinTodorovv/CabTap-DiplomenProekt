@@ -13,12 +13,14 @@ public class StatisticRepository : IStatisticRepository
 
     public int CountTaxis()
     {
-        return _context.Taxis.Count();
+        return _context.Taxis
+            .Count();
     }
 
     public int CountDrivers()
     {
-        return _context.Drivers.Count();
+        return _context.Drivers
+            .Count();
     }
 
     public int CountClients()
@@ -37,11 +39,19 @@ public class StatisticRepository : IStatisticRepository
 
     public int CountReservations()
     {
-        return _context.Reservations.Count();
+        return _context.Reservations
+            .Count();
+    }
+    
+    public int CountReservations(string userId)
+    {
+        return _context.Reservations
+            .Count(x => x.UserId == userId);
     }
 
     public decimal SumReservations()
     {
-        return _context.Reservations.Sum(x => x.Price);
+        return _context.Reservations
+            .Sum(x => x.Price);
     }
 }

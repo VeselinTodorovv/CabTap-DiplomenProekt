@@ -61,4 +61,24 @@ public class ReservationRepository : IReservationRepository
         _context.Reservations.Remove(reservationToRemove);
         await _context.SaveChangesAsync();
     }
+    
+    public async Task<IEnumerable<Reservation>> GetPaginatedReservationsAsync(int page, int pageSize)
+    {
+        var skip = (page - 1) * pageSize;
+        return await _context.Reservations
+            .Skip(skip)
+            .Take(pageSize)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Reservation>> GetPaginatedReservationsByUserIdAsync(string userId, int page, int pageSize)
+    {
+        var skip = (page - 1) * pageSize;
+        return await _context.Reservations
+            .Where(r => r.UserId == userId)
+            .Skip(skip)
+            .Take(pageSize)
+            .ToListAsync();
+    }
+
 }

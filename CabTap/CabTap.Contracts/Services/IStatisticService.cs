@@ -7,5 +7,6 @@ public interface IStatisticService
     int CountDrivers();
     int CountClients();
     int CountReservations();
+    int CountReservations(string userId);
     decimal SumReservations();
 }
