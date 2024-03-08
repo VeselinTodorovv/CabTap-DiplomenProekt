@@ -1,24 +1,3 @@
-<style>
-    .autocomplete-dropdown {
-        position: absolute;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        max-height: 150px;
-        overflow-y: auto;
-        z-index: 1000;
-        box-shadow: 0 2px 4px rgba(0,0,0,.1);
-    }
-
-    .autocomplete-dropdown-item {
-        padding: 5px 10px;
-        cursor: pointer;
-    }
-
-    .autocomplete-dropdown-item:hover {
-        background-color: #f0f0f0;
-    }
-</style>
-
 @model CabTap.Shared.Reservation.ReservationCreateViewModel
 
 @{
@@ -30,6 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="~/css/reservation.css">
 </head>
 
 <div class="container mt-5">
@@ -54,16 +34,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="CategoryId" class="control-label">Category</label>
-                    <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-control">
-                        @foreach (var category in Model.TaxiCategories)
-                        {
-                            <option value="@category.Id">@category.Name</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label asp-for="PassengersCount" class="control-label">Passengers Count</label>
                     <input asp-for="PassengersCount" class="form-control" />
                     <span asp-validation-for="PassengersCount" class="text-danger"></span>
@@ -82,8 +52,26 @@
                 <div class="form-group">
                     <input type="button" id="confirmRoute" value="See Prices" class="btn btn-secondary" />
                 </div>
+                
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <div class="row">
+                        <div class="col-md-12 mb-4" id="categoryCards" style="display: block;margin-top: 20px;">
+                            @foreach (var category in Model.TaxiCategories)
+                            {
+                                <div class="card category-card" style="width: 150px;" data-category-id="@category.Id">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@category.Name</h5>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <input type="hidden" asp-for="CategoryId" id="categoryId" />
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" id="createButton" value="Create" class="btn btn-primary" />
                 </div>
             </form>
         </div>
@@ -97,3 +85,4 @@
 <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 <script src="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.umd.js"></script>
 <script src="~/js/reservation.js"></script>
+<script src="~/js/reservationCards.js"></script>

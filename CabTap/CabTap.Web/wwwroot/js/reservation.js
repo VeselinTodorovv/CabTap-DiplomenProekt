@@ -61,6 +61,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function calculateRoute() {
+        if (!originLat || !originLng || !destinationLat || !destinationLng) {
+            return;
+        }
+        
         const map = L.map(document.createElement('div'));
 
         L.Routing.control({

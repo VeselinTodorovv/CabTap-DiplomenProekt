@@ -25,7 +25,7 @@ public class ReservationsController : Controller
     }
 
     [Authorize(Roles = "Administrator")]
-    public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 9)
     {
         var reservations = await _reservationService.GetPaginatedReservationsAsync(page, pageSize);
         
@@ -39,7 +39,7 @@ public class ReservationsController : Controller
     }
 
     [Authorize(Roles = "Administrator, Client")]
-    public async Task<IActionResult> MyReservations(int page = 1, int pageSize = 10)
+    public async Task<IActionResult> MyReservations(int page = 1, int pageSize = 9)
     {
         var reservations = await _reservationService.GetPaginatedReservationsByUserIdAsync(page, pageSize);
         
