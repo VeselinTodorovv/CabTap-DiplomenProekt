@@ -19,7 +19,6 @@
 
 .category-card {
     margin-right: 10px;
-    margin-bottom: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
@@ -30,11 +29,16 @@
     transform: translateY(-5px);
 }
 
+#categoryCards {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
 .selected {
     border: 2px solid #007bff; /* Blue border */
 }
 
-/* Hide category cards and create button by default */
-#categoryCards, #createButton {
+#createButton {
     display: none;
 }

@@ -4,7 +4,6 @@ using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Reservation;
-using CabTap.Shared.Taxi;
 
 namespace CabTap.Services.Services;
 
@@ -64,7 +63,7 @@ public class ReservationService : IReservationService
             throw new UnauthorizedAccessException("User is not logged in.");
         }
 
-        var taxi = await FindAvailableTaxi(reservationViewModel.CategoryId);
+        var taxi = await _taxiService.FindAvailableTaxiAsync(reservationViewModel.CategoryId);
 
         var reservation = _mapper.Map<Reservation>(reservationViewModel);
 
@@ -91,7 +90,7 @@ public class ReservationService : IReservationService
         var existingReservation = await _reservationRepository.GetReservationsByIdAsync(reservationViewModel.Id);
         if (existingReservation.Taxi.CategoryId != reservationViewModel.CategoryId)
         {
-            var taxi = await FindAvailableTaxi(reservationViewModel.CategoryId);
+            var taxi = await _taxiService.FindAvailableTaxiAsync(reservationViewModel.CategoryId);
             
             var oldId = existingReservation.TaxiId;
             newTaxiId = taxi.Id;
@@ -120,14 +119,6 @@ public class ReservationService : IReservationService
         await _reservationRepository.DeleteReservationAsync(id);
     }
 
-    private async Task<TaxiAllViewModel> FindAvailableTaxi(int categoryId)
-    {
-        var taxis = await _taxiService.GetAvailableTaxisAsync(categoryId);
-        
-        return taxis.FirstOrDefault() ?? 
-               throw new InvalidOperationException("No available taxi found.");
-    }
-    
     public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsAsync(int page, int pageSize)
     {
         var reservations = await _reservationRepository.GetPaginatedReservationsAsync(page, pageSize);
@@ -147,5 +138,4 @@ public class ReservationService : IReservationService
         var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
         return reservationViewModels;
     }
-
 }

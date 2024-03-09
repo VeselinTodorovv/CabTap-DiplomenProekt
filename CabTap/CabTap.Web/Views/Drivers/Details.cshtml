@@ -4,48 +4,43 @@
     ViewData["Title"] = "Driver Details";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title">@ViewData["Title"]</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="text-center col-md-4">Name</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.Name)</dd>
 
-<div class="row">
-    <div class="col-md-6">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.CreatedOn)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.LastModifiedOn)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.LastModifiedOn)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.CreatedBy)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.LastModifiedBy)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.LastModifiedBy)
-            </dd>
-        </dl>
+                        <dt class="text-center col-md-4">Created On</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.CreatedOn)</dd>
+
+                        <dt class="text-center col-md-4">Last Modified On</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedOn)</dd>
+
+                        <dt class="text-center col-md-4">Created By</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.CreatedBy)</dd>
+
+                        <dt class="text-center col-md-4">Last Modified By</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedBy)</dd>
+                    </dl>
+                    <div class="text-center mt-4">
+                        <a class="btn btn-primary" asp-controller="Drivers" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                        <a class="btn btn-danger ml-2" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                        <a class="btn btn-secondary ml-2" asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-controller="Drivers" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    .col-md-4 {
+        margin-bottom: 20px;
+    }
+</style>

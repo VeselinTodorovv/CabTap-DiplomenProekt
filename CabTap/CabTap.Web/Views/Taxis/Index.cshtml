@@ -2,74 +2,46 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1>Index</h1>
+
+<h1 class="text-center mb-4">Taxi Index</h1>
 
 <partial name="_AdminPartial" />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RegNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ManufacturerName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DriverName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaxiStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PassengerSeats)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RegNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ManufacturerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DriverName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <img src="@Html.DisplayFor(modelItem => item.Picture)" alt="Image" width="100" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaxiStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PassengerSeats)
-                </td>
-                <td>
-                    <partial name="_EntityActionsPartial" model="@item.Id" />
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container mt-4">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Registration Number</th>
+                    <th scope="col">Manufacturer</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Driver</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Picture</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Passenger Seats</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.RegNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ManufacturerName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DriverName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td><img src="@Html.DisplayFor(modelItem => item.Picture)" alt="Taxi Image" class="img-thumbnail" style="max-height: 100px;" /></td>
+                        <td>@Html.DisplayFor(modelItem => item.TaxiStatus)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PassengerSeats)</td>
+                        <td><partial name="_EntityActionsPartial" model="@item.Id" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

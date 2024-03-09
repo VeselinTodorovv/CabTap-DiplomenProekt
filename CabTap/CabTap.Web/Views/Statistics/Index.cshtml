@@ -2,52 +2,80 @@
 @{
     ViewData["Title"] = "Statistics";
 }
-<h4 class="text-center">Statistic</h4>
-<div class="text-center">
-    <div class="col-xl-8">
-        <div class="card-group pb-0">
-            <div class="card-columns text-center">
+<h2 class="text-center" style="padding-bottom: 50px;">Statistics</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title">Clients Count</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@Model.CountClients</p>
+                    <button class="btn btn-primary btn-sm mt-2" onclick="toggleChart('clientsChart')">Show More</button>
+                </div>
             </div>
+            <canvas id="clientsChart" class="chart" width="400" height="200" style="display: none;"></canvas>
         </div>
-        <table class="table table-striped " style="width:150%">
-            <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CountClients)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CountDrivers)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CountTaxis)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CountReservations)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SumReservations)
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => model.CountClients)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.CountDrivers)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.CountTaxis)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.CountReservations)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.SumReservations)
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="col-md-4">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title">Drivers Count</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@Model.CountDrivers</p>
+                    <button class="btn btn-success btn-sm mt-2" onclick="toggleChart('driversChart')">Show More</button>
+                </div>
+            </div>
+            <canvas id="driversChart" class="chart" width="400" height="200" style="display: none;"></canvas>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-warning">
+                <div class="card-header bg-warning text-white">
+                    <h5 class="card-title">Taxis Count</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@Model.CountTaxis</p>
+                    <button class="btn btn-warning btn-sm mt-2" onclick="toggleChart('taxisChart')">Show More</button>
+                </div>
+            </div>
+            <canvas id="taxisChart" class="chart" width="400" height="200" style="display: none;"></canvas>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h5 class="card-title">Reservations Count</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@Model.CountReservations</p>
+                    <button class="btn btn-info btn-sm mt-2" onclick="toggleChart('reservationsCountChart')">Show More</button>
+                </div>
+            </div>
+            <canvas id="reservationsCountChart" class="chart" width="400" height="200" style="display: none;"></canvas>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="card-title">Reservations Sum</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@Model.SumReservations</p>
+                    <button class="btn btn-danger btn-sm mt-2" onclick="toggleChart('reservationsSumChart')">Show More</button>
+                </div>
+            </div>
+            <canvas id="reservationsSumChart" class="chart" width="400" height="200" style="display: none;"></canvas>
+        </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<script>
+    let clientsData = @Html.Raw(Json.Serialize(Model.CountClients));
+    let driversData = @Html.Raw(Json.Serialize(Model.CountDrivers));
+    let taxisData = @Html.Raw(Json.Serialize(Model.CountTaxis));
+    let reservationsCountData = @Html.Raw(Json.Serialize(Model.CountReservations));
+    let reservationsSumData = @Html.Raw(Json.Serialize(Model.SumReservations));
+</script>
+<script src="js/statistic/graphs.js"></script>
