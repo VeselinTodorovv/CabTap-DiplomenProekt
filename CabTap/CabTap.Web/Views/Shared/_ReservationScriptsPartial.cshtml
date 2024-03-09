@@ -6,19 +6,8 @@
 <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 <script src="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.umd.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="~/js/reservation.js"></script>
-<script src="~/js/reservationCards.js"></script>
 
-<script>
-    $('.category-card').click(function() {
-        const categoryId = $(this).data('category-id');
-        const distance = parseFloat($('#distance').val());
-
-        $.get(getTotalPriceUrl, { categoryId: categoryId, distance: distance },
-            function(data) {
-                $('#totalPrice-' + categoryId).text('$' + data.toFixed(2));
-                
-                document.getElementById('price').value = data.toFixed(2);
-            });
-    });
-</script>
+<script src="~/js/reservation/autocomplete.js"></script>
+<script src="~/js/reservation/route.js"></script>
+<script src="~/js/reservation/price.js"></script>
+<script src="~/js/reservation/reservationCards.js"></script>
