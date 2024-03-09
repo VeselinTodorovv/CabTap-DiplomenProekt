@@ -42,8 +42,8 @@
         </dd>
     </dl>
 
-    <form asp-controller="Drivers" asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="@Model.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

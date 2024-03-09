@@ -5,7 +5,7 @@
 }
 
 <head>
-    <title>@ViewData["Title"]?.ToString()</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
@@ -84,30 +84,10 @@
     </div>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Task.WhenAll(
+            Html.RenderPartialAsync("_ReservationScriptsPartial"),
+            Html.RenderPartialAsync("_ValidationScriptsPartial")
+        );
+    }
 }
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-<script src="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.umd.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="~/js/reservation.js"></script>
-<script src="~/js/reservationCards.js"></script>
-
-<script>
-    $('.category-card').click(function() {
-        const categoryId = $(this).data('category-id');
-        const distance = parseFloat($('#distance').val());
-
-        console.log(`${categoryId} ${distance}`);
-
-        $.get('@Url.Action("GetTotalPrice", "Reservations")', { categoryId: categoryId, distance: distance }, function(data) {
-            $('#totalPrice-' + categoryId).text('$' + data.toFixed(2));
-            
-            console.log(`${data.toFixed(2)}`);
-            
-            let price = document.getElementById('price');
-            price.value = data.toFixed(2);
-        });
-    });
-</script>

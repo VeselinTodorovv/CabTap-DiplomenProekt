@@ -1,0 +1,8 @@
+@model string
+
+@{
+    const int maxLength = 30;
+    var truncatedLocation = Model.Length > maxLength ? Model[..maxLength] + "..." : Model;
+}
+
+@truncatedLocation

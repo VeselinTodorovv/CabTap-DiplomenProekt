@@ -5,13 +5,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    let originLat, originLng, destinationLat, destinationLng;
+    
     const originInput = document.getElementById('origin');
     const destinationInput = document.getElementById('destination');
-
     let durationInput = document.getElementById('duration');
     let distanceInput = document.getElementById('distance');
-
-    let originLat, originLng, destinationLat, destinationLng;
 
     let originDropdown = document.getElementById('origin-dropdown');
     let destinationDropdown = document.getElementById('destination-dropdown');
@@ -72,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 L.latLng(originLat, originLng),
                 L.latLng(destinationLat, destinationLng)
             ],
-            routeWhileDragging: true,
             createMarker: function () { return null; },
         }).on('routesfound', function (e) {
             const routes = e.routes;

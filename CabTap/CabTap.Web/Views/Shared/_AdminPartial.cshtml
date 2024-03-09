@@ -1,0 +1,6 @@
+@if(User.Identity!.IsAuthenticated && User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}

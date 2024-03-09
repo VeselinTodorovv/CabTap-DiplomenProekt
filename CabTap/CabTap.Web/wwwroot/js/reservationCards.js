@@ -3,18 +3,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     categoryCards.forEach(card => {
         card.addEventListener('click', function () {
-            // Remove the 'selected' class from all category cards
             categoryCards.forEach(card => {
                 card.classList.remove('selected');
             });
-
-            // Add the 'selected' class to the clicked category card
             card.classList.add('selected');
 
-            // Update the hidden input field with the selected category's ID
             document.getElementById('categoryId').value = card.dataset.categoryId;
-
-            // Show the create button
             document.getElementById('createButton').style.display = 'block';
         });
     });
