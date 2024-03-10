@@ -130,7 +130,7 @@ public class ReservationsController : Controller
                     Id = reservation.Taxi.CategoryId,
                     Name = reservation.Taxi.Category.Name
                 };
-                availableCategories.Add(currentCategory);
+                availableCategories.Insert(0, currentCategory);
             }
             
             var model = _mapper.Map<ReservationEditViewModel>(reservation);

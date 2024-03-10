@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const originInput = document.getElementById('origin');
     const destinationInput = document.getElementById('destination');
     const categoryCards = document.querySelectorAll('.category-card');
-    const categoryIdInput = document.getElementById('categoryId');
-    const createButton = document.getElementById('createButton');
     const confirmRouteButton = document.getElementById('confirmRoute');
 
     categoryCards.forEach(card => {
@@ -13,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             card.classList.add('selected');
 
-            categoryIdInput.value = card.dataset.categoryId;
-            createButton.style.display = 'block';
+            document.getElementById('categoryId').value = card.dataset.categoryId;
+            document.getElementById('createButton').classList.remove('visually-hidden');
         });
     });
 
@@ -25,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         
-        document.getElementById('categoryCards').className = 'col-md-12 mb-4';
+        document.getElementById('categoryCards').classList.remove('visually-hidden');
         this.style.display = 'none';
     });
 });

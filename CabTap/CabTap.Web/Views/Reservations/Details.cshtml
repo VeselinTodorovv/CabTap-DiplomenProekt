@@ -1,97 +1,71 @@
 @model CabTap.Shared.Reservation.ReservationDetailsViewModel
 
 @{
-    ViewData["Title"] = "Taxi Details";
+    ViewData["Title"] = "Reservation Details";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title">@ViewData["Title"]</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="text-center col-md-4">Origin:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.Origin)</dd>
 
-<div class="row">
-    <div class="col-md-6">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Origin)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Origin)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Destination)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Destination)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Duration)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Duration)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Distance)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Distance)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Price)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.PassengersCount)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PassengersCount)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.RideStatus)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.RideStatus)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.UserId)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.UserId)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.TaxiId)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.TaxiId)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.CreatedOn)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.LastModifiedOn)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.LastModifiedOn)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.CreatedBy)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.LastModifiedBy)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.LastModifiedBy)
-            </dd>
-        </dl>
+                        <dt class="text-center col-md-4">Destination:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.Destination)</dd>
+
+                        <dt class="text-center col-md-4">Duration:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.Duration)</dd>
+
+                        <dt class="text-center col-md-4">Distance:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.Distance)</dd>
+
+                        <dt class="text-center col-md-4">Price:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.Price)</dd>
+
+                        <dt class="text-center col-md-4">Passengers Count:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.PassengersCount)</dd>
+
+                        <dt class="text-center col-md-4">Ride Status:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.RideStatus)</dd>
+
+                        <dt class="text-center col-md-4">User ID:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.UserId)</dd>
+
+                        <dt class="text-center col-md-4">Taxi ID:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.TaxiId)</dd>
+
+                        <dt class="text-center col-md-4">Created On:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.CreatedOn)</dd>
+
+                        <dt class="text-center col-md-4">Last Modified On:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedOn)</dd>
+
+                        <dt class="text-center col-md-4">Created By:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.CreatedBy)</dd>
+
+                        <dt class="text-center col-md-4">Last Modified By:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedBy)</dd>
+                    </dl>
+                    
+                    <div class="text-center mt-4">
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                        <a class="btn btn-danger ml-2" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                        <a class="btn btn-secondary ml-2" asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Edit" asp-controller="Taxis" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    .col-md-4 {
+        margin-bottom: 20px;
+    }
+</style>

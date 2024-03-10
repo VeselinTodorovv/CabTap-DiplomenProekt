@@ -38,7 +38,3 @@
 .selected {
     border: 2px solid #007bff; /* Blue border */
 }
-
-#createButton {
-    display: none;
-}

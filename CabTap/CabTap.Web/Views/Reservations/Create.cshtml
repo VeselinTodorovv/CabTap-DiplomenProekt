@@ -12,74 +12,81 @@
     <link rel="stylesheet" href="~/css/reservation.css">
 </head>
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-4 offset-md-3">
-            <h2>@ViewData["Title"]</h2>
-            <hr />
-            <form asp-controller="Reservations" asp-action="Create" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Origin" class="control-label">Origin</label>
-                    <input asp-for="Origin" class="form-control" id="origin" />
-                    <div id="origin-dropdown" class="autocomplete-dropdown"></div>
-                    <span asp-validation-for="Origin" class="text-danger"></span>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title">@ViewData["Title"]</h2>
                 </div>
+                <div class="card-body">
+                    <form asp-controller="Reservations" asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="form-group">
-                    <label asp-for="Destination" class="control-label">Destination</label>
-                    <input asp-for="Destination" class="form-control" id="destination" />
-                    <div id="destination-dropdown" class="autocomplete-dropdown"></div>
-                    <span asp-validation-for="Destination" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="PassengersCount" class="control-label">Passengers Count</label>
-                    <input asp-for="PassengersCount" class="form-control" />
-                    <span asp-validation-for="PassengersCount" class="text-danger"></span>
-                </div>
-                
-                <div class="form-group">
-                    <input asp-for="Duration" id="duration" class="form-control" hidden />
-                    <span asp-validation-for="Duration" class="text-danger"></span>
-                </div>
-           
-                <div class="form-group">
-                    <input asp-for="Distance" id="distance" class="form-control" hidden />
-                    <span asp-validation-for="Distance" class="text-danger"></span>
-                </div>
-                           
-                <div class="form-group">
-                    <input asp-for="Price" id="price" class="form-control" hidden />
-                    <span asp-validation-for="Price" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <input type="button" id="confirmRoute" value="See Prices" class="btn btn-secondary" />
-                </div>
-                
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-12 mb-4 visually-hidden" id="categoryCards" style="margin-top: 20px;">
-                            @foreach (var category in Model.TaxiCategories)
-                            {
-                                <div class="card category-card" style="width: 150px;" data-category-id="@category.Id">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@category.Name</h5>
-                                        <p>Total Price: <span id="totalPrice-@category.Id">Calculating...</span></p>
-                                    </div>
-                                </div>
-                            }
+                        <div class="form-group">
+                            <label asp-for="Origin" class="control-label">Origin</label>
+                            <input asp-for="Origin" class="form-control" id="origin" />
+                            <div id="origin-dropdown" class="autocomplete-dropdown"></div>
+                            <span asp-validation-for="Origin" class="text-danger"></span>
                         </div>
-                    </div>
-                    <input type="hidden" asp-for="CategoryId" id="categoryId" />
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>
-                </div>
 
-                <div class="form-group">
-                    <input type="submit" id="createButton" value="Create" class="btn btn-primary" />
+                        <div class="form-group">
+                            <label asp-for="Destination" class="control-label">Destination</label>
+                            <input asp-for="Destination" class="form-control" id="destination" />
+                            <div id="destination-dropdown" class="autocomplete-dropdown"></div>
+                            <span asp-validation-for="Destination" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="PassengersCount" class="control-label">Passengers Count</label>
+                            <input asp-for="PassengersCount" class="form-control" />
+                            <span asp-validation-for="PassengersCount" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input asp-for="Duration" id="duration" class="form-control" hidden />
+                            <span asp-validation-for="Duration" class="text-danger"></span>
+                        </div>
+                    
+                        <div class="form-group">
+                            <input asp-for="Distance" id="distance" class="form-control" hidden />
+                            <span asp-validation-for="Distance" class="text-danger"></span>
+                        </div>
+                                    
+                        <div class="form-group">
+                            <input asp-for="Price" id="price" class="form-control" hidden />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="button" id="confirmRoute" value="See Prices" class="btn btn-secondary" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12 mb-4 visually-hidden" id="categoryCards" style="margin-top: 20px;">
+                                    @foreach (var category in Model.TaxiCategories)
+                                    {
+                                        <div class="card category-card" style="width: 150px;" data-category-id="@category.Id">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@category.Name</h5>
+                                                <p>Total Price: <span id="totalPrice-@category.Id">Calculating...</span></p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <input type="hidden" asp-for="CategoryId" id="categoryId" />
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" id="createButton" value="Create" class="btn btn-primary visually-hidden" />
+                            <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -91,3 +98,9 @@
         );
     }
 }
+
+<style>
+    .form-group {
+        margin-bottom: 15px;
+    }
+</style>
