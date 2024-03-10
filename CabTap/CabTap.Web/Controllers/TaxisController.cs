@@ -16,20 +16,28 @@ public class TaxisController : Controller
     private readonly IManufacturerService _manufacturerService;
     private readonly IDriverService _driverService;
     private readonly IMapper _mapper;
+    private readonly IStatisticService _statisticService;
     
-    public TaxisController(ITaxiService taxiService, ICategoryService categoryService, IManufacturerService manufacturerService, IDriverService driverService, IMapper mapper)
+    public TaxisController(ITaxiService taxiService, ICategoryService categoryService, IManufacturerService manufacturerService, IDriverService driverService, IMapper mapper, IStatisticService statisticService)
     {
         _taxiService = taxiService;
         _categoryService = categoryService;
         _manufacturerService = manufacturerService;
         _driverService = driverService;
         _mapper = mapper;
+        _statisticService = statisticService;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
     {
-        var taxis = await _taxiService.GetAllTaxisAsync();
+        var taxis = await _taxiService.GetPaginatedTaxisAsync(page, pageSize);
         
+        var totalReservations = _statisticService.CountTaxis();
+        var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
+
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = totalPages;
+
         return View(taxis);
     }
     

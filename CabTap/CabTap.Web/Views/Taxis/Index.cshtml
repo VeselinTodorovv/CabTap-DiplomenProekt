@@ -1,3 +1,4 @@
+@using CabTap.Shared.Pagination
 @model IEnumerable<CabTap.Shared.Taxi.TaxiAllViewModel>
 @{
     ViewData["Title"] = "Index";
@@ -47,3 +48,7 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<div>
+    <partial name="_PaginationPartial" model='new PaginationViewModel { CurrentPage = ViewBag.CurrentPage, TotalPages = ViewBag.TotalPages, ActionName = "Index" }' />
+</div>

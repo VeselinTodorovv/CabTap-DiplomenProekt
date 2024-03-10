@@ -20,7 +20,7 @@ public class DriversController : Controller
         _statisticService = statisticService;
     }
     
-    public async Task<IActionResult> Index(int page = 1, int pageSize = 9)
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
     {
         var drivers = await _driverService.GetPaginatedDriversAsync(page, pageSize);
         

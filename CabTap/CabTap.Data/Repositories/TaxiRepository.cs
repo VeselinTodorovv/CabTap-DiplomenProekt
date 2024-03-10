@@ -18,6 +18,15 @@ public class TaxiRepository : ITaxiRepository
         return await _context.Taxis.ToListAsync();
     }
 
+    public async Task<IEnumerable<Taxi>> GetPaginatedReservationsAsync(int page, int pageSize)
+    {
+        var skip = (page - 1) * pageSize;
+        return await _context.Taxis
+            .Skip(skip)
+            .Take(pageSize)
+            .ToListAsync();
+    }
+
     public async Task<Taxi> GetTaxiByIdAsync(int taxiId)
     {
         var taxi = await _context.Taxis.FindAsync(taxiId);

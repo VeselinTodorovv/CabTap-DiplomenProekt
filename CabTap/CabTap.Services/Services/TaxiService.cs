@@ -32,6 +32,13 @@ public class TaxiService : ITaxiService
         return taxiViewModels;
     }
 
+    public async Task<IEnumerable<TaxiAllViewModel>> GetPaginatedTaxisAsync(int page, int pageSize)
+    {
+        var reservations = await _taxiRepository.GetPaginatedReservationsAsync(page, pageSize);
+        var reservationViewModels = _mapper.Map<IEnumerable<TaxiAllViewModel>>(reservations);
+        return reservationViewModels;
+    }
+
     public async Task<TaxiAllViewModel> FindAvailableTaxiAsync(int categoryId)
     {
         var taxis = (await _taxiRepository.GetAllTaxisAsync())
