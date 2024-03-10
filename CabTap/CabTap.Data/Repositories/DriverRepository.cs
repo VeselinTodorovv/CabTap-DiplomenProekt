@@ -52,4 +52,13 @@ public class DriverRepository : IDriverRepository
         _context.Drivers.Remove(driverToRemove);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<Driver>> GetPaginatedDriversAsync(int page, int pageSize)
+    {
+        var skip = (page - 1) * pageSize;
+        return await _context.Drivers
+            .Skip(skip)
+            .Take(pageSize)
+            .ToListAsync();
+    }
 }

@@ -10,17 +10,25 @@ namespace CabTap.Web.Controllers;
 public class DriversController : Controller
 {
     private readonly IDriverService _driverService;
+    private readonly IStatisticService _statisticService;
     private readonly IMapper _mapper;
     
-    public DriversController(IDriverService driverService, IMapper mapper)
+    public DriversController(IDriverService driverService, IMapper mapper, IStatisticService statisticService)
     {
         _driverService = driverService;
         _mapper = mapper;
+        _statisticService = statisticService;
     }
     
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 9)
     {
-        var drivers = await _driverService.GetAllDriversAsync();
+        var drivers = await _driverService.GetPaginatedDriversAsync(page, pageSize);
+        
+        var totalReservations = _statisticService.CountDrivers();
+        var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
+
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = totalPages;
         
         return View(drivers);
     }

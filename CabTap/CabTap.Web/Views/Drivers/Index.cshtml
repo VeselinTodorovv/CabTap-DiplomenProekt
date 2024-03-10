@@ -1,3 +1,4 @@
+@using CabTap.Shared.Pagination
 @model IEnumerable<CabTap.Shared.Driver.DriverAllViewModel>
 @{
     ViewData["Title"] = "Index";
@@ -37,4 +38,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div>
+    <partial name="_PaginationPartial" model='new PaginationViewModel { CurrentPage = ViewBag.CurrentPage, TotalPages = ViewBag.TotalPages, ActionName = "Index" }' />
 </div>

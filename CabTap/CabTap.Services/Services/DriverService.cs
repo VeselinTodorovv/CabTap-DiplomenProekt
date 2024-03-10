@@ -73,4 +73,11 @@ public class DriverService : IDriverService
     {
         await _driverRepository.DeleteDriverAsync(driverId);
     }
+
+    public async Task<IEnumerable<DriverAllViewModel>> GetPaginatedDriversAsync(int page, int pageSize)
+    {
+        var reservations = await _driverRepository.GetPaginatedDriversAsync(page, pageSize);
+        var reservationViewModels = _mapper.Map<IEnumerable<DriverAllViewModel>>(reservations);
+        return reservationViewModels;
+    }
 }

@@ -9,4 +9,5 @@ public interface IDriverRepository
     Task AddDriverAsync(Driver driver);
     Task UpdateDriverAsync(Driver driver);
     Task DeleteDriverAsync(string driverId);
+    Task<IEnumerable<Driver>> GetPaginatedDriversAsync(int page, int pageSize);
 }
