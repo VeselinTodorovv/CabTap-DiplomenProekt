@@ -20,4 +20,18 @@ public class UsersController : Controller
 
         return View(users);
     }
+
+    public async Task<IActionResult> ViewProfile(string id)
+    {
+        try
+        {
+            var clientDetails = await _userService.GetClientDetailsAsync(id);
+
+            return View(clientDetails);
+        }
+        catch (InvalidOperationException)
+        {
+            return NotFound();
+        }
+    }
 }

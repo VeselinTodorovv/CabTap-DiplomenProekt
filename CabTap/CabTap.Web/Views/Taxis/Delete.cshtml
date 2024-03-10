@@ -2,59 +2,53 @@
 @{
     ViewData["Title"] = "Delete";
 }
-<h1>Delete</h1>
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>ProductDeleteVM</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RegNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RegNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ManufacturerId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ManufacturerId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CategoryId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DriverId)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@Html.DisplayFor(model => model.DriverId)" alt="Image" width="100" />
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TaxiStatus)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TaxiStatus)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PassengerSeats)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PassengerSeats)
-        </dd>
-    </dl>
 
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="@Model.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h1 class="card-title">@ViewData["Title"]</h1>
+                </div>
+                <div class="card-body">
+                    <h3 class="text-danger">Are you sure you want to delete this taxi?</h3>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-2">Registration Number:</dt>
+                        <dd class="col-sm-10">@Model.RegNumber</dd>
+
+                        <dt class="col-sm-2">Manufacturer:</dt>
+                        <dd class="col-sm-10">@Model.ManufacturerId</dd>
+
+                        <dt class="col-sm-2">Category:</dt>
+                        <dd class="col-sm-10">@Model.CategoryId</dd>
+
+                        <dt class="col-sm-2">Driver:</dt>
+                        <dd class="col-sm-10"><img src="@Model.DriverId" alt="Driver Image" width="100" /></dd>
+
+                        <dt class="col-sm-2">Description:</dt>
+                        <dd class="col-sm-10">@Model.Description</dd>
+
+                        <dt class="col-sm-2">Status:</dt>
+                        <dd class="col-sm-10">@Model.TaxiStatus</dd>
+
+                        <dt class="col-sm-2">Passenger Seats:</dt>
+                        <dd class="col-sm-10">@Model.PassengerSeats</dd>
+                    </dl>
+
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <a asp-action="Index" class="btn btn-secondary ml-2">Back to List</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .col-sm-2 {
+        margin-bottom: 20px;
+    }
+</style>

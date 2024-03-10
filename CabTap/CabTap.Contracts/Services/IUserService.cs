@@ -7,4 +7,5 @@ public interface IUserService
 {
     Task<ApplicationUser?> GetCurrentUserAsync();
     Task<IEnumerable<ClientIndexViewModel>> GetAllClientsAsync();
+    Task<ClientDetailsViewModel> GetClientDetailsAsync(string id);
 }

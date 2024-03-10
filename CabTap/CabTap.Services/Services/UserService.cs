@@ -1,3 +1,4 @@
+using AutoMapper;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Shared.User;
@@ -10,11 +11,13 @@ public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IMapper _mapper;
 
-    public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
+    public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, IMapper mapper)
     {
         _userManager = userManager;
         _httpContextAccessor = httpContextAccessor;
+        _mapper = mapper;
     }
 
     public async Task<ApplicationUser?> GetCurrentUserAsync()
@@ -49,5 +52,19 @@ public class UserService : IUserService
             .OrderBy(u => u.UserName);
 
         return list;
+    }
+
+    public Task<ClientDetailsViewModel> GetClientDetailsAsync(string id)
+    {
+        var user = _userManager.Users
+            .FirstOrDefault(x => x.Id == id);
+        if (user == null)
+        {
+            throw new InvalidOperationException($"User with ID '{id}' not found.");
+        }
+
+        var clientDetails = _mapper.Map<ClientDetailsViewModel>(user);
+
+        return Task.FromResult(clientDetails);
     }
 }
