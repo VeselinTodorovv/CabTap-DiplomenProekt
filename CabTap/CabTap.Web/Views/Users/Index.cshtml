@@ -15,34 +15,34 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">Username</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Actions</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.UserName)</td>
-                                        <td>@item.FirstName @item.LastName</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                                        <td>
-                                            <li class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="False">
-                                                    Actions
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <li><a class="dropdown-item" asp-action="ViewProfile" asp-route-id="@item.Id">View Profile</a></li>
-                                                </ul>
-                                            </li>
-                                        </td>
-                                    </tr>
-                                }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                                    <td>@item.FirstName @item.LastName</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                                    <td>
+                                        <li class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="False">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li><a class="dropdown-item" asp-action="ViewProfile" asp-route-id="@item.Id">View Profile</a></li>
+                                            </ul>
+                                        </li>
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                     </div>

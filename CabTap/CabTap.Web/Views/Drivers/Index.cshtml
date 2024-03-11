@@ -40,6 +40,13 @@
     </div>
 </div>
 
+@{
+    var paginationModel = new PaginationViewModel
+    {
+        CurrentPage = ViewBag.CurrentPage,
+        TotalPages = ViewBag.TotalPages
+    };
+}
 <div>
-    <partial name="_PaginationPartial" model='new PaginationViewModel { CurrentPage = ViewBag.CurrentPage, TotalPages = ViewBag.TotalPages, ActionName = "Index" }' />
+    <partial name="_PaginationPartial" model="paginationModel" />
 </div>
