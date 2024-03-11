@@ -103,6 +103,7 @@ public class ReservationsController : Controller
         }
     }
     
+    [Authorize(Roles = "Administrator, Client")]
     [HttpGet]
     public async Task<IActionResult> GetTotalPrice(int categoryId, double distance, double duration)
     {
