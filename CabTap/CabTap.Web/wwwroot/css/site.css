@@ -1,43 +1,8 @@
-/*html {*/
-/*  font-size: 14px;*/
-/*}*/
-
-/*@media (min-width: 768px) {*/
-/*  html {*/
-/*    font-size: 16px;*/
-/*  }*/
-/*}*/
-
-/*html {*/
-/*  position: relative;*/
-/*  min-height: 100%;*/
-/*}*/
-
-/*body {*/
-/*  margin-bottom: 60px;*/
-/*}*/
-
-/*!*OWN*!*/
-/*html, body {*/
-/*  height: 100%;*/
-/*  width: 100vw;*/
-/*  margin: 0;*/
-/*}*/
-
-/*#map {*/
-/*  height: 70vh;*/
-/*  width: 100%;*/
-/*}*/
-
-/*.leaflet-popup-content {*/
-/*  max-width: 300px;*/
-/*}*/
-
-/*.leaflet-top {*/
-/*  display: none !important;*/
-/*}*/
-
 body {
     margin: 0;
     padding-top: 0; /* Optionally reset padding if needed */
+}
+
+.form-group {
+    margin-bottom: 15px;
 }

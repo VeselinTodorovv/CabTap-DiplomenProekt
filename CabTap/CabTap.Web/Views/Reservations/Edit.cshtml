@@ -68,7 +68,12 @@
                         <input asp-for="RideStatus" class="form-control" hidden />
                         <input asp-for="UserId" class="form-control" hidden />
                         <input asp-for="TaxiId" class="form-control" hidden>
-
+                        
+                        @* TODO: Try adding properties for origin/destination lat/lng,
+                            Editing a reservation without changing the origin and destination (which will update the coordinates) will not update the lat/lng properties,
+                            which will lead to card prices not updating.
+                        *@
+                        
                         <div class="form-group">
                             <input type="button" id="confirmRoute" value="See Prices" class="btn btn-secondary" />
                         </div>
@@ -91,7 +96,7 @@
                             <span asp-validation-for="CategoryId" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group text-center">
                             <input type="submit" id="createButton" value="Save changes" class="btn btn-primary" />
                             <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
                         </div>
@@ -109,9 +114,3 @@
         );
     }
 }
-
-<style>
-    .form-group {
-        margin-bottom: 15px;
-    }
-</style>

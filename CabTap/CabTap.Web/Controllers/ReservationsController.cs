@@ -104,13 +104,12 @@ public class ReservationsController : Controller
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetTotalPrice(int categoryId, double distance)
+    public async Task<IActionResult> GetTotalPrice(int categoryId, double distance, double duration)
     {
-        var category = await _categoryService.GetCategoryById(categoryId);
+        var categoryRate = (await _categoryService.GetCategoryById(categoryId)).Rate;
 
-        // Perform calculation based on category rate and distance
-        var totalPrice = category.Rate * (decimal) distance / 6;
-
+        // Just some random formula, like proof of concept
+        var totalPrice = (decimal)distance * categoryRate + (decimal)duration / 2.4m * categoryRate;
         return Json(totalPrice);
     }
 
@@ -136,6 +135,7 @@ public class ReservationsController : Controller
             var model = _mapper.Map<ReservationEditViewModel>(reservation);
 
             model.Categories = availableCategories;
+            model.CategoryId = reservation.Taxi.CategoryId;
 
             return View(model);
         }

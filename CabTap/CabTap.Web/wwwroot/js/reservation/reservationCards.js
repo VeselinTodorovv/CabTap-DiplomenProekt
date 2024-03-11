@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             document.getElementById('categoryId').value = card.dataset.categoryId;
             document.getElementById('createButton').classList.remove('visually-hidden');
+            document.getElementById('alert').classList.remove('visually-hidden');
         });
     });
 
