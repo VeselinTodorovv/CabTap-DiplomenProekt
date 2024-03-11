@@ -1,4 +1,5 @@
-﻿@model IEnumerable<CabTap.Shared.User.ClientIndexViewModel>
+﻿@using CabTap.Shared.Pagination
+@model IEnumerable<CabTap.Shared.User.ClientIndexViewModel>
 @{
     ViewData["Title"] = "Clients Index";
 }
@@ -50,4 +51,14 @@
             </div>
         </div>
     </div>
+</div>
+@{
+    var paginationModel = new PaginationViewModel
+    {
+        CurrentPage = ViewBag.CurrentPage,
+        TotalPages = ViewBag.TotalPages
+    };
+}
+<div>
+    <partial name="_PaginationPartial" model="paginationModel" />
 </div>

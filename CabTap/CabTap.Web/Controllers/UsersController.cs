@@ -8,15 +8,23 @@ namespace CabTap.Web.Controllers;
 public class UsersController : Controller
 {
     private readonly IUserService _userService;
+    private readonly IStatisticService _statisticService;
 
-    public UsersController(IUserService userService)
+    public UsersController(IUserService userService, IStatisticService statisticService)
     {
         _userService = userService;
+        _statisticService = statisticService;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
     {
-        var users = await _userService.GetAllClientsAsync();
+        var users = await _userService.GetPaginatedClientsAsync(page, pageSize);
+        
+        var totalReservations = _statisticService.CountClients();
+        var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
+
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = totalPages;
 
         return View(users);
     }

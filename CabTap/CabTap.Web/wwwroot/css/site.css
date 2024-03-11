@@ -3,6 +3,10 @@ body {
     padding-top: 0; /* Optionally reset padding if needed */
 }
 
-.form-group {
+.form-group, .form-floating {
     margin-bottom: 15px;
+}
+
+.col-md-4, .col-sm-2 {
+    margin-bottom: 20px;
 }

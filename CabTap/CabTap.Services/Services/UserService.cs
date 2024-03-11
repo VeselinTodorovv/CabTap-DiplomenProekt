@@ -54,6 +54,27 @@ public class UserService : IUserService
         return list;
     }
 
+    public async Task<IEnumerable<ClientIndexViewModel>> GetPaginatedClientsAsync(int page, int pageSize)
+    {
+        var users = _userManager.Users
+            .ToList();
+
+        var adminIds = (await _userManager.GetUsersInRoleAsync("Administrator"))
+            .Select(u => u.Id)
+            .ToArray();
+
+        var paginatedUsers = users
+            .Where(u => !adminIds.Contains(u.Id)) // Exclude admins
+            .OrderBy(u => u.UserName)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var clientViewModels = _mapper.Map<List<ClientIndexViewModel>>(paginatedUsers);
+
+        return clientViewModels;
+    }
+
     public Task<ClientDetailsViewModel> GetClientDetailsAsync(string id)
     {
         var user = _userManager.Users
