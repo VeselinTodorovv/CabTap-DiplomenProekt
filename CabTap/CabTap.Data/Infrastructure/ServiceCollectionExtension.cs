@@ -26,6 +26,7 @@ public static class ServiceCollectionExtension
         services.AddTransient<IManufacturerService, ManufacturerService>();
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IStatisticService, StatisticService>();
+        services.AddTransient<IDateTimeService, DateTimeService>();
     }
 
     public static void AddAutoMapperProfiles(this IServiceCollection services)

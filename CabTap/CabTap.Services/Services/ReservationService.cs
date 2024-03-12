@@ -12,14 +12,16 @@ public class ReservationService : IReservationService
     private readonly IReservationRepository _reservationRepository;
     private readonly IUserService _userService;
     private readonly ITaxiService _taxiService;
+    private readonly IDateTimeService _dateTimeService;
     private readonly IMapper _mapper;
 
-    public ReservationService(IReservationRepository reservationRepository, IUserService userService, IMapper mapper, ITaxiService taxiService)
+    public ReservationService(IReservationRepository reservationRepository, IUserService userService, IMapper mapper, ITaxiService taxiService, IDateTimeService dateTimeService)
     {
         _reservationRepository = reservationRepository;
         _userService = userService;
         _mapper = mapper;
         _taxiService = taxiService;
+        _dateTimeService = dateTimeService;
     }
 
     public async Task<IEnumerable<ReservationAllViewModel>> GetAllReservationsAsync()
@@ -70,7 +72,9 @@ public class ReservationService : IReservationService
         reservation.UserId = user.Id;
         reservation.TaxiId = taxi.Id;
 
-        reservation.UpdateAuditInfo(user.UserName);
+        var dateTime = _dateTimeService.GetCurrentDateTime();
+
+        reservation.UpdateAuditInfo(dateTime, user.UserName);
 
         await _taxiService.UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
 
@@ -105,7 +109,9 @@ public class ReservationService : IReservationService
             existingReservation.TaxiId = newTaxiId;
         }
 
-        existingReservation.UpdateAuditInfo(user.UserName);
+        var dateTime = _dateTimeService.GetCurrentDateTime();
+
+        existingReservation.UpdateAuditInfo(dateTime, user.UserName);
         
         await _reservationRepository.UpdateReservationAsync(existingReservation);
     }

@@ -13,12 +13,14 @@ public class TaxiService : ITaxiService
     private readonly ITaxiRepository _taxiRepository;
     private readonly IUserService _userService;
     private readonly ICategoryService _categoryService;
+    private readonly IDateTimeService _dateTimeService;
     private readonly IMapper _mapper;
     
-    public TaxiService(ITaxiRepository taxiRepository, IUserService userService, IMapper mapper, ICategoryService categoryService)
+    public TaxiService(ITaxiRepository taxiRepository, IUserService userService, IMapper mapper, ICategoryService categoryService, IDateTimeService dateTimeService)
     {
         _taxiRepository = taxiRepository;
         _userService = userService;
+        _dateTimeService = dateTimeService;
         _mapper = mapper;
         _categoryService = categoryService;
     }
@@ -87,8 +89,10 @@ public class TaxiService : ITaxiService
         }
 
         var taxi = _mapper.Map<Taxi>(taxiViewModel);
-        
-        taxi.UpdateAuditInfo(user.UserName);
+
+        var dateTime = _dateTimeService.GetCurrentDateTime();
+
+        taxi.UpdateAuditInfo(dateTime, user.UserName);
 
         await _taxiRepository.AddTaxiAsync(taxi);
     }
@@ -105,7 +109,9 @@ public class TaxiService : ITaxiService
 
         _mapper.Map(taxiViewModel, existingTaxi);
 
-        existingTaxi.UpdateAuditInfo(user.UserName);
+        var dateTime = _dateTimeService.GetCurrentDateTime();
+
+        existingTaxi.UpdateAuditInfo(dateTime, user.UserName);
 
         await _taxiRepository.UpdateTaxiAsync(existingTaxi);
     }

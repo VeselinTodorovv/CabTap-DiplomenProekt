@@ -18,15 +18,15 @@ public abstract class BaseEntity
     [Required]
     public string LastModifiedBy { get; set; } = null!;
 
-    public void UpdateAuditInfo(string userName)
+    public void UpdateAuditInfo(DateTime dateTime, string userName)
     {
         if (string.IsNullOrEmpty(CreatedBy))
         {
             CreatedBy = userName;
-            CreatedOn = DateTime.UtcNow;
+            CreatedOn = dateTime;
         }
         
         LastModifiedBy = userName;
-        LastModifiedOn = DateTime.UtcNow;
+        LastModifiedOn = dateTime;
     }
 }

@@ -10,12 +10,14 @@ public class DriverService : IDriverService
 {
     private readonly IDriverRepository _driverRepository;
     private readonly IUserService _userService;
+    private readonly IDateTimeService _dateTimeService;
     private readonly IMapper _mapper;
     
-    public DriverService(IDriverRepository driverRepository, IUserService userService, IMapper mapper)
+    public DriverService(IDriverRepository driverRepository, IUserService userService, IMapper mapper, IDateTimeService dateTimeService)
     {
         _driverRepository = driverRepository;
         _userService = userService;
+        _dateTimeService = dateTimeService;
         _mapper = mapper;
     }
     
@@ -47,7 +49,9 @@ public class DriverService : IDriverService
 
         var driver = _mapper.Map<Driver>(driverViewModel);
 
-        driver.UpdateAuditInfo(user.UserName);
+        var dateTime = _dateTimeService.GetCurrentDateTime();
+
+        driver.UpdateAuditInfo(dateTime, user.UserName);
 
         await _driverRepository.AddDriverAsync(driver);
     }
@@ -64,7 +68,9 @@ public class DriverService : IDriverService
 
         _mapper.Map(driverViewModel, existingDriver);
 
-        existingDriver.UpdateAuditInfo(user.UserName);  
+        var dateTime = _dateTimeService.GetCurrentDateTime();
+
+        existingDriver.UpdateAuditInfo(dateTime, user.UserName);  
 
         await _driverRepository.UpdateDriverAsync(existingDriver);
     }
