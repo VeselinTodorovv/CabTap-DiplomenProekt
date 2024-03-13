@@ -13,9 +13,9 @@ public class ManufacturerService : IManufacturerService
         _manufacturerRepository = manufacturerRepository;
     }
 
-    public async Task<IEnumerable<ManufacturerPairViewModel>> GetAllManufacturers()
+    public async Task<IEnumerable<ManufacturerPairViewModel>> GetAllManufacturersAsync()
     {
-        var manufacturers = await _manufacturerRepository.GetAllManufacturers();
+        var manufacturers = await _manufacturerRepository.GetAllManufacturersAsync();
 
         var model = manufacturers.Select(x => new ManufacturerPairViewModel
         {

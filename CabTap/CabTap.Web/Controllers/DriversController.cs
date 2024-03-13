@@ -24,7 +24,7 @@ public class DriversController : Controller
     {
         var drivers = await _driverService.GetPaginatedDriversAsync(page, pageSize);
         
-        var totalReservations = _statisticService.CountDrivers();
+        var totalReservations = await _statisticService.CountDriversAsync();
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
 
         ViewBag.CurrentPage = page;

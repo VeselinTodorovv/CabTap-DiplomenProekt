@@ -13,9 +13,9 @@ public class CategoryService : ICategoryService
         _categoryRepository = categoryRepository;
     }
 
-    public async Task<IEnumerable<CategoryPairViewModel>> GetAllCategories()
+    public async Task<IEnumerable<CategoryPairViewModel>> GetAllCategoriesAsync()
     {
-        var categories = await _categoryRepository.GetAllCategories();
+        var categories = await _categoryRepository.GetAllCategoriesAsync();
 
         var model = categories.Select(x => new CategoryPairViewModel
         {
@@ -27,9 +27,9 @@ public class CategoryService : ICategoryService
         return model;
     }
 
-    public async Task<CategoryPairViewModel> GetCategoryById(int id)
+    public async Task<CategoryPairViewModel> GetCategoryByIdAsync(int id)
     {
-        var category = await _categoryRepository.GetCategoryById(id);
+        var category = await _categoryRepository.GetCategoryByIdAsync(id);
 
         var model = new CategoryPairViewModel
         {

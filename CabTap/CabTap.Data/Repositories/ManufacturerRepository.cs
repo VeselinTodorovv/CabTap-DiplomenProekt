@@ -13,7 +13,7 @@ public class ManufacturerRepository : IManufacturerRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Manufacturer>> GetAllManufacturers()
+    public async Task<IEnumerable<Manufacturer>> GetAllManufacturersAsync()
     {
         return await _context.Manufacturers.ToListAsync();
     }

@@ -4,5 +4,5 @@ namespace CabTap.Contracts.Repositories;
 
 public interface IManufacturerRepository
 {
-    Task<IEnumerable<Manufacturer>> GetAllManufacturers();
+    Task<IEnumerable<Manufacturer>> GetAllManufacturersAsync();
 }

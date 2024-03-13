@@ -13,15 +13,15 @@ public class StatisticsController : Controller
         _statisticService = statisticService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         var statistics = new StatisticViewModel
         {
-            CountClients = _statisticService.CountClients(),
-            CountDrivers = _statisticService.CountDrivers(),
-            CountReservations = _statisticService.CountReservations(),
-            CountTaxis = _statisticService.CountTaxis(),
-            SumReservations = _statisticService.SumReservations()
+            CountClients = await _statisticService.CountClientsAsync(),
+            CountDrivers = await _statisticService.CountDriversAsync(),
+            CountReservations = await _statisticService.CountReservationsAsync(),
+            CountTaxis = await _statisticService.CountTaxisAsync(),
+            SumReservations = await _statisticService.SumReservationsAsync()
         };
         
         return View(statistics);

@@ -20,7 +20,7 @@ public class UsersController : Controller
     {
         var users = await _userService.GetPaginatedClientsAsync(page, pageSize);
         
-        var totalReservations = _statisticService.CountClients();
+        var totalReservations = await _statisticService.CountClientsAsync();
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
 
         ViewBag.CurrentPage = page;

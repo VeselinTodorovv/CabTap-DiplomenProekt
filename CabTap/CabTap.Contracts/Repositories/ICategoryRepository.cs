@@ -4,6 +4,6 @@ namespace CabTap.Contracts.Repositories;
 
 public interface ICategoryRepository
 {
-    Task<IEnumerable<Category>> GetAllCategories();
-    Task<Category> GetCategoryById(int id);
+    Task<IEnumerable<Category>> GetAllCategoriesAsync();
+    Task<Category> GetCategoryByIdAsync(int id);
 }

@@ -31,7 +31,7 @@ public class ReservationsController : Controller
     {
         var reservations = await _reservationService.GetPaginatedReservationsAsync(page, pageSize);
         
-        var totalReservations = _statisticService.CountReservations();
+        var totalReservations = await _statisticService.CountReservationsAsync();
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
 
         ViewBag.CurrentPage = page;
@@ -45,7 +45,7 @@ public class ReservationsController : Controller
     {
         var reservations = await _reservationService.GetPaginatedReservationsByUserIdAsync(page, pageSize);
         
-        var totalReservations = _statisticService.CountReservations(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var totalReservations = await _statisticService.CountReservationsAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
 
         ViewBag.CurrentPage = page;
@@ -72,7 +72,7 @@ public class ReservationsController : Controller
     [Authorize(Roles = "Administrator, Client")]
     public async Task<IActionResult> Create()
     {
-        var categories = await _taxiService.GetAvailableTaxiTypes();
+        var categories = await _taxiService.GetAvailableTaxiTypesAsync();
 
         var reservationViewModel = new ReservationCreateViewModel
         {
@@ -107,7 +107,7 @@ public class ReservationsController : Controller
     [HttpGet]
     public async Task<IActionResult> GetTotalPrice(int categoryId, double distance, double duration)
     {
-        var categoryRate = (await _categoryService.GetCategoryById(categoryId)).Rate;
+        var categoryRate = (await _categoryService.GetCategoryByIdAsync(categoryId)).Rate;
 
         // Just an example
         var totalPrice = (decimal) distance * categoryRate;
@@ -120,7 +120,7 @@ public class ReservationsController : Controller
         try
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
-            var availableCategories = (await _taxiService.GetAvailableTaxiTypes()).ToList();
+            var availableCategories = (await _taxiService.GetAvailableTaxiTypesAsync()).ToList();
 
             // Add current category, if it is not already in the list
             if (availableCategories.All(c => c.Id != reservation.Taxi.CategoryId))

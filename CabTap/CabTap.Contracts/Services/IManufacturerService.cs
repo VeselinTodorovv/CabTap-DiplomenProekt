@@ -4,5 +4,5 @@ namespace CabTap.Contracts.Services;
 
 public interface IManufacturerService
 {
-    Task<IEnumerable<ManufacturerPairViewModel>> GetAllManufacturers();
+    Task<IEnumerable<ManufacturerPairViewModel>> GetAllManufacturersAsync();
 }

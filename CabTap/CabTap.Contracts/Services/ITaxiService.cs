@@ -8,7 +8,7 @@ public interface ITaxiService
 {
     Task<IEnumerable<TaxiAllViewModel>> GetPaginatedTaxisAsync(int page, int pageSize);
     Task<TaxiAllViewModel> FindAvailableTaxiAsync(int categoryId);
-    Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypes();
+    Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypesAsync();
     Task<TaxiDetailsViewModel> GetTaxiByIdAsync(int taxiId);
     Task AddTaxiAsync(TaxiCreateViewModel taxiViewModel);
     Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel);

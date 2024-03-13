@@ -12,33 +12,33 @@ public class StatisticService : IStatisticService
         _statisticRepository = statisticRepository;
     }
 
-    public int CountTaxis()
+    public Task<int> CountTaxisAsync()
     {
-        return _statisticRepository.CountTaxis();
+        return _statisticRepository.CountTaxisAsync();
     }
 
-    public int CountDrivers()
+    public Task<int> CountDriversAsync()
     {
-        return _statisticRepository.CountDrivers();
+        return _statisticRepository.CountDriversAsync();
     }
 
-    public int CountClients()
+    public Task<int> CountClientsAsync()
     {
-        return _statisticRepository.CountClients();
+        return _statisticRepository.CountClientsAsync();
     }
 
-    public int CountReservations()
+    public Task<int> CountReservationsAsync()
     {
-        return _statisticRepository.CountReservations();
+        return _statisticRepository.CountReservationsAsync();
     }
 
-    public int CountReservations(string userId)
+    public Task<int> CountReservationsAsync(string userId)
     {
-        return _statisticRepository.CountReservations(userId);
+        return _statisticRepository.CountReservationsAsync(userId);
     }
 
-    public decimal SumReservations()
+    public Task<decimal> SumReservationsAsync()
     {
-        return _statisticRepository.SumReservations();
+        return _statisticRepository.SumReservationsAsync();
     }
 }

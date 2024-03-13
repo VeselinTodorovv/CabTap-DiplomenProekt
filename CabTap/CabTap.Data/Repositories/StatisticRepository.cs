@@ -1,4 +1,5 @@
 using CabTap.Contracts.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace CabTap.Data.Repositories;
 
@@ -11,24 +12,24 @@ public class StatisticRepository : IStatisticRepository
         _context = context;
     }
 
-    public int CountTaxis()
+    public Task<int> CountTaxisAsync()
     {
         return _context.Taxis
-            .Count();
+            .CountAsync();
     }
 
-    public int CountDrivers()
+    public Task<int> CountDriversAsync()
     {
         return _context.Drivers
-            .Count();
+            .CountAsync();
     }
 
-    public int CountClients()
+    public async Task<int> CountClientsAsync()
     {    
-        var adminRoleId = _context.Roles
+        var adminRoleId = await _context.Roles
             .Where(role => role.Name == "Administrator")
             .Select(role => role.Id)
-            .FirstOrDefault();
+            .FirstOrDefaultAsync();
 
         // Count of clients only
         var clientCount = _context.UserRoles
@@ -37,21 +38,21 @@ public class StatisticRepository : IStatisticRepository
         return clientCount;
     }
 
-    public int CountReservations()
+    public Task<int> CountReservationsAsync()
     {
         return _context.Reservations
-            .Count();
+            .CountAsync();
     }
     
-    public int CountReservations(string userId)
+    public Task<int> CountReservationsAsync(string userId)
     {
         return _context.Reservations
-            .Count(x => x.UserId == userId);
+            .CountAsync(x => x.UserId == userId);
     }
 
-    public decimal SumReservations()
+    public Task<decimal> SumReservationsAsync()
     {
         return _context.Reservations
-            .Sum(x => x.Price);
+            .SumAsync(x => x.Price);
     }
 }

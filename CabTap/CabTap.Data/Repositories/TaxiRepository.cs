@@ -18,7 +18,7 @@ public class TaxiRepository : ITaxiRepository
         return await _context.Taxis.ToListAsync();
     }
 
-    public async Task<IEnumerable<Taxi>> GetPaginatedReservationsAsync(int page, int pageSize)
+    public async Task<IEnumerable<Taxi>> GetPaginatedTaxisAsync(int page, int pageSize)
     {
         var skip = (page - 1) * pageSize;
         return await _context.Taxis

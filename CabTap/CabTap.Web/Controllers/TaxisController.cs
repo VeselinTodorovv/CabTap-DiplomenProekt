@@ -32,7 +32,7 @@ public class TaxisController : Controller
     {
         var taxis = await _taxiService.GetPaginatedTaxisAsync(page, pageSize);
         
-        var totalReservations = _statisticService.CountTaxis();
+        var totalReservations = await _statisticService.CountTaxisAsync();
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
 
         ViewBag.CurrentPage = page;
@@ -57,8 +57,8 @@ public class TaxisController : Controller
     
     public async Task<IActionResult> Create()
     {
-        var categories = await _categoryService.GetAllCategories();
-        var manufacturers = await _manufacturerService.GetAllManufacturers();
+        var categories = await _categoryService.GetAllCategoriesAsync();
+        var manufacturers = await _manufacturerService.GetAllManufacturersAsync();
         var drivers = await _driverService.GetAllDriversAsync();
         
         var taxi = new TaxiCreateViewModel
@@ -104,8 +104,8 @@ public class TaxisController : Controller
         {
             var taxi = await _taxiService.GetTaxiByIdAsync(id);
             
-            var categories = await _categoryService.GetAllCategories();
-            var manufacturers = await _manufacturerService.GetAllManufacturers();
+            var categories = await _categoryService.GetAllCategoriesAsync();
+            var manufacturers = await _manufacturerService.GetAllManufacturersAsync();
             var drivers = await _driverService.GetAllDriversAsync();
             
             var model = _mapper.Map<TaxiEditViewModel>(taxi);
