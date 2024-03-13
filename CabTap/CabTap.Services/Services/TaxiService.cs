@@ -25,15 +25,6 @@ public class TaxiService : ITaxiService
         _categoryService = categoryService;
     }
 
-    public async Task<IEnumerable<TaxiAllViewModel>> GetAllTaxisAsync()
-    {
-        var taxis = await _taxiRepository.GetAllTaxisAsync();
-
-        var taxiViewModels = _mapper.Map<IEnumerable<TaxiAllViewModel>>(taxis);
-        
-        return taxiViewModels;
-    }
-
     public async Task<IEnumerable<TaxiAllViewModel>> GetPaginatedTaxisAsync(int page, int pageSize)
     {
         var reservations = await _taxiRepository.GetPaginatedReservationsAsync(page, pageSize);
@@ -91,7 +82,6 @@ public class TaxiService : ITaxiService
         var taxi = _mapper.Map<Taxi>(taxiViewModel);
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-
         taxi.UpdateAuditInfo(dateTime, user.UserName);
 
         await _taxiRepository.AddTaxiAsync(taxi);
@@ -110,7 +100,6 @@ public class TaxiService : ITaxiService
         _mapper.Map(taxiViewModel, existingTaxi);
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-
         existingTaxi.UpdateAuditInfo(dateTime, user.UserName);
 
         await _taxiRepository.UpdateTaxiAsync(existingTaxi);

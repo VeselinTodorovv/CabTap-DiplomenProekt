@@ -17,22 +17,4 @@ public class ManufacturerRepository : IManufacturerRepository
     {
         return await _context.Manufacturers.ToListAsync();
     }
-
-    public async Task<Manufacturer> GetManufacturerById(int id)
-    {
-        var manufacturer = await _context.Manufacturers.FindAsync(id);
-        if (manufacturer == null)
-        {
-            throw new InvalidOperationException($"Manufacturer with id {id} not found.");
-        }
-        
-        return manufacturer;
-    }
-
-    public async Task<IEnumerable<Taxi>> GetTaxisByManufacturer(int manufacturerId)
-    {
-        return await _context.Taxis
-            .Where(x => x.ManufacturerId == manufacturerId)
-            .ToListAsync();
-    }
 }

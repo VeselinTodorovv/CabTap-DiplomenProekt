@@ -11,7 +11,7 @@ function showCategoryCards() {
 function updatePrices(categoryId, distance, duration) {
     $.get(getTotalPriceUrl, { categoryId: categoryId, distance: distance, duration: duration })
         .done(function(data) {
-            $('#totalPrice-' + categoryId).text('$' + data.toFixed(2));
+            $('#totalPrice-' + categoryId).text(data.toFixed(2) + 'BGN');
             document.getElementById('price').value = data.toFixed(2);
         })
         .fail(function(xhr, status, error) {

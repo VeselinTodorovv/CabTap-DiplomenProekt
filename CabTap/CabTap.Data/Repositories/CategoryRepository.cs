@@ -28,11 +28,4 @@ public class CategoryRepository : ICategoryRepository
 
         return category;
     }
-
-    public async Task<IEnumerable<Taxi>> GetTaxisByCategory(int categoryId)
-    {
-        return await _context.Taxis
-            .Where(x => x.CategoryId == categoryId)
-            .ToListAsync();
-    }
 }

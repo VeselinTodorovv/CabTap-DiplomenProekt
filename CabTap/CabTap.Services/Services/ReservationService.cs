@@ -24,15 +24,6 @@ public class ReservationService : IReservationService
         _dateTimeService = dateTimeService;
     }
 
-    public async Task<IEnumerable<ReservationAllViewModel>> GetAllReservationsAsync()
-    {
-        var reservations = await _reservationRepository.GetAllReservationsAsync();
-
-        var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
-
-        return reservationViewModels;
-    }
-
     public async Task<ReservationDetailsViewModel> GetReservationByIdAsync(string reservationId)
     {
         var reservation = await _reservationRepository.GetReservationsByIdAsync(reservationId);
@@ -40,21 +31,6 @@ public class ReservationService : IReservationService
         var model = _mapper.Map<ReservationDetailsViewModel>(reservation);
 
         return model;
-    }
-
-    public async Task<IEnumerable<ReservationAllViewModel>> GetReservationsByUserIdAsync()
-    {
-        var user = await _userService.GetCurrentUserAsync();
-        if (user == null)
-        {
-            throw new UnauthorizedAccessException("User is not logged in.");
-        }
-        
-        var reservations = await _reservationRepository.GetReservationsByUserIdAsync(user.Id);
-        
-        var reservationViewModel = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
-        
-        return reservationViewModel;
     }
 
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
@@ -73,7 +49,6 @@ public class ReservationService : IReservationService
         reservation.TaxiId = taxi.Id;
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-
         reservation.UpdateAuditInfo(dateTime, user.UserName);
 
         await _taxiService.UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
@@ -110,7 +85,6 @@ public class ReservationService : IReservationService
         }
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-
         existingReservation.UpdateAuditInfo(dateTime, user.UserName);
         
         await _reservationRepository.UpdateReservationAsync(existingReservation);

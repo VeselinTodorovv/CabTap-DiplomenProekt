@@ -50,7 +50,6 @@ public class DriverService : IDriverService
         var driver = _mapper.Map<Driver>(driverViewModel);
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-
         driver.UpdateAuditInfo(dateTime, user.UserName);
 
         await _driverRepository.AddDriverAsync(driver);
@@ -69,7 +68,6 @@ public class DriverService : IDriverService
         _mapper.Map(driverViewModel, existingDriver);
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-
         existingDriver.UpdateAuditInfo(dateTime, user.UserName);  
 
         await _driverRepository.UpdateDriverAsync(existingDriver);

@@ -109,8 +109,8 @@ public class ReservationsController : Controller
     {
         var categoryRate = (await _categoryService.GetCategoryById(categoryId)).Rate;
 
-        // Just some random formula, like proof of concept
-        var totalPrice = (decimal)distance * categoryRate + (decimal)duration / 2.4m * categoryRate;
+        // Just an example
+        var totalPrice = (decimal) distance * categoryRate;
         return Json(totalPrice);
     }
 

@@ -27,33 +27,6 @@ public class UserService : IUserService
         return user;
     }
 
-    public async Task<IEnumerable<ClientIndexViewModel>> GetAllClientsAsync()
-    {
-        var users = _userManager.Users
-            .Select(x => new ClientIndexViewModel
-            {
-                Id = x.Id,
-                UserName = x.UserName,
-                Email = x.Email,
-                Address = x.Address,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-            })
-            .ToList();
-
-        var adminIds = (await _userManager.GetUsersInRoleAsync("Administrator")).Select(u => u.Id).ToArray();
-        foreach (var user in users)
-        {
-            user.IsAdmin = adminIds.Contains(user.Id);
-        }
-
-        var list = users
-            .Where(x => !x.IsAdmin)
-            .OrderBy(u => u.UserName);
-
-        return list;
-    }
-
     public async Task<IEnumerable<ClientIndexViewModel>> GetPaginatedClientsAsync(int page, int pageSize)
     {
         var users = _userManager.Users

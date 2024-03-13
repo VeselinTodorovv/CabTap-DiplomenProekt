@@ -6,5 +6,4 @@ public interface ICategoryRepository
 {
     Task<IEnumerable<Category>> GetAllCategories();
     Task<Category> GetCategoryById(int id);
-    Task<IEnumerable<Taxi>> GetTaxisByCategory(int categoryId);
 }
