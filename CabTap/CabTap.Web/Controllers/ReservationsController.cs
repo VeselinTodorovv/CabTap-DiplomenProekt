@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CabTap.Web.Controllers;
 
+[Authorize(Roles = "Administrator, Client")]
 public class ReservationsController : Controller
 {
     private readonly IReservationService _reservationService;
@@ -16,7 +17,7 @@ public class ReservationsController : Controller
     private readonly IStatisticService _statisticService;
     private readonly ICategoryService _categoryService;
     private readonly IMapper _mapper;
-    
+
     public ReservationsController(IReservationService reservationService, ITaxiService taxiService, IMapper mapper, IStatisticService statisticService, ICategoryService categoryService)
     {
         _reservationService = reservationService;
@@ -40,7 +41,7 @@ public class ReservationsController : Controller
         return View(reservations);
     }
 
-    [Authorize(Roles = "Administrator, Client")]
+/*    [Authorize(Roles = "Administrator, Client")]*/
     public async Task<IActionResult> MyReservations(int page = 1, int pageSize = 9)
     {
         var reservations = await _reservationService.GetPaginatedReservationsByUserIdAsync(page, pageSize);
@@ -54,7 +55,7 @@ public class ReservationsController : Controller
         return View(reservations);
     }
 
-    [Authorize(Roles = "Administrator")]
+/*    [Authorize(Roles = "Administrator, Client")] */
     public async Task<IActionResult> Details(string id)
     {
         try
@@ -69,7 +70,7 @@ public class ReservationsController : Controller
         }
     }
     
-    [Authorize(Roles = "Administrator, Client")]
+/*    [Authorize(Roles = "Administrator, Client")]*/
     public async Task<IActionResult> Create()
     {
         var categories = await _taxiService.GetAvailableTaxiTypesAsync();
@@ -82,7 +83,7 @@ public class ReservationsController : Controller
         return View(reservationViewModel);
     }
 
-    [Authorize(Roles = "Administrator, Client")]
+/*    [Authorize(Roles = "Administrator, Client")]*/
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(ReservationCreateViewModel viewModel)
@@ -103,7 +104,7 @@ public class ReservationsController : Controller
         }
     }
     
-    [Authorize(Roles = "Administrator, Client")]
+    /*[Authorize(Roles = "Administrator, Client")]*/
     [HttpGet]
     public async Task<IActionResult> GetTotalPrice(int categoryId, double distance, double duration)
     {
@@ -114,7 +115,24 @@ public class ReservationsController : Controller
         return Json(totalPrice);
     }
 
-    [Authorize(Roles = "Administrator")]
+    // TODO: Add GET actions and use them as confirmatin windows
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> MarkAsCompleted(string reservationId)
+    {
+        await _reservationService.MarkAsCompleted(reservationId);
+        return RedirectToAction(nameof(MyReservations));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> MarkAsCancelled(string reservationId)
+    {
+        await _reservationService.MarkAsCancelled(reservationId);
+        return RedirectToAction(nameof(MyReservations));
+    }
+
+    /*[Authorize(Roles = "Administrator, Client")]*/
     public async Task<IActionResult> Edit(string id)
     {
         try
@@ -146,7 +164,7 @@ public class ReservationsController : Controller
         }
     }
     
-    [Authorize(Roles = "Administrator")]
+    /*[Authorize(Roles = "Administrator, Client")]*/
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(ReservationEditViewModel viewModel)

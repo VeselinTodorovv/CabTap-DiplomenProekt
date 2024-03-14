@@ -118,4 +118,18 @@ public class ReservationService : IReservationService
         var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
         return reservationViewModels;
     }
+
+    public async Task MarkAsCompleted(string reservationId)
+    {
+        var reservation = await _reservationRepository.GetReservationsByIdAsync(reservationId);
+        reservation.RideStatus = RideStatus.Finished;
+        await _reservationRepository.UpdateReservationAsync(reservation);
+    }
+
+    public async Task MarkAsCancelled(string reservationId)
+    {
+        var reservation = await _reservationRepository.GetReservationsByIdAsync(reservationId);
+        reservation.RideStatus = RideStatus.Cancelled;
+        await _reservationRepository.UpdateReservationAsync(reservation);
+    }
 }
