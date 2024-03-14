@@ -34,6 +34,7 @@ public class TaxiService : ITaxiService
 
     public async Task<TaxiAllViewModel> FindAvailableTaxiAsync(int categoryId)
     {
+        //TODO: Also check if there are enough seats
         var taxis = (await _taxiRepository.GetAllTaxisAsync())
             .FirstOrDefault(x => x.TaxiStatus == TaxiStatus.Available &&
                                  x.CategoryId == categoryId);

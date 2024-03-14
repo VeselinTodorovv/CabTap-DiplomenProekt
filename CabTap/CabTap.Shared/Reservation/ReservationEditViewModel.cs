@@ -17,6 +17,9 @@ public class ReservationEditViewModel
     public int CategoryId { get; set; }
 
     public virtual List<CategoryPairViewModel> Categories { get; set; } = new();
+    
+    [Required]
+    public DateTime ReservationDateTime { get; set; }
 
     [Required]
     public string Origin { get; set; } = null!;

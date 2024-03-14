@@ -43,6 +43,12 @@
                             <div id="destination-dropdown" class="autocomplete-dropdown"></div>
                             <span asp-validation-for="Destination" class="text-danger"></span>
                         </div>
+                        
+                        <div class="form-group">
+                            <label asp-for="ReservationDateTime" class="control-label">Date of Reservation</label>
+                            <input asp-for="ReservationDateTime" class="form-control" />
+                            <span asp-validation-for="ReservationDateTime" class="text-danger"></span>
+                        </div>
 
                         <div class="form-group">
                             <label asp-for="PassengersCount" class="control-label">Passengers Count</label>

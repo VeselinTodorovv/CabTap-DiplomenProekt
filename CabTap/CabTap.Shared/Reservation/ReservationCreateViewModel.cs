@@ -10,6 +10,9 @@ public class ReservationCreateViewModel
     public int CategoryId { get; set; }
 
     public virtual List<CategoryPairViewModel> TaxiCategories { get; set; } = new();
+    
+    [Required]
+    public DateTime ReservationDateTime { get; set; }
 
     [Required]
     public string Origin { get; set; } = null!;

@@ -15,6 +15,8 @@ public class ReservationDetailsViewModel
 
     public Core.Entities.Taxi Taxi { get; set; } = null!;
     
+    public DateTime ReservationDateTime { get; set; }
+    
     public string Origin { get; set; } = null!;
 
     public string Destination { get; set; } = null!;

@@ -20,6 +20,9 @@ public class Reservation : BaseEntity
     public virtual Taxi Taxi { get; set; } = null!;
     
     [Required]
+    public DateTime ReservationDateTime { get; set; } 
+    
+    [Required]
     //start location
     public string Origin { get; set; } = null!;
 

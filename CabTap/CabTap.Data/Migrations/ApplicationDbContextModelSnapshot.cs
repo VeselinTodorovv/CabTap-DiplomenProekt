@@ -210,6 +210,9 @@ namespace CabTap.Data.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("ReservationDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<byte>("RideStatus")
                         .HasColumnType("tinyint");
 

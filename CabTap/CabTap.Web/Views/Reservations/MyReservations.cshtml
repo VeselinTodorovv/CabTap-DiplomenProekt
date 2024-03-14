@@ -8,6 +8,33 @@
 <partial name="_AdminPartial" />
 
 <div class="row">
+    <div class="col-md-12">
+        <form asp-controller="Reservations" asp-action="MyReservations" method="post" id="filterForm" class="mb-4">
+            <div class="row align-items-end">
+                <div class="col-md-3">
+                    <label for="searchInput" class="form-label">Search by User ID:</label>
+                    <input type="text" class="form-control" id="searchInput" name="searchInput">
+                </div>
+                <div class="col-md-3">
+                    <label for="sortSelect" class="form-label">Sort by:</label>
+                    <select class="form-select" id="sortSelect" name="sortOption">
+                        <option value="priceAsc">Price (Ascending)</option>
+                        <option value="priceDesc">Price (Descending)</option>
+                        <option value="userIdAsc">User ID (A to Z)</option>
+                        <option value="userIdDesc">User ID (Z to A)</option>
+                        <option value="distanceAsc">Distance (Short to Long)</option>
+                        <option value="distanceDesc">Distance (Long to Short)</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">Apply Filter & Sort</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
     @foreach (var item in Model)
     {
         <div class="col-md-4 mb-4">
@@ -25,6 +52,7 @@
                     <p class="card-text">
                         <strong>@Html.DisplayNameFor(x => x.UserId): </strong>@item.UserId<br>
                         <strong>@Html.DisplayNameFor(x => x.TaxiId): </strong>@item.TaxiId<br>
+                        <strong>@Html.DisplayNameFor(x => x.ReservationDateTime): </strong>@item.ReservationDateTime<br>
                         <strong>@Html.DisplayNameFor(x => x.Duration): </strong>@item.Duration min<br>
                         <strong>@Html.DisplayNameFor(x => x.Distance): </strong>@item.Distance km<br>
                         <strong>@Html.DisplayNameFor(x => x.Price): </strong>@item.Price<br>
