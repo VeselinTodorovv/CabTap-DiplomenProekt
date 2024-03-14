@@ -15,6 +15,7 @@ public class ReservationDetailsViewModel
 
     public Core.Entities.Taxi Taxi { get; set; } = null!;
     
+    [DataType(DataType.DateTime)]
     public DateTime ReservationDateTime { get; set; }
     
     public string Origin { get; set; } = null!;

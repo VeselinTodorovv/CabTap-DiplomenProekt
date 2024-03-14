@@ -20,6 +20,7 @@ public class Reservation : BaseEntity
     public virtual Taxi Taxi { get; set; } = null!;
     
     [Required]
+    [DataType(DataType.DateTime)]
     public DateTime ReservationDateTime { get; set; } 
     
     [Required]

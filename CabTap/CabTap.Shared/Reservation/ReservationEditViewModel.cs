@@ -19,6 +19,8 @@ public class ReservationEditViewModel
     public virtual List<CategoryPairViewModel> Categories { get; set; } = new();
     
     [Required]
+    [DataType(DataType.DateTime)]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
     public DateTime ReservationDateTime { get; set; }
 
     [Required]

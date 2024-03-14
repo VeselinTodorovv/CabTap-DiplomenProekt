@@ -12,6 +12,8 @@ public class ReservationCreateViewModel
     public virtual List<CategoryPairViewModel> TaxiCategories { get; set; } = new();
     
     [Required]
+    [DataType(DataType.DateTime)]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
     public DateTime ReservationDateTime { get; set; }
 
     [Required]
