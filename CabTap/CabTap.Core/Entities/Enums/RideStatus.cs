@@ -7,5 +7,5 @@ public enum RideStatus : byte
     [Display(Name = "In Progress")]
     InProgress = 1,
     Finished = 2,
-    Cancelled = 3
+    Canceled = 3
 }

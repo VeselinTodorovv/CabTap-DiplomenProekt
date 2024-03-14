@@ -122,14 +122,20 @@ public class ReservationService : IReservationService
     public async Task MarkAsCompleted(string reservationId)
     {
         var reservation = await _reservationRepository.GetReservationsByIdAsync(reservationId);
-        reservation.RideStatus = RideStatus.Finished;
-        await _reservationRepository.UpdateReservationAsync(reservation);
+        if (reservation.RideStatus == RideStatus.InProgress)
+        {
+            reservation.RideStatus = RideStatus.Finished;
+            await _reservationRepository.UpdateReservationAsync(reservation);
+        }
     }
 
-    public async Task MarkAsCancelled(string reservationId)
+    public async Task MarkAsCanceled(string reservationId)
     {
         var reservation = await _reservationRepository.GetReservationsByIdAsync(reservationId);
-        reservation.RideStatus = RideStatus.Cancelled;
-        await _reservationRepository.UpdateReservationAsync(reservation);
+        if (reservation.RideStatus == RideStatus.InProgress)
+        {
+            reservation.RideStatus = RideStatus.Canceled;
+            await _reservationRepository.UpdateReservationAsync(reservation);
+        }
     }
 }

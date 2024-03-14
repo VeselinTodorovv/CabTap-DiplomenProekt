@@ -1,0 +1,17 @@
+@using CabTap.Core.Entities.Enums
+@model CabTap.Shared.Reservation.ReservationAllViewModel
+
+@if (Model.RideStatus == RideStatus.InProgress)
+{
+    <div class="text-center">
+        <form method="post" asp-controller="Reservations" asp-action="MarkAsCompleted" style="margin-bottom: 15px;">
+            <input type="hidden" name="reservationId" value="@Model.Id"/>
+            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to mark this reservation as completed?')">Complete</button>
+        </form>
+
+        <form method="post" asp-controller="Reservations" asp-action="MarkAsCanceled" style="margin-bottom: 15px;">
+            <input type="hidden" name="reservationId" value="@Model.Id"/>
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this reservation?')">Cancel</button>
+        </form>
+    </div>
+}
