@@ -10,5 +10,6 @@ public class UserMappingProfile : Profile
     {
         CreateMap<ApplicationUser, ClientDetailsViewModel>();
         CreateMap<ApplicationUser, ClientIndexViewModel>();
+        CreateMap<ApplicationUser, ClientDeleteViewModel>();
     }
 }

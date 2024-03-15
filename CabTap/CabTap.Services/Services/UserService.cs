@@ -48,7 +48,7 @@ public class UserService : IUserService
         return clientViewModels;
     }
 
-    public Task<ClientDetailsViewModel> GetClientDetailsAsync(string id)
+    public Task<ClientDetailsViewModel> GetClientDetailsByIdAsync(string id)
     {
         var user = _userManager.Users
             .FirstOrDefault(x => x.Id == id);
@@ -60,5 +60,30 @@ public class UserService : IUserService
         var clientDetails = _mapper.Map<ClientDetailsViewModel>(user);
 
         return Task.FromResult(clientDetails);
+    }
+
+    public Task<ClientDeleteViewModel> GetClientToDeleteByIdAsync(string id)
+    {
+        var user = _userManager.Users
+            .FirstOrDefault(x => x.Id == id);
+        if (user == null)
+        {
+            throw new InvalidOperationException($"User with ID '{id}' not found.");
+        }
+
+        var client = _mapper.Map<ClientDeleteViewModel>(user);
+
+        return Task.FromResult(client);
+    }
+
+    public async Task DeleteClientAsync(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            throw new InvalidOperationException($"User with ID '{id}' not found.");
+        }
+        
+        await _userManager.DeleteAsync(user);
     }
 }

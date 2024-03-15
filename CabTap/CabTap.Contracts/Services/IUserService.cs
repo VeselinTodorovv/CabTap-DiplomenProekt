@@ -7,5 +7,7 @@ public interface IUserService
 {
     Task<IEnumerable<ClientIndexViewModel>> GetPaginatedClientsAsync(int page, int pageSize);
     Task<ApplicationUser?> GetCurrentUserAsync();
-    Task<ClientDetailsViewModel> GetClientDetailsAsync(string id);
+    Task<ClientDetailsViewModel> GetClientDetailsByIdAsync(string id);
+    Task<ClientDeleteViewModel> GetClientToDeleteByIdAsync(string id);
+    Task DeleteClientAsync(string id);
 }

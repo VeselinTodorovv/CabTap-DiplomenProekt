@@ -27,7 +27,8 @@
                     </dl>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-danger ml-2">Delete Profile</a>
+                    <a asp-action="DeleteProfile" asp-route-id="@Model.Id" class="btn btn-danger ml-2">Delete Profile</a>
+                    <a href="javascript:history.back()" class="btn btn-secondary ml-2">Back</a>
                 </div>
             </div>
         </div>

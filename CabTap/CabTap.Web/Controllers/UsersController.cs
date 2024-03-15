@@ -1,4 +1,5 @@
 ﻿using CabTap.Contracts.Services;
+using CabTap.Shared.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,13 +34,43 @@ public class UsersController : Controller
     {
         try
         {
-            var clientDetails = await _userService.GetClientDetailsAsync(id);
+            var clientDetails = await _userService.GetClientDetailsByIdAsync(id);
 
             return View(clientDetails);
         }
         catch (InvalidOperationException)
         {
             return NotFound();
+        }
+    }
+
+    public async Task<IActionResult> DeleteProfile(string id)
+    {
+        try
+        {
+            var user = await _userService.GetClientToDeleteByIdAsync(id);
+
+            return View(user);
+        }
+        catch (InvalidOperationException)
+        {
+            return NotFound();
+        }
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteProfile(ClientDeleteViewModel viewModel)
+    {
+        try
+        {
+            await _userService.DeleteClientAsync(viewModel.Id);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
         }
     }
 }
