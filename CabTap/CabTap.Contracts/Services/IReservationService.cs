@@ -4,8 +4,8 @@ namespace CabTap.Contracts.Services;
 
 public interface IReservationService
 {
-    Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsAsync(int page, int pageSize);
-    Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsByUserIdAsync(int page, int pageSize);
+    Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsAsync(string searchInput, string sortOption, int page, int pageSize);
+    Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsByUserIdAsync(string searchInput, string sortOption, int page, int pageSize);
     Task<ReservationDetailsViewModel> GetReservationByIdAsync(string reservationId);
     Task MarkAsCompleted(string reservationId);
     Task MarkAsCanceled(string reservationId);

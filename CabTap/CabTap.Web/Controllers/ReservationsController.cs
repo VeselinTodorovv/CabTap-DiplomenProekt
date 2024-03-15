@@ -28,9 +28,9 @@ public class ReservationsController : Controller
     }
 
     [Authorize(Roles = "Administrator")]
-    public async Task<IActionResult> Index(int page = 1, int pageSize = 9)
+    public async Task<IActionResult> Index(string searchInput, string sortOption, int page = 1, int pageSize = 9)
     {
-        var reservations = await _reservationService.GetPaginatedReservationsAsync(page, pageSize);
+        var reservations = await _reservationService.GetPaginatedReservationsAsync(searchInput, sortOption, page, pageSize);
         
         var totalReservations = await _statisticService.CountReservationsAsync();
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
@@ -41,9 +41,9 @@ public class ReservationsController : Controller
         return View(reservations);
     }
 
-    public async Task<IActionResult> MyReservations(int page = 1, int pageSize = 9)
+    public async Task<IActionResult> MyReservations(string searchInput, string sortOption, int page = 1, int pageSize = 9)
     {
-        var reservations = await _reservationService.GetPaginatedReservationsByUserIdAsync(page, pageSize);
+        var reservations = await _reservationService.GetPaginatedReservationsByUserIdAsync(searchInput, sortOption, page, pageSize);
         
         var totalReservations = await _statisticService.CountReservationsAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
