@@ -83,6 +83,11 @@ public class RegisterModel : PageModel
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; init; }
+        
+        [DataType(DataType.PhoneNumber)]
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; init; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -170,7 +175,8 @@ public class RegisterModel : PageModel
             Email = Input.Email,
             Address = Input.Address,
             FirstName = Input.FirstName,
-            LastName = Input.LastName
+            LastName = Input.LastName,
+            PhoneNumber = Input.PhoneNumber
         });
     }
 

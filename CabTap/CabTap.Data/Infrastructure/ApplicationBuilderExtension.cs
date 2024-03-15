@@ -11,12 +11,13 @@ public static class ApplicationBuilderExtension
     {
         using var serviceScope = app.ApplicationServices.CreateScope();
         var services = serviceScope.ServiceProvider;
+        var context = services.GetRequiredService<ApplicationDbContext>();
         
         await RoleSeeder(services);
         await SeedAdministratorUser(services);
 
-        await SeedCategoriesAsync(services.GetRequiredService<ApplicationDbContext>());
-        await SeedManufacturersAsync(services.GetRequiredService<ApplicationDbContext>());
+        await SeedCategoriesAsync(context);
+        await SeedManufacturersAsync(context);
     }
     
     private static async Task RoleSeeder(IServiceProvider serviceProvider)

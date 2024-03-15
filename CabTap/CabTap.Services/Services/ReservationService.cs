@@ -108,29 +108,16 @@ public class ReservationService : IReservationService
             reservations = reservations.Where(x => x.User.UserName == searchInput);
         }
 
-        switch (sortOption)
+        reservations = sortOption switch
         {
-            case "priceAsc":
-                reservations = reservations.OrderBy(x => x.Price);
-                break;
-            case "priceDesc":
-                reservations = reservations.OrderByDescending(x => x.Price);
-                break;
-            case "distanceAsc":
-                reservations = reservations.OrderBy(x => x.Distance);
-                break;
-            case "distanceDesc":
-                reservations = reservations.OrderByDescending(x => x.Distance);
-                break;
-            case "dateAsc":
-                reservations = reservations.OrderBy(x => x.ReservationDateTime);
-                break;
-            case "dateDesc":
-                reservations = reservations.OrderByDescending(x => x.ReservationDateTime);
-                break;
-            default:
-                break;
-        }
+            "priceAsc" => reservations.OrderBy(x => x.Price),
+            "priceDesc" => reservations.OrderByDescending(x => x.Price),
+            "distanceAsc" => reservations.OrderBy(x => x.Distance),
+            "distanceDesc" => reservations.OrderByDescending(x => x.Distance),
+            "dateAsc" => reservations.OrderBy(x => x.ReservationDateTime),
+            "dateDesc" => reservations.OrderByDescending(x => x.ReservationDateTime),
+            _ => reservations
+        };
 
         var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
 
@@ -152,29 +139,16 @@ public class ReservationService : IReservationService
             reservations = reservations.Where(x => x.User.UserName == searchInput);
         }
 
-        switch (sortOption)
+        reservations = sortOption switch
         {
-            case "priceAsc":
-                reservations = reservations.OrderBy(x => x.Price);
-                break;
-            case "priceDesc":
-                reservations = reservations.OrderByDescending(x => x.Price);
-                break;
-            case "distanceAsc":
-                reservations = reservations.OrderBy(x => x.Distance);
-                break;
-            case "distanceDesc":
-                reservations = reservations.OrderByDescending(x => x.Distance);
-                break;
-            case "dateAsc":
-                reservations = reservations.OrderBy(x => x.ReservationDateTime);
-                break;
-            case "dateDesc":
-                reservations = reservations.OrderByDescending(x => x.ReservationDateTime);
-                break;
-            default:
-                break;
-        }
+            "priceAsc" => reservations.OrderBy(x => x.Price),
+            "priceDesc" => reservations.OrderByDescending(x => x.Price),
+            "distanceAsc" => reservations.OrderBy(x => x.Distance),
+            "distanceDesc" => reservations.OrderByDescending(x => x.Distance),
+            "dateAsc" => reservations.OrderBy(x => x.ReservationDateTime),
+            "dateDesc" => reservations.OrderByDescending(x => x.ReservationDateTime),
+            _ => reservations
+        };
 
         var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
         return reservationViewModels;

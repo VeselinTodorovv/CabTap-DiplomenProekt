@@ -6,33 +6,7 @@
 <h1 style="margin-bottom: 30px;">@ViewData["Title"]</h1>
 
 <partial name="_AdminPartial" />
-
-<div class="row">
-    <div class="col-md-12">
-        <form asp-controller="Reservations" asp-action="MyReservations" method="post" id="filterForm" class="mb-4">
-            <div class="row align-items-end">
-                <div class="col-md-3">
-                    <label for="searchInput" class="form-label">Search by Username:</label>
-                    <input type="text" class="form-control" id="searchInput" name="searchInput">
-                </div>
-                <div class="col-md-3">
-                    <label for="sortSelect" class="form-label">Sort by:</label>
-                    <select class="form-select" id="sortSelect" name="sortOption">
-                        <option value="dateAsc">Date (Ascending)</option>
-                        <option value="dateDesc">Date (Descending)</option>
-                        <option value="priceAsc">Price (Ascending)</option>
-                        <option value="priceDesc">Price (Descending)</option>
-                        <option value="distanceAsc">Distance (Short to Long)</option>
-                        <option value="distanceDesc">Distance (Long to Short)</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary">Apply Filter & Sort</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<partial name="_SortFilterPartial"></partial>
 
 <div class="row">
     @foreach (var item in Model)
