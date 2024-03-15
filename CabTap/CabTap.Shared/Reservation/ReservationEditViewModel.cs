@@ -20,7 +20,7 @@ public class ReservationEditViewModel
     
     [Required]
     [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm}")]
     public DateTime ReservationDateTime { get; set; }
 
     [Required]

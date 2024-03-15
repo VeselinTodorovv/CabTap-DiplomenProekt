@@ -24,6 +24,9 @@ public class UsersController : Controller
         var totalReservations = await _statisticService.CountClientsAsync();
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
 
+        // Ensure that page is within valid range
+        page = Math.Max(1, Math.Min(page, totalPages));
+
         ViewBag.CurrentPage = page;
         ViewBag.TotalPages = totalPages;
 

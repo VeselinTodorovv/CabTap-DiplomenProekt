@@ -6,7 +6,7 @@
 <h1 style="margin-bottom: 30px;">@ViewData["Title"]</h1>
 
 <partial name="_AdminPartial" />
-<partial name="_SortFilterPartial"></partial>
+<partial name="_SortFilterPartial" />
 
 <div class="row">
     @foreach (var item in Model)
@@ -22,18 +22,7 @@
                             @await Html.PartialAsync("_TruncateLocationPartial", item.Destination)
                         </h5>
                     </div>
-
-                    <p class="card-text">
-                        <strong>@Html.DisplayNameFor(x => x.UserId): </strong>@item.UserId<br>
-                        <strong>@Html.DisplayNameFor(x => x.TaxiId): </strong>@item.TaxiId<br>
-                        <strong>@Html.DisplayNameFor(x => x.ReservationDateTime): </strong>@item.ReservationDateTime<br>
-                        <strong>@Html.DisplayNameFor(x => x.Duration): </strong>@item.Duration min<br>
-                        <strong>@Html.DisplayNameFor(x => x.Distance): </strong>@item.Distance km<br>
-                        <strong>@Html.DisplayNameFor(x => x.Price): </strong>@item.Price<br>
-                        <strong>@Html.DisplayNameFor(x => x.PassengersCount): </strong>@item.PassengersCount<br>
-                        <strong>@Html.DisplayNameFor(x => x.RideStatus): </strong>@item.RideStatus<br>
-                        <strong>@Html.DisplayNameFor(x => x.CreatedOn): </strong>@item.CreatedOn
-                    </p>
+                    <partial name="_CardContentPartial" model="item" />
                     <div class="text-center" style="margin-bottom: 15px;" >
                         <partial name="_EntityActionsPartial" model="@item.Id" />
                     </div>

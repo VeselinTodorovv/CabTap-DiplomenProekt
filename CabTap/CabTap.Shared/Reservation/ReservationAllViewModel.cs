@@ -12,11 +12,13 @@ public class ReservationAllViewModel
     public int TaxiId { get; set; }
     
     [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm}")]
     public DateTime ReservationDateTime { get; set; }
     
+    [Display(Name = "From")]
     public string Origin { get; set; } = null!;
 
+    [Display(Name = "To")]
     public string Destination { get; set; } = null!;
 
     public double Duration { get; set; }

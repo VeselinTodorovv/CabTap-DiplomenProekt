@@ -12,7 +12,7 @@ public class ReservationDeleteViewModel
     public int TaxiId { get; set; }
     
     [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm}")]
     public DateTime ReservationDateTime { get; set; }
     
     public string Origin { get; set; } = null!;
@@ -31,11 +31,11 @@ public class ReservationDeleteViewModel
     public RideStatus RideStatus { get; set; }
     
     [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm}")]
     public DateTime CreatedOn { get; set; }
     
     [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm}")]
     public DateTime LastModifiedOn { get; set; }
     
     public string CreatedBy { get; set; } = null!;

@@ -9,11 +9,11 @@ public class DriverAllViewModel
     public string Name { get; set; } = null!;
     
     [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm}")]
     public DateTime CreatedOn { get; set; }
     
     [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm tt}")]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy hh:mm}")]
     public DateTime LastModifiedOn { get; set; }
     
     public string CreatedBy { get; set; } = null!;

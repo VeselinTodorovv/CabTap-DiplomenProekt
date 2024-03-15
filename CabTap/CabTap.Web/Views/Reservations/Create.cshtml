@@ -23,86 +23,97 @@
                     <form asp-controller="Reservations" asp-action="Create" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        <div class="form-group">
-                            <label asp-for="Origin" class="control-label">Origin</label>
-                            <input asp-for="Origin" class="form-control" id="origin" />
-                            <div id="origin-dropdown" class="autocomplete-dropdown"></div>
-                            <span asp-validation-for="Origin" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Destination" class="control-label">Destination</label>
-                            <input asp-for="Destination" class="form-control" id="destination" />
-                            <div id="destination-dropdown" class="autocomplete-dropdown"></div>
-                            <span asp-validation-for="Destination" class="text-danger"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="control-label">Reservation Type:</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" id="instantReservation" name="reservationType" value="instant" checked>
-                                <label class="form-check-label" for="instantReservation">
-                                    Instant Reservation
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" id="scheduledReservation" name="reservationType" value="scheduled">
-                                <label class="form-check-label" for="scheduledReservation">
-                                    Scheduled Reservation
-                                </label>
-                            </div>
-                        </div>
-
-                        <div id="scheduledReservationFields" style="display: none;">
+                        @if (!Model.TaxiCategories.Any())
+                        {
                             <div class="form-group">
-                                <label asp-for="ReservationDateTime" class="control-label">Scheduled Date and Time:</label>
-                                <input asp-for="ReservationDateTime" class="form-control" />
-                                <span asp-validation-for="ReservationDateTime" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="PassengersCount" class="control-label">Passengers Count</label>
-                            <input asp-for="PassengersCount" class="form-control" />
-                            <span asp-validation-for="PassengersCount" class="text-danger"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input asp-for="Duration" id="duration" class="form-control" hidden />
-                            <span asp-validation-for="Duration" class="text-danger"></span>
-                        </div>
-                    
-                        <div class="form-group">
-                            <input asp-for="Distance" id="distance" class="form-control" hidden />
-                            <span asp-validation-for="Distance" class="text-danger"></span>
-                        </div>
-                                    
-                        <div class="form-group">
-                            <input asp-for="Price" id="price" class="form-control" hidden />
-                            <span asp-validation-for="Price" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="button" id="confirmRoute" value="See Prices" class="btn btn-secondary" />
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-12 mb-4 visually-hidden" id="categoryCards" style="margin-top: 20px;">
-                                    @foreach (var category in Model.TaxiCategories)
-                                    {
-                                        <div class="card category-card" style="width: 150px;" data-category-id="@category.Id">
-                                            <div class="card-body">
-                                                <h5 class="card-title">@category.Name</h5>
-                                                <p>Total Price: <span id="totalPrice-@category.Id">Calculating...</span></p>
-                                            </div>
-                                        </div>
-                                    }
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Alert:</strong> There are currently no available taxis, please try at another time
                                 </div>
                             </div>
-                            <input type="hidden" asp-for="CategoryId" id="categoryId" />
-                            <span asp-validation-for="CategoryId" class="text-danger"></span>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <label asp-for="Origin" class="control-label">From</label>
+                                <input asp-for="Origin" class="form-control" id="origin" />
+                                <div id="origin-dropdown" class="autocomplete-dropdown"></div>
+                                <span asp-validation-for="Origin" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Destination" class="control-label">To</label>
+                                <input asp-for="Destination" class="form-control" id="destination" />
+                                <div id="destination-dropdown" class="autocomplete-dropdown"></div>
+                                <span asp-validation-for="Destination" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label">Reservation Type:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="instantReservation" name="reservationType" value="instant" checked>
+                                    <label class="form-check-label" for="instantReservation">
+                                        Instant Reservation
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="scheduledReservation" name="reservationType" value="scheduled">
+                                    <label class="form-check-label" for="scheduledReservation">
+                                        Scheduled Reservation
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="scheduledReservationFields" style="display: none;">
+                                <div class="form-group">
+                                    <label asp-for="ReservationDateTime" class="control-label">Scheduled Date and Time:</label>
+                                    <input asp-for="ReservationDateTime" class="form-control" />
+                                    <span asp-validation-for="ReservationDateTime" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="PassengersCount" class="control-label">Passengers Count</label>
+                                <input asp-for="PassengersCount" class="form-control" />
+                                <span asp-validation-for="PassengersCount" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input asp-for="Duration" id="duration" class="form-control" hidden />
+                                <span asp-validation-for="Duration" class="text-danger"></span>
+                            </div>
+                        
+                            <div class="form-group">
+                                <input asp-for="Distance" id="distance" class="form-control" hidden />
+                                <span asp-validation-for="Distance" class="text-danger"></span>
+                            </div>
+                                        
+                            <div class="form-group">
+                                <input asp-for="Price" id="price" class="form-control" hidden />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="button" id="confirmRoute" value="See Prices" class="btn btn-secondary" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12 mb-4 visually-hidden" id="categoryCards" style="margin-top: 20px;">
+                                        @foreach (var category in Model.TaxiCategories)
+                                        {
+                                            <div class="card category-card" style="width: 150px;" data-category-id="@category.Id">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">@category.Name</h5>
+                                                    <p>Total Price: <span id="totalPrice-@category.Id">Calculating...</span></p>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <input type="hidden" asp-for="CategoryId" id="categoryId" />
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+                        }
 
                         <div class="form-group">
                             <div class="alert alert-info visually-hidden" id="alert" role="alert">
@@ -138,47 +149,4 @@
             Html.RenderPartialAsync("_ValidationScriptsPartial")
         );
     }
-
-    <script>
-        function formatDateTime(dateTimeStr) {
-            let dateTime = new Date(dateTimeStr);
-            let day = dateTime.getDate();
-            let month = dateTime.getMonth() + 1;
-            let year = dateTime.getFullYear();
-            let hours = dateTime.getHours();
-            let minutes = dateTime.getMinutes();
-        
-            day = day < 10 ? '0' + day : day;
-            month = month < 10 ? '0' + month : month;
-            hours = hours < 10 ? '0' + hours : hours;
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-        
-            return `${day}/${month}/${year} ${hours}:${minutes}`;
-        }
-    
-        // Updates reservation details summary
-        $(document).ready(function() {
-            $('#confirmRoute').click(function() {
-                let origin = $('#origin').val();
-                let destination = $('#destination').val();
-                let passengersCount = $('#PassengersCount').val();
-                let reservationType = $('input[name="reservationType"]:checked').val();
-                let reservationDateTime = formatDateTime($('#ReservationDateTime').val());
-        
-                let reservationDetailsHtml = `
-                    <p><strong>Origin:</strong> ${origin}</p>
-                    <p><strong>Destination:</strong> ${destination}</p>
-                    <p><strong>Passengers Count:</strong> ${passengersCount}</p>
-                    <p><strong>Reservation Type:</strong> ${reservationType}</p>
-                `;
-        
-                // If reservation type is scheduled, add scheduled date and time to reservation details
-                if (reservationType === 'scheduled') {
-                    reservationDetailsHtml += `<p><strong>Scheduled Date and Time:</strong> ${reservationDateTime}</p>`;
-                }
-        
-                $('#reservationDetails').html(reservationDetailsHtml);
-            });
-        });
-    </script>
 }

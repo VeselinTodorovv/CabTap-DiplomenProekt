@@ -30,10 +30,15 @@ public class ReservationsController : Controller
     [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> Index(string searchInput, string sortOption, int page = 1, int pageSize = 9)
     {
-        var reservations = await _reservationService.GetPaginatedReservationsAsync(searchInput, sortOption, page, pageSize);
+        var reservations = (await _reservationService.GetPaginatedReservationsAsync(searchInput, sortOption, page, pageSize))
+            // Show newest first
+            .OrderByDescending(r => r.CreatedOn);
         
         var totalReservations = await _statisticService.CountReservationsAsync();
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
+
+        // Ensure that page is within valid range
+        page = Math.Max(1, Math.Min(page, totalPages));
 
         ViewBag.CurrentPage = page;
         ViewBag.TotalPages = totalPages;
@@ -75,7 +80,7 @@ public class ReservationsController : Controller
         var reservationViewModel = new ReservationCreateViewModel
         {
             TaxiCategories = categories.ToList(),
-            ReservationDateTime = DateTime.Now
+            ReservationDateTime = DateTime.Today
         };
         
         return View(reservationViewModel);
