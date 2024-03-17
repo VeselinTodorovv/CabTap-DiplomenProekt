@@ -26,12 +26,8 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h5 class="card-title fw-bold">
-                            @await Html.PartialAsync("_TruncateLocationPartial", item.Origin)
-                        </h5>
-                        <h5 class="card-title fw-bold">
-                            @await Html.PartialAsync("_TruncateLocationPartial", item.Destination)
-                        </h5>
+                        <h5 class="card-title fw-bold text-truncate">@item.Origin</h5>
+                        <h5 class="card-title fw-bold text-truncate">@item.Destination</h5>
                     </div>
                     <hr>
                     <partial name="_CardContentPartial" model="item" />
