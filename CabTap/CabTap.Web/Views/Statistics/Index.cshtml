@@ -70,12 +70,15 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-<script>
-    let clientsData = @Html.Raw(Json.Serialize(Model.CountClients));
-    let driversData = @Html.Raw(Json.Serialize(Model.CountDrivers));
-    let taxisData = @Html.Raw(Json.Serialize(Model.CountTaxis));
-    let reservationsCountData = @Html.Raw(Json.Serialize(Model.CountReservations));
-    let reservationsSumData = @Html.Raw(Json.Serialize(Model.SumReservations));
-</script>
-<script src="js/statistic/graphs.js"></script>
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+     let clientsData = @Html.Raw(Json.Serialize(Model.CountClients));
+     let driversData = @Html.Raw(Json.Serialize(Model.CountDrivers));
+     let taxisData = @Html.Raw(Json.Serialize(Model.CountTaxis));
+     let reservationsCountData = @Html.Raw(Json.Serialize(Model.CountReservations));
+     let reservationsSumData = @Html.Raw(Json.Serialize(Model.SumReservations));
+    </script>
+    <script src="js/statistic/graphs.js"></script>   
+}

@@ -31,7 +31,7 @@ public class ReservationCreateViewModel
     [Required]
     public decimal Price { get; set; }
     
-    [Display(Name = "Passengers Count")]
+    [Display(Name = "Passengers")]
     public int PassengersCount { get; set; }
 
     [Required]

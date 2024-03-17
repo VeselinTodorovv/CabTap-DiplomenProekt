@@ -37,7 +37,21 @@
 
                         <dt class="text-center col-md-4">Passenger Seats</dt>
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.PassengerSeats)</dd>
+                        <hr>
+                        
+                        <dt class="text-center col-md-4">Created On:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.CreatedOn)</dd>
+
+                        <dt class="text-center col-md-4">Last Modified On:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedOn)</dd>
+
+                        <dt class="text-center col-md-4">Created By:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.CreatedBy)</dd>
+
+                        <dt class="text-center col-md-4">Last Modified By:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedBy)</dd>
                     </dl>
+                    <hr>
                     <div class="text-center mt-4">
                         <a class="btn btn-primary" asp-controller="Taxis" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                         <a class="btn btn-danger ml-2" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>

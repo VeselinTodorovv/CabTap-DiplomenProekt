@@ -162,6 +162,7 @@ public class ReservationService : IReservationService
         {
             reservation.RideStatus = RideStatus.Finished;
             await _reservationRepository.UpdateReservationAsync(reservation);
+            await _taxiService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
         }
     }
 
@@ -172,6 +173,7 @@ public class ReservationService : IReservationService
         {
             reservation.RideStatus = RideStatus.Canceled;
             await _reservationRepository.UpdateReservationAsync(reservation);
+            await _taxiService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
         }
     }
 }

@@ -7,29 +7,20 @@
     <projectFile profileName="IIS Express">CabTap.Web/CabTap.Web.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="">
+    <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="swap data &amp; services architectural layers, authenticate StatisticsController">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IStatisticService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/IStatisticService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/ReservationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/ReservationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/TaxiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/TaxiService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Shared/Reservation/ReservationAllViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Shared/Reservation/ReservationAllViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Shared/Reservation/ReservationCreateViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Shared/Reservation/ReservationCreateViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CabTap.Shared/Taxi/TaxiCreateViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Shared/Taxi/TaxiCreateViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Shared/Taxi/TaxiEditViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Shared/Taxi/TaxiEditViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/DriversController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/DriversController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/TaxisController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/TaxisController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/UsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Drivers/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Drivers/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Drivers/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Drivers/Details.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Delete.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Edit.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/MyReservations.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/MyReservations.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Shared/_PaginationPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Shared/_PaginationPartial.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Shared/_SortFilterPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Shared/_SortFilterPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Shared/_CardContentPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Shared/_CardContentPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Statistics/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Statistics/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Taxis/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Taxis/Details.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Taxis/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Taxis/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Users/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Users/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,62 +43,33 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Contracts/Services/IStatisticService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Taxi.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1af51483c9bf18871cce649b9f966dd7be686536f998c33bba3c5fc4adea4a0/Task.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea95343b9387b73062a9b61b7538f826c54ce3529632b4472ba4494044d23/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/538811d0fba15c61b743814ea8b7193d48cfbb84a1a53c5db2512b1b329330/DbSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Shared/_PaginationPartial.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Contracts/Services/IStatisticService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/MyReservations.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/357d87849baf229feda8f4d10c552b0ceb83ac666291d7a17ddfd88c9b76/ViewContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Home/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c1da7b6c7c71a954fe3eb2531c6476711b3e6d93a8d76795386d326bb9dbc/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/TaxiService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Web/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Taxi/TaxiEditViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/BaseEntity.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Contracts/Services/ICategoryService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/ReservationService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Shared/_SortFilterPartial.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1e8feaadf5c3fa14d36ea2a638c432a2e1a47b7837d8b83d88303c5d9c15cf/AsyncValueTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Home/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Taxis/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/Create.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8d3195c9ba918c7860b66ce3965d4b9f173653cfea2479e8bb842d3513a89b/RazorPageOfT.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1af51483c9bf18871cce649b9f966dd7be686536f998c33bba3c5fc4adea4a0/Task.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/357d87849baf229feda8f4d10c552b0ceb83ac666291d7a17ddfd88c9b76/ViewContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Taxi/TaxiEditViewModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/Edit.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/Delete.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Drivers/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/CategoryService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Contracts/Services/ICategoryService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d555b6bc78df652895d9bf368762f415ad13deb21ca2dc977dd48593f46e2/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Controllers/ReservationsController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Shared/_PaginationPartial.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Home/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Shared/_SortFilterPartial.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Users/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/MyReservations.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/Delete.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Shared/_SortFilterPartial.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1e8feaadf5c3fa14d36ea2a638c432a2e1a47b7837d8b83d88303c5d9c15cf/AsyncValueTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Controllers/StatisticsController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/598be7b76329747735b1e8e8b423ca7a2fff54b0a9474b23f1e0f920a889444d/RazorView.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Shared/_PaginationPartial.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cf91eb35ab781c324ad4fa382dce85631ec37cf3813529f7c92208d866c851/TaskContinuation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/41cc2659897ded1c75869e25f414a6dce3380d39586a3b5a93cc7ebd6ce5/SignInManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b34cdea969917836c37b6dc15e916d3e5954856c12dd1caf3926e4a2a3a0dfe2/AuthorizationAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Shared/_PaginationPartial.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Reservations/Delete.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/b7df8cac8cd3461cb2ff4ac7ecebd98f2e698/69/d50929da/02000015pdb.il" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Shared/Taxi/TaxiCreateViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8d3195c9ba918c7860b66ce3965d4b9f173653cfea2479e8bb842d3513a89b/RazorPageOfT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/TaxiService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Controllers/UsersController.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -184,6 +146,7 @@
       <workItem from="1710625575512" duration="1657000" />
       <workItem from="1710631681905" duration="1094000" />
       <workItem from="1710686651267" duration="5519000" />
+      <workItem from="1710693171620" duration="11581000" />
     </task>
     <task id="LOCAL-00001" summary="implement leaflet map with routing">
       <created>1705443031280</created>
@@ -416,7 +379,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710536011009</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="swap data &amp; services architectural layers, authenticate StatisticsController">
+      <created>1710701913240</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1710701913240</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,7 +435,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add a confirm route button (will serve for sending data to the controller later on)" />
     <MESSAGE value="move sendRouteData() function from main.js to routing.js" />
     <MESSAGE value="merge hide/show confirm button functions into one." />
     <MESSAGE value="implement base entity class and improve core entities" />
@@ -490,7 +459,8 @@
     <MESSAGE value="add phone number to register form and improve views" />
     <MESSAGE value="implement deleting clients" />
     <MESSAGE value="grinding TODOs" />
-    <option name="LAST_COMMIT_MESSAGE" value="grinding TODOs" />
+    <MESSAGE value="swap data &amp; services architectural layers, authenticate StatisticsController" />
+    <option name="LAST_COMMIT_MESSAGE" value="swap data &amp; services architectural layers, authenticate StatisticsController" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -546,6 +516,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/CabTap.Services/Services/ReservationService.cs</url>
+          <line>159</line>
+          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Services\Services\ReservationService.cs" initialLine="159" containingFunctionPresentation="method 'MarkAsCompleted'">
+            <startOffsets>
+              <option value="6305" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6392" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

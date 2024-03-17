@@ -19,7 +19,7 @@
                         <dt class="text-center col-md-4">To:</dt>
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.Destination)</dd>
                         
-                        <dt class="text-center col-md-4">Price:</dt>
+                        <dt class="text-center col-md-4">Time of Reservation:</dt>
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.ReservationDateTime)</dd>
 
                         <dt class="text-center col-md-4">Duration:</dt>
@@ -42,6 +42,7 @@
 
                         <dt class="text-center col-md-4">Taxi ID:</dt>
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.TaxiId)</dd>
+                        <hr>
 
                         <dt class="text-center col-md-4">Created On:</dt>
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.CreatedOn)</dd>
@@ -55,7 +56,7 @@
                         <dt class="text-center col-md-4">Last Modified By:</dt>
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedBy)</dd>
                     </dl>
-                    
+                    <hr>
                     <div class="text-center mt-4">
                         <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                         <a class="btn btn-danger ml-2" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>

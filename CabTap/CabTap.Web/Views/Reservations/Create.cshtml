@@ -72,11 +72,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label asp-for="PassengersCount" class="control-label">Passengers Count</label>
-                                <input asp-for="PassengersCount" class="form-control" value="1" max="5" min="1" />
-                                <span asp-validation-for="PassengersCount" class="text-danger"></span>
+                                <div class="col-md-2">
+                                    <label asp-for="PassengersCount" class="control-label">Passengers</label>
+                                    <input asp-for="PassengersCount" class="form-control" value="1" max="5" min="1" />
+                                    <span asp-validation-for="PassengersCount" class="text-danger"></span>
+                                </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <input asp-for="Duration" id="duration" class="form-control" hidden />
                                 <span asp-validation-for="Duration" class="text-danger"></span>
@@ -142,7 +144,8 @@
         </div>
     </div>
 </div>
-@section Scripts {
+@section Scripts
+{
     @{
         await Task.WhenAll(
             Html.RenderPartialAsync("_ReservationScriptsPartial"),

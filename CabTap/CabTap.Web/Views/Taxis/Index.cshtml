@@ -4,6 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    .status-badge {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 20px;
+        font-size: 15px;
+    }
+    
+    .status-Available { background-color: #28a745; color: #fff; }
+    .status-Unavailable { background-color: #dc3545; color: #fff; }
+    .status-Busy { background-color: #ffc107; color: #212529; }
+</style>
+
 <h1 class="text-center mb-4">Taxi Index</h1>
 
 <partial name="_AdminPartial" />
@@ -34,7 +47,9 @@
                         <td>@Html.DisplayFor(modelItem => item.DriverName)</td>
                         <td>@Html.DisplayFor(modelItem => item.Description)</td>
                         <td><img src="@Html.DisplayFor(modelItem => item.Picture)" alt="Taxi Image" class="img-thumbnail" style="max-height: 100px;" /></td>
-                        <td>@Html.DisplayFor(modelItem => item.TaxiStatus)</td>
+                        <td>
+                            <span class="status-badge status-@(item.TaxiStatus.ToString())">@Html.DisplayFor(modelItem => item.TaxiStatus)</span>
+                        </td>
                         <td>@Html.DisplayFor(modelItem => item.PassengerSeats)</td>
                         <td><partial name="_EntityActionsPartial" model="@item.Id" /></td>
                     </tr>
@@ -43,11 +58,6 @@
         </table>
     </div>
 </div>
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
 
 @{
     var currentPage = (int)(ViewData["CurrentPage"] ?? 1);
