@@ -1,4 +1,5 @@
 @using CabTap.Shared.Pagination
+@using CabTap.Core.Entities.Enums
 @model IEnumerable<CabTap.Shared.Reservation.ReservationAllViewModel>
 @{
     ViewData["Title"] = "Reservation History";
@@ -24,7 +25,7 @@
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <div style="padding-bottom: 15px;">
+                    <div>
                         <h5 class="card-title fw-bold">
                             @await Html.PartialAsync("_TruncateLocationPartial", item.Origin)
                         </h5>
@@ -32,13 +33,13 @@
                             @await Html.PartialAsync("_TruncateLocationPartial", item.Destination)
                         </h5>
                     </div>
+                    <hr>
                     <partial name="_CardContentPartial" model="item" />
+                    <hr>
                     <div class="text-center" style="margin-bottom: 15px;" >
                         <partial name="_EntityActionsPartial" model="@item.Id" />
                     </div>
-                    <div class="card-footer" id="toggle">
-                        <partial name="_ReservationActionsPartial" model="@item"/>
-                    </div>
+                    <partial name="_ReservationActionsPartial" model="item"></partial>
                 </div>
             </div>
         </div>

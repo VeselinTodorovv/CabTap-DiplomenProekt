@@ -4,7 +4,12 @@ html {
 
 body {
     margin: 0;
-    padding-top: 0; /* Optionally reset padding if needed */
+    padding-top: 0;
+    background-color: #f0f7ff;
+}
+
+p {
+    margin-top: 16px;
 }
 
 .form-group, .form-floating {
@@ -13,8 +18,4 @@ body {
 
 .col-md-4, .col-sm-2 {
     margin-bottom: 20px;
-}
-
-p {
-    margin-top: 16px;
 }

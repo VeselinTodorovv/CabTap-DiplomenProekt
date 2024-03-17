@@ -24,7 +24,7 @@
         <div class="col-md-4 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <div style="padding-bottom: 15px;">
+                    <div>
                         <h5 class="card-title fw-bold">
                             @await Html.PartialAsync("_TruncateLocationPartial", item.Origin)
                         </h5>
@@ -32,8 +32,9 @@
                             @await Html.PartialAsync("_TruncateLocationPartial", item.Destination)
                         </h5>
                     </div>
+                    <hr>
                     <partial name="_CardContentPartial" model="item" />
-                    <div class="text-center">
+                    <div class="card-footer">
                         <partial name="_EntityActionsPartial" model="@item.Id" />
                     </div>
                 </div>
