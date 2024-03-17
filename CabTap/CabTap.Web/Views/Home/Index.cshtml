@@ -12,15 +12,6 @@
     <link rel="stylesheet" href="css/site.css">
 </head>
 
-<style>
-    #indicator1, #indicator2, #indicator3 {
-        background-color: #6c757d;
-    }
-    .carousel-indicators .active {
-        background-color: #333333;
-    }
-</style>
-
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" id="indicator1" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -30,40 +21,37 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="#f0f7ff" />
+                <rect width="100%" height="100%" fill="#f0f7ff"/>
             </svg>
-
             <div class="container">
                 <div class="carousel-caption text-start">
-                    <h1 style="color: #6c757d;">Example headline.</h1>
-                    <p style="color: #333333;">Some representative placeholder content for the first slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" style="background-color: #007bff;">Sign up today</a></p>
+                    <h1 style="color: #6c757d;">Welcome to CabTap!</h1>
+                    <p style="color: #333333;">Your ultimate destination for convenient and reliable transportation services. Book your ride with us today and experience seamless travel experiences.</p>
+                    <p><a class="btn btn-lg btn-primary" asp-controller="Reservations" asp-action="Create" style="background-color: #007bff;">Make a reservation</a></p>
                 </div>
             </div>
         </div>
         <div class="carousel-item">
             <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="#f0f7ff" />
+                <rect width="100%" height="100%" fill="#f0f7ff"/>
             </svg>
-
             <div class="container">
-                <div class="carousel-caption">
-                    <h1 style="color: #6c757d;">Another example headline.</h1>
-                    <p style="color: #333333;">Some representative placeholder content for the second slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" style="background-color: #007bff;">Learn more</a></p>
+                <div class="carousel-caption text-center">
+                    <h1 style="color: #6c757d;">Effortless Travel Solutions</h1>
+                    <p style="color: #333333;">Simplify your commute with CabTap. Whether it's a ride to the airport, office, or a night out, we've got you covered with our seamless booking process and reliable service.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#marketing" style="background-color: #007bff;">Learn More</a></p>
                 </div>
             </div>
         </div>
         <div class="carousel-item">
             <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="#f0f7ff" />
+                <rect width="100%" height="100%" fill="#f0f7ff"/>
             </svg>
-
             <div class="container">
                 <div class="carousel-caption text-end">
-                    <h1 style="color: #6c757d;">One more for good measure.</h1>
-                    <p style="color: #333333;">Some representative placeholder content for the third slide of this carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" style="background-color: #007bff;">Browse gallery</a></p>
+                    <h1 style="color: #6c757d;">Ride in Style and Comfort</h1>
+                    <p style="color: #333333;">Experience luxury travel with CabTap. From our premium vehicles to our professional drivers, every journey with us is designed to provide comfort, safety, and style.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#" style="background-color: #007bff;">Book Your Ride</a></p>
                 </div>
             </div>
         </div>
@@ -78,7 +66,7 @@
     </button>
 </div>
 
-<div class="container marketing">
+<div class="container marketing" id="marketing">
     <div class="row">
         <div class="col-lg-4">
             <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -88,7 +76,7 @@
             </svg>
             <h2 style="color: #333333;">24/7 Service</h2>
             <p style="color: #333333;">Get around the clock assistance with our reliable service.</p>
-            <p><a class="btn btn-secondary" href="#" style="background-color: #007bff;">View details &raquo;</a></p>
+            <p><a class="btn btn-secondary" asp-action="Contacts" style="background-color: #007bff;">View details &raquo;</a></p>
         </div>
         <!-- Define the clock icon SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: none;">
@@ -107,7 +95,7 @@
             </svg>
             <h2 style="color: #333333;">Affordable Rates</h2>
             <p style="color: #333333;">Enjoy our budget-friendly rates without compromising on quality.</p>
-            <p><a class="btn btn-secondary" href="#" style="background-color: #007bff;">View details &raquo;</a></p>
+            <p><a class="btn btn-secondary" asp-action="Contacts" style="background-color: #007bff;">View details &raquo;</a></p>
         </div>
         <!-- Define the dollar icon SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: none;">
@@ -124,7 +112,7 @@
           </svg>
           <h2 style="color: #333333;">Professional Drivers</h2>
           <p style="color: #333333;">Our experienced drivers ensure a safe and comfortable journey.</p>
-          <p><a class="btn btn-secondary" href="#" style="background-color: #007bff;">View details &raquo;</a></p>
+          <p><a class="btn btn-secondary" asp-action="Contacts" style="background-color: #007bff;">View details &raquo;</a></p>
         </div>
         <!-- Define the car icon SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: none;">
@@ -155,8 +143,8 @@
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading" style="color: #333333;">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead" style="color: #333333;">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+            <h2 class="featurette-heading" style="color: #333333;">Ride in Comfort. <span class="text-muted">Experience luxury on the move.</span></h2>
+            <p class="lead" style="color: #333333;">Indulge in a premium travel experience with our fleet of top-of-the-line vehicles equipped with modern amenities. Sit back, relax, and let us take you to your destination in style and comfort.</p>
         </div>
         <div class="col-md-5 order-md-1">
             <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -171,8 +159,8 @@
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading" style="color: #333333;">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead" style="color: #333333;">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
+            <h2 class="featurette-heading" style="color: #333333;">Seamless Booking. <span class="text-muted">Effortless reservations at your fingertips.</span></h2>
+            <p class="lead" style="color: #333333;">With our user-friendly booking platform, arranging your rides has never been easier. Simply select your destination, choose your preferred vehicle, and confirm your reservation with just a few clicks. Enjoy hassle-free travel planning with CabTap.</p>
         </div>
         <div class="col-md-5">
             <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">

@@ -1,9 +1,11 @@
 using CabTap.Contracts.Services;
 using CabTap.Shared.Statistic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CabTap.Web.Controllers;
 
+[Authorize(Roles = "Administrator")]
 public class StatisticsController : Controller
 {
     private readonly IStatisticService _statisticService;
