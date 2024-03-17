@@ -34,12 +34,11 @@ public class TaxiService : ITaxiService
 
     public async Task<TaxiAllViewModel> FindAvailableTaxiAsync(int categoryId)
     {
-        //TODO: Also check if there are enough seats
-        var taxis = (await _taxiRepository.GetAllTaxisAsync())
+        var taxi = (await _taxiRepository.GetAllTaxisAsync())
             .FirstOrDefault(x => x.TaxiStatus == TaxiStatus.Available &&
                                  x.CategoryId == categoryId);
 
-        var model = _mapper.Map<TaxiAllViewModel>(taxis);
+        var model = _mapper.Map<TaxiAllViewModel>(taxi);
 
         return model;
     }

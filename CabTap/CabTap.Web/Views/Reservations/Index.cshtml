@@ -7,6 +7,17 @@
 
 <partial name="_AdminPartial" />
 
+@{
+    const bool showUsernameFilter = true;
+}
+<div class="row">
+    <div class="col-md-12">
+        <form asp-controller="Reservations" asp-action="Index" method="get" id="filterForm" class="mb-4">
+            <partial name="_SortFilterPartial" model="showUsernameFilter"></partial>
+        </form>
+    </div>
+</div>
+
 <div class="row">
     @foreach (var item in Model)
     {
@@ -32,10 +43,13 @@
 </div>
 
 @{
+    var currentPage = (int)(ViewData["CurrentPage"] ?? 1);
+    var totalPages = (int)(ViewData["TotalPages"] ?? Model.Count() / 9);
+
     var paginationModel = new PaginationViewModel
     {
-        CurrentPage = ViewBag.CurrentPage,
-        TotalPages = ViewBag.TotalPages
+        CurrentPage = currentPage,
+        TotalPages = totalPages
     };
 }
 <div>

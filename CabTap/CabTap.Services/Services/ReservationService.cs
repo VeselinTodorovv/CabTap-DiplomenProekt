@@ -116,7 +116,8 @@ public class ReservationService : IReservationService
             "distanceDesc" => reservations.OrderByDescending(x => x.Distance),
             "dateAsc" => reservations.OrderBy(x => x.ReservationDateTime),
             "dateDesc" => reservations.OrderByDescending(x => x.ReservationDateTime),
-            _ => reservations
+            "oldest" => reservations.OrderBy(r => r.CreatedOn),
+            _ => reservations.OrderByDescending(r => r.LastModifiedOn)
         };
 
         var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
@@ -147,7 +148,7 @@ public class ReservationService : IReservationService
             "distanceDesc" => reservations.OrderByDescending(x => x.Distance),
             "dateAsc" => reservations.OrderBy(x => x.ReservationDateTime),
             "dateDesc" => reservations.OrderByDescending(x => x.ReservationDateTime),
-            _ => reservations
+            _ => reservations.OrderByDescending(r => r.LastModifiedOn)
         };
 
         var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);

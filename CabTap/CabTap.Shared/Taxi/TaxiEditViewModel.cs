@@ -43,6 +43,6 @@ public class TaxiEditViewModel
     public TaxiStatus TaxiStatus { get; set; }
     
     [Required]
-    [Range(1, 8, ErrorMessage = "Passenger Seats must be between 1 and 8")]
+    [Range(1, 5, ErrorMessage = "Passenger Seats must be between 1 and 5")]
     public int PassengerSeats { get; set; }
 }

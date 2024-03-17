@@ -50,10 +50,13 @@
 }
 
 @{
+    var currentPage = (int)(ViewData["CurrentPage"] ?? 1);
+    var totalPages = (int)(ViewData["TotalPages"] ?? Model.Count() / 10);
+
     var paginationModel = new PaginationViewModel
     {
-        CurrentPage = ViewBag.CurrentPage,
-        TotalPages = ViewBag.TotalPages
+        CurrentPage = currentPage,
+        TotalPages = totalPages
     };
 }
 <div>

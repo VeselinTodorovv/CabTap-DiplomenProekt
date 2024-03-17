@@ -27,11 +27,8 @@ public class DriversController : Controller
         var totalReservations = await _statisticService.CountDriversAsync();
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
         
-        // Ensure that page is within valid range
-        page = Math.Max(1, Math.Min(page, totalPages));
-
-        ViewBag.CurrentPage = page;
-        ViewBag.TotalPages = totalPages;
+        ViewData["CurrentPage"] = page;
+        ViewData["TotalPages"] = totalPages;
         
         return View(drivers);
     }

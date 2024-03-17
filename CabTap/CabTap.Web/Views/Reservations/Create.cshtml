@@ -27,7 +27,7 @@
                         {
                             <div class="form-group">
                                 <div class="alert alert-danger" role="alert">
-                                    <strong>Alert:</strong> There are currently no available taxis, please try at another time
+                                    <strong>Alert:</strong> There are currently no available taxis, please try again later.
                                 </div>
                             </div>
                         }
@@ -73,7 +73,7 @@
 
                             <div class="form-group">
                                 <label asp-for="PassengersCount" class="control-label">Passengers Count</label>
-                                <input asp-for="PassengersCount" class="form-control" />
+                                <input asp-for="PassengersCount" class="form-control" value="1" max="5" min="1" />
                                 <span asp-validation-for="PassengersCount" class="text-danger"></span>
                             </div>
                             
