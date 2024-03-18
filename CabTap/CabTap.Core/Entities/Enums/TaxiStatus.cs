@@ -1,6 +1,6 @@
 namespace CabTap.Core.Entities.Enums;
 
-public enum TaxiStatus : byte
+public enum TaxiStatus
 {
     Available = 1,
     Busy = 2,

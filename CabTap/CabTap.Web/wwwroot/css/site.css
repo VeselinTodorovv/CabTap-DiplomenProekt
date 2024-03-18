@@ -12,6 +12,10 @@ p {
     margin-top: 16px;
 }
 
+.marketing {
+    color: black;
+}
+
 .form-group, .form-floating {
     margin-bottom: 15px;
 }

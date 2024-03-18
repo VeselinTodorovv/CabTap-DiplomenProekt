@@ -36,10 +36,10 @@
                         @if (User.Identity!.IsAuthenticated && User.IsInRole("Administrator"))
                         {
                             <li class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="False"
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="False"
                                         style="background-color: #777676;">Statistic Module</button>
                             
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                     <li>
                                         <a class="dropdown-item" asp-controller="Taxis" asp-action="Index">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-briefcase-fill" viewBox="0 0 16 16">
@@ -99,9 +99,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - CabTap.Web - <a asp-controller="Home" asp-action="Contacts">Contacts</a>
+    <footer class="border-top footer" style="background-color: #37474f;">
+        <div class="container" style="color: #ffffff;">
+            &copy; 2024 - CabTap.Web - <a asp-controller="Home" asp-action="Contacts" style="color: #ffffff;">Contacts</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
