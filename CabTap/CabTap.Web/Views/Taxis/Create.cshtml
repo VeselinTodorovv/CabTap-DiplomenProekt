@@ -67,9 +67,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="PassengerSeats" class="control-label">Passenger Seats</label>
-                            <input asp-for="PassengerSeats" class="form-control" type="number" placeholder="Enter passenger seats" min="1" required />
-                            <span asp-validation-for="PassengerSeats" class="text-danger"></span>
+                            <div class="col-md-2">
+                                <label asp-for="PassengerSeats" class="control-label">Passengers</label>
+                                <input asp-for="PassengerSeats" class="form-control" value="1" max="5" min="1" />
+                                <span asp-validation-for="PassengerSeats" class="text-danger"></span>
+                            </div>
                         </div>
 
                         <div class="form-group text-center">

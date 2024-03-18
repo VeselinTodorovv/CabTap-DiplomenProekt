@@ -88,7 +88,7 @@ public class DriversController : Controller
         }
     }
 
-    [HttpPut]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(DriverEditViewModel viewModel)
     {
@@ -129,7 +129,7 @@ public class DriversController : Controller
         }
     }
 
-    [HttpDelete]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(DriverDeleteViewModel viewModel)
     {

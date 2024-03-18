@@ -111,7 +111,7 @@ public class ReservationsController : Controller
         return Json(totalPrice);
     }
 
-    [HttpPut]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> MarkAsCompleted(string reservationId)
     {
@@ -119,7 +119,7 @@ public class ReservationsController : Controller
         return RedirectToAction(nameof(MyReservations));
     }
 
-    [HttpPut]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> MarkAsCanceled(string reservationId)
     {
@@ -158,7 +158,7 @@ public class ReservationsController : Controller
         }
     }
     
-    [HttpPut]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(ReservationEditViewModel viewModel)
     {
@@ -201,7 +201,7 @@ public class ReservationsController : Controller
     }
     
     [Authorize(Roles = "Administrator")]
-    [HttpDelete]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(ReservationDeleteViewModel viewModel)
     {

@@ -39,6 +39,7 @@ public class Reservation : BaseEntity
     [Required]
     public decimal Price { get; set; }
     
+    [Range(1, 5)]
     public int PassengersCount { get; set; }
 
     [Required]

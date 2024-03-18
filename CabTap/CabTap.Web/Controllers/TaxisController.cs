@@ -127,7 +127,7 @@ public class TaxisController : Controller
         }
     }
 
-    [HttpPut]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(TaxiEditViewModel viewModel)
     {
@@ -168,7 +168,7 @@ public class TaxisController : Controller
         }
     }
     
-    [HttpDelete]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(TaxiDeleteViewModel viewModel)
     {

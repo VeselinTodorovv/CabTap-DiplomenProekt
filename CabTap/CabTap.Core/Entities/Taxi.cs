@@ -36,7 +36,7 @@ public class Taxi : BaseEntity
     [EnumDataType(typeof(TaxiStatus))]
     public TaxiStatus TaxiStatus { get; set; }
 
-    [Range(3, 5)]
+    [Range(1, 5)]
     public int PassengerSeats { get; set; }
 
     public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();

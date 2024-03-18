@@ -52,7 +52,7 @@
 
                         <div class="form-group">
                             <label asp-for="PassengersCount" class="control-label">Passengers Count</label>
-                            <input asp-for="PassengersCount" class="form-control" />
+                            <input asp-for="PassengersCount" class="form-control" min="1" max="5" />
                             <span asp-validation-for="PassengersCount" class="text-danger"></span>
                         </div>
                         

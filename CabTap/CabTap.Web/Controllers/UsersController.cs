@@ -58,7 +58,7 @@ public class UsersController : Controller
         }
     }
 
-    [HttpDelete]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteProfile(ClientDeleteViewModel viewModel)
     {
