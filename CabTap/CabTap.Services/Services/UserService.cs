@@ -4,6 +4,7 @@ using CabTap.Core.Entities;
 using CabTap.Shared.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CabTap.Services.Services;
 
@@ -29,29 +30,23 @@ public class UserService : IUserService
 
     public async Task<IEnumerable<ClientIndexViewModel>> GetPaginatedClientsAsync(int page, int pageSize)
     {
-        var users = _userManager.Users
-            .ToList();
-
         var adminIds = (await _userManager.GetUsersInRoleAsync("Administrator"))
-            .Select(u => u.Id)
-            .ToArray();
+            .Select(u => u.Id);
 
-        var paginatedUsers = users
+        var paginatedUsers = _userManager.Users
             .Where(u => !adminIds.Contains(u.Id)) // Exclude admins
-            .OrderBy(u => u.UserName)
             .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToList();
+            .Take(pageSize);
 
         var clientViewModels = _mapper.Map<List<ClientIndexViewModel>>(paginatedUsers);
 
         return clientViewModels;
     }
 
-    public Task<ClientDetailsViewModel> GetClientDetailsByIdAsync(string id)
+    public async Task<ClientDetailsViewModel> GetClientDetailsByIdAsync(string id)
     {
-        var user = _userManager.Users
-            .FirstOrDefault(x => x.Id == id);
+        var user = await _userManager.Users
+            .FirstOrDefaultAsync(x => x.Id == id);
         if (user == null)
         {
             throw new InvalidOperationException($"User with ID '{id}' not found.");
@@ -59,13 +54,13 @@ public class UserService : IUserService
 
         var clientDetails = _mapper.Map<ClientDetailsViewModel>(user);
 
-        return Task.FromResult(clientDetails);
+        return clientDetails;
     }
 
-    public Task<ClientDeleteViewModel> GetClientToDeleteByIdAsync(string id)
+    public async Task<ClientDeleteViewModel> GetClientToDeleteByIdAsync(string id)
     {
-        var user = _userManager.Users
-            .FirstOrDefault(x => x.Id == id);
+        var user = await _userManager.Users
+            .FirstOrDefaultAsync(x => x.Id == id);
         if (user == null)
         {
             throw new InvalidOperationException($"User with ID '{id}' not found.");
@@ -73,7 +68,7 @@ public class UserService : IUserService
 
         var client = _mapper.Map<ClientDeleteViewModel>(user);
 
-        return Task.FromResult(client);
+        return client;
     }
 
     public async Task DeleteClientAsync(string id)

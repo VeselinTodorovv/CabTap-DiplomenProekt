@@ -45,12 +45,11 @@ public class TaxiService : ITaxiService
 
     public async Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypesAsync()
     {
-        var taxis = await _taxiRepository.GetAllTaxisAsync();
+        var taxis = (await _taxiRepository.GetAllTaxisAsync())
+            .Where(x => x is { TaxiStatus: TaxiStatus.Available });
         var allCategories = await _categoryService.GetAllCategoriesAsync();
 
-        var availableTaxis = taxis.Where(x => x is { TaxiStatus: TaxiStatus.Available });
-
-        var availableCategoryIds = availableTaxis.Select(x => x.CategoryId).Distinct();
+        var availableCategoryIds = taxis.Select(x => x.CategoryId).Distinct();
         var availableCategories = allCategories.Where(category => availableCategoryIds.Contains(category.Id));
 
         var categoryViewModels = availableCategories.Select(x => new CategoryPairViewModel

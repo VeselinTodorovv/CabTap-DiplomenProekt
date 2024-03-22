@@ -32,8 +32,8 @@ public class StatisticRepository : IStatisticRepository
             .FirstOrDefaultAsync();
 
         // Count of clients only
-        var clientCount = _context.UserRoles
-            .Count(userRole => userRole.RoleId != adminRoleId);
+        var clientCount = await _context.UserRoles
+            .CountAsync(userRole => userRole.RoleId != adminRoleId);
 
         return clientCount;
     }

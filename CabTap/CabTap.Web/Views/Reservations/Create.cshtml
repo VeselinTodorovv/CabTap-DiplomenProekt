@@ -65,9 +65,11 @@
 
                             <div id="scheduledReservationFields" style="display: none;">
                                 <div class="form-group">
-                                    <label asp-for="ReservationDateTime" class="control-label">Scheduled Date and Time:</label>
-                                    <input asp-for="ReservationDateTime" class="form-control" />
-                                    <span asp-validation-for="ReservationDateTime" class="text-danger"></span>
+                                    <div class="col-md-6">
+                                        <label asp-for="ReservationDateTime" class="control-label">Scheduled Date and Time:</label>
+                                        <input asp-for="ReservationDateTime" class="form-control"/>
+                                        <span asp-validation-for="ReservationDateTime" class="text-danger"></span>
+                                    </div>
                                 </div>
                             </div>
 
