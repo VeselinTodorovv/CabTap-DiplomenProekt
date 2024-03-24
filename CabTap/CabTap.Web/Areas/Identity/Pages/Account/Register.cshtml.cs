@@ -125,7 +125,7 @@ public class RegisterModel : PageModel
             return Page();
         }
 
-        var user = await CreateUserAsync();
+        var user = CreateUser();
 
         await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
         var result = await _userManager.CreateAsync(user, Input.Password);
@@ -167,9 +167,9 @@ public class RegisterModel : PageModel
         return (IUserEmailStore<ApplicationUser>)_userStore;
     }
 
-    private Task<ApplicationUser> CreateUserAsync()
+    private ApplicationUser CreateUser()
     {
-        return Task.FromResult(new ApplicationUser
+        return new ApplicationUser
         {
             UserName = Input.UserName,
             Email = Input.Email,
@@ -177,7 +177,7 @@ public class RegisterModel : PageModel
             FirstName = Input.FirstName,
             LastName = Input.LastName,
             PhoneNumber = Input.PhoneNumber
-        });
+        };
     }
 
     private async Task<IdentityResult> AddUserToRoleAsync(ApplicationUser user, string role)

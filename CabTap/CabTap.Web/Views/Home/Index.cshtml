@@ -9,7 +9,8 @@
     <title>@ViewData["Title"]?.ToString()</title>
 
     <link rel="stylesheet" href="~/css/carousel.css">
-    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="~/css/home.css">
 </head>
 
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -25,9 +26,9 @@
             </svg>
             <div class="container">
                 <div class="carousel-caption text-start">
-                    <h1 style="color: #ffffff;">Welcome to CabTap!</h1>
-                    <p style="color: #e0e0e0;">Your ultimate destination for convenient and reliable transportation services. Book your ride with us today and experience seamless travel experiences.</p>
-                    <p><a class="btn btn-lg btn-primary" asp-controller="Reservations" asp-action="Create" style="background-color: #0d6dfc;">Sign up today</a></p>
+                    <h1>Ride in Style and Comfort</h1>
+                    <p class="carouselText">Experience luxury travel with CabTap. From our premium vehicles to our professional drivers, every journey with us is designed to provide comfort, safety, and style.</p>
+                    <p><a class="btn btn-lg btn-primary" asp-controller="Reservations" asp-action="Create">Book Your Ride</a></p>
                 </div>
             </div>
         </div>
@@ -37,9 +38,9 @@
             </svg>
             <div class="container">
                 <div class="carousel-caption text-center">
-                    <h1 style="color: #ffffff;">Effortless Travel Solutions</h1>
-                    <p style="color: #e0e0e0;">Simplify your commute with CabTap. Whether it's a ride to the airport, office, or a night out, we've got you covered with our seamless booking process and reliable service.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#marketing" style="background-color: #0d6dfc;">Learn More</a></p>
+                    <h1>Effortless Travel Solutions</h1>
+                    <p class="carouselText">Simplify your commute with CabTap. Whether it's a ride to the airport, office, or a night out, we've got you covered with our seamless booking process and reliable service.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#marketing">Learn More</a></p>
                 </div>
             </div>
         </div>
@@ -49,9 +50,18 @@
             </svg>
             <div class="container">
                 <div class="carousel-caption text-end">
-                    <h1 style="color: #ffffff;">Ride in Style and Comfort</h1>
-                    <p style="color: #e0e0e0;">Experience luxury travel with CabTap. From our premium vehicles to our professional drivers, every journey with us is designed to provide comfort, safety, and style.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" style="background-color: #0d6dfc;">Book Your Ride</a></p>
+                    <h1>Welcome to CabTap!</h1>
+                    <p class="carouselText">Your ultimate destination for convenient and reliable transportation services. Book your ride with us today and experience seamless travel experiences.</p>
+                    <p>
+                        @if (!User.Identity!.IsAuthenticated)
+                        {
+                            <a class="btn btn-lg btn-primary" asp-area="Identity" asp-page="/Account/Register">Sign up today</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-lg btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index">Manage Profile</a>
+                        }
+                    </p>
                 </div>
             </div>
         </div>
@@ -74,12 +84,12 @@
                 <circle cx="70" cy="70" r="70" fill="#eaf0ff"></circle>
                 <use href="#clock-icon"></use>
             </svg>
-            <h2 style="color: #333333;">24/7 Service</h2>
-            <p style="color: #333333;">Get around the clock assistance with our reliable service.</p>
-            <p><a class="btn btn-secondary" asp-action="Contacts" style="background-color: #0d6dfc;">View details &raquo;</a></p>
+            <h2>24/7 Service</h2>
+            <p>Get around the clock assistance with our reliable service.</p>
+            <p><a class="btn btn-secondary" asp-action="Contacts">View details &raquo;</a></p>
         </div>
         <!-- Define the clock icon SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: none;">
+        <svg class="svgPlaceholder" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
             <symbol id="clock-icon" viewBox="0 0 16 16">
                 <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
@@ -92,12 +102,12 @@
                 <circle cx="70" cy="70" r="70" fill="#eaf0ff"></circle>
                 <use href="#dollar-icon"></use>
             </svg>
-            <h2 style="color: #333333;">Affordable Rates</h2>
-            <p style="color: #333333;">Enjoy our budget-friendly rates without compromising on quality.</p>
-            <p><a class="btn btn-secondary" asp-action="Contacts" style="background-color: #0d6dfc;">View details &raquo;</a></p>
+            <h2>Affordable Rates</h2>
+            <p>Enjoy our budget-friendly rates without compromising on quality.</p>
+            <p><a class="btn btn-secondary" asp-action="Contacts">View details &raquo;</a></p>
         </div>
         <!-- Define the dollar icon SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: none;">
+        <svg class="svgPlaceholder" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
             <symbol id="dollar-icon" viewBox="0 0 16 16">
                 <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z"/>
             </symbol>
@@ -109,12 +119,12 @@
               <circle cx="70" cy="70" r="70" fill="#eaf0ff"></circle>
               <use href="#car-icon"></use>
           </svg>
-          <h2 style="color: #333333;">Professional Drivers</h2>
-          <p style="color: #333333;">Our experienced drivers ensure a safe and comfortable journey.</p>
-          <p><a class="btn btn-secondary" asp-action="Contacts" style="background-color: #0d6dfc;">View details &raquo;</a></p>
+          <h2>Professional Drivers</h2>
+          <p>Our experienced drivers ensure a safe and comfortable journey.</p>
+          <p><a class="btn btn-secondary" asp-action="Contacts">View details &raquo;</a></p>
         </div>
         <!-- Define the car icon SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: none;">
+        <svg class="svgPlaceholder" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
           <symbol id="car-icon" viewBox="0 0 16 16">
               <path d="M4 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0m10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2zM4.862 4.276 3.906 6.19a.51.51 0 0 0 .497.731c.91-.073 2.35-.17 3.597-.17s2.688.097 3.597.17a.51.51 0 0 0 .497-.731l-.956-1.913A.5.5 0 0 0 10.691 4H5.309a.5.5 0 0 0-.447.276"/>
               <path d="M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679q.05.242.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.8.8 0 0 0 .381-.404l.792-1.848ZM4.82 3a1.5 1.5 0 0 0-1.379.91l-.792 1.847a1.8 1.8 0 0 1-.853.904.8.8 0 0 0-.43.564L1.03 8.904a1.5 1.5 0 0 0-.03.294v.413c0 .796.62 1.448 1.408 1.484 1.555.07 3.786.155 5.592.155s4.037-.084 5.592-.155A1.48 1.48 0 0 0 15 9.611v-.413q0-.148-.03-.294l-.335-1.68a.8.8 0 0 0-.43-.563 1.8 1.8 0 0 1-.853-.904l-.792-1.848A1.5 1.5 0 0 0 11.18 3z"/>
@@ -126,13 +136,12 @@
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading" style="color: #333333;">Discover New Horizons. <span class="text-muted">Unleash your wanderlust.</span></h2>
-            <p class="lead" style="color: #333333;">Embark on a journey of exploration and adventure. Our curated travel experiences promise to ignite your passion for discovery and leave you with unforgettable memories.</p>
+            <h2 class="featurette-heading">Discover New Horizons. <span class="text-muted">Unleash your wanderlust.</span></h2>
+            <p class="lead">Embark on a journey of exploration and adventure. Our curated travel experiences promise to ignite your passion for discovery and leave you with unforgettable memories.</p>
         </div>
         <div class="col-md-5">
             <img src="~/images/featurette1.jpg" 
-                 class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" alt="Placeholder: 500x500"
-                 style="border-radius: 15%;">
+                 class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" alt="Placeholder: 500x500">
         </div>
     </div>
 
@@ -140,13 +149,12 @@
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading" style="color: #333333;">Ride in Comfort. <span class="text-muted">Experience luxury on the move.</span></h2>
-            <p class="lead" style="color: #333333;">Indulge in a premium travel experience with our fleet of top-of-the-line vehicles equipped with modern amenities. Sit back, relax, and let us take you to your destination in style and comfort.</p>
+            <h2 class="featurette-heading">Ride in Comfort. <span class="text-muted">Experience luxury on the move.</span></h2>
+            <p class="lead">Indulge in a premium travel experience with our fleet of top-of-the-line vehicles equipped with modern amenities. Sit back, relax, and let us take you to your destination in style and comfort.</p>
         </div>
        <div class="col-md-5">
            <img src="~/images/featurette2.jpg" 
-                class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" alt="Placeholder: 500x500"
-                style="border-radius: 15%;">
+                class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" alt="Placeholder: 500x500">
        </div>
     </div>
 
@@ -154,13 +162,12 @@
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading" style="color: #333333;">Seamless Booking. <span class="text-muted">Effortless reservations at your fingertips.</span></h2>
-            <p class="lead" style="color: #333333;">With our user-friendly booking platform, arranging your rides has never been easier. Simply select your destination, choose your preferred vehicle, and confirm your reservation with just a few clicks. Enjoy hassle-free travel planning with CabTap.</p>
+            <h2 class="featurette-heading">Seamless Booking. <span class="text-muted">Effortless reservations at your fingertips.</span></h2>
+            <p class="lead">With our user-friendly booking platform, arranging your rides has never been easier. Simply select your destination, choose your preferred vehicle, and confirm your reservation with just a few clicks. Enjoy hassle-free travel planning with CabTap.</p>
         </div>
         <div class="col-md-5">
             <img src="~/images/featurette3.jpg" 
-                 class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" alt="Placeholder: 500x500"
-                 style="border-radius: 15%;">
+                 class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" alt="Placeholder: 500x500">
         </div>
     </div>
 

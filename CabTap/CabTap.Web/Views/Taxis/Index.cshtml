@@ -3,19 +3,10 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<style>
-    .status-badge {
-        display: inline-block;
-        padding: 2px 10px;
-        border-radius: 20px;
-        font-size: 15px;
-    }
-    
-    .status-Available { background-color: #28a745; color: #fff; }
-    .status-Unavailable { background-color: #dc3545; color: #fff; }
-    .status-Busy { background-color: #ffc107; color: #212529; }
-</style>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/taxis.css">
+</head>
 
 <h1 class="text-center mb-4">Taxis Index</h1>
 

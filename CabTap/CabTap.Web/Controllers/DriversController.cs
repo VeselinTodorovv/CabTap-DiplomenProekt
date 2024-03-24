@@ -47,9 +47,9 @@ public class DriversController : Controller
         }
     }
     
-    public Task<IActionResult> Create()
+    public IActionResult Create()
     {
-        return Task.FromResult<IActionResult>(View());
+        return View();
     }
 
     [HttpPost]

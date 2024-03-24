@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using CabTap.Core.Entities;
 using CabTap.Core.Entities.Enums;
 
 namespace CabTap.Shared.Reservation;
@@ -8,10 +9,9 @@ public class ReservationAllViewModel
     public string Id { get; set; } = null!;
 
     public string UserId { get; set; } = null!;
-    public string UserName { get; set; } = null!;
+    public ApplicationUser User { get; set; } = null!;
 
     public int TaxiId { get; set; }
-    public int TaxiImage { get; set; }
     
     [Display(Name = "Time of Reservation")]
     [DataType(DataType.DateTime)]

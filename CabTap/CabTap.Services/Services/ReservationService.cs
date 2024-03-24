@@ -42,6 +42,10 @@ public class ReservationService : IReservationService
         }
 
         var taxi = await _taxiService.FindAvailableTaxiAsync(reservationViewModel.CategoryId);
+        if (taxi.PassengerSeats < reservationViewModel.PassengersCount)
+        {
+            reservationViewModel.PassengersCount = taxi.PassengerSeats;
+        }
 
         var reservation = _mapper.Map<Reservation>(reservationViewModel);
 

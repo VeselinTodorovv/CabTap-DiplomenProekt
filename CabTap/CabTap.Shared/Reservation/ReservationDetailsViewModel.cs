@@ -10,9 +10,9 @@ public class ReservationDetailsViewModel
     public string Id { get; set; } = null!;
 
     public string UserId { get; set; } = null!;
+    public Core.Entities.ApplicationUser User { get; set; } = null!;
 
     public int TaxiId { get; set; }
-
     public Core.Entities.Taxi Taxi { get; set; } = null!;
     
     [DataType(DataType.DateTime)]

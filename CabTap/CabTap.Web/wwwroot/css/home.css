@@ -1,0 +1,19 @@
+h1 {
+    color: #ffffff;
+}
+
+h2, p {
+    color: #333333;
+}
+
+img {
+    border-radius: 15%;
+}
+
+.svgPlaceholder {
+    display: none;
+}
+
+.carousel-caption, .carouselText {
+    color: #e0e0e0;
+}

@@ -37,11 +37,20 @@
                         <dt class="text-center col-md-4">Ride Status:</dt>
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.RideStatus)</dd>
 
-                        <dt class="text-center col-md-4">User ID:</dt>
-                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.UserId)</dd>
+                        <dt class="text-center col-md-4">Username:</dt>
+                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.User.UserName)</dd>
 
-                        <dt class="text-center col-md-4">Taxi ID:</dt>
-                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.TaxiId)</dd>
+                        <dt class="text-center col-md-4">Taxi Image:</dt>
+                        <dd class="text-center col-md-8">
+                            @if (!string.IsNullOrEmpty(Model.Taxi.Picture))
+                            {
+                                <img src="@Model.Taxi.Picture" alt="Taxi Image" class="img-fluid">
+                            }
+                            else
+                            {
+                                <span>No image available</span>
+                            }
+                        </dd>
                         <hr>
 
                         <dt class="text-center col-md-4">Created On:</dt>
@@ -50,11 +59,14 @@
                         <dt class="text-center col-md-4">Last Modified On:</dt>
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedOn)</dd>
 
-                        <dt class="text-center col-md-4">Created By:</dt>
-                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.CreatedBy)</dd>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <dt class="text-center col-md-4">Created By:</dt>
+                            <dd class="text-center col-md-8">@Html.DisplayFor(model => model.CreatedBy)</dd>
 
-                        <dt class="text-center col-md-4">Last Modified By:</dt>
-                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedBy)</dd>
+                            <dt class="text-center col-md-4">Last Modified By:</dt>
+                            <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedBy)</dd>
+                        }
                     </dl>
                     <hr>
                     <div class="text-center mt-4">
