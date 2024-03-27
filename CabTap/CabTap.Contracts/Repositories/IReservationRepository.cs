@@ -4,7 +4,7 @@ namespace CabTap.Contracts.Repositories;
 
 public interface IReservationRepository
 {
-    Task<Reservation> GetReservationsByIdAsync(string reservationId);
+    Task<Reservation> GetReservationByIdAsync(string reservationId);
     Task AddReservationAsync(Reservation reservation);
     Task UpdateReservationAsync(Reservation reservation);
     Task DeleteReservationAsync(string reservationId);

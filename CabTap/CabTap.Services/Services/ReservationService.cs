@@ -26,7 +26,7 @@ public class ReservationService : IReservationService
 
     public async Task<ReservationDetailsViewModel> GetReservationByIdAsync(string reservationId)
     {
-        var reservation = await _reservationRepository.GetReservationsByIdAsync(reservationId);
+        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
 
         var model = _mapper.Map<ReservationDetailsViewModel>(reservation);
 
@@ -70,7 +70,7 @@ public class ReservationService : IReservationService
 
         var newTaxiId = 0;
 
-        var existingReservation = await _reservationRepository.GetReservationsByIdAsync(reservationViewModel.Id);
+        var existingReservation = await _reservationRepository.GetReservationByIdAsync(reservationViewModel.Id);
         if (existingReservation.Taxi.CategoryId != reservationViewModel.CategoryId)
         {
             var taxi = await _taxiService.FindAvailableTaxiAsync(reservationViewModel.CategoryId);
@@ -96,7 +96,7 @@ public class ReservationService : IReservationService
 
     public async Task DeleteReservationAsync(string id)
     {
-        var reservation = await _reservationRepository.GetReservationsByIdAsync(id);
+        var reservation = await _reservationRepository.GetReservationByIdAsync(id);
         
         await _taxiService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
         
@@ -161,7 +161,7 @@ public class ReservationService : IReservationService
 
     public async Task MarkAsCompleted(string reservationId)
     {
-        var reservation = await _reservationRepository.GetReservationsByIdAsync(reservationId);
+        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
         if (reservation.RideStatus == RideStatus.InProgress)
         {
             reservation.RideStatus = RideStatus.Finished;
@@ -172,7 +172,7 @@ public class ReservationService : IReservationService
 
     public async Task MarkAsCanceled(string reservationId)
     {
-        var reservation = await _reservationRepository.GetReservationsByIdAsync(reservationId);
+        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
         if (reservation.RideStatus == RideStatus.InProgress)
         {
             reservation.RideStatus = RideStatus.Canceled;

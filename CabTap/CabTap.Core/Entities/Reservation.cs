@@ -15,6 +15,7 @@ public class Reservation : BaseEntity
     public string UserId { get; set; } = null!;
     public virtual ApplicationUser User { get; set; } = null!;
 
+    [Required]
     [ForeignKey(nameof(Taxi))]
     public int TaxiId { get; set; }
     public virtual Taxi Taxi { get; set; } = null!;

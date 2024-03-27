@@ -39,5 +39,5 @@ public class Taxi : BaseEntity
     [Range(1, 5)]
     public int PassengerSeats { get; set; }
 
-    public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+    public virtual IEnumerable<Reservation> Reservations { get; set; } = new List<Reservation>();
 }

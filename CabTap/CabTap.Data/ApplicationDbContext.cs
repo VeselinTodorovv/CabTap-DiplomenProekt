@@ -20,6 +20,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.Entity<Taxi>()
+            .HasIndex(t => t.RegNumber)
+            .IsUnique();
         
         builder.Entity<Reservation>()
             .Property(r => r.Price)

@@ -12,7 +12,7 @@ public class TaxiCreateViewModel
     public int Id { get; set; }
     
     [Required]
-    [RegularExpression(@"^[A-Z]{1,2}\d{4}[A-Z]{2}$", ErrorMessage = "Invalid registration number")]
+    [RegularExpression(@"^[A-Z]{1,2}\d{4}[A-Z]{1,2}$", ErrorMessage = "Invalid registration number")]
     public string RegNumber { get; set; } = null!;
     
     [Required]

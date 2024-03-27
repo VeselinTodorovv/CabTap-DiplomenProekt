@@ -4,6 +4,7 @@ using CabTap.Shared.Driver;
 using CabTap.Shared.Taxi;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CabTap.Web.Controllers;
 
@@ -95,6 +96,11 @@ public class TaxisController : Controller
         catch (UnauthorizedAccessException)
         {
             return Unauthorized();
+        }
+        catch (DbUpdateException)
+        {
+            ModelState.AddModelError(string.Empty, "Taxi with this registration number already exists");
+            return View(viewModel);
         }
     }
 

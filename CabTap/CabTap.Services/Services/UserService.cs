@@ -23,7 +23,7 @@ public class UserService : IUserService
 
     public async Task<ApplicationUser?> GetCurrentUserAsync()
     {
-        var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+        var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext?.User);
 
         return user;
     }

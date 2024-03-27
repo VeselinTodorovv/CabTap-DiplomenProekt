@@ -13,5 +13,5 @@ public class Category
     [Required]
     public decimal Rate { get; set; }
 
-    public virtual ICollection<Taxi> Taxis { get; set; } = new List<Taxi>();
+    public virtual IEnumerable<Taxi> Taxis { get; set; } = new List<Taxi>();
 }

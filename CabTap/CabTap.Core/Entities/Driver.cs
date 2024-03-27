@@ -12,5 +12,5 @@ public class Driver : BaseEntity
     [Required]
     public string Name { get; set; } = null!;
     
-    public virtual ICollection<Taxi> Taxis { get; set; } = new List<Taxi>();
+    public virtual IEnumerable<Taxi> Taxis { get; set; } = new List<Taxi>();
 }

@@ -13,7 +13,7 @@ public class ReservationRepository : IReservationRepository
         _context = context;
     }
 
-    public async Task<Reservation> GetReservationsByIdAsync(string reservationId)
+    public async Task<Reservation> GetReservationByIdAsync(string reservationId)
     {
         var reservation = await _context.Reservations.FindAsync(reservationId);
         if (reservation == null)
@@ -26,12 +26,22 @@ public class ReservationRepository : IReservationRepository
 
     public async Task AddReservationAsync(Reservation reservation)
     {
+        if (reservation == null)
+        {
+            throw new InvalidOperationException("Reservation cannot be null.");
+        }
+        
         await _context.Reservations.AddAsync(reservation);
         await _context.SaveChangesAsync();
     }
 
     public async Task UpdateReservationAsync(Reservation reservation)
     {
+        if (reservation == null)
+        {
+            throw new InvalidOperationException("Reservation cannot be null.");
+        }
+        
         _context.Reservations.Update(reservation);
         await _context.SaveChangesAsync();
     }
