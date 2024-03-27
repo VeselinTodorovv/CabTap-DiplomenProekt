@@ -9,12 +9,8 @@ public class TaxiDeleteViewModel
     public int ManufacturerId { get; set; }
     public int CategoryId { get; set; }
     public string DriverId { get; set; } = null!;
-    public string? Description { get; set; } = null!;
+    public string? Description { get; set; }
     public string? Picture { get; set; }
     public TaxiStatus TaxiStatus { get; set; }
     public int PassengerSeats { get; set; }
-    public DateTime CreatedOn { get; set; }
-    public DateTime LastModifiedOn { get; set; }
-    public string CreatedBy { get; set; } = null!;
-    public string LastModifiedBy { get; set; } = null!;
 }

@@ -25,8 +25,4 @@ public class TaxiAllViewModel
     public string? Picture { get; set; }
     public TaxiStatus TaxiStatus { get; set; }
     public int PassengerSeats { get; set; }
-    public DateTime CreatedOn { get; set; }
-    public DateTime LastModifiedOn { get; set; }
-    public string CreatedBy { get; set; } = null!;
-    public string LastModifiedBy { get; set; } = null!;
 }

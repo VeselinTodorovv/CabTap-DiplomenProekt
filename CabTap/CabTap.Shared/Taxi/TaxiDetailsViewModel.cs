@@ -9,7 +9,7 @@ public class TaxiDetailsViewModel
     public int ManufacturerId { get; set; }
     public int CategoryId { get; set; }
     public string DriverId { get; set; } = null!;
-    public string? Description { get; set; } = null!;
+    public string? Description { get; set; }
     public string? Picture { get; set; }
     public TaxiStatus TaxiStatus { get; set; }
     public int PassengerSeats { get; set; }
