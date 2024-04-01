@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-
+using CabTap.Contracts.Services;
 using CabTap.Web.Models;
 
 using Microsoft.AspNetCore.Mvc;
@@ -8,16 +8,18 @@ namespace CabTap.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ICategoryService _categoryService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICategoryService categoryService)
         {
-            _logger = logger;
+            _categoryService = categoryService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var categories = await _categoryService.GetAllCategoriesAsync();
+            
+            return View(categories);
         }
 
         public IActionResult Contacts()
