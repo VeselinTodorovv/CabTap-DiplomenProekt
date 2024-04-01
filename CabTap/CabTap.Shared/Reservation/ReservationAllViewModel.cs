@@ -23,6 +23,10 @@ public class ReservationAllViewModel
 
     [Display(Name = "To")]
     public string Destination { get; set; } = null!;
+    
+    [Display(Name = "Reservation Type")]
+    [EnumDataType(typeof(ReservationType))]
+    public ReservationType ReservationType { get; set; }
 
     public double Duration { get; set; }
     

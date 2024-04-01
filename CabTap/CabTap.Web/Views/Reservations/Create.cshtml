@@ -50,13 +50,13 @@
                             <div class="form-group">
                                 <label class="control-label">Reservation Type:</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="instantReservation" name="reservationType" value="instant" checked>
+                                    <input asp-for="ReservationType" class="form-check-input" type="radio" id="instantReservation" value="OnDemand" checked>
                                     <label class="form-check-label" for="instantReservation">
                                         Instant Reservation
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="scheduledReservation" name="reservationType" value="scheduled">
+                                    <input asp-for="ReservationType" class="form-check-input" type="radio" id="scheduledReservation" value="Scheduled">
                                     <label class="form-check-label" for="scheduledReservation">
                                         Scheduled Reservation
                                     </label>

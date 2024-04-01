@@ -28,6 +28,11 @@ public class ReservationEditViewModel
 
     [Required]
     public string Destination { get; set; } = null!;
+    
+    [Required]
+    [EnumDataType(typeof(ReservationType))]
+    [Display(Name = "Reservation Type")]
+    public ReservationType ReservationType { get; set; }
 
     [Required]
     public double Duration { get; set; }

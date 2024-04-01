@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    $('input[name="reservationType"]').change(function() {
-        if ($(this).val() === "scheduled") {
+    $('input[name="ReservationType"]').change(function() {
+        if ($(this).val() === "Scheduled") {
             $('#scheduledReservationFields').show();
         } else {
             $('#scheduledReservationFields').hide();
