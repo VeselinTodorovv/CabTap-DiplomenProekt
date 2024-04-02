@@ -55,7 +55,8 @@ public class TaxiService : ITaxiService
         var categoryViewModels = availableCategories.Select(x => new CategoryPairViewModel
         {
             Id = x.Id,
-            Name = x.Name
+            Name = x.Name,
+            Rate = x.Rate
         });
 
         return categoryViewModels;

@@ -75,7 +75,7 @@ public class ReservationsController : Controller
         var reservationViewModel = new ReservationCreateViewModel
         {
             TaxiCategories = categories.ToList(),
-            ReservationDateTime = DateTime.Today
+            ReservationDateTime = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, 0, 0),
         };
         
         return View(reservationViewModel);

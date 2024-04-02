@@ -48,11 +48,13 @@ public class ReservationService : IReservationService
         }
 
         var reservation = _mapper.Map<Reservation>(reservationViewModel);
+        
+        var dateTime = _dateTimeService.GetCurrentDateTime();
 
         reservation.UserId = user.Id;
         reservation.TaxiId = taxi.Id;
+        reservation.ReservationDateTime = dateTime;
 
-        var dateTime = _dateTimeService.GetCurrentDateTime();
         reservation.UpdateAuditInfo(dateTime, user.UserName);
 
         await _taxiService.UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
