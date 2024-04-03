@@ -6,6 +6,6 @@ public interface IStatisticService
     Task<int> CountDriversAsync();
     Task<int> CountClientsAsync();
     Task<int> CountReservationsAsync();
-    Task<int> CountReservationsAsync(string userId);
+    Task<int> CountReservationsAsync(string userName);
     Task<decimal> SumReservationsAsync();
 }

@@ -107,14 +107,36 @@ public class ReservationService : IReservationService
 
     public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsAsync(string searchInput, string sortOption, int page, int pageSize)
     {
-        var reservations = await _reservationRepository.GetPaginatedReservationsAsync(page, pageSize);
-        reservations = FilterReservations(reservations, searchInput);
-        reservations = SortReservations(reservations, sortOption);
+        IEnumerable<Reservation> reservations;
+        var userId = _userService.GetUserId(searchInput);
+        
+        if (string.IsNullOrWhiteSpace(searchInput))
+        {
+            reservations = await _reservationRepository.GetPaginatedReservationsAsync(page, pageSize);
+        }
+        else
+        {
+            reservations = await _reservationRepository.GetPaginatedReservationsByUserIdAsync(userId, page, pageSize);
+        }
 
-        return _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
+        reservations = sortOption switch
+        {
+            "priceAsc" => reservations.OrderBy(x => x.Price),
+            "priceDesc" => reservations.OrderByDescending(x => x.Price),
+            "distanceAsc" => reservations.OrderBy(x => x.Distance),
+            "distanceDesc" => reservations.OrderByDescending(x => x.Distance),
+            "dateAsc" => reservations.OrderBy(x => x.ReservationDateTime),
+            "dateDesc" => reservations.OrderByDescending(x => x.ReservationDateTime),
+            "oldest" => reservations.OrderBy(r => r.CreatedOn),
+            _ => reservations.OrderByDescending(r => r.LastModifiedOn)
+        };
+
+        var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
+
+        return reservationViewModels;
     }
 
-    public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsByUserIdAsync(string searchInput, string sortOption, int page, int pageSize)
+    public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsByUserNameAsync(string searchInput, string sortOption, int page, int pageSize)
     {
         var user = await _userService.GetCurrentUserAsync();
         if (user == null)
@@ -123,24 +145,13 @@ public class ReservationService : IReservationService
         }
 
         var reservations = await _reservationRepository.GetPaginatedReservationsByUserIdAsync(user.Id, page, pageSize);
-        reservations = FilterReservations(reservations, searchInput);
-        reservations = SortReservations(reservations, sortOption);
 
-        return _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
-    }
-
-    private static IEnumerable<Reservation> FilterReservations(IEnumerable<Reservation> reservations, string searchInput)
-    {
         if (!string.IsNullOrWhiteSpace(searchInput))
         {
             reservations = reservations.Where(x => x.User.UserName == searchInput);
         }
-        return reservations;
-    }
 
-    private static IEnumerable<Reservation> SortReservations(IEnumerable<Reservation> reservations, string sortOption)
-    {
-        return sortOption switch
+        reservations = sortOption switch
         {
             "priceAsc" => reservations.OrderBy(x => x.Price),
             "priceDesc" => reservations.OrderByDescending(x => x.Price),
@@ -150,6 +161,9 @@ public class ReservationService : IReservationService
             "dateDesc" => reservations.OrderByDescending(x => x.ReservationDateTime),
             _ => reservations.OrderByDescending(r => r.LastModifiedOn)
         };
+
+        var reservationViewModels = _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
+        return reservationViewModels;
     }
 
     public async Task MarkAsCompleted(string reservationId)

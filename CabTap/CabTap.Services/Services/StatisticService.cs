@@ -32,9 +32,9 @@ public class StatisticService : IStatisticService
         return _statisticRepository.CountReservationsAsync();
     }
 
-    public Task<int> CountReservationsAsync(string userId)
+    public Task<int> CountReservationsAsync(string userName)
     {
-        return _statisticRepository.CountReservationsAsync(userId);
+        return _statisticRepository.CountReservationsAsync(userName);
     }
 
     public Task<decimal> SumReservationsAsync()

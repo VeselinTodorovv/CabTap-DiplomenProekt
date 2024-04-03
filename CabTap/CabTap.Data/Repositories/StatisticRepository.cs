@@ -44,10 +44,10 @@ public class StatisticRepository : IStatisticRepository
             .CountAsync();
     }
     
-    public Task<int> CountReservationsAsync(string userId)
+    public Task<int> CountReservationsAsync(string userName)
     {
         return _context.Reservations
-            .CountAsync(x => x.UserId == userId);
+            .CountAsync(x => x.User.UserName == userName);
     }
 
     public Task<decimal> SumReservationsAsync()

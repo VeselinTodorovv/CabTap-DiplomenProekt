@@ -81,4 +81,11 @@ public class UserService : IUserService
         
         await _userManager.DeleteAsync(user);
     }
+
+    public string GetUserId(string searchInput)
+    {
+        var user = _userManager.Users.FirstOrDefault(u => u.UserName == searchInput);
+        
+        return user?.Id ?? "";
+    }
 }

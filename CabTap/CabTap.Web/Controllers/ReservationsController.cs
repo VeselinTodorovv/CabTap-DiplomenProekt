@@ -32,7 +32,10 @@ public class ReservationsController : Controller
     {
         var reservations = await _reservationService.GetPaginatedReservationsAsync(searchInput, sortOption, page, pageSize);
         
-        var totalReservations = await _statisticService.CountReservationsAsync();
+        var totalReservations = string.IsNullOrWhiteSpace(searchInput)
+            ? await _statisticService.CountReservationsAsync()
+            : await _statisticService.CountReservationsAsync(searchInput);
+
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
 
         ViewData["CurrentPage"] = page;
@@ -43,9 +46,9 @@ public class ReservationsController : Controller
 
     public async Task<IActionResult> MyReservations(string searchInput, string sortOption, int page = 1, int pageSize = 9)
     {
-        var reservations = await _reservationService.GetPaginatedReservationsByUserIdAsync(searchInput, sortOption, page, pageSize);
+        var reservations = await _reservationService.GetPaginatedReservationsByUserNameAsync(searchInput, sortOption, page, pageSize);
         
-        var totalReservations = await _statisticService.CountReservationsAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var totalReservations = await _statisticService.CountReservationsAsync(User.Identity!.Name);
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
 
         ViewData["CurrentPage"] = page;

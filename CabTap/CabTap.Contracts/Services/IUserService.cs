@@ -10,4 +10,5 @@ public interface IUserService
     Task<ClientDetailsViewModel> GetClientDetailsByIdAsync(string id);
     Task<ClientDeleteViewModel> GetClientToDeleteByIdAsync(string id);
     Task DeleteClientAsync(string id);
+    string GetUserId(string searchInput);
 }
