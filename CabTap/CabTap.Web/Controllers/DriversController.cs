@@ -70,6 +70,11 @@ public class DriversController : Controller
         {
             return Unauthorized();
         }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
+        }
     }
     
     public async Task<IActionResult> Edit(string id)

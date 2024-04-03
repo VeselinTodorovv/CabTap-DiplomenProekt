@@ -40,12 +40,22 @@ public class TaxiRepository : ITaxiRepository
 
     public async Task AddTaxiAsync(Taxi taxi)
     {
+        if (taxi == null)
+        {
+            throw new InvalidOperationException("Taxi cannot be null.");
+        }
+        
         await _context.Taxis.AddAsync(taxi);
         await _context.SaveChangesAsync();
     }
 
     public async Task UpdateTaxiAsync(Taxi taxi)
     {
+        if (taxi == null)
+        {
+            throw new InvalidOperationException("Taxi cannot be null.");
+        }
+        
         _context.Taxis.Update(taxi);
         await _context.SaveChangesAsync();
     }

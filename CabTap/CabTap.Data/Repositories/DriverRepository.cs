@@ -31,12 +31,22 @@ public class DriverRepository : IDriverRepository
 
     public async Task AddDriverAsync(Driver driver)
     {
+        if (driver == null)
+        {
+            throw new InvalidOperationException("Driver cannot be null.");
+        }
+        
         await _context.Drivers.AddAsync(driver);
         await _context.SaveChangesAsync();
     }
 
     public async Task UpdateDriverAsync(Driver driver)
     {
+        if (driver == null)
+        {
+            throw new InvalidOperationException("Driver cannot be null.");
+        }
+        
         _context.Drivers.Update(driver);
         await _context.SaveChangesAsync();
     }

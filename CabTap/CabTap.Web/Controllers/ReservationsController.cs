@@ -37,6 +37,11 @@ public class ReservationsController : Controller
             : await _statisticService.CountReservationsAsync(searchInput);
 
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
+        // Ensure totalPages is at least 1
+        if (totalPages <= 0)
+        {
+            totalPages = 1;
+        }
 
         ViewData["CurrentPage"] = page;
         ViewData["TotalPages"] = totalPages;
@@ -101,6 +106,11 @@ public class ReservationsController : Controller
         catch (UnauthorizedAccessException)
         {
             return Unauthorized();
+        }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
         }
     }
     

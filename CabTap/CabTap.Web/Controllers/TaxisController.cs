@@ -97,6 +97,11 @@ public class TaxisController : Controller
         {
             return Unauthorized();
         }
+        catch (InvalidOperationException e)
+        {
+            ModelState.AddModelError(string.Empty, e.Message);
+            return View(viewModel);
+        }
         catch (DbUpdateException)
         {
             ModelState.AddModelError(string.Empty, "Taxi with this registration number already exists");
