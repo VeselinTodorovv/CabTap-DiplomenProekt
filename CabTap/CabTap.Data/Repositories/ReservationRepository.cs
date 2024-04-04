@@ -1,6 +1,6 @@
 using CabTap.Contracts.Repositories;
 using CabTap.Core.Entities;
-using Microsoft.EntityFrameworkCore;
+using CabTap.Core.Entities.Enums;
 
 namespace CabTap.Data.Repositories;
 
@@ -11,6 +11,27 @@ public class ReservationRepository : IReservationRepository
     public ReservationRepository(ApplicationDbContext context)
     {
         _context = context;
+    }
+    
+    public IQueryable<Reservation> GetPaginatedReservationsQuery(string userId, string searchInput, string sortOption, string reservationType)
+    {
+        IQueryable<Reservation> query = _context.Reservations;
+
+        // For MyReservations
+        if (!string.IsNullOrEmpty(userId))
+        {
+            query = query.Where(r => r.UserId == userId);
+        }
+
+        if (!string.IsNullOrWhiteSpace(searchInput))
+        {
+            query = query.Where(r => r.User.UserName == searchInput);
+        }
+
+        query = ApplyFiltering(query, reservationType);
+        query = ApplySorting(query, sortOption);
+
+        return query;
     }
 
     public async Task<Reservation> GetReservationByIdAsync(string reservationId)
@@ -58,34 +79,6 @@ public class ReservationRepository : IReservationRepository
         await _context.SaveChangesAsync();
     }
     
-    public async Task<IEnumerable<Reservation>> GetPaginatedReservationsAsync(string sortOption, int page, int pageSize)
-    {
-        var skip = (page - 1) * pageSize;
-        var query = _context.Reservations
-            .AsQueryable();
-    
-        query = ApplySorting(query, sortOption);
-
-        return await query
-            .Skip(skip)
-            .Take(pageSize)
-            .ToListAsync();
-    }
-
-    public async Task<IEnumerable<Reservation>> GetPaginatedReservationsByUserIdAsync(string userId, string sortOption, int page, int pageSize)
-    {
-        var skip = (page - 1) * pageSize;
-        var query = _context.Reservations
-            .Where(r => r.UserId == userId)
-            .AsQueryable();
-    
-        query = ApplySorting(query, sortOption);
-
-        return await query.Skip(skip)
-            .Take(pageSize)
-            .ToListAsync();
-    }
-
     private static IQueryable<Reservation> ApplySorting(IQueryable<Reservation> query, string sortOption)
     {
         return sortOption switch
@@ -99,5 +92,12 @@ public class ReservationRepository : IReservationRepository
             "oldest" => query.OrderBy(r => r.CreatedOn),
             _ => query.OrderByDescending(r => r.LastModifiedOn)
         };
+    }
+
+    private static IQueryable<Reservation> ApplyFiltering(IQueryable<Reservation> query, string reservationType)
+    {
+        return !string.IsNullOrEmpty(reservationType)
+            ? query.Where(r => r.ReservationType == Enum.Parse<ReservationType>(reservationType))
+            : query;
     }
 }

@@ -27,9 +27,15 @@ public class ReservationsController : Controller
     }
 
     [Authorize(Roles = "Administrator")]
-    public async Task<IActionResult> Index(string searchInput, string sortOption, int page = 1, int pageSize = 9)
+    public async Task<IActionResult> Index(string searchInput, string sortOption, string reservationType, int page = 1, int pageSize = 9)
     {
-        var reservations = await _reservationService.GetPaginatedReservationsAsync(searchInput, sortOption, page, pageSize);
+        // Validate page number
+        if (page <= 0)
+        {
+            return RedirectToAction(nameof(Index), new { searchInput, sortOption, reservationType, page = 1, pageSize });
+        }
+        
+        var reservations = await _reservationService.GetPaginatedReservationsAsync(searchInput, sortOption, reservationType, page, pageSize);
         
         var totalReservations = string.IsNullOrWhiteSpace(searchInput)
             ? await _statisticService.CountReservationsAsync()
@@ -48,12 +54,23 @@ public class ReservationsController : Controller
         return View(reservations);
     }
 
-    public async Task<IActionResult> MyReservations(string searchInput, string sortOption, int page = 1, int pageSize = 9)
+    public async Task<IActionResult> MyReservations(string searchInput, string sortOption, string reservationType, int page = 1, int pageSize = 9)
     {
-        var reservations = await _reservationService.GetPaginatedReservationsByUserNameAsync(searchInput, sortOption, page, pageSize);
+        if (page <= 0)
+        {
+            return RedirectToAction(nameof(MyReservations), new { searchInput, sortOption, reservationType, page = 1, pageSize });
+        }
+        
+        var reservations = await _reservationService.GetPaginatedReservationsByUserNameAsync(searchInput, sortOption,reservationType, page, pageSize);
         
         var totalReservations = await _statisticService.CountReservationsAsync(User.Identity!.Name);
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
+        
+        // Ensure totalPages is at least 1
+        if (totalPages <= 0)
+        {
+            totalPages = 1;
+        }
 
         ViewData["CurrentPage"] = page;
         ViewData["TotalPages"] = totalPages;

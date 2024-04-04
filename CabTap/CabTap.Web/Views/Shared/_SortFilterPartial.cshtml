@@ -3,6 +3,7 @@
 @{
     var sortOption = Context.Request.Query["sortOption"].ToString();
     var searchInput = Context.Request.Query["searchInput"].ToString();
+    var reservationType = Context.Request.Query["reservationType"].ToString();
 }
 
 <div class="row align-items-end">
@@ -27,6 +28,14 @@
             <option value="distanceDesc" selected="@(sortOption == "distanceDesc")">Distance (Long to Short)</option>
         </select>
     </div>
+        <div class="col-md-3">
+            <label for="reservationTypeSelect" class="form-label">Reservation Type:</label>
+            <select class="form-select" id="reservationTypeSelect" name="reservationType">
+                <option value="">All</option>
+                <option value="OnDemand" selected="@(reservationType == "OnDemand")">On-Demand</option>
+                <option value="Scheduled" selected="@(reservationType == "Scheduled")">Scheduled</option>
+            </select>
+        </div>
     <div class="col-md-3">
         <button type="submit" class="btn btn-primary">Apply Filter & Sort</button>
     </div>
