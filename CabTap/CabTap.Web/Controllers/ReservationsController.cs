@@ -1,7 +1,6 @@
-using System.Security.Claims;
 using AutoMapper;
-
 using CabTap.Contracts.Services;
+using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Category;
 using CabTap.Shared.Reservation;
 using Microsoft.AspNetCore.Authorization;
@@ -175,6 +174,12 @@ public class ReservationsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(ReservationEditViewModel viewModel)
     {
+        if (viewModel.RideStatus != RideStatus.InProgress)
+        {
+            ModelState.AddModelError(string.Empty, "Reservation can only be edited when the ride is in progress.");
+            return View(viewModel);
+        }
+        
         if (!ModelState.IsValid)
         {
             return View(viewModel);
@@ -183,7 +188,7 @@ public class ReservationsController : Controller
         try
         {
             await _reservationService.UpdateReservationAsync(viewModel);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(MyReservations));
         }
         catch (InvalidOperationException e)
         {

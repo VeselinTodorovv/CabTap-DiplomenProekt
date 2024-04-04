@@ -2,6 +2,7 @@
 @model CabTap.Shared.Pagination.PaginationViewModel
 
 @{
+    // Ensure pagination doesn't reset sort/filter
     var queryParameters = QueryHelpers.ParseQuery(Context.Request.QueryString.Value);
     var updatedQueryString = "";
     foreach(var (key, value) in queryParameters)

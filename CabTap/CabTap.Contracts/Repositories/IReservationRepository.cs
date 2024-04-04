@@ -9,6 +9,6 @@ public interface IReservationRepository
     Task UpdateReservationAsync(Reservation reservation);
     Task DeleteReservationAsync(string reservationId);
 
-    Task<IEnumerable<Reservation>> GetPaginatedReservationsAsync(int page, int pageSize);
-    Task<IEnumerable<Reservation>> GetPaginatedReservationsByUserIdAsync(string userId, int page, int pageSize);
+    Task<IEnumerable<Reservation>> GetPaginatedReservationsAsync(string sortOption, int page, int pageSize);
+    Task<IEnumerable<Reservation>> GetPaginatedReservationsByUserIdAsync(string userId, string sortOption, int page, int pageSize);
 }

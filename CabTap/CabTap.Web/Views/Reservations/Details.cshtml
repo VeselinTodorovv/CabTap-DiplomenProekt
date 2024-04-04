@@ -1,3 +1,4 @@
+@using CabTap.Core.Entities.Enums
 @model CabTap.Shared.Reservation.ReservationDetailsViewModel
 
 @{
@@ -70,8 +71,14 @@
                     </dl>
                     <hr>
                     <div class="text-center mt-4">
-                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                        <a class="btn btn-danger ml-2" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                        @if (Model.RideStatus == RideStatus.InProgress)
+                        {
+                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                        }
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <a class="btn btn-danger ml-2" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                        }
                         <a class="btn btn-secondary ml-2" href="javascript:history.back()">Back</a>
                     </div>
                 </div>

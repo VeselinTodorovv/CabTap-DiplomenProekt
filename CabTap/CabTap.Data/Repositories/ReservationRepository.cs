@@ -58,23 +58,46 @@ public class ReservationRepository : IReservationRepository
         await _context.SaveChangesAsync();
     }
     
-    public async Task<IEnumerable<Reservation>> GetPaginatedReservationsAsync(int page, int pageSize)
+    public async Task<IEnumerable<Reservation>> GetPaginatedReservationsAsync(string sortOption, int page, int pageSize)
     {
         var skip = (page - 1) * pageSize;
-        return await _context.Reservations
+        var query = _context.Reservations
+            .AsQueryable();
+    
+        query = ApplySorting(query, sortOption);
+
+        return await query
             .Skip(skip)
             .Take(pageSize)
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Reservation>> GetPaginatedReservationsByUserIdAsync(string userId, int page, int pageSize)
+    public async Task<IEnumerable<Reservation>> GetPaginatedReservationsByUserIdAsync(string userId, string sortOption, int page, int pageSize)
     {
         var skip = (page - 1) * pageSize;
-        return await _context.Reservations
+        var query = _context.Reservations
             .Where(r => r.UserId == userId)
-            .Skip(skip)
+            .AsQueryable();
+    
+        query = ApplySorting(query, sortOption);
+
+        return await query.Skip(skip)
             .Take(pageSize)
             .ToListAsync();
     }
 
+    private static IQueryable<Reservation> ApplySorting(IQueryable<Reservation> query, string sortOption)
+    {
+        return sortOption switch
+        {
+            "priceAsc" => query.OrderBy(x => x.Price),
+            "priceDesc" => query.OrderByDescending(x => x.Price),
+            "distanceAsc" => query.OrderBy(x => x.Distance),
+            "distanceDesc" => query.OrderByDescending(x => x.Distance),
+            "dateAsc" => query.OrderBy(x => x.ReservationDateTime),
+            "dateDesc" => query.OrderByDescending(x => x.ReservationDateTime),
+            "oldest" => query.OrderBy(r => r.CreatedOn),
+            _ => query.OrderByDescending(r => r.LastModifiedOn)
+        };
+    }
 }
