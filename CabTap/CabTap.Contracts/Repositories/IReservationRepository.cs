@@ -4,7 +4,7 @@ namespace CabTap.Contracts.Repositories;
 
 public interface IReservationRepository
 {
-    public IQueryable<Reservation> GetPaginatedReservationsQuery(string userId, string searchInput, string sortOption, string reservationType);
+    IQueryable<Reservation> GetReservationsQuery(string userId, string searchInput);
     Task<Reservation> GetReservationByIdAsync(string reservationId);
     Task AddReservationAsync(Reservation reservation);
     Task UpdateReservationAsync(Reservation reservation);

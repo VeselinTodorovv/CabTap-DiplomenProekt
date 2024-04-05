@@ -2,6 +2,7 @@ using AutoMapper;
 using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
+using CabTap.Services.Infrastructure;
 using CabTap.Shared.Driver;
 
 namespace CabTap.Services.Services;
@@ -21,13 +22,23 @@ public class DriverService : IDriverService
         _mapper = mapper;
     }
     
-    public async Task<IEnumerable<DriverAllViewModel>> GetAllDriversAsync()
+    public IEnumerable<DriverAllViewModel> GetAllDriversAsync()
     {
-        var drivers = await _driverRepository.GetAllDriversAsync();
+        var drivers = _driverRepository.GetDriversQuery()
+            .AsEnumerable();
 
         var driverViewModels = _mapper.Map<IEnumerable<DriverAllViewModel>>(drivers);
 
         return driverViewModels;
+    }
+    
+    public async Task<IEnumerable<DriverAllViewModel>> GetPaginatedDriversAsync(int page, int pageSize)
+    {
+        var query = _driverRepository.GetDriversQuery();
+        var drivers = await query.PaginateAsync(page, pageSize);
+        
+        var reservationViewModels = _mapper.Map<IEnumerable<DriverAllViewModel>>(drivers);
+        return reservationViewModels;
     }
 
     public async Task<DriverDetailsViewModel> GetDriverByIdAsync(string driverId)
@@ -76,12 +87,5 @@ public class DriverService : IDriverService
     public async Task DeleteDriverAsync(string driverId)
     {
         await _driverRepository.DeleteDriverAsync(driverId);
-    }
-
-    public async Task<IEnumerable<DriverAllViewModel>> GetPaginatedDriversAsync(int page, int pageSize)
-    {
-        var reservations = await _driverRepository.GetPaginatedDriversAsync(page, pageSize);
-        var reservationViewModels = _mapper.Map<IEnumerable<DriverAllViewModel>>(reservations);
-        return reservationViewModels;
     }
 }

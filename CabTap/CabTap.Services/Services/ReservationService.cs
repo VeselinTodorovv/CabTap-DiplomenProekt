@@ -3,8 +3,8 @@ using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Core.Entities.Enums;
+using CabTap.Services.Infrastructure;
 using CabTap.Shared.Reservation;
-using Microsoft.EntityFrameworkCore;
 
 namespace CabTap.Services.Services;
 
@@ -23,6 +23,37 @@ public class ReservationService : IReservationService
         _mapper = mapper;
         _taxiService = taxiService;
         _dateTimeService = dateTimeService;
+    }
+    
+    public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsAsync(string searchInput, string sortOption, string reservationType, int page, int pageSize)
+    {
+        var userId = await _userService.GetUserId(searchInput);
+        var query = _reservationRepository.GetReservationsQuery(userId, searchInput);
+
+        query = ApplySorting(query, sortOption);
+        query = ApplyFiltering(query, reservationType);
+
+        var reservations = await query.PaginateAsync(page, pageSize);
+        
+        return _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
+    }
+
+    public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsByUserNameAsync(string searchInput, string sortOption, string reservationType, int page, int pageSize)
+    {
+        var user = await _userService.GetCurrentUserAsync();
+        if (user == null)
+        {
+            throw new UnauthorizedAccessException("User is not logged in");
+        }
+        
+        var query = _reservationRepository.GetReservationsQuery(user.Id, searchInput);
+
+        query = ApplySorting(query, sortOption);
+        query = ApplyFiltering(query, reservationType);
+
+        var reservations = await query.PaginateAsync(page, pageSize);
+
+        return _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
     }
 
     public async Task<ReservationDetailsViewModel> GetReservationByIdAsync(string reservationId)
@@ -54,7 +85,11 @@ public class ReservationService : IReservationService
 
         reservation.UserId = user.Id;
         reservation.TaxiId = taxi.Id;
-        reservation.ReservationDateTime = dateTime;
+
+        if (reservation.ReservationType == ReservationType.OnDemand)
+        {
+            reservation.ReservationDateTime = dateTime;
+        }
 
         reservation.UpdateAuditInfo(dateTime, user.UserName);
 
@@ -106,30 +141,26 @@ public class ReservationService : IReservationService
         await _reservationRepository.DeleteReservationAsync(id);
     }
 
-    public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsAsync(string searchInput, string sortOption, string reservationType, int page, int pageSize)
+    private static IQueryable<Reservation> ApplySorting(IQueryable<Reservation> query, string sortOption)
     {
-        var userId = _userService.GetUserId(searchInput);
-        var reservations = await GetReservationsAsync(userId, searchInput, sortOption, reservationType, page, pageSize);
-        
-        return _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
+        return sortOption switch
+        {
+            "priceAsc" => query.OrderBy(x => x.Price),
+            "priceDesc" => query.OrderByDescending(x => x.Price),
+            "distanceAsc" => query.OrderBy(x => x.Distance),
+            "distanceDesc" => query.OrderByDescending(x => x.Distance),
+            "dateAsc" => query.OrderBy(x => x.ReservationDateTime),
+            "dateDesc" => query.OrderByDescending(x => x.ReservationDateTime),
+            "oldest" => query.OrderBy(r => r.CreatedOn),
+            _ => query.OrderByDescending(r => r.LastModifiedOn)
+        };
     }
 
-    public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsByUserNameAsync(string searchInput, string sortOption, string reservationType, int page, int pageSize)
+    private static IQueryable<Reservation> ApplyFiltering(IQueryable<Reservation> query, string reservationType)
     {
-        var user = await _userService.GetCurrentUserAsync() ?? throw new UnauthorizedAccessException("User is not logged in.");
-        var reservations = await GetReservationsAsync(user.Id, searchInput, sortOption, reservationType, page, pageSize);
-
-        return _mapper.Map<IEnumerable<ReservationAllViewModel>>(reservations);
-    }
-
-    private async Task<IEnumerable<Reservation>> GetReservationsAsync(string userId, string searchInput, string sortOption, string reservationType, int page, int pageSize)
-    {
-        var query = _reservationRepository.GetPaginatedReservationsQuery(userId, searchInput, sortOption, reservationType);
-
-        return await query
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+        return !string.IsNullOrEmpty(reservationType)
+            ? query.Where(r => r.ReservationType == Enum.Parse<ReservationType>(reservationType))
+            : query;
     }
 
     public async Task MarkAsCompleted(string reservationId)

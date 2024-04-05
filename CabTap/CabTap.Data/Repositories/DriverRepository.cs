@@ -1,6 +1,5 @@
 using CabTap.Contracts.Repositories;
 using CabTap.Core.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace CabTap.Data.Repositories;
 
@@ -13,9 +12,9 @@ public class DriverRepository : IDriverRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Driver>> GetAllDriversAsync()
+    public IQueryable<Driver> GetDriversQuery()
     {
-        return await _context.Drivers.ToListAsync();
+        return _context.Drivers;
     }
 
     public async Task<Driver> GetDriverByIdAsync(string driverId)
@@ -61,14 +60,5 @@ public class DriverRepository : IDriverRepository
 
         _context.Drivers.Remove(driverToRemove);
         await _context.SaveChangesAsync();
-    }
-
-    public async Task<IEnumerable<Driver>> GetPaginatedDriversAsync(int page, int pageSize)
-    {
-        var skip = (page - 1) * pageSize;
-        return await _context.Drivers
-            .Skip(skip)
-            .Take(pageSize)
-            .ToListAsync();
     }
 }

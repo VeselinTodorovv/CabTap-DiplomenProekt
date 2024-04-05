@@ -1,6 +1,7 @@
 using AutoMapper;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
+using CabTap.Services.Infrastructure;
 using CabTap.Shared.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -33,10 +34,9 @@ public class UserService : IUserService
         var adminIds = (await _userManager.GetUsersInRoleAsync("Administrator"))
             .Select(u => u.Id);
 
-        var paginatedUsers = _userManager.Users
+        var paginatedUsers = await _userManager.Users
             .Where(u => !adminIds.Contains(u.Id)) // Exclude admins
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize);
+            .PaginateAsync(page, pageSize);
 
         var clientViewModels = _mapper.Map<List<ClientIndexViewModel>>(paginatedUsers);
 
@@ -82,9 +82,10 @@ public class UserService : IUserService
         await _userManager.DeleteAsync(user);
     }
 
-    public string GetUserId(string searchInput)
+    public async Task<string> GetUserId(string searchInput)
     {
-        var user = _userManager.Users.FirstOrDefault(u => u.UserName == searchInput);
+        var user = await _userManager.Users
+            .FirstOrDefaultAsync(u => u.UserName == searchInput);
         
         return user?.Id ?? "";
     }

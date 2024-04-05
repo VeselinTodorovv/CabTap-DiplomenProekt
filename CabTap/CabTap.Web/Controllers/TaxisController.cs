@@ -60,7 +60,7 @@ public class TaxisController : Controller
     {
         var categories = await _categoryService.GetAllCategoriesAsync();
         var manufacturers = await _manufacturerService.GetAllManufacturersAsync();
-        var drivers = await _driverService.GetAllDriversAsync();
+        var drivers = _driverService.GetAllDriversAsync();
         
         var taxi = new TaxiCreateViewModel
         {
@@ -117,7 +117,7 @@ public class TaxisController : Controller
             
             var categories = await _categoryService.GetAllCategoriesAsync();
             var manufacturers = await _manufacturerService.GetAllManufacturersAsync();
-            var drivers = await _driverService.GetAllDriversAsync();
+            var drivers = _driverService.GetAllDriversAsync();
             
             var model = _mapper.Map<TaxiEditViewModel>(taxi);
             

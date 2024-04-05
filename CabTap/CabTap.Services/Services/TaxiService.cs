@@ -3,8 +3,10 @@ using CabTap.Contracts.Repositories;
 using CabTap.Contracts.Services;
 using CabTap.Core.Entities;
 using CabTap.Core.Entities.Enums;
+using CabTap.Services.Infrastructure;
 using CabTap.Shared.Category;
 using CabTap.Shared.Taxi;
+using Microsoft.EntityFrameworkCore;
 
 namespace CabTap.Services.Services;
 
@@ -27,15 +29,17 @@ public class TaxiService : ITaxiService
 
     public async Task<IEnumerable<TaxiAllViewModel>> GetPaginatedTaxisAsync(int page, int pageSize)
     {
-        var reservations = await _taxiRepository.GetPaginatedTaxisAsync(page, pageSize);
-        var reservationViewModels = _mapper.Map<IEnumerable<TaxiAllViewModel>>(reservations);
+        var query = _taxiRepository.GetTaxisQuery();
+        var taxis = await query.PaginateAsync(page, pageSize);
+
+        var reservationViewModels = _mapper.Map<IEnumerable<TaxiAllViewModel>>(taxis);
         return reservationViewModels;
     }
 
     public async Task<TaxiAllViewModel> FindAvailableTaxiAsync(int categoryId)
     {
-        var taxi = (await _taxiRepository.GetAllTaxisAsync())
-            .FirstOrDefault(x => x.TaxiStatus == TaxiStatus.Available &&
+        var taxi = await _taxiRepository.GetTaxisQuery()
+            .FirstOrDefaultAsync(x => x.TaxiStatus == TaxiStatus.Available &&
                                  x.CategoryId == categoryId);
 
         var model = _mapper.Map<TaxiAllViewModel>(taxi);
@@ -45,8 +49,8 @@ public class TaxiService : ITaxiService
 
     public async Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypesAsync()
     {
-        var taxis = (await _taxiRepository.GetAllTaxisAsync())
-            .Where(x => x is { TaxiStatus: TaxiStatus.Available });
+        var taxis = _taxiRepository.GetTaxisQuery()
+            .Where(x => x.TaxiStatus == TaxiStatus.Available);
         var allCategories = await _categoryService.GetAllCategoriesAsync();
 
         var availableCategoryIds = taxis.Select(x => x.CategoryId).Distinct();

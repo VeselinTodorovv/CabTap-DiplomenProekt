@@ -13,18 +13,9 @@ public class TaxiRepository : ITaxiRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Taxi>> GetAllTaxisAsync()
+    public IQueryable<Taxi> GetTaxisQuery()
     {
-        return await _context.Taxis.ToListAsync();
-    }
-
-    public async Task<IEnumerable<Taxi>> GetPaginatedTaxisAsync(int page, int pageSize)
-    {
-        var skip = (page - 1) * pageSize;
-        return await _context.Taxis
-            .Skip(skip)
-            .Take(pageSize)
-            .ToListAsync();
+        return _context.Taxis;
     }
 
     public async Task<Taxi> GetTaxiByIdAsync(int taxiId)

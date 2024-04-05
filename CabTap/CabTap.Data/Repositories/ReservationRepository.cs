@@ -1,6 +1,5 @@
 using CabTap.Contracts.Repositories;
 using CabTap.Core.Entities;
-using CabTap.Core.Entities.Enums;
 
 namespace CabTap.Data.Repositories;
 
@@ -13,7 +12,7 @@ public class ReservationRepository : IReservationRepository
         _context = context;
     }
     
-    public IQueryable<Reservation> GetPaginatedReservationsQuery(string userId, string searchInput, string sortOption, string reservationType)
+    public IQueryable<Reservation> GetReservationsQuery(string userId, string searchInput)
     {
         IQueryable<Reservation> query = _context.Reservations;
 
@@ -22,14 +21,11 @@ public class ReservationRepository : IReservationRepository
         {
             query = query.Where(r => r.UserId == userId);
         }
-
-        if (!string.IsNullOrWhiteSpace(searchInput))
+        // For Index
+        else if (!string.IsNullOrWhiteSpace(searchInput))
         {
             query = query.Where(r => r.User.UserName == searchInput);
         }
-
-        query = ApplyFiltering(query, reservationType);
-        query = ApplySorting(query, sortOption);
 
         return query;
     }
@@ -77,27 +73,5 @@ public class ReservationRepository : IReservationRepository
 
         _context.Reservations.Remove(reservationToRemove);
         await _context.SaveChangesAsync();
-    }
-    
-    private static IQueryable<Reservation> ApplySorting(IQueryable<Reservation> query, string sortOption)
-    {
-        return sortOption switch
-        {
-            "priceAsc" => query.OrderBy(x => x.Price),
-            "priceDesc" => query.OrderByDescending(x => x.Price),
-            "distanceAsc" => query.OrderBy(x => x.Distance),
-            "distanceDesc" => query.OrderByDescending(x => x.Distance),
-            "dateAsc" => query.OrderBy(x => x.ReservationDateTime),
-            "dateDesc" => query.OrderByDescending(x => x.ReservationDateTime),
-            "oldest" => query.OrderBy(r => r.CreatedOn),
-            _ => query.OrderByDescending(r => r.LastModifiedOn)
-        };
-    }
-
-    private static IQueryable<Reservation> ApplyFiltering(IQueryable<Reservation> query, string reservationType)
-    {
-        return !string.IsNullOrEmpty(reservationType)
-            ? query.Where(r => r.ReservationType == Enum.Parse<ReservationType>(reservationType))
-            : query;
     }
 }
