@@ -31,10 +31,21 @@ public class TaxisController : Controller
 
     public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
     {
+        // Validate page number
+        if (page <= 0)
+        {
+            return RedirectToAction(nameof(Index), new { page = 1, pageSize });
+        }
+        
         var taxis = await _taxiService.GetPaginatedTaxisAsync(page, pageSize);
         
         var totalReservations = await _statisticService.CountTaxisAsync();
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
+        // Ensure totalPages is at least 1
+        if (totalPages <= 0)
+        {
+            totalPages = 1;
+        }
         
         ViewData["CurrentPage"] = page;
         ViewData["TotalPages"] = totalPages;

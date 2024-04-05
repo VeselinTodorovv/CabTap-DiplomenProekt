@@ -22,10 +22,21 @@ public class DriversController : Controller
     
     public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
     {
+        // Validate page number
+        if (page <= 0)
+        {
+            return RedirectToAction(nameof(Index), new { page = 1, pageSize });
+        }
+        
         var drivers = await _driverService.GetPaginatedDriversAsync(page, pageSize);
         
         var totalReservations = await _statisticService.CountDriversAsync();
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
+        // Ensure totalPages is at least 1
+        if (totalPages <= 0)
+        {
+            totalPages = 1;
+        }
         
         ViewData["CurrentPage"] = page;
         ViewData["TotalPages"] = totalPages;

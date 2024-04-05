@@ -68,12 +68,12 @@ public static class ApplicationBuilderExtension
             return;
         }
 
-        context.Categories.AddRange(
-            new Category { Name = "Standard", Rate = 1.2m },
-            new Category { Name = "Premium", Rate = 2.0m},
-            new Category { Name = "Luxury", Rate = 2.6m },
-            new Category { Name = "Economy", Rate = 1.5m },
-            new Category { Name = "Eco-friendly", Rate = 1.6m }
+        await context.Categories.AddRangeAsync(
+            new Category { Name = "Standard", Rate = 1.2m, Image = "/images/categories/standard.png"},
+            new Category { Name = "Premium", Rate = 2.0m, Image = "/images/categories/premium.png"},
+            new Category { Name = "Luxury", Rate = 2.6m, Image = "/images/categories/luxury.png"},
+            new Category { Name = "Economy", Rate = 1.5m, Image = "/images/categories/economy.png"},
+            new Category { Name = "Eco-friendly", Rate = 1.6m, Image = "/images/categories/eco-friendly.png"}
         );
 
         await context.SaveChangesAsync();
@@ -86,7 +86,7 @@ public static class ApplicationBuilderExtension
             return;
         }
         
-        context.Manufacturers.AddRange(
+        await context.Manufacturers.AddRangeAsync(
             new Manufacturer { Name = "Toyota" },
             new Manufacturer { Name = "BMW" },
             new Manufacturer { Name = "Mercedes" },

@@ -37,6 +37,7 @@ public static class ServiceCollectionExtension
             cfg.AddProfile(new TaxiMappingProfile());
             cfg.AddProfile(new ReservationMappingProfile());
             cfg.AddProfile(new UserMappingProfile());
+            cfg.AddProfile(new CategoryMappingProfile());
         });
 
         var mapper = config.CreateMapper();

@@ -12,6 +12,8 @@ public class Category
     
     [Required]
     public decimal Rate { get; set; }
+    
+    public string? Image { get; set; }
 
     public virtual IEnumerable<Taxi> Taxis { get; set; } = new List<Taxi>();
 }

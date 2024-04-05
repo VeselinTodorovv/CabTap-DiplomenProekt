@@ -10,4 +10,6 @@ public class CategoryPairViewModel
     public string Name { get; set; } = null!;
     
     public decimal Rate { get; set; }
+    
+    public string? Image { get; set; }
 }
