@@ -32,7 +32,7 @@ public class ReservationsController : Controller
         // Validate page number
         if (page <= 0)
         {
-            return RedirectToAction(nameof(Index), new { searchInput, sortOption, reservationType, page = 1, pageSize });
+            return RedirectToAction(nameof(Index));
         }
         
         var reservations = await _reservationService.GetPaginatedReservationsAsync(searchInput, sortOption, reservationType, page, pageSize);
@@ -56,9 +56,10 @@ public class ReservationsController : Controller
 
     public async Task<IActionResult> MyReservations(string searchInput, string sortOption, string reservationType, int page = 1, int pageSize = 9)
     {
+        // Validate page number
         if (page <= 0)
         {
-            return RedirectToAction(nameof(MyReservations), new { searchInput, sortOption, reservationType, page = 1, pageSize });
+            return RedirectToAction(nameof(Index));
         }
         
         var reservations = await _reservationService.GetPaginatedReservationsByUserNameAsync(searchInput, sortOption,reservationType, page, pageSize);
@@ -135,7 +136,6 @@ public class ReservationsController : Controller
     {
         var categoryRate = (await _categoryService.GetCategoryByIdAsync(categoryId)).Rate;
 
-        // Just an example
         var totalPrice = (decimal) distance * categoryRate;
         return Json(totalPrice);
     }

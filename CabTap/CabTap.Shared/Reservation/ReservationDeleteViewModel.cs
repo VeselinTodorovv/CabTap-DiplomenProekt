@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using CabTap.Core.Entities;
 using CabTap.Core.Entities.Enums;
 
 namespace CabTap.Shared.Reservation;
@@ -8,6 +9,7 @@ public class ReservationDeleteViewModel
     public string Id { get; set; } = null!;
 
     public string UserId { get; set; } = null!;
+    public ApplicationUser User { get; set; }
 
     public int TaxiId { get; set; }
     

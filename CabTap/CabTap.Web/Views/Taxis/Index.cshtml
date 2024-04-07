@@ -52,7 +52,7 @@
 
 @{
     var currentPage = (int)(ViewData["CurrentPage"] ?? 1);
-    var totalPages = (int)(ViewData["TotalPages"] ?? Model.Count() / 10);
+    var totalPages = (int)(ViewData["TotalPages"] ?? Model.Count() / 9);
 
     var paginationModel = new PaginationViewModel
     {

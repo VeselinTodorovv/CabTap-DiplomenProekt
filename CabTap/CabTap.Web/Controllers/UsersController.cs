@@ -22,7 +22,7 @@ public class UsersController : Controller
         // Validate page number
         if (page <= 0)
         {
-            return RedirectToAction(nameof(Index), new { page = 1, pageSize });
+            return RedirectToAction(nameof(Index));
         }
         
         var users = await _userService.GetPaginatedClientsAsync(page, pageSize);

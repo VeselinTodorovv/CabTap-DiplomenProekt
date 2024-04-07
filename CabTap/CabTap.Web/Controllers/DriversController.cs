@@ -25,7 +25,7 @@ public class DriversController : Controller
         // Validate page number
         if (page <= 0)
         {
-            return RedirectToAction(nameof(Index), new { page = 1, pageSize });
+            return RedirectToAction(nameof(Index));
         }
         
         var drivers = await _driverService.GetPaginatedDriversAsync(page, pageSize);

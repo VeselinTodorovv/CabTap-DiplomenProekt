@@ -169,6 +169,11 @@ public class ReservationService : IReservationService
         if (reservation.RideStatus == RideStatus.InProgress)
         {
             reservation.RideStatus = RideStatus.Finished;
+            
+            var dateTime = _dateTimeService.GetCurrentDateTime();
+            var userName = (await _userService.GetCurrentUserAsync())!.UserName;
+            reservation.UpdateAuditInfo(dateTime, userName);
+            
             await _reservationRepository.UpdateReservationAsync(reservation);
             await _taxiService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
         }
@@ -180,6 +185,11 @@ public class ReservationService : IReservationService
         if (reservation.RideStatus == RideStatus.InProgress)
         {
             reservation.RideStatus = RideStatus.Canceled;
+
+            var dateTime = _dateTimeService.GetCurrentDateTime();
+            var userName = (await _userService.GetCurrentUserAsync())!.UserName;
+            reservation.UpdateAuditInfo(dateTime, userName);
+            
             await _reservationRepository.UpdateReservationAsync(reservation);
             await _taxiService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
         }

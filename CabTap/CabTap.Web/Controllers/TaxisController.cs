@@ -12,7 +12,6 @@ namespace CabTap.Web.Controllers;
 public class TaxisController : Controller
 {
     private readonly ITaxiService _taxiService;
-    
     private readonly ICategoryService _categoryService;
     private readonly IManufacturerService _manufacturerService;
     private readonly IDriverService _driverService;
@@ -29,12 +28,12 @@ public class TaxisController : Controller
         _statisticService = statisticService;
     }
 
-    public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 9)
     {
         // Validate page number
         if (page <= 0)
         {
-            return RedirectToAction(nameof(Index), new { page = 1, pageSize });
+            return RedirectToAction(nameof(Index));
         }
         
         var taxis = await _taxiService.GetPaginatedTaxisAsync(page, pageSize);

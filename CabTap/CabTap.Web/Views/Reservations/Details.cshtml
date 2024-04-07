@@ -41,11 +41,12 @@
                         <dt class="text-center col-md-4">Username:</dt>
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.User.UserName)</dd>
 
-                        <dt class="text-center col-md-4">Taxi Image:</dt>
+                        <dt class="text-center col-md-4">Category:</dt>
                         <dd class="text-center col-md-8">
                             @if (!string.IsNullOrEmpty(Model.Taxi.Picture))
                             {
-                                <img src="@Model.Taxi.Picture" alt="Taxi Image" class="img-fluid">
+                                <img src="@Model.Taxi.Category.Image" alt="Taxi Image" class="img-fluid"
+                                     style="max-height: 100px;">
                             }
                             else
                             {
