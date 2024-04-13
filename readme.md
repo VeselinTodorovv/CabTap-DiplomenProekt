@@ -1,7 +1,3 @@
-Certainly! Here's a template for a README file based on the context you provided:
-
----
-
 # CabTap
 
 CabTap is a taxi reservation system built with ASP.NET Core.
@@ -24,22 +20,9 @@ CabTap is a taxi reservation system built with ASP.NET Core.
 CabTap is a web application that provides users with a reliable and efficient taxi reservation system, designed to be user-friendly and easy to use.
 
 ## Features
-
-- **User Roles:**
-  - Guests
-  - Clients
-  - Admins
-
-- **Reservation System:**
-  - Clients are able to place reservations, provided all requirements are met.
-  - Clients are able to make edits to certain parts of their reservation
-
-- **Taxi Management:**
-  - Admins can add, edit, and remove taxi information.
-  - Passengers can view available taxis.
-
-- **User Authentication:**
-  - Secure registration and login role-based system.
+- Users can enjoy features such as address autocompletion, viewing the distance and cost of their trip, choosing a taxi type and more when creating reservations!
+- Users can see their reservation history.
+- Admins can see and manage reservations, as well as access other important information conveniently.
 
 ## Getting Started
 
@@ -67,43 +50,21 @@ cd CabTap
 dotnet build
 ```
 
-4. Run the Api:
+4. Run the Web App:
 
 ```bash
-cd CabTap.Api
 dotnet run
-```
-
-5. Run the Web App:
-
-```bash
-  cd ..
-  cd CabTap.Web
-  dotnet run
 ```
 
 ## Usage
 
 - Visit the application in your web browser.
 - Log in or register an account.
-- Explore the features available for your role (client or admin).
+- Explore the features available to you!
 
-## Folder Structure
-
-```plaintext
-CabTap/
-|-- src/
-|   |-- CabTap.Api/        # API
-|   |-- CabTap.Contracts/  # Shared interfaces and models
-|   |-- CabTap.Core/       # Core business logic and entities
-|   |-- CabTap.Data/       # Data access layer
-|   |-- CabTap.Services/   # Application services
-|   |-- CabTap.Shared/     # Shared models for the Api and Web apps
-|   |-- CabTap.Web/        # ASP.NET Core Web Application
-|-- .gitignore
-|-- LICENSE
-|-- README.md
-```
+## Project Architecture
+<img src="docs/CabTapArchitecture.png" alt="Architecture" width="225" height="538">
+This is an overview of the project's architecture. Each layer is dependent on those above.
 
 ## Technologies Used
 
@@ -115,7 +76,7 @@ CabTap/
 #### Front end:
 - HTML, CSS
 - Razor, Bootstrap
-- JavaScript, LeafletJS
+- JavaScript, jQuery, LeafletJS
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
