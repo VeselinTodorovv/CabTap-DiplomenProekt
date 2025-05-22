@@ -6,34 +6,86 @@
     <projectFile profileName="CabTap.Web">CabTap.Web/CabTap.Web.csproj</projectFile>
     <projectFile profileName="IIS Express">CabTap.Web/CabTap.Web.csproj</projectFile>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="swap data &amp; services architectural layers, authenticate StatisticsController">
+    <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Utilities/IAuditService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Utilities/ITaxiManagerService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/AuditService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/TaxiManagerService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/ReservationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/ReservationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Shared/Reservation/ReservationAllViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Shared/Reservation/ReservationAllViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Shared/Reservation/ReservationCreateViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Shared/Reservation/ReservationCreateViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Shared/Taxi/TaxiCreateViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Shared/Taxi/TaxiCreateViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Drivers/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Drivers/Details.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Reservations/Details.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Shared/_CardContentPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Shared/_CardContentPartial.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Statistics/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Statistics/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Taxis/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Taxis/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/ICategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Taxi/ICategoryRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/IDriverRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Taxi/IDriverRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/IManufacturerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Taxi/IManufacturerRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/IReservationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Reservation/IReservationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/IStatisticRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Analytics/IStatisticRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/ITaxiRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Taxi/ITaxiRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/ICategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/ICategoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IDateTimeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Utilities/IDateTimeService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IDriverService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/IDriverService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IManufacturerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/IManufacturerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IReservationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Reservation/IReservationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IStatisticService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Analytics/IStatisticService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/ITaxiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/ITaxiService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Identity/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/BaseEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/CategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/CategoryRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/DriverRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/DriverRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/ManufacturerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/ManufacturerRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/ReservationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/ReservationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/StatisticRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/StatisticRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/TaxiRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/TaxiRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Infrastructure/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Infrastructure/ServiceCollectionExtension.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/CategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/CategoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/DateTimeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/DateTimeService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/DriverService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/DriverService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/ManufacturerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/ManufacturerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/ReservationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Reservation/ReservationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/StatisticService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Analytics/StatisticService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/TaxiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/TaxiService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Identity/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/DriversController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/DriversController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/StatisticsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/StatisticsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/TaxisController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/TaxisController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/UsersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Drivers/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Drivers/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Home/Contacts.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Home/Contacts.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Taxis/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Taxis/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Users/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Users/Index.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "VeselinTodorovv"
+  }
+}]]></component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
       <filtered-out-file-type name="LOCAL_BRANCH" />
@@ -42,56 +94,69 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/VeselinTodorovv/DiplomenProekt.git",
+    "accountId": "6ab4788d-2541-48b8-8f6e-239b4e1aad24"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1af51483c9bf18871cce649b9f966dd7be686536f998c33bba3c5fc4adea4a0/Task.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea95343b9387b73062a9b61b7538f826c54ce3529632b4472ba4494044d23/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/538811d0fba15c61b743814ea8b7193d48cfbb84a1a53c5db2512b1b329330/DbSet.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/357d87849baf229feda8f4d10c552b0ceb83ac666291d7a17ddfd88c9b76/ViewContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Home/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c1da7b6c7c71a954fe3eb2531c6476711b3e6d93a8d76795386d326bb9dbc/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Web/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/fd4328e906d748c1b13904971ee859f9f200/91/f1b186fe/0200000Cpdb11.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/df71358f7b7337a1eee3a65abe6d678dd9a065e256b8cc3fd44a2949754/Object.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Contracts/Services/Reservation/IReservationService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/ICategoryService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/BaseEntity.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/CategoryService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Contracts/Services/ICategoryService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d555b6bc78df652895d9bf368762f415ad13deb21ca2dc977dd48593f46e2/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Views/Home/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1e8feaadf5c3fa14d36ea2a638c432a2e1a47b7837d8b83d88303c5d9c15cf/AsyncValueTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Controllers/StatisticsController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/598be7b76329747735b1e8e8b423ca7a2fff54b0a9474b23f1e0f920a889444d/RazorView.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cf91eb35ab781c324ad4fa382dce85631ec37cf3813529f7c92208d866c851/TaskContinuation.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/41cc2659897ded1c75869e25f414a6dce3380d39586a3b5a93cc7ebd6ce5/SignInManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b34cdea969917836c37b6dc15e916d3e5954856c12dd1caf3926e4a2a3a0dfe2/AuthorizationAppBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/b7df8cac8cd3461cb2ff4ac7ecebd98f2e698/69/d50929da/02000015pdb.il" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/DEV/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8d3195c9ba918c7860b66ce3965d4b9f173653cfea2479e8bb842d3513a89b/RazorPageOfT.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/TaxiService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Analytics/StatisticService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Taxi/CategoryService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Taxi/TaxiService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Web/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Web/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="HttpClientEndpointsTabState">
+    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;7428b15f1daa36710ccbb4a779cb50256d03436e&quot; value=&quot;###&amp;#10;GET https://localhost:7254/Home/Contacts/{{id}}&quot; /&gt;&#10;  &lt;entry key=&quot;617d38d42b867ad53ee436de1a9a7774eb022632&quot; value=&quot;###&amp;#10;GET https://localhost:7254/Drivers/Index/{{id}}&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2axMp8fg3EIIY2aWkFr4qJgWTaa" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="sqlserver" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.CabTap.Web.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CodeLensConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="C:\Users\titan\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="4b195625-2ae3-4967-b5d3-bcf002eb5679" reportId="CabTap/qodana/2025-03-31" />
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="CabTap.Web" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -146,77 +211,112 @@
       <workItem from="1710625575512" duration="1657000" />
       <workItem from="1710631681905" duration="1094000" />
       <workItem from="1710686651267" duration="5519000" />
-      <workItem from="1710693171620" duration="11581000" />
-    </task>
-    <task id="LOCAL-00001" summary="implement leaflet map with routing">
-      <created>1705443031280</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1705443031280</updated>
-    </task>
-    <task id="LOCAL-00002" summary="add empty taxi viewmodels">
-      <created>1705498367130</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1705498367130</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Implement Taxi Repository">
-      <created>1705498536713</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1705498536713</updated>
-    </task>
-    <task id="LOCAL-00004" summary="define taxi service">
-      <created>1705502511289</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1705502511289</updated>
-    </task>
-    <task id="LOCAL-00005" summary="refactor WebApp's configuration.">
-      <created>1705504752280</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1705504752280</updated>
-    </task>
-    <task id="LOCAL-00006" summary="implement dummy taxi service">
-      <created>1705505553765</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1705505553765</updated>
-    </task>
-    <task id="LOCAL-00007" summary="edit .gitignore">
-      <created>1705577212321</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1705577212321</updated>
-    </task>
-    <task id="LOCAL-00008" summary="add .vscode to .gitignore">
-      <created>1705577257192</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1705577257192</updated>
-    </task>
-    <task id="LOCAL-00009" summary="add a confirm route button (will serve for sending data to the controller later on)">
-      <created>1705578560090</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1705578560090</updated>
-    </task>
-    <task id="LOCAL-00010" summary="move sendRouteData() function from main.js to routing.js">
-      <created>1705578981176</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1705578981176</updated>
+      <workItem from="1710693171620" duration="14694000" />
+      <workItem from="1710711138556" duration="7463000" />
+      <workItem from="1710719953674" duration="741000" />
+      <workItem from="1710767909966" duration="2094000" />
+      <workItem from="1710782051007" duration="10139000" />
+      <workItem from="1710852264323" duration="2100000" />
+      <workItem from="1710879073633" duration="344000" />
+      <workItem from="1710886721953" duration="2116000" />
+      <workItem from="1710939621741" duration="1621000" />
+      <workItem from="1710943607335" duration="105000" />
+      <workItem from="1710954949304" duration="4358000" />
+      <workItem from="1710973230992" duration="3939000" />
+      <workItem from="1711011622992" duration="3910000" />
+      <workItem from="1711031955855" duration="630000" />
+      <workItem from="1711067410381" duration="888000" />
+      <workItem from="1711116032713" duration="2339000" />
+      <workItem from="1711122607117" duration="2051000" />
+      <workItem from="1711241587876" duration="1453000" />
+      <workItem from="1711286081655" duration="443000" />
+      <workItem from="1711292690638" duration="2434000" />
+      <workItem from="1711297772176" duration="9682000" />
+      <workItem from="1711315771646" duration="463000" />
+      <workItem from="1711372413054" duration="766000" />
+      <workItem from="1711376114345" duration="467000" />
+      <workItem from="1711407896912" duration="588000" />
+      <workItem from="1711454932073" duration="925000" />
+      <workItem from="1711484985004" duration="636000" />
+      <workItem from="1711487583942" duration="7791000" />
+      <workItem from="1711542506627" duration="3643000" />
+      <workItem from="1711550480075" duration="5566000" />
+      <workItem from="1711634987238" duration="2788000" />
+      <workItem from="1711643332980" duration="6458000" />
+      <workItem from="1711709688972" duration="8957000" />
+      <workItem from="1711814059375" duration="7034000" />
+      <workItem from="1711844962623" duration="1984000" />
+      <workItem from="1711909341350" duration="5187000" />
+      <workItem from="1711963874671" duration="6634000" />
+      <workItem from="1711988562598" duration="12912000" />
+      <workItem from="1712081772552" duration="5860000" />
+      <workItem from="1712158100023" duration="18209000" />
+      <workItem from="1712234960417" duration="13979000" />
+      <workItem from="1712320695233" duration="11400000" />
+      <workItem from="1712342255005" duration="7581000" />
+      <workItem from="1712418706278" duration="6422000" />
+      <workItem from="1712428984966" duration="4172000" />
+      <workItem from="1712446958520" duration="1496000" />
+      <workItem from="1712499268678" duration="387000" />
+      <workItem from="1712500193943" duration="1346000" />
+      <workItem from="1712516939821" duration="1876000" />
+      <workItem from="1712527315866" duration="783000" />
+      <workItem from="1712612115558" duration="595000" />
+      <workItem from="1712686209982" duration="1246000" />
+      <workItem from="1712769165247" duration="10243000" />
+      <workItem from="1712932106481" duration="4323000" />
+      <workItem from="1713033880784" duration="3511000" />
+      <workItem from="1713099328830" duration="192000" />
+      <workItem from="1713119718001" duration="671000" />
+      <workItem from="1713126137697" duration="1179000" />
+      <workItem from="1713203007136" duration="3589000" />
+      <workItem from="1713261262990" duration="1193000" />
+      <workItem from="1713287124218" duration="2416000" />
+      <workItem from="1713296043240" duration="644000" />
+      <workItem from="1714836035769" duration="9566000" />
+      <workItem from="1715098061236" duration="208000" />
+      <workItem from="1716326161512" duration="623000" />
+      <workItem from="1716327765822" duration="1284000" />
+      <workItem from="1716329489962" duration="641000" />
+      <workItem from="1716505943475" duration="10000" />
+      <workItem from="1716756943306" duration="2558000" />
+      <workItem from="1716760617361" duration="3346000" />
+      <workItem from="1716836952974" duration="1497000" />
+      <workItem from="1717067343923" duration="2125000" />
+      <workItem from="1717283504960" duration="650000" />
+      <workItem from="1717333849265" duration="2442000" />
+      <workItem from="1717418354643" duration="727000" />
+      <workItem from="1717452996209" duration="1023000" />
+      <workItem from="1717583382130" duration="1707000" />
+      <workItem from="1717667714646" duration="5375000" />
+      <workItem from="1717689536919" duration="4761000" />
+      <workItem from="1717757638304" duration="4666000" />
+      <workItem from="1717971657996" duration="1344000" />
+      <workItem from="1718048517484" duration="81000" />
+      <workItem from="1718203874873" duration="2871000" />
+      <workItem from="1719063156572" duration="87000" />
+      <workItem from="1720699243926" duration="1619000" />
+      <workItem from="1721084252026" duration="888000" />
+      <workItem from="1722638518407" duration="194000" />
+      <workItem from="1728061309311" duration="980000" />
+      <workItem from="1729615849645" duration="1840000" />
+      <workItem from="1729800022708" duration="2210000" />
+      <workItem from="1729862051603" duration="311000" />
+      <workItem from="1730838956805" duration="1421000" />
+      <workItem from="1731503187473" duration="751000" />
+      <workItem from="1732134801035" duration="1432000" />
+      <workItem from="1733432759297" duration="610000" />
+      <workItem from="1733905160914" duration="881000" />
+      <workItem from="1738672778968" duration="467000" />
+      <workItem from="1738673284631" duration="408000" />
+      <workItem from="1741887044200" duration="69000" />
+      <workItem from="1742833607219" duration="648000" />
+      <workItem from="1742836214257" duration="914000" />
+      <workItem from="1742857341629" duration="341000" />
+      <workItem from="1743434538292" duration="1438000" />
+      <workItem from="1743436113134" duration="539000" />
+      <workItem from="1743437060322" duration="900000" />
+      <workItem from="1747760625714" duration="1022000" />
     </task>
     <task id="LOCAL-00011" summary="merge hide/show confirm button functions into one.">
       <created>1705607360801</created>
@@ -386,19 +486,210 @@
       <option name="project" value="LOCAL" />
       <updated>1710701913240</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="add regex for regnumbers, free taxis after completing/canceling reservations, minor view improvements">
+      <created>1710706468283</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1710706468283</updated>
+    </task>
+    <task id="LOCAL-00036" summary="ui enhancements">
+      <created>1710712906201</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1710712906201</updated>
+    </task>
+    <task id="LOCAL-00037" summary="use HttpPut &amp; HttpDelete, instead of only HttpPost; remove truncation partial and remove Html.Raw usages">
+      <created>1710716347107</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1710716347107</updated>
+    </task>
+    <task id="LOCAL-00038" summary=".">
+      <created>1710769168821</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1710769168821</updated>
+    </task>
+    <task id="LOCAL-00039" summary=".">
+      <created>1710769321936</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1710769321936</updated>
+    </task>
+    <task id="LOCAL-00040" summary="update migration">
+      <created>1710769414228</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1710769414228</updated>
+    </task>
+    <task id="LOCAL-00041" summary="continue work on front end">
+      <created>1710797259587</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1710797259587</updated>
+    </task>
+    <task id="LOCAL-00042" summary="images">
+      <created>1710797294550</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1710797294550</updated>
+    </task>
+    <task id="LOCAL-00043" summary="improved repositories/services and added first/last pages in pagination">
+      <created>1711068086692</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1711068086692</updated>
+    </task>
+    <task id="LOCAL-00044" summary="finishing touches">
+      <created>1711312052537</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1711312052537</updated>
+    </task>
+    <task id="LOCAL-00045" summary="general improvements">
+      <created>1711546139325</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1711546139326</updated>
+    </task>
+    <task id="LOCAL-00046" summary="remove unused viewmodel properties">
+      <created>1711558231958</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1711558231958</updated>
+    </task>
+    <task id="LOCAL-00047" summary="small improvements to home page and ReservationService">
+      <created>1711976903253</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1711976903253</updated>
+    </task>
+    <task id="LOCAL-00048" summary="implement scheduled and on-demand reservations">
+      <created>1712008843928</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1712008843928</updated>
+    </task>
+    <task id="LOCAL-00049" summary="fixes to reservation dates">
+      <created>1712090973933</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1712090973933</updated>
+    </task>
+    <task id="LOCAL-00050" summary="fix sort and filter for reservations">
+      <created>1712164662757</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1712164662758</updated>
+    </task>
+    <task id="LOCAL-00051" summary="fix pagination resetting sort/filter and add null checking in repositories">
+      <created>1712176131977</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1712176131978</updated>
+    </task>
+    <task id="LOCAL-00052" summary="fix reservation sorting and general UI improvements">
+      <created>1712235479785</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1712235479785</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Implement reservation filter by type and refactor related service and repository">
+      <created>1712274565310</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1712274565310</updated>
+    </task>
+    <task id="LOCAL-00054" summary="move pagination logic from repository data access layer to service layer">
+      <created>1712327277028</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1712327277028</updated>
+    </task>
+    <task id="LOCAL-00055" summary="add an image property to categories and display categories in the home page">
+      <created>1712343622479</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1712343622479</updated>
+    </task>
+    <task id="LOCAL-00056" summary="misc changes">
+      <created>1712500269422</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1712500269422</updated>
+    </task>
+    <task id="LOCAL-00057" summary="update readme.md">
+      <created>1713035630086</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1713035630086</updated>
+    </task>
+    <task id="LOCAL-00058" summary="add architecture image">
+      <created>1713035671867</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1713035671867</updated>
+    </task>
+    <task id="LOCAL-00059" summary="upload DB backup">
+      <created>1713289706186</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1713289706186</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="6a5aa1f1-a707-469b-92ab-4b747f7da567" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="6a5aa1f1-a707-469b-92ab-4b747f7da567">
           <value>
             <State>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -417,6 +708,7 @@
                   </entry>
                 </map>
               </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
             </State>
           </value>
         </entry>
@@ -427,110 +719,134 @@
         </entry>
       </map>
     </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="6a5aa1f1-a707-469b-92ab-4b747f7da567" value="TOOL_WINDOW" />
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="move sendRouteData() function from main.js to routing.js" />
-    <MESSAGE value="merge hide/show confirm button functions into one." />
-    <MESSAGE value="implement base entity class and improve core entities" />
-    <MESSAGE value="add Duration and Price properties for Reservations" />
-    <MESSAGE value="added Driver ViewModels" />
-    <MESSAGE value="Implemented Driver repository, service and controller" />
-    <MESSAGE value="Small taxi repository and controller refactor" />
-    <MESSAGE value="bind driver viewModels and models in DriverService" />
-    <MESSAGE value="bind taxi models and viewModels" />
-    <MESSAGE value="register services in ServiceCollectionExtension.cs, instead of Program.cs" />
-    <MESSAGE value="set default values on driver objects create/edit" />
-    <MESSAGE value="Category ViewModels" />
-    <MESSAGE value="Implement category repository &amp; service" />
-    <MESSAGE value="Initialize navigation properties" />
-    <MESSAGE value="Implement reservation repository" />
-    <MESSAGE value="Use 'AddAsync' instead of 'Add'" />
-    <MESSAGE value="Added reservation viewModels" />
-    <MESSAGE value="Implemented reservation service and added respective controller" />
-    <MESSAGE value="fix for UpdateTaxiAsync in TaxiRepository.cs" />
-    <MESSAGE value="added taxi create view" />
-    <MESSAGE value="Modify create view style" />
-    <MESSAGE value="add phone number to register form and improve views" />
-    <MESSAGE value="implement deleting clients" />
-    <MESSAGE value="grinding TODOs" />
     <MESSAGE value="swap data &amp; services architectural layers, authenticate StatisticsController" />
-    <option name="LAST_COMMIT_MESSAGE" value="swap data &amp; services architectural layers, authenticate StatisticsController" />
+    <MESSAGE value="add regex for regnumbers, free taxis after completing/canceling reservations, minor view improvements" />
+    <MESSAGE value="ui enhancements" />
+    <MESSAGE value="use HttpPut &amp; HttpDelete, instead of only HttpPost; remove truncation partial and remove Html.Raw usages" />
+    <MESSAGE value="." />
+    <MESSAGE value="update migration" />
+    <MESSAGE value="continue work on front end" />
+    <MESSAGE value="images" />
+    <MESSAGE value="improved repositories/services and added first/last pages in pagination" />
+    <MESSAGE value="finishing touches" />
+    <MESSAGE value="general improvements" />
+    <MESSAGE value="remove unused viewmodel properties" />
+    <MESSAGE value="small improvements to home page and ReservationService" />
+    <MESSAGE value="implement scheduled and on-demand reservations" />
+    <MESSAGE value="fixes to reservation dates" />
+    <MESSAGE value="fix sort and filter for reservations" />
+    <MESSAGE value="fix pagination resetting sort/filter and add null checking in repositories" />
+    <MESSAGE value="fix reservation sorting and general UI improvements" />
+    <MESSAGE value="Implement reservation filter by type and refactor related service and repository" />
+    <MESSAGE value="move pagination logic from repository data access layer to service layer" />
+    <MESSAGE value="add an image property to categories and display categories in the home page" />
+    <MESSAGE value="misc changes" />
+    <MESSAGE value="update readme.md" />
+    <MESSAGE value="add architecture image" />
+    <MESSAGE value="upload DB backup" />
+    <option name="LAST_COMMIT_MESSAGE" value="upload DB backup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/CabTap.Web/Controllers/UsersController.cs</url>
-          <line>66</line>
-          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\UsersController.cs" initialLine="71" containingFunctionPresentation="method 'DeleteProfile'">
+          <line>78</line>
+          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\UsersController.cs" containingFunctionPresentation="method 'DeleteProfile'">
             <startOffsets>
-              <option value="1791" />
+              <option value="2099" />
             </startOffsets>
             <endOffsets>
-              <option value="1842" />
+              <option value="2150" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/CabTap.Web/Controllers/TaxisController.cs</url>
-          <line>176</line>
-          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\TaxisController.cs" initialLine="181" containingFunctionPresentation="method 'Delete'">
+          <line>198</line>
+          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\TaxisController.cs" containingFunctionPresentation="method 'Delete'">
             <startOffsets>
-              <option value="5093" />
+              <option value="5774" />
             </startOffsets>
             <endOffsets>
-              <option value="5142" />
+              <option value="5823" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs</url>
-          <line>209</line>
-          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\ReservationsController.cs" initialLine="214" containingFunctionPresentation="method 'Delete'">
+          <line>246</line>
+          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\ReservationsController.cs" containingFunctionPresentation="method 'Delete'">
             <startOffsets>
-              <option value="6654" />
+              <option value="7956" />
             </startOffsets>
             <endOffsets>
-              <option value="6717" />
+              <option value="8019" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/CabTap.Web/Controllers/DriversController.cs</url>
-          <line>137</line>
-          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\DriversController.cs" initialLine="142" containingFunctionPresentation="method 'Delete'">
+          <line>154</line>
+          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\DriversController.cs" containingFunctionPresentation="Method 'Delete'">
             <startOffsets>
-              <option value="3563" />
+              <option value="3992" />
             </startOffsets>
             <endOffsets>
-              <option value="3616" />
+              <option value="4045" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/CabTap.Services/Services/ReservationService.cs</url>
-          <line>159</line>
-          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Services\Services\ReservationService.cs" initialLine="159" containingFunctionPresentation="method 'MarkAsCompleted'">
+          <url>file://$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs</url>
+          <line>116</line>
+          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\ReservationsController.cs" containingFunctionPresentation="method 'Create'">
             <startOffsets>
-              <option value="6305" />
+              <option value="4022" />
             </startOffsets>
             <endOffsets>
-              <option value="6392" />
+              <option value="4045" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="63" />
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs</url>
+          <line>99</line>
+          <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\ReservationsController.cs" containingFunctionPresentation="method 'Create'">
+            <startOffsets>
+              <option value="3412" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3477" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="66" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="67" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="68" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

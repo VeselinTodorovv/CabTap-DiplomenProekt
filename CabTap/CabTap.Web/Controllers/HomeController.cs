@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using CabTap.Contracts.Services;
+using CabTap.Contracts.Services.Taxi;
 using CabTap.Web.Models;
 
 using Microsoft.AspNetCore.Mvc;

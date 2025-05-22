@@ -1,7 +1,7 @@
 using CabTap.Core.Entities;
 using CabTap.Shared.User;
 
-namespace CabTap.Contracts.Services;
+namespace CabTap.Contracts.Services.Identity;
 
 public interface IUserService
 {

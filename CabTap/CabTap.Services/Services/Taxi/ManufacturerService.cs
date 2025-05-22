@@ -1,8 +1,8 @@
-using CabTap.Contracts.Repositories;
-using CabTap.Contracts.Services;
+using CabTap.Contracts.Repositories.Taxi;
+using CabTap.Contracts.Services.Taxi;
 using CabTap.Shared.Manufacturer;
 
-namespace CabTap.Services.Services;
+namespace CabTap.Services.Services.Taxi;
 
 public class ManufacturerService : IManufacturerService
 {

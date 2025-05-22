@@ -1,4 +1,5 @@
-﻿using CabTap.Contracts.Services;
+﻿using CabTap.Contracts.Services.Analytics;
+using CabTap.Contracts.Services.Identity;
 using CabTap.Shared.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

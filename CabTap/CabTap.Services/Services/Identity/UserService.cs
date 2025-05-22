@@ -1,5 +1,5 @@
 using AutoMapper;
-using CabTap.Contracts.Services;
+using CabTap.Contracts.Services.Identity;
 using CabTap.Core.Entities;
 using CabTap.Services.Infrastructure;
 using CabTap.Shared.User;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace CabTap.Services.Services;
+namespace CabTap.Services.Services.Identity;
 
 public class UserService : IUserService
 {

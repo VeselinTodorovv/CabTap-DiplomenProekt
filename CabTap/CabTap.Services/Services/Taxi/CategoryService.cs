@@ -1,9 +1,9 @@
 using AutoMapper;
-using CabTap.Contracts.Repositories;
-using CabTap.Contracts.Services;
+using CabTap.Contracts.Repositories.Taxi;
+using CabTap.Contracts.Services.Taxi;
 using CabTap.Shared.Category;
 
-namespace CabTap.Services.Services;
+namespace CabTap.Services.Services.Taxi;
 
 public class CategoryService : ICategoryService
 {

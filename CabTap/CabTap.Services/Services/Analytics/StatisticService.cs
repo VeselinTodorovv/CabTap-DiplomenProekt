@@ -1,7 +1,7 @@
-using CabTap.Contracts.Repositories;
-using CabTap.Contracts.Services;
+using CabTap.Contracts.Repositories.Analytics;
+using CabTap.Contracts.Services.Analytics;
 
-namespace CabTap.Services.Services;
+namespace CabTap.Services.Services.Analytics;
 
 public class StatisticService : IStatisticService
 {

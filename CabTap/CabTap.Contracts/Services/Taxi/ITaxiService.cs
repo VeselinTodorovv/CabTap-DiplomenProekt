@@ -1,17 +1,14 @@
-using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Category;
 using CabTap.Shared.Taxi;
 
-namespace CabTap.Contracts.Services;
+namespace CabTap.Contracts.Services.Taxi;
 
 public interface ITaxiService
 {
     Task<IEnumerable<TaxiAllViewModel>> GetPaginatedTaxisAsync(int page, int pageSize);
-    Task<TaxiAllViewModel> FindAvailableTaxiAsync(int categoryId);
     Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypesAsync();
     Task<TaxiDetailsViewModel> GetTaxiByIdAsync(int taxiId);
     Task AddTaxiAsync(TaxiCreateViewModel taxiViewModel);
     Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel);
-    Task UpdateTaxiStatusAsync(int taxiId, TaxiStatus newStatus);
     Task DeleteTaxiAsync(int taxiId);
 }

@@ -1,6 +1,6 @@
-namespace CabTap.Contracts.Repositories;
+namespace CabTap.Contracts.Services.Analytics;
 
-public interface IStatisticRepository
+public interface IStatisticService
 {
     Task<int> CountTaxisAsync();
     Task<int> CountDriversAsync();

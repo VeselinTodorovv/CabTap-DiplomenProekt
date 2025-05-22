@@ -1,6 +1,6 @@
 using CabTap.Shared.Driver;
 
-namespace CabTap.Contracts.Services;
+namespace CabTap.Contracts.Services.Taxi;
 
 public interface IDriverService
 {

@@ -1,6 +1,6 @@
 using CabTap.Shared.Reservation;
 
-namespace CabTap.Contracts.Services;
+namespace CabTap.Contracts.Services.Reservation;
 
 public interface IReservationService
 {

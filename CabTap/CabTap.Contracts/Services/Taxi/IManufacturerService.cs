@@ -1,6 +1,6 @@
 using CabTap.Shared.Manufacturer;
 
-namespace CabTap.Contracts.Services;
+namespace CabTap.Contracts.Services.Taxi;
 
 public interface IManufacturerService
 {

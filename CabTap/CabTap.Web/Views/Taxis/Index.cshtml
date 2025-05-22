@@ -15,36 +15,37 @@
 <div class="container mt-4">
     <div class="table-responsive">
         <table class="table table-striped text-center">
+            <caption>All Taxis</caption>
             <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Registration Number</th>
-                    <th scope="col">Manufacturer</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Driver</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Picture</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Passenger Seats</th>
-                    <th scope="col">Actions</th>
-                </tr>
+            <tr>
+                <th scope="col">Registration Number</th>
+                <th scope="col">Manufacturer</th>
+                <th scope="col">Category</th>
+                <th scope="col">Driver</th>
+                <th scope="col">Description</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Status</th>
+                <th scope="col">Passenger Seats</th>
+                <th scope="col">Actions</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.RegNumber)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ManufacturerName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DriverName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                        <td><img src="@Html.DisplayFor(modelItem => item.Picture)" alt="Taxi Image" class="img-thumbnail" style="max-height: 100px;" /></td>
-                        <td>
-                            <span class="status-badge status-@(item.TaxiStatus.ToString())">@Html.DisplayFor(modelItem => item.TaxiStatus)</span>
-                        </td>
-                        <td>@Html.DisplayFor(modelItem => item.PassengerSeats)</td>
-                        <td><partial name="_EntityActionsPartial" model="@item.Id" /></td>
-                    </tr>
-                }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.RegNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ManufacturerName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DriverName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td><img src="@Html.DisplayFor(modelItem => item.Picture)" alt="Taxi Image" class="img-thumbnail" style="max-height: 100px;"/></td>
+                    <td>
+                        <span class="status-badge status-@(item.TaxiStatus.ToString())">@Html.DisplayFor(modelItem => item.TaxiStatus)</span>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.PassengerSeats)</td>
+                    <td><partial name="_EntityActionsPartial" model="@item.Id"/></td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>

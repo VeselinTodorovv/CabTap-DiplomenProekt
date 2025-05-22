@@ -1,4 +1,4 @@
-using CabTap.Contracts.Repositories;
+using CabTap.Contracts.Repositories.Reservation;
 using CabTap.Core.Entities;
 
 namespace CabTap.Data.Repositories;

@@ -1,11 +1,13 @@
 using AutoMapper;
-using CabTap.Contracts.Repositories;
-using CabTap.Contracts.Services;
+using CabTap.Contracts.Repositories.Taxi;
+using CabTap.Contracts.Services.Identity;
+using CabTap.Contracts.Services.Taxi;
+using CabTap.Contracts.Services.Utilities;
 using CabTap.Core.Entities;
 using CabTap.Services.Infrastructure;
 using CabTap.Shared.Driver;
 
-namespace CabTap.Services.Services;
+namespace CabTap.Services.Services.Taxi;
 
 public class DriverService : IDriverService
 {
@@ -13,12 +15,14 @@ public class DriverService : IDriverService
     private readonly IUserService _userService;
     private readonly IDateTimeService _dateTimeService;
     private readonly IMapper _mapper;
+    private readonly IAuditService _auditService;
     
-    public DriverService(IDriverRepository driverRepository, IUserService userService, IMapper mapper, IDateTimeService dateTimeService)
+    public DriverService(IDriverRepository driverRepository, IUserService userService, IMapper mapper, IDateTimeService dateTimeService, IAuditService auditService)
     {
         _driverRepository = driverRepository;
         _userService = userService;
         _dateTimeService = dateTimeService;
+        _auditService = auditService;
         _mapper = mapper;
     }
     
@@ -61,7 +65,7 @@ public class DriverService : IDriverService
         var driver = _mapper.Map<Driver>(driverViewModel);
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-        driver.UpdateAuditInfo(dateTime, user.UserName);
+        _auditService.UpdateAuditInfo(driver, dateTime, user.UserName);
 
         await _driverRepository.AddDriverAsync(driver);
     }
@@ -79,7 +83,7 @@ public class DriverService : IDriverService
         _mapper.Map(driverViewModel, existingDriver);
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-        existingDriver.UpdateAuditInfo(dateTime, user.UserName);  
+        _auditService.UpdateAuditInfo(existingDriver, dateTime, user.UserName);
 
         await _driverRepository.UpdateDriverAsync(existingDriver);
     }

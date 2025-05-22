@@ -1,4 +1,4 @@
-using CabTap.Contracts.Repositories;
+using CabTap.Contracts.Repositories.Taxi;
 using CabTap.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 

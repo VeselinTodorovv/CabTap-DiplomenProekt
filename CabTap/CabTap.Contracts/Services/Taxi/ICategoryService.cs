@@ -1,6 +1,6 @@
 using CabTap.Shared.Category;
 
-namespace CabTap.Contracts.Services;
+namespace CabTap.Contracts.Services.Taxi;
 
 public interface ICategoryService
 {

@@ -1,4 +1,4 @@
-using CabTap.Contracts.Repositories;
+using CabTap.Contracts.Repositories.Analytics;
 using Microsoft.EntityFrameworkCore;
 
 namespace CabTap.Data.Repositories;

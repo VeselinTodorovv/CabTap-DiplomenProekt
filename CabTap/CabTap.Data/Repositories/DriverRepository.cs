@@ -1,10 +1,9 @@
-using CabTap.Contracts.Repositories;
+using CabTap.Contracts.Repositories.Taxi;
 using CabTap.Core.Entities;
 
 namespace CabTap.Data.Repositories;
 
-public class DriverRepository : IDriverRepository
-{
+public class DriverRepository : IDriverRepository {
     private readonly ApplicationDbContext _context;
     
     public DriverRepository(ApplicationDbContext context)

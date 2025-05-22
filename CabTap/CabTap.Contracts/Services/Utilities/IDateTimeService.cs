@@ -1,4 +1,4 @@
-﻿namespace CabTap.Contracts.Services;
+﻿namespace CabTap.Contracts.Services.Utilities;
 
 public interface IDateTimeService
 {

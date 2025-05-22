@@ -1,5 +1,7 @@
 using AutoMapper;
-using CabTap.Contracts.Services;
+using CabTap.Contracts.Services.Analytics;
+using CabTap.Contracts.Services.Reservation;
+using CabTap.Contracts.Services.Taxi;
 using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Category;
 using CabTap.Shared.Reservation;
@@ -100,7 +102,7 @@ public class ReservationsController : Controller
         var reservationViewModel = new ReservationCreateViewModel
         {
             TaxiCategories = categories.ToList(),
-            ReservationDateTime = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, 0, 0),
+            ReservationDateTime = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, DateTime.Today.Hour, 0, 0, DateTimeKind.Local),
         };
         
         return View(reservationViewModel);
@@ -164,7 +166,7 @@ public class ReservationsController : Controller
             var availableCategories = (await _taxiService.GetAvailableTaxiTypesAsync()).ToList();
 
             // Add current category, if it is not already in the list
-            if (availableCategories.All(c => c.Id != reservation.Taxi.CategoryId))
+            if (availableCategories.TrueForAll(c => c.Id != reservation.Taxi.CategoryId))
             {
                 var currentCategory = new CategoryPairViewModel
                 {

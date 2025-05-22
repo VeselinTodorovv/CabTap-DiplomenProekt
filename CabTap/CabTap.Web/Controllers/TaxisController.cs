@@ -1,5 +1,6 @@
 using AutoMapper;
-using CabTap.Contracts.Services;
+using CabTap.Contracts.Services.Analytics;
+using CabTap.Contracts.Services.Taxi;
 using CabTap.Shared.Driver;
 using CabTap.Shared.Taxi;
 using Microsoft.AspNetCore.Authorization;

@@ -29,6 +29,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddAutoMapperProfiles();
 
+builder.Services.RegisterRepositories();
 builder.Services.RegisterServices();
 
 var app = builder.Build();

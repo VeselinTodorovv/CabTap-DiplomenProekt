@@ -1,14 +1,14 @@
 using AutoMapper;
-using CabTap.Contracts.Repositories;
-using CabTap.Contracts.Services;
-using CabTap.Core.Entities;
+using CabTap.Contracts.Repositories.Taxi;
+using CabTap.Contracts.Services.Identity;
+using CabTap.Contracts.Services.Taxi;
+using CabTap.Contracts.Services.Utilities;
 using CabTap.Core.Entities.Enums;
 using CabTap.Services.Infrastructure;
 using CabTap.Shared.Category;
 using CabTap.Shared.Taxi;
-using Microsoft.EntityFrameworkCore;
 
-namespace CabTap.Services.Services;
+namespace CabTap.Services.Services.Taxi;
 
 public class TaxiService : ITaxiService
 {
@@ -17,12 +17,14 @@ public class TaxiService : ITaxiService
     private readonly ICategoryService _categoryService;
     private readonly IDateTimeService _dateTimeService;
     private readonly IMapper _mapper;
+    private readonly IAuditService _auditService;
     
-    public TaxiService(ITaxiRepository taxiRepository, IUserService userService, IMapper mapper, ICategoryService categoryService, IDateTimeService dateTimeService)
+    public TaxiService(ITaxiRepository taxiRepository, IUserService userService, IMapper mapper, ICategoryService categoryService, IDateTimeService dateTimeService, IAuditService auditService)
     {
         _taxiRepository = taxiRepository;
         _userService = userService;
         _dateTimeService = dateTimeService;
+        _auditService = auditService;
         _mapper = mapper;
         _categoryService = categoryService;
     }
@@ -34,17 +36,6 @@ public class TaxiService : ITaxiService
 
         var reservationViewModels = _mapper.Map<IEnumerable<TaxiAllViewModel>>(taxis);
         return reservationViewModels;
-    }
-
-    public async Task<TaxiAllViewModel> FindAvailableTaxiAsync(int categoryId)
-    {
-        var taxi = await _taxiRepository.GetTaxisQuery()
-            .FirstOrDefaultAsync(x => x.TaxiStatus == TaxiStatus.Available &&
-                                 x.CategoryId == categoryId);
-
-        var model = _mapper.Map<TaxiAllViewModel>(taxi);
-
-        return model;
     }
 
     public async Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypesAsync()
@@ -83,10 +74,10 @@ public class TaxiService : ITaxiService
             throw new UnauthorizedAccessException("User is not logged in");
         }
 
-        var taxi = _mapper.Map<Taxi>(taxiViewModel);
+        var taxi = _mapper.Map<Core.Entities.Taxi>(taxiViewModel);
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-        taxi.UpdateAuditInfo(dateTime, user.UserName);
+        _auditService.UpdateAuditInfo(taxi, dateTime, user.UserName);
 
         await _taxiRepository.AddTaxiAsync(taxi);
     }
@@ -104,18 +95,9 @@ public class TaxiService : ITaxiService
         _mapper.Map(taxiViewModel, existingTaxi);
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-        existingTaxi.UpdateAuditInfo(dateTime, user.UserName);
+        _auditService.UpdateAuditInfo(existingTaxi, dateTime, user.UserName);
 
         await _taxiRepository.UpdateTaxiAsync(existingTaxi);
-    }
-
-    public async Task UpdateTaxiStatusAsync(int taxiId, TaxiStatus newStatus)
-    {
-        var taxi = await _taxiRepository.GetTaxiByIdAsync(taxiId);
-
-        taxi.TaxiStatus = newStatus;
-
-        await _taxiRepository.UpdateTaxiAsync(taxi);
     }
 
     public async Task DeleteTaxiAsync(int taxiId)

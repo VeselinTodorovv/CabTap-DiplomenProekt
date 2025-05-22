@@ -1,16 +1,26 @@
 using AutoMapper;
-using CabTap.Contracts.Repositories;
-using CabTap.Contracts.Services;
+using CabTap.Contracts.Repositories.Analytics;
+using CabTap.Contracts.Repositories.Reservation;
+using CabTap.Contracts.Repositories.Taxi;
+using CabTap.Contracts.Services.Analytics;
+using CabTap.Contracts.Services.Identity;
+using CabTap.Contracts.Services.Reservation;
+using CabTap.Contracts.Services.Taxi;
+using CabTap.Contracts.Services.Utilities;
 using CabTap.Data.Repositories;
 using CabTap.Services.Profiles;
-using CabTap.Services.Services;
+using CabTap.Services.Services.Analytics;
+using CabTap.Services.Services.Identity;
+using CabTap.Services.Services.Reservation;
+using CabTap.Services.Services.Taxi;
+using CabTap.Services.Services.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CabTap.Services.Infrastructure;
 
 public static class ServiceCollectionExtension
 {
-    public static void RegisterServices(this IServiceCollection services)
+    public static void RegisterRepositories(this IServiceCollection services)
     {
         services.AddTransient<ITaxiRepository, TaxiRepository>();
         services.AddTransient<IDriverRepository, DriverRepository>();
@@ -18,7 +28,10 @@ public static class ServiceCollectionExtension
         services.AddTransient<ICategoryRepository, CategoryRepository>();
         services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
         services.AddTransient<IStatisticRepository, StatisticRepository>();
+    }
 
+    public static void RegisterServices(this IServiceCollection services)
+    {
         services.AddTransient<ITaxiService, TaxiService>();
         services.AddTransient<IDriverService, DriverService>();
         services.AddTransient<IReservationService, ReservationService>();
@@ -27,6 +40,8 @@ public static class ServiceCollectionExtension
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IStatisticService, StatisticService>();
         services.AddTransient<IDateTimeService, DateTimeService>();
+        services.AddTransient<IAuditService, AuditService>();
+        services.AddTransient<ITaxiManagerService, TaxiManagerService>();
     }
 
     public static void AddAutoMapperProfiles(this IServiceCollection services)
