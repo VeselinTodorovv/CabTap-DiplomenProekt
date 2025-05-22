@@ -11,25 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CabTap.Data/Migrations/20250522144006_AddSpatialSupport.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Core/CabTap.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/CabTap.Core.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Data/Migrations/20250522144006_AddSpatialSupport.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Category.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Manufacturer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Manufacturer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Reservation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Reservation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/CabTap.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/CabTap.Data.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240318133655_InitMigration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240318133655_InitMigration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240326211745_UniqueRegNumbers.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240326211745_UniqueRegNumbers.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240401211400_ReservationTypeColumn.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240401211400_ReservationTypeColumn.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240405153628_CategoryImageColumn.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240405153628_CategoryImageColumn.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/DateTimeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/DateTimeService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/CabTap.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/CabTap.Web.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,16 +61,14 @@
     <setting file="file://$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/ICategoryService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/BaseEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Reservation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Data/ApplicationDbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Data/Migrations/ApplicationDbContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Analytics/StatisticService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Taxi/CategoryService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Taxi/TaxiService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/Utilities/DateTimeService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Web/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Web/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" root0="FORCE_HIGHLIGHTING" />
@@ -289,7 +273,7 @@
       <workItem from="1747760625714" duration="1022000" />
       <workItem from="1747919406654" duration="1698000" />
       <workItem from="1747923478631" duration="2631000" />
-      <workItem from="1747926139139" duration="311000" />
+      <workItem from="1747926139139" duration="642000" />
     </task>
     <task id="LOCAL-00011" summary="merge hide/show confirm button functions into one.">
       <created>1705607360801</created>
@@ -634,7 +618,7 @@
       <option name="project" value="LOCAL" />
       <updated>1713289706186</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -695,7 +679,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="swap data &amp; services architectural layers, authenticate StatisticsController" />
     <MESSAGE value="add regex for regnumbers, free taxis after completing/canceling reservations, minor view improvements" />
     <MESSAGE value="ui enhancements" />
     <MESSAGE value="use HttpPut &amp; HttpDelete, instead of only HttpPost; remove truncation partial and remove Html.Raw usages" />
@@ -720,7 +703,8 @@
     <MESSAGE value="update readme.md" />
     <MESSAGE value="add architecture image" />
     <MESSAGE value="upload DB backup" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Use postgres instead of sql server" />
+    <option name="LAST_COMMIT_MESSAGE" value="Use postgres instead of sql server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

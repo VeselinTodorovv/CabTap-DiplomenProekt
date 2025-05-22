@@ -13,6 +13,7 @@ public class Reservation : BaseEntity
 
     [Required]
     [ForeignKey(nameof(User))]
+    [StringLength(50)]
     public string UserId { get; set; } = null!;
     public virtual ApplicationUser User { get; set; } = null!;
 
@@ -26,10 +27,11 @@ public class Reservation : BaseEntity
     public DateTime ReservationDateTime { get; set; } 
     
     [Required]
-    //start location
+    [StringLength(250)]
     public string Origin { get; set; } = null!;
 
     [Required]
+    [StringLength(250)]
     public string Destination { get; set; } = null!;
     
     [Column(TypeName = "geometry (Point, 4326)")]

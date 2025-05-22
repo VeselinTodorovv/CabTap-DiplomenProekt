@@ -10,6 +10,7 @@ public class Taxi : BaseEntity
     public int Id { get; set; }
 
     [Required]
+    [StringLength(8)]
     public string RegNumber { get; set; } = null!;
     
     [Required]
@@ -24,9 +25,11 @@ public class Taxi : BaseEntity
 
     [Required]
     [ForeignKey(nameof(Driver))]
+    [StringLength(50)]
     public string DriverId { get; set; } = null!;
     public virtual Driver Driver { get; set; } = null!;
 
+    [StringLength(100)]
     public string? Description { get; set; }
 
     [Url]
