@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CabTap.Core.Entities.Enums;
+using NetTopologySuite.Geometries;
 
 namespace CabTap.Core.Entities;
 
@@ -30,6 +31,9 @@ public class Reservation : BaseEntity
 
     [Required]
     public string Destination { get; set; } = null!;
+    
+    [Column(TypeName = "geometry (Point, 4326)")]
+    public Point Location { get; set; } = null!;
     
     [Required]
     [EnumDataType(typeof(ReservationType))]

@@ -11,55 +11,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Utilities/IAuditService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Utilities/ITaxiManagerService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/AuditService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/TaxiManagerService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CabTap.Data/Migrations/20250522144006_AddSpatialSupport.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/ICategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Taxi/ICategoryRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/IDriverRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Taxi/IDriverRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/IManufacturerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Taxi/IManufacturerRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/IReservationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Reservation/IReservationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/IStatisticRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Analytics/IStatisticRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Repositories/ITaxiRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Repositories/Taxi/ITaxiRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/ICategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/ICategoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IDateTimeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Utilities/IDateTimeService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IDriverService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/IDriverService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IManufacturerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/IManufacturerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IReservationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Reservation/IReservationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IStatisticService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Analytics/IStatisticService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/ITaxiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/ITaxiService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Identity/IUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/BaseEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/CategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/CategoryRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/DriverRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/DriverRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/ManufacturerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/ManufacturerRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/ReservationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/ReservationRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/StatisticRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/StatisticRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/TaxiRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/TaxiRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Infrastructure/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Infrastructure/ServiceCollectionExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/CategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/CategoryService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/DateTimeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/DateTimeService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/DriverService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/DriverService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/ManufacturerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/ManufacturerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/ReservationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Reservation/ReservationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/StatisticService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Analytics/StatisticService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/TaxiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/TaxiService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Identity/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/DriversController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/DriversController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/HomeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/StatisticsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/StatisticsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/TaxisController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/TaxisController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/UsersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/CabTap.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/CabTap.Core.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Core/Entities/Reservation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Core/Entities/Reservation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/CabTap.Data.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/CabTap.Data.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240318133655_InitMigration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240318133655_InitMigration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240326211745_UniqueRegNumbers.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240326211745_UniqueRegNumbers.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240401211400_ReservationTypeColumn.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240401211400_ReservationTypeColumn.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240405153628_CategoryImageColumn.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/20240405153628_CategoryImageColumn.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/DateTimeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/DateTimeService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/CabTap.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/CabTap.Web.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CabTap.Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Drivers/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Drivers/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Home/Contacts.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Home/Contacts.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Taxis/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Taxis/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Web/Views/Users/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Views/Users/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,12 +50,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "VeselinTodorovv"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;VeselinTodorovv&quot;
   }
-}]]></component>
+}</component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
       <filtered-out-file-type name="LOCAL_BRANCH" />
@@ -94,27 +64,32 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/VeselinTodorovv/DiplomenProekt.git",
-    "accountId": "6ab4788d-2541-48b8-8f6e-239b4e1aad24"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/VeselinTodorovv/DiplomenProekt.git&quot;,
+    &quot;accountId&quot;: &quot;6ab4788d-2541-48b8-8f6e-239b4e1aad24&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/fd4328e906d748c1b13904971ee859f9f200/91/f1b186fe/0200000Cpdb11.il" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/df71358f7b7337a1eee3a65abe6d678dd9a065e256b8cc3fd44a2949754/Object.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Contracts/Services/Reservation/IReservationService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Contracts/Services/Taxi/ICategoryService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/BaseEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Core/Entities/Reservation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Data/ApplicationDbContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Data/Migrations/ApplicationDbContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Analytics/StatisticService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Taxi/CategoryService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Taxi/TaxiService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Web/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Web/appsettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Web/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CabTap.Web/wwwroot/lib/jquery/dist/jquery.min.map" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="HttpClientEndpointsTabState">
     <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;7428b15f1daa36710ccbb4a779cb50256d03436e&quot; value=&quot;###&amp;#10;GET https://localhost:7254/Home/Contacts/{{id}}&quot; /&gt;&#10;  &lt;entry key=&quot;617d38d42b867ad53ee436de1a9a7774eb022632&quot; value=&quot;###&amp;#10;GET https://localhost:7254/Drivers/Index/{{id}}&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
@@ -142,7 +117,7 @@
     &quot;.NET Launch Settings Profile.CabTap.Web.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;PostreSQL-Migration&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -153,11 +128,6 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="QodanaReportsService">
-    <option name="descriptions">
-      <ReportDescription localRun="true" path="C:\Users\titan\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="4b195625-2ae3-4967-b5d3-bcf002eb5679" reportId="CabTap/qodana/2025-03-31" />
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="CabTap.Web" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/CabTap.Web/CabTap.Web.csproj" />
@@ -317,6 +287,9 @@
       <workItem from="1743436113134" duration="539000" />
       <workItem from="1743437060322" duration="900000" />
       <workItem from="1747760625714" duration="1022000" />
+      <workItem from="1747919406654" duration="1698000" />
+      <workItem from="1747923478631" duration="2631000" />
+      <workItem from="1747926139139" duration="311000" />
     </task>
     <task id="LOCAL-00011" summary="merge hide/show confirm button functions into one.">
       <created>1705607360801</created>
@@ -747,7 +720,7 @@
     <MESSAGE value="update readme.md" />
     <MESSAGE value="add architecture image" />
     <MESSAGE value="upload DB backup" />
-    <option name="LAST_COMMIT_MESSAGE" value="upload DB backup" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

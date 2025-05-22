@@ -21,6 +21,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         base.OnModelCreating(builder);
 
+        builder.HasDefaultSchema("public");
+
         builder.Entity<Taxi>()
             .HasIndex(t => t.RegNumber)
             .IsUnique();

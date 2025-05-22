@@ -3,14 +3,29 @@ using CabTap.Data;
 using CabTap.Services.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var config = builder.Configuration;
+var postgresConnectionString = config.GetConnectionString("PostgresConnection");
+var dbPassword = Environment.GetEnvironmentVariable("CabTapDBPassword");
+
+if (string.IsNullOrWhiteSpace(dbPassword))
+{
+    throw new InvalidOperationException("CabTapDBPassword is not set.");
+}
+
+var connBuilder = new NpgsqlConnectionStringBuilder(postgresConnectionString)
+{
+    Password = dbPassword
+};
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options
         .UseLazyLoadingProxies()
-        .UseSqlServer(connectionString));
+        .UseNpgsql(connBuilder.ConnectionString,
+            o => o.UseNetTopologySuite()));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     {
