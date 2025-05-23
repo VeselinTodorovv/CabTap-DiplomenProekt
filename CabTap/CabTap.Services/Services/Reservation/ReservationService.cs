@@ -94,7 +94,7 @@ public class ReservationService : IReservationService
             reservation.ReservationDateTime = dateTime;
         }
 
-        _auditService.UpdateAuditInfo(reservation, dateTime, user.UserName);
+        _auditService.SetCreationAuditInfo(reservation, dateTime, user.UserName);
 
         await _taxiManagerService.UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
 
@@ -130,7 +130,7 @@ public class ReservationService : IReservationService
         }
 
         var dateTime = _dateTimeService.GetCurrentDateTime();
-        _auditService.UpdateAuditInfo(existingReservation, dateTime, user.UserName);
+        _auditService.SetModificationAuditInfo(existingReservation, dateTime, user.UserName);
         
         await _reservationRepository.UpdateReservationAsync(existingReservation);
     }
@@ -169,17 +169,19 @@ public class ReservationService : IReservationService
     public async Task MarkAsCompleted(string reservationId)
     {
         var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
-        if (reservation.RideStatus == RideStatus.InProgress)
+        if (reservation.RideStatus != RideStatus.InProgress)
         {
-            reservation.RideStatus = RideStatus.Finished;
-            
-            var dateTime = _dateTimeService.GetCurrentDateTime();
-            var userName = (await _userService.GetCurrentUserAsync())!.UserName;
-            _auditService.UpdateAuditInfo(reservation, dateTime, userName);
-            
-            await _reservationRepository.UpdateReservationAsync(reservation);
-            await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
+            return;
         }
+        
+        reservation.RideStatus = RideStatus.Finished;
+        
+        var dateTime = _dateTimeService.GetCurrentDateTime();
+        var userName = (await _userService.GetCurrentUserAsync())!.UserName;
+        _auditService.SetModificationAuditInfo(reservation, dateTime, userName);
+        
+        await _reservationRepository.UpdateReservationAsync(reservation);
+        await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
     }
 
     public async Task MarkAsCanceled(string reservationId)
@@ -191,7 +193,7 @@ public class ReservationService : IReservationService
 
             var dateTime = _dateTimeService.GetCurrentDateTime();
             var userName = (await _userService.GetCurrentUserAsync())!.UserName;
-            _auditService.UpdateAuditInfo(reservation, dateTime, userName);
+            _auditService.SetModificationAuditInfo(reservation, dateTime, userName);
             
             await _reservationRepository.UpdateReservationAsync(reservation);
             await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);

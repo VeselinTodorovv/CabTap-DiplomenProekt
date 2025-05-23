@@ -13,7 +13,13 @@ public class ReservationMappingProfile : Profile
         CreateMap<Reservation, ReservationDetailsViewModel>();
         CreateMap<Reservation, ReservationDeleteViewModel>();
         CreateMap<Reservation, ReservationCreateViewModel>().ReverseMap();
-        CreateMap<Reservation, ReservationEditViewModel>().ReverseMap();
+        
+        CreateMap<Reservation, ReservationEditViewModel>()
+            .ReverseMap()
+            .ForMember(dest => dest.CreatedOn, opt => opt.Ignore())
+            .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+            .ForMember(dest => dest.LastModifiedOn, opt => opt.Ignore())
+            .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
         CreateMap<ReservationDetailsViewModel, ReservationEditViewModel>();
         CreateMap<ReservationDetailsViewModel, ReservationDeleteViewModel>();

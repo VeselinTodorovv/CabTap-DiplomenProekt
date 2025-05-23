@@ -44,6 +44,8 @@ public class DriverRepository : IDriverRepository {
         {
             throw new InvalidOperationException("Driver cannot be null.");
         }
+
+        
         
         _context.Drivers.Update(driver);
         await _context.SaveChangesAsync();
