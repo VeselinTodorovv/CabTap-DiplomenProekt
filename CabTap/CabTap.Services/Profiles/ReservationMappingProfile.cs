@@ -37,8 +37,8 @@ public class ReservationMappingProfile : Profile
             return null;
         }
 
-        if (double.TryParse(parts[0], out var x) &&
-            double.TryParse(parts[1], out var y))
+        if (double.TryParse(parts[0], out var y) &&
+            double.TryParse(parts[1], out var x))
         {
             return new Point(x, y) { SRID = 4326 };
         }

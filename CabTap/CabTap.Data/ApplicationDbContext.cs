@@ -1,6 +1,7 @@
 ﻿using CabTap.Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CabTap.Data;
 
@@ -34,5 +35,37 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         builder.Entity<Category>()
             .Property(c => c.Rate)
             .HasPrecision(18, 2);
+
+        ConfigureDateTimeValueConverters(builder);
+    }
+
+    private static void ConfigureDateTimeValueConverters(ModelBuilder builder)
+    {
+        var utcDateTimeConverter = new ValueConverter<DateTime, DateTime>(
+            v => v.Kind == DateTimeKind.Utc ? v : DateTime.SpecifyKind(v, DateTimeKind.Utc),
+            v => DateTime.SpecifyKind(v, DateTimeKind.Utc)
+        );
+
+        var nullableUtcDateTimeConverter = new ValueConverter<DateTime?, DateTime?>(
+            v => v.HasValue ? DateTime.SpecifyKind(v.Value, DateTimeKind.Utc) : v,
+            v => v.HasValue ? DateTime.SpecifyKind(v.Value, DateTimeKind.Utc) : v
+        );
+
+        foreach (var entityType in builder.Model.GetEntityTypes())
+        {
+            foreach (var property in entityType.GetProperties()
+                         .Where(p => p.ClrType == typeof(DateTime)))
+            {
+                property.SetValueConverter(utcDateTimeConverter);
+            }
+
+            var nullableDateTimeProperties = entityType.GetProperties()
+                .Where(p => p.ClrType == typeof(DateTime?));
+            
+            foreach (var property in nullableDateTimeProperties)
+            {
+                property.SetValueConverter(nullableUtcDateTimeConverter);
+            }
+        }
     }
 }

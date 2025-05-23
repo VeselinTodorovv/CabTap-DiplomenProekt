@@ -5,15 +5,27 @@ namespace CabTap.Services.Services.Utilities;
 
 public class AuditService : IAuditService
 {
-    public void UpdateAuditInfo(BaseEntity entity, DateTime dateTime, string userName)
+    public void UpdateAuditInfo(BaseEntity entity, DateTime timestamp, string user)
     {
-        if (string.IsNullOrEmpty(entity.CreatedBy))
+        var isNewEntity = string.IsNullOrEmpty(entity.CreatedBy);
+    
+        if (isNewEntity)
         {
-            entity.CreatedBy = userName;
-            entity.CreatedOn = dateTime;
+            entity.CreatedBy = user;
+            entity.CreatedOn = timestamp;
         }
         
-        entity.LastModifiedBy = userName;
-        entity.LastModifiedOn = dateTime;
+        entity.LastModifiedBy = user;
+        entity.LastModifiedOn = timestamp;
+
+        entity.CreatedOn = EnsureDateTimeIsUtc(entity.CreatedOn);
+        entity.LastModifiedOn = EnsureDateTimeIsUtc(entity.LastModifiedOn);
+    }
+
+    private static DateTime EnsureDateTimeIsUtc(DateTime dateTime)
+    {
+        return dateTime.Kind == DateTimeKind.Unspecified
+            ? DateTime.SpecifyKind(dateTime, DateTimeKind.Utc)
+            : dateTime;
     }
 }
