@@ -35,7 +35,10 @@ public class Reservation : BaseEntity
     public string Destination { get; set; } = null!;
     
     [Column(TypeName = "geometry (Point, 4326)")]
-    public Point Location { get; set; } = null!;
+    public Point OriginPoint { get; set; } = null!;
+    
+    [Column(TypeName = "geometry (Point, 4326)")]
+    public Point DestinationPoint { get; set; } = null!;
     
     [Required]
     [EnumDataType(typeof(ReservationType))]

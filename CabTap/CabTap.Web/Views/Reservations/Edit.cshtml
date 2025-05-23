@@ -71,6 +71,16 @@
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                         
+                        <div class="form-group">
+                            <input asp-for="OriginPoint" id="originPoint" class="form-control" hidden />
+                            <span asp-validation-for="OriginPoint" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input asp-for="DestinationPoint" id="destinationPoint" class="form-control" hidden />
+                            <span asp-validation-for="DestinationPoint" class="text-danger"></span>
+                        </div>
+                        
                         <input asp-for="RideStatus" class="form-control" hidden />
                         <input asp-for="UserId" class="form-control" hidden />
                         <input asp-for="TaxiId" class="form-control" hidden>

@@ -3,8 +3,8 @@ using System;
 using CabTap.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NetTopologySuite.Geometries;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -12,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CabTap.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250523102834_RemoveLocationCol")]
+    partial class RemoveLocationCol
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,10 +195,6 @@ namespace CabTap.Data.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
 
-                    b.Property<Point>("DestinationPoint")
-                        .IsRequired()
-                        .HasColumnType("geometry (Point, 4326)");
-
                     b.Property<double>("Distance")
                         .HasColumnType("double precision");
 
@@ -215,10 +212,6 @@ namespace CabTap.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
-
-                    b.Property<Point>("OriginPoint")
-                        .IsRequired()
-                        .HasColumnType("geometry (Point, 4326)");
 
                     b.Property<int>("PassengersCount")
                         .HasColumnType("integer");
