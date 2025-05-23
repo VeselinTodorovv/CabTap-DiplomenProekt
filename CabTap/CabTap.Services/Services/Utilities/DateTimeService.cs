@@ -6,6 +6,9 @@ public class DateTimeService : IDateTimeService
 {
     public DateTime GetCurrentDateTime()
     {
-        return DateTime.UtcNow;
+        var currentDateTime = DateTime.UtcNow;
+        currentDateTime = DateTime.SpecifyKind(currentDateTime, DateTimeKind.Utc);
+        
+        return currentDateTime;
     }
 }
