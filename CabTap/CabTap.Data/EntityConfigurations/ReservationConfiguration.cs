@@ -22,6 +22,7 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
         reservation.Property(r => r.TaxiId)
             .IsRequired();
 
+        reservation.HasIndex(r => r.ReservationDateTime);
         reservation.Property(r => r.ReservationDateTime)
             .IsRequired();
 
@@ -44,12 +45,14 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
         reservation.Property(r => r.ReservationType)
             .IsRequired();
 
+        reservation.HasIndex(r => r.Duration);
         reservation.Property(r => r.Duration)
             .IsRequired();
 
         reservation.Property(r => r.Distance)
             .IsRequired();
 
+        reservation.HasIndex(r => r.Price);
         reservation.Property(r => r.Price)
             .IsRequired()
             .HasPrecision(18, 2);
@@ -69,6 +72,5 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
             .WithMany(t => t.Reservations)
             .HasForeignKey(r => r.TaxiId)
             .OnDelete(DeleteBehavior.Restrict);
-
     }
 }
