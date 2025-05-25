@@ -170,23 +170,17 @@ public class ReservationsController : Controller
         try
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
-            var availableCategories = (await _taxiService.GetAvailableTaxiTypesAsync()).ToList();
+            var categories = (await _taxiService.GetAvailableTaxiTypesAsync()).ToList();
 
-            // Add current category, if it is not already in the list
-            if (availableCategories.TrueForAll(c => c.Id != reservation.Taxi.CategoryId))
-            {
-                var currentCategory = new CategoryPairViewModel
-                {
-                    Id = reservation.Taxi.CategoryId,
-                    Name = reservation.Taxi.Category.Name
-                };
-                availableCategories.Insert(0, currentCategory);
-            }
+            int currentCategoryId = reservation.Taxi.CategoryId;
+            string currentCategoryName = reservation.Taxi.Category.Name;
+
+            var categoriesWithCurrent = EnsureCurrentCategoryIncluded(categories, currentCategoryId, currentCategoryName);
             
             var model = _mapper.Map<ReservationEditViewModel>(reservation);
 
-            model.Categories = availableCategories;
-            model.CategoryId = reservation.Taxi.CategoryId;
+            model.Categories = categoriesWithCurrent;
+            model.CategoryId = currentCategoryId;
 
             return View(model);
         }
@@ -194,6 +188,20 @@ public class ReservationsController : Controller
         {
             return NotFound();
         }
+    }
+
+    private static List<CategoryPairViewModel> EnsureCurrentCategoryIncluded(
+        List<CategoryPairViewModel> categories, int currentCategoryId, string currentCategoryName)
+    {
+        if (categories.TrueForAll(c => c.Id != currentCategoryId))
+        {
+            categories.Insert(0, new CategoryPairViewModel
+            {
+                Id = currentCategoryId,
+                Name = currentCategoryName
+            });
+        }
+        return categories;
     }
     
     [HttpPost]
