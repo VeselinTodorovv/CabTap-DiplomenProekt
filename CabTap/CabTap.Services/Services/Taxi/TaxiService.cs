@@ -76,8 +76,7 @@ public class TaxiService : ITaxiService
 
         var taxi = _mapper.Map<Core.Entities.Taxi>(taxiViewModel);
 
-        var dateTime = _dateTimeService.GetCurrentDateTime();
-        _auditService.SetCreationAuditInfo(taxi, dateTime, user.UserName);
+        _auditService.SetCreationAuditInfo(taxi, user.UserName);
 
         await _taxiRepository.AddTaxiAsync(taxi);
     }
@@ -94,8 +93,7 @@ public class TaxiService : ITaxiService
 
         _mapper.Map(taxiViewModel, existingTaxi);
 
-        var dateTime = _dateTimeService.GetCurrentDateTime();
-        _auditService.SetModificationAuditInfo(existingTaxi, dateTime, user.UserName);
+        _auditService.SetModificationAuditInfo(existingTaxi, user.UserName);
 
         await _taxiRepository.UpdateTaxiAsync(existingTaxi);
     }

@@ -5,8 +5,16 @@ namespace CabTap.Services.Services.Utilities;
 
 public class AuditService : IAuditService
 {
-    public void SetCreationAuditInfo(BaseEntity entity, DateTime timestamp, string user)
+    private readonly IDateTimeService _dateTimeService;
+    public AuditService(IDateTimeService dateTimeService)
     {
+        _dateTimeService = dateTimeService;
+    }
+
+    public void SetCreationAuditInfo(BaseEntity entity, string user)
+    {
+        var timestamp = _dateTimeService.GetCurrentDateTime();
+        
         entity.CreatedBy = user;
         entity.CreatedOn = timestamp;
         
@@ -14,8 +22,10 @@ public class AuditService : IAuditService
         entity.LastModifiedOn = timestamp;
     }
 
-    public void SetModificationAuditInfo(BaseEntity entity, DateTime timestamp, string user)
+    public void SetModificationAuditInfo(BaseEntity entity, string user)
     {
+        var timestamp = _dateTimeService.GetCurrentDateTime();
+        
         entity.LastModifiedBy = user;
         entity.LastModifiedOn = timestamp;
     }

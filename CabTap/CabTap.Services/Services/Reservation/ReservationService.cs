@@ -94,7 +94,7 @@ public class ReservationService : IReservationService
             reservation.ReservationDateTime = dateTime;
         }
 
-        _auditService.SetCreationAuditInfo(reservation, dateTime, user.UserName);
+        _auditService.SetCreationAuditInfo(reservation, user.UserName);
 
         await _taxiManagerService.UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
 
@@ -129,8 +129,7 @@ public class ReservationService : IReservationService
             existingReservation.TaxiId = newTaxiId;
         }
 
-        var dateTime = _dateTimeService.GetCurrentDateTime();
-        _auditService.SetModificationAuditInfo(existingReservation, dateTime, user.UserName);
+        _auditService.SetModificationAuditInfo(existingReservation, user.UserName);
         
         await _reservationRepository.UpdateReservationAsync(existingReservation);
     }
@@ -176,9 +175,8 @@ public class ReservationService : IReservationService
         
         reservation.RideStatus = RideStatus.Finished;
         
-        var dateTime = _dateTimeService.GetCurrentDateTime();
         var userName = (await _userService.GetCurrentUserAsync())!.UserName;
-        _auditService.SetModificationAuditInfo(reservation, dateTime, userName);
+        _auditService.SetModificationAuditInfo(reservation, userName);
         
         await _reservationRepository.UpdateReservationAsync(reservation);
         await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
@@ -191,9 +189,8 @@ public class ReservationService : IReservationService
         {
             reservation.RideStatus = RideStatus.Canceled;
 
-            var dateTime = _dateTimeService.GetCurrentDateTime();
             var userName = (await _userService.GetCurrentUserAsync())!.UserName;
-            _auditService.SetModificationAuditInfo(reservation, dateTime, userName);
+            _auditService.SetModificationAuditInfo(reservation, userName);
             
             await _reservationRepository.UpdateReservationAsync(reservation);
             await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);

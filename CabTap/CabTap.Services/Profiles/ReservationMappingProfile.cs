@@ -31,12 +31,11 @@ public class ReservationMappingProfile : Profile
                 ConvertToPoint(src.DestinationPoint)));
     }
     
-    private static Point ConvertToPoint(string pointString)
+    private static Point? ConvertToPoint(string pointString)
     {
         if (string.IsNullOrEmpty(pointString))
-            return new Point(0, 0); // or new Point(0, 0) if you want a default
+            return new Point(0, 0);
 
-        // For example, pointString = "23.1234,42.1234"
         var parts = pointString.Split(',');
         if (parts.Length != 2)
         {
