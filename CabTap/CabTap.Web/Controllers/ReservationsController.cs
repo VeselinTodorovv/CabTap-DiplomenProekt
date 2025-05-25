@@ -64,9 +64,16 @@ public class ReservationsController : Controller
             return RedirectToAction(nameof(Index));
         }
         
-        var reservations = await _reservationService.GetPaginatedReservationsByUserNameAsync(searchInput, sortOption,reservationType, page, pageSize);
+        var reservations = await _reservationService
+            .GetPaginatedReservationsByUserNameAsync(searchInput, sortOption,reservationType, page, pageSize);
         
-        var totalReservations = await _statisticService.CountReservationsAsync(User.Identity!.Name);
+        var userName = User.Identity!.Name;
+        if (userName == null)
+        {
+            return View(reservations);
+        }
+        
+        var totalReservations = await _statisticService.CountReservationsAsync(userName);
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
         
         // Ensure totalPages is at least 1

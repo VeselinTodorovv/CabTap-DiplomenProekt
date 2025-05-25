@@ -19,12 +19,12 @@ public class ReservationRepository : IReservationRepository
         // For MyReservations
         if (!string.IsNullOrEmpty(userId))
         {
-            query = query.Where(r => r.UserId == userId);
+            query = query.Where(r => string.Equals(r.UserId, userId));
         }
         // For Index
         else if (!string.IsNullOrWhiteSpace(searchInput))
         {
-            query = query.Where(r => r.User.UserName == searchInput);
+            query = query.Where(r => string.Equals(r.User.UserName, searchInput));
         }
 
         return query;

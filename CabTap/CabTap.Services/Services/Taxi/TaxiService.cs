@@ -38,23 +38,33 @@ public class TaxiService : ITaxiService
         return reservationViewModels;
     }
 
-    public async Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypesAsync()
+    private static IEnumerable<CategoryPairViewModel> MapToCategoryPairViewModels(IEnumerable<CategoryPairViewModel> categories)
     {
-        var taxis = _taxiRepository.GetTaxisQuery()
-            .Where(x => x.TaxiStatus == TaxiStatus.Available);
-        var allCategories = await _categoryService.GetAllCategoriesAsync();
-
-        var availableCategoryIds = taxis.Select(x => x.CategoryId).Distinct();
-        var availableCategories = allCategories.Where(category => availableCategoryIds.Contains(category.Id));
-
-        var categoryViewModels = availableCategories.Select(x => new CategoryPairViewModel
+        return categories.Select(x => new CategoryPairViewModel
         {
             Id = x.Id,
             Name = x.Name,
             Rate = x.Rate
         });
+    }
 
-        return categoryViewModels;
+    public async Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypesAsync()
+    {
+        var availableTaxis = _taxiRepository.GetTaxisQuery()
+            .Where(taxi => taxi.TaxiStatus == TaxiStatus.Available);
+
+        var allCategories = (await _categoryService.GetAllCategoriesAsync())
+            .ToList();
+        
+        var availableCategoryIds = availableTaxis
+            .Select(taxi => taxi.CategoryId)
+            .Distinct()
+            .ToHashSet();
+
+        var availableCategories = allCategories
+            .Where(category => availableCategoryIds.Contains(category.Id));
+
+        return MapToCategoryPairViewModels(availableCategories);
     }
 
     public async Task<TaxiDetailsViewModel> GetTaxiByIdAsync(int taxiId)

@@ -3,7 +3,8 @@ using CabTap.Core.Entities;
 
 namespace CabTap.Data.Repositories;
 
-public class DriverRepository : IDriverRepository {
+public class DriverRepository : IDriverRepository
+{
     private readonly ApplicationDbContext _context;
     
     public DriverRepository(ApplicationDbContext context)
@@ -44,8 +45,6 @@ public class DriverRepository : IDriverRepository {
         {
             throw new InvalidOperationException("Driver cannot be null.");
         }
-
-        
         
         _context.Drivers.Update(driver);
         await _context.SaveChangesAsync();

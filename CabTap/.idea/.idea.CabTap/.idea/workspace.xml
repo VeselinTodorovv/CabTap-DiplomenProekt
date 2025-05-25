@@ -12,12 +12,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ef3d507b-c2ac-4f76-adaa-c38e6bd47030" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CabTap/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Contracts/Services/Utilities/IAuditService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Contracts/Services/Utilities/IAuditService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Profiles/ReservationMappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Profiles/ReservationMappingProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/Reservation/ReservationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Reservation/ReservationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/DriverService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/DriverService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/DriverRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/DriverRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Data/Repositories/ReservationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Data/Repositories/ReservationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Infrastructure/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Infrastructure/ServiceCollectionExtension.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Profiles/DriverMappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Profiles/DriverMappingProfile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/TaxiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Taxi/TaxiService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/AuditService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/AuditService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/DateTimeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Services/Services/Utilities/DateTimeService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CabTap.Web/Controllers/ReservationsController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +68,7 @@
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Driver.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Core/Entities/Taxi.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Profiles/DriverMappingProfile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Analytics/StatisticService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/Reservation/ReservationService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Taxi/CategoryService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -74,6 +76,7 @@
     <setting file="file://$PROJECT_DIR$/CabTap.Services/Services/Taxi/TaxiService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/Taxi/TaxiService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Services/Services/Utilities/AuditService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/dev/c#/repos/DiplomenProekt/CabTap/CabTap.Web/Controllers/ReservationsController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Web/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CabTap.Web/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" root0="FORCE_HIGHLIGHTING" />
@@ -103,22 +106,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.CabTap.Web.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;PostreSQL-Migration&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CodeLensConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.CabTap.Web.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "PostreSQL-Migration",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CodeLensConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="CabTap.Web" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/CabTap.Web/CabTap.Web.csproj" />
@@ -285,7 +288,7 @@
       <workItem from="1747992431711" duration="6570000" />
       <workItem from="1748005491452" duration="2739000" />
       <workItem from="1748009172667" duration="2234000" />
-      <workItem from="1748192014540" duration="686000" />
+      <workItem from="1748192014540" duration="3040000" />
     </task>
     <task id="LOCAL-00011" summary="merge hide/show confirm button functions into one.">
       <created>1705607360801</created>
@@ -630,7 +633,7 @@
       <option name="project" value="LOCAL" />
       <updated>1713289706186</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -691,7 +694,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="continue work on front end" />
     <MESSAGE value="images" />
     <MESSAGE value="improved repositories/services and added first/last pages in pagination" />
     <MESSAGE value="finishing touches" />
@@ -716,7 +718,8 @@
     <MESSAGE value="Refactor DateTimeService and add mapping for GeoPoints" />
     <MESSAGE value="Enforce UTC handling for DateTime properties and fix mapping." />
     <MESSAGE value="Refactor audit service methods for clarity and separation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor audit service methods for clarity and separation." />
+    <MESSAGE value="Refactor audit service to use IDateTimeService for timestamps.&#10;&#10;Removed explicit timestamp parameters from audit service methods and replaced them with IDateTimeService dependency for time handling. Updated all relevant method calls across services to align with this change, ensuring consistency and reducing repetitive code." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor audit service to use IDateTimeService for timestamps.&#10;&#10;Removed explicit timestamp parameters from audit service methods and replaced them with IDateTimeService dependency for time handling. Updated all relevant method calls across services to align with this change, ensuring consistency and reducing repetitive code." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -752,10 +755,10 @@
           <line>246</line>
           <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\ReservationsController.cs" containingFunctionPresentation="method 'Delete'">
             <startOffsets>
-              <option value="7956" />
+              <option value="8100" />
             </startOffsets>
             <endOffsets>
-              <option value="8019" />
+              <option value="8163" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="59" />
@@ -778,10 +781,10 @@
           <line>116</line>
           <properties documentPath="E:\DEV\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\ReservationsController.cs" containingFunctionPresentation="method 'Create'">
             <startOffsets>
-              <option value="4022" />
+              <option value="4166" />
             </startOffsets>
             <endOffsets>
-              <option value="4045" />
+              <option value="4189" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="64" />
@@ -791,10 +794,10 @@
           <line>121</line>
           <properties documentPath="E:\dev\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\ReservationsController.cs" containingFunctionPresentation="Method 'Create'">
             <startOffsets>
-              <option value="4091" />
+              <option value="4235" />
             </startOffsets>
             <endOffsets>
-              <option value="4148" />
+              <option value="4292" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="71" />
@@ -817,26 +820,13 @@
           <line>79</line>
           <properties documentPath="E:\dev\c#\repos\DiplomenProekt\CabTap\CabTap.Services\Services\Taxi\TaxiService.cs" containingFunctionPresentation="Method 'AddTaxiAsync'">
             <startOffsets>
-              <option value="2776" />
+              <option value="2785" />
             </startOffsets>
             <endOffsets>
-              <option value="2832" />
+              <option value="2841" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/CabTap.Data/Repositories/DriverRepository.cs</url>
-          <line>47</line>
-          <properties documentPath="E:\dev\c#\repos\DiplomenProekt\CabTap\CabTap.Data\Repositories\DriverRepository.cs" containingFunctionPresentation="Method 'UpdateDriverAsync'">
-            <startOffsets>
-              <option value="1216" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1248" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/CabTap.Web/Controllers/DriversController.cs</url>
@@ -869,10 +859,10 @@
           <line>61</line>
           <properties documentPath="E:\dev\c#\repos\DiplomenProekt\CabTap\CabTap.Data\Repositories\ReservationRepository.cs" containingFunctionPresentation="Method 'UpdateReservationAsync'">
             <startOffsets>
-              <option value="1767" />
+              <option value="1793" />
             </startOffsets>
             <endOffsets>
-              <option value="1809" />
+              <option value="1835" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="79" />
@@ -889,6 +879,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/CabTap.Services/Services/Taxi/DriverService.cs</url>
+          <line>51</line>
+          <properties documentPath="E:\dev\c#\repos\DiplomenProekt\CabTap\CabTap.Services\Services\Taxi\DriverService.cs" containingFunctionPresentation="Method 'GetDriverByIdAsync'">
+            <startOffsets>
+              <option value="1831" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1887" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/CabTap.Web/Controllers/DriversController.cs</url>
+          <line>97</line>
+          <properties documentPath="E:\dev\c#\repos\DiplomenProekt\CabTap\CabTap.Web\Controllers\DriversController.cs" containingFunctionPresentation="Method 'Edit'">
+            <startOffsets>
+              <option value="2620" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2673" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="82" />
         </line-breakpoint>
         <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
           <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />

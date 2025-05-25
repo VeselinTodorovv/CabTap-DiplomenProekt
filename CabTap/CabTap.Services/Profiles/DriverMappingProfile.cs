@@ -20,5 +20,6 @@ public class DriverMappingProfile : Profile
             .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
         
         CreateMap<DriverDetailsViewModel, DriverDeleteViewModel>();
+        CreateMap<DriverDetailsViewModel, DriverEditViewModel>();
     }
 }
