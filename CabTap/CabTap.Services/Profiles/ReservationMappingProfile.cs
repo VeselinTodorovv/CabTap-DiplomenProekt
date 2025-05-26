@@ -10,10 +10,20 @@ public class ReservationMappingProfile : Profile
     public ReservationMappingProfile()
     {
         CreateMap<Reservation, ReservationAllViewModel>();
-        CreateMap<Reservation, ReservationDetailsViewModel>();
         CreateMap<Reservation, ReservationDeleteViewModel>();
         CreateMap<Reservation, ReservationCreateViewModel>().ReverseMap();
-        CreateMap<Reservation, ReservationEditViewModel>().ReverseMap();
+        
+        CreateMap<Reservation, ReservationEditViewModel>().ReverseMap()
+            .ForMember(dest => dest.OriginPoint, opt =>
+                opt.MapFrom(src => ConvertToPoint(src.OriginPoint)))
+            .ForMember(dest => dest.DestinationPoint, opt =>
+                opt.MapFrom(src => ConvertToPoint(src.DestinationPoint)));
+
+        CreateMap<Reservation, ReservationDetailsViewModel>()
+            .ForMember(dest => dest.OriginPoint, opt =>
+                opt.MapFrom(src => ConvertToString(src.OriginPoint)))
+            .ForMember(dest => dest.DestinationPoint, opt =>
+                opt.MapFrom(src => ConvertToString(src.DestinationPoint)));
 
         CreateMap<ReservationDetailsViewModel, ReservationEditViewModel>();
         CreateMap<ReservationDetailsViewModel, ReservationDeleteViewModel>();
@@ -45,5 +55,12 @@ public class ReservationMappingProfile : Profile
         }
 
         return null;
+    }
+
+    private static string? ConvertToString(Point? point)
+    {
+        return point == null
+            ? null
+            : $"{point.Y},{point.X}";
     }
 }

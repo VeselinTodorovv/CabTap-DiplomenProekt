@@ -1,9 +1,6 @@
 const durationInput = document.getElementById('duration');
 const distanceInput = document.getElementById('distance');
 
-const originPointInput = document.getElementById('originPoint');
-const destinationPointInput = document.getElementById('destinationPoint');
-
 const confirmButton = document.getElementById('confirmRoute');
 confirmButton.addEventListener('click', calculateRoute);
 

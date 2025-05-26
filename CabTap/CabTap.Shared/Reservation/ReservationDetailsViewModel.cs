@@ -22,6 +22,12 @@ public class ReservationDetailsViewModel
 
     public string Destination { get; set; } = null!;
     
+    [Required]
+    public string OriginPoint { get; set; } = null!;
+    
+    [Required]
+    public string DestinationPoint { get; set; } = null!;
+    
     [Display(Name = "Reservation Type")]
     [EnumDataType(typeof(ReservationType))]
     public ReservationType ReservationType { get; set; }

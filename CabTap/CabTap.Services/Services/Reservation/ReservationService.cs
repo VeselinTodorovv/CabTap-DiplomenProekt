@@ -112,6 +112,7 @@ public class ReservationService : IReservationService
             await _taxiManagerService.UpdateTaxiStatusAsync(newTaxiId, TaxiStatus.Busy);
         }
 
+        reservationViewModel.ReservationDateTime = DateTime.SpecifyKind(reservationViewModel.ReservationDateTime, DateTimeKind.Utc);
         _mapper.Map(reservationViewModel, existingReservation);
         if (newTaxiId != 0)
         {
