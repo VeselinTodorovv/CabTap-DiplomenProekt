@@ -4,5 +4,6 @@ namespace CabTap.Contracts.Services.Utilities;
 
 public interface IAuditService
 {
-    void UpdateAuditInfo(BaseEntity entity, DateTime dateTime, string userName);
+    void SetCreationAuditInfo(BaseEntity entity, string userName);
+    void SetModificationAuditInfo(BaseEntity entity, string userName);
 }

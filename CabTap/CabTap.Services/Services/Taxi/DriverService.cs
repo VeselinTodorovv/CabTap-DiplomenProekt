@@ -13,15 +13,13 @@ public class DriverService : IDriverService
 {
     private readonly IDriverRepository _driverRepository;
     private readonly IUserService _userService;
-    private readonly IDateTimeService _dateTimeService;
     private readonly IMapper _mapper;
     private readonly IAuditService _auditService;
     
-    public DriverService(IDriverRepository driverRepository, IUserService userService, IMapper mapper, IDateTimeService dateTimeService, IAuditService auditService)
+    public DriverService(IDriverRepository driverRepository, IUserService userService, IMapper mapper, IAuditService auditService)
     {
         _driverRepository = driverRepository;
         _userService = userService;
-        _dateTimeService = dateTimeService;
         _auditService = auditService;
         _mapper = mapper;
     }
@@ -57,15 +55,10 @@ public class DriverService : IDriverService
     public async Task AddDriverAsync(DriverCreateViewModel driverViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-        if (user == null)
-        {
-            throw new UnauthorizedAccessException("User is not logged in");
-        }
 
         var driver = _mapper.Map<Driver>(driverViewModel);
 
-        var dateTime = _dateTimeService.GetCurrentDateTime();
-        _auditService.UpdateAuditInfo(driver, dateTime, user.UserName);
+        _auditService.SetCreationAuditInfo(driver, user.UserName);
 
         await _driverRepository.AddDriverAsync(driver);
     }
@@ -73,17 +66,12 @@ public class DriverService : IDriverService
     public async Task UpdateDriverAsync(DriverEditViewModel driverViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-        if (user == null)
-        {
-            throw new InvalidOperationException();
-        }
 
         var existingDriver = await _driverRepository.GetDriverByIdAsync(driverViewModel.Id);
 
         _mapper.Map(driverViewModel, existingDriver);
 
-        var dateTime = _dateTimeService.GetCurrentDateTime();
-        _auditService.UpdateAuditInfo(existingDriver, dateTime, user.UserName);
+        _auditService.SetModificationAuditInfo(existingDriver, user.UserName);
 
         await _driverRepository.UpdateDriverAsync(existingDriver);
     }

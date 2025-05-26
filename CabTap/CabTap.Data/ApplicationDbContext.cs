@@ -21,16 +21,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<Taxi>()
-            .HasIndex(t => t.RegNumber)
-            .IsUnique();
-        
-        builder.Entity<Reservation>()
-            .Property(r => r.Price)
-            .HasPrecision(18, 2);
-        
-        builder.Entity<Category>()
-            .Property(c => c.Rate)
-            .HasPrecision(18, 2);
+        builder.HasDefaultSchema("public");
+
+        builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 }

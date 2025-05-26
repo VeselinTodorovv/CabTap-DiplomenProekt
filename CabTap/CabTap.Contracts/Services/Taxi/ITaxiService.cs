@@ -6,7 +6,6 @@ namespace CabTap.Contracts.Services.Taxi;
 public interface ITaxiService
 {
     Task<IEnumerable<TaxiAllViewModel>> GetPaginatedTaxisAsync(int page, int pageSize);
-    Task<IEnumerable<CategoryPairViewModel>> GetAvailableTaxiTypesAsync();
     Task<TaxiDetailsViewModel> GetTaxiByIdAsync(int taxiId);
     Task AddTaxiAsync(TaxiCreateViewModel taxiViewModel);
     Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel);

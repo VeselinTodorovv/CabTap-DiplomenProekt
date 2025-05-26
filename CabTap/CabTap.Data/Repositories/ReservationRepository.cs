@@ -12,19 +12,19 @@ public class ReservationRepository : IReservationRepository
         _context = context;
     }
     
-    public IQueryable<Reservation> GetReservationsQuery(string userId, string searchInput)
+    public IQueryable<Reservation> GetReservationsQuery(string? userId, string searchInput)
     {
         IQueryable<Reservation> query = _context.Reservations;
 
         // For MyReservations
         if (!string.IsNullOrEmpty(userId))
         {
-            query = query.Where(r => r.UserId == userId);
+            query = query.Where(r => string.Equals(r.UserId, userId));
         }
         // For Index
         else if (!string.IsNullOrWhiteSpace(searchInput))
         {
-            query = query.Where(r => r.User.UserName == searchInput);
+            query = query.Where(r => string.Equals(r.User.UserName, searchInput));
         }
 
         return query;

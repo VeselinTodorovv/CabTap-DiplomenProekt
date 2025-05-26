@@ -13,8 +13,8 @@ public class DriverMappingProfile : Profile
         CreateMap<Driver, DriverDeleteViewModel>();
         CreateMap<Driver, DriverCreateViewModel>().ReverseMap();
         CreateMap<Driver, DriverEditViewModel>().ReverseMap();
-
-        CreateMap<DriverDetailsViewModel, DriverEditViewModel>();
+        
         CreateMap<DriverDetailsViewModel, DriverDeleteViewModel>();
+        CreateMap<DriverDetailsViewModel, DriverEditViewModel>();
     }
 }

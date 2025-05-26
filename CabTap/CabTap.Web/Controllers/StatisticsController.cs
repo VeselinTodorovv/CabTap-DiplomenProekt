@@ -17,7 +17,14 @@ public class StatisticsController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var statistics = new StatisticViewModel
+        var statistics = await GetStatisticsAsync();
+        
+        return View(statistics);
+    }
+
+    private async Task<StatisticViewModel> GetStatisticsAsync()
+    {
+        return new StatisticViewModel
         {
             CountClients = await _statisticService.CountClientsAsync(),
             CountDrivers = await _statisticService.CountDriversAsync(),
@@ -25,7 +32,5 @@ public class StatisticsController : Controller
             CountTaxis = await _statisticService.CountTaxisAsync(),
             SumReservations = await _statisticService.SumReservationsAsync()
         };
-        
-        return View(statistics);
     }
 }

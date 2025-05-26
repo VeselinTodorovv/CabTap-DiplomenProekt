@@ -2,6 +2,7 @@ using AutoMapper;
 using CabTap.Contracts.Services.Analytics;
 using CabTap.Contracts.Services.Reservation;
 using CabTap.Contracts.Services.Taxi;
+using CabTap.Contracts.Services.Utilities;
 using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Category;
 using CabTap.Shared.Reservation;
@@ -14,18 +15,18 @@ namespace CabTap.Web.Controllers;
 public class ReservationsController : Controller
 {
     private readonly IReservationService _reservationService;
-    private readonly ITaxiService _taxiService;
+    private readonly ITaxiManagerService _taxiManagerService;
     private readonly IStatisticService _statisticService;
     private readonly ICategoryService _categoryService;
     private readonly IMapper _mapper;
 
-    public ReservationsController(IReservationService reservationService, ITaxiService taxiService, IMapper mapper, IStatisticService statisticService, ICategoryService categoryService)
+    public ReservationsController(IReservationService reservationService, IMapper mapper, IStatisticService statisticService, ICategoryService categoryService, ITaxiManagerService taxiManagerService)
     {
         _reservationService = reservationService;
-        _taxiService = taxiService;
         _mapper = mapper;
         _statisticService = statisticService;
         _categoryService = categoryService;
+        _taxiManagerService = taxiManagerService;
     }
 
     [Authorize(Roles = "Administrator")]
@@ -64,9 +65,16 @@ public class ReservationsController : Controller
             return RedirectToAction(nameof(Index));
         }
         
-        var reservations = await _reservationService.GetPaginatedReservationsByUserNameAsync(searchInput, sortOption,reservationType, page, pageSize);
+        var reservations = await _reservationService
+            .GetPaginatedReservationsByUserNameAsync(searchInput, sortOption,reservationType, page, pageSize);
         
-        var totalReservations = await _statisticService.CountReservationsAsync(User.Identity!.Name);
+        var userName = User.Identity!.Name;
+        if (userName == null)
+        {
+            return View(reservations);
+        }
+        
+        var totalReservations = await _statisticService.CountReservationsAsync(userName);
         var totalPages = (int)Math.Ceiling((double)totalReservations / pageSize);
         
         // Ensure totalPages is at least 1
@@ -97,7 +105,7 @@ public class ReservationsController : Controller
     
     public async Task<IActionResult> Create()
     {
-        var categories = await _taxiService.GetAvailableTaxiTypesAsync();
+        var categories = await _taxiManagerService.GetAvailableTaxiTypesAsync();
 
         var reservationViewModel = new ReservationCreateViewModel
         {
@@ -163,23 +171,17 @@ public class ReservationsController : Controller
         try
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
-            var availableCategories = (await _taxiService.GetAvailableTaxiTypesAsync()).ToList();
+            var categories = (await _taxiManagerService.GetAvailableTaxiTypesAsync()).ToList();
 
-            // Add current category, if it is not already in the list
-            if (availableCategories.TrueForAll(c => c.Id != reservation.Taxi.CategoryId))
-            {
-                var currentCategory = new CategoryPairViewModel
-                {
-                    Id = reservation.Taxi.CategoryId,
-                    Name = reservation.Taxi.Category.Name
-                };
-                availableCategories.Insert(0, currentCategory);
-            }
+            int currentCategoryId = reservation.Taxi.CategoryId;
+            string currentCategoryName = reservation.Taxi.Category.Name;
+
+            var categoriesWithCurrent = EnsureCurrentCategoryIncluded(categories, currentCategoryId, currentCategoryName);
             
             var model = _mapper.Map<ReservationEditViewModel>(reservation);
 
-            model.Categories = availableCategories;
-            model.CategoryId = reservation.Taxi.CategoryId;
+            model.Categories = categoriesWithCurrent;
+            model.CategoryId = currentCategoryId;
 
             return View(model);
         }
@@ -187,6 +189,20 @@ public class ReservationsController : Controller
         {
             return NotFound();
         }
+    }
+
+    private static List<CategoryPairViewModel> EnsureCurrentCategoryIncluded(
+        List<CategoryPairViewModel> categories, int currentCategoryId, string currentCategoryName)
+    {
+        if (categories.TrueForAll(c => c.Id != currentCategoryId))
+        {
+            categories.Insert(0, new CategoryPairViewModel
+            {
+                Id = currentCategoryId,
+                Name = currentCategoryName
+            });
+        }
+        return categories;
     }
     
     [HttpPost]

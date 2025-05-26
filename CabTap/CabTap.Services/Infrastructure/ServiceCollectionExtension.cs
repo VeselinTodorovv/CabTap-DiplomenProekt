@@ -18,8 +18,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CabTap.Services.Infrastructure;
 
-public static class ServiceCollectionExtension
+public static class ServiceCollectionExtensions
 {
+    private static readonly Profile[] MappingProfiles =
+    {
+        new DriverMappingProfile(),
+        new TaxiMappingProfile(),
+        new ReservationMappingProfile(),
+        new UserMappingProfile(),
+        new CategoryMappingProfile()
+    };
+
     public static void RegisterRepositories(this IServiceCollection services)
     {
         services.AddTransient<ITaxiRepository, TaxiRepository>();
@@ -48,14 +57,18 @@ public static class ServiceCollectionExtension
     {
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.AddProfile(new DriverMappingProfile());
-            cfg.AddProfile(new TaxiMappingProfile());
-            cfg.AddProfile(new ReservationMappingProfile());
-            cfg.AddProfile(new UserMappingProfile());
-            cfg.AddProfile(new CategoryMappingProfile());
+            AddProfiles(cfg, MappingProfiles);
         });
 
         var mapper = config.CreateMapper();
         services.AddSingleton(mapper);
+    }
+
+    private static void AddProfiles(IMapperConfigurationExpression cfg, Profile[] profiles)
+    {
+        foreach (var profile in profiles)
+        {
+            cfg.AddProfile(profile);
+        }
     }
 }

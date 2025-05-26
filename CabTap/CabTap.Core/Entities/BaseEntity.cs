@@ -13,8 +13,10 @@ public abstract class BaseEntity
     public DateTime LastModifiedOn { get; set; }
     
     [Required]
+    [StringLength(50, MinimumLength = 3)]
     public string CreatedBy { get; set; } = null!;
     
     [Required]
+    [StringLength(50, MinimumLength = 3)]
     public string LastModifiedBy { get; set; } = null!;
 }
