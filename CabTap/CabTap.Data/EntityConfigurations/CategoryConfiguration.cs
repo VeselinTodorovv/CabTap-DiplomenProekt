@@ -20,10 +20,11 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
         category.Property(c => c.Rate)
             .HasPrecision(18, 2)
             .IsRequired();
-            
+        
         category.Property(c => c.Image)
-            .HasDefaultValue("/images/categories/default.png");
-            
+            .HasDefaultValue("/images/categories/default.png")
+            .HasMaxLength(100);
+        
         category.HasMany(c => c.Taxis)
             .WithOne(t => t.Category)
             .HasForeignKey(t => t.CategoryId)
