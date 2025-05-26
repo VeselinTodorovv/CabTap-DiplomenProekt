@@ -9,6 +9,8 @@ using CabTap.Shared.Reservation;
 
 namespace CabTap.Services.Services.Reservation;
 
+using Reservation=Core.Entities.Reservation;
+
 public class ReservationService : IReservationService
 {
     private readonly IReservationRepository _reservationRepository;
@@ -74,7 +76,7 @@ public class ReservationService : IReservationService
             reservationViewModel.PassengersCount = taxi.PassengerSeats;
         }
 
-        var reservation = _mapper.Map<Core.Entities.Reservation>(reservationViewModel);
+        var reservation = _mapper.Map<Reservation>(reservationViewModel);
         
         var dateTime = _dateTimeService.GetCurrentDateTime();
 
@@ -129,7 +131,7 @@ public class ReservationService : IReservationService
         await _reservationRepository.DeleteReservationAsync(reservationId);
     }
 
-    private static IQueryable<Core.Entities.Reservation> ApplySorting(IQueryable<Core.Entities.Reservation> query, string sortOption)
+    private static IQueryable<Reservation> ApplySorting(IQueryable<Reservation> query, string sortOption)
     {
         return sortOption switch
         {
@@ -144,7 +146,7 @@ public class ReservationService : IReservationService
         };
     }
 
-    private static IQueryable<Core.Entities.Reservation> ApplyFiltering(IQueryable<Core.Entities.Reservation> query, string reservationType)
+    private static IQueryable<Reservation> ApplyFiltering(IQueryable<Reservation> query, string reservationType)
     {
         return !string.IsNullOrEmpty(reservationType)
             ? query.Where(r => r.ReservationType == Enum.Parse<ReservationType>(reservationType))

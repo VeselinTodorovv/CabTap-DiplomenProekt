@@ -1,10 +1,12 @@
 namespace CabTap.Contracts.Repositories.Taxi;
 
+using Taxi=Core.Entities.Taxi;
+
 public interface ITaxiRepository
 {
-    IQueryable<Core.Entities.Taxi> GetTaxisQuery();
-    Task<Core.Entities.Taxi> GetTaxiByIdAsync(int taxiId);
-    Task AddTaxiAsync(Core.Entities.Taxi taxi);
-    Task UpdateTaxiAsync(Core.Entities.Taxi taxi);
+    IQueryable<Taxi> GetTaxisQuery();
+    Task<Taxi> GetTaxiByIdAsync(int taxiId);
+    Task AddTaxiAsync(Taxi taxi);
+    Task UpdateTaxiAsync(Taxi taxi);
     Task DeleteTaxiAsync(int taxiId);
 }

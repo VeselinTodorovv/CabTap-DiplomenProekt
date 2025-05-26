@@ -8,6 +8,8 @@ using CabTap.Shared.Taxi;
 
 namespace CabTap.Services.Services.Taxi;
 
+using Taxi=Core.Entities.Taxi;
+
 public class TaxiService : ITaxiService
 {
     private readonly ITaxiRepository _taxiRepository;
@@ -15,7 +17,7 @@ public class TaxiService : ITaxiService
     private readonly IMapper _mapper;
     private readonly IAuditService _auditService;
     
-    public TaxiService(ITaxiRepository taxiRepository, IUserService userService, IMapper mapper, ICategoryService categoryService, IAuditService auditService)
+    public TaxiService(ITaxiRepository taxiRepository, IUserService userService, IMapper mapper, IAuditService auditService)
     {
         _taxiRepository = taxiRepository;
         _userService = userService;
@@ -45,23 +47,20 @@ public class TaxiService : ITaxiService
     {
         var user = await _userService.GetCurrentUserAsync();
 
-        var taxi = _mapper.Map<Core.Entities.Taxi>(taxiViewModel);
+        var taxi = _mapper.Map<Taxi>(taxiViewModel);
 
         _auditService.SetCreationAuditInfo(taxi, user.UserName);
-
         await _taxiRepository.AddTaxiAsync(taxi);
     }
 
     public async Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-
         var existingTaxi = await _taxiRepository.GetTaxiByIdAsync(taxiViewModel.Id);
 
         _mapper.Map(taxiViewModel, existingTaxi);
 
         _auditService.SetModificationAuditInfo(existingTaxi, user.UserName);
-
         await _taxiRepository.UpdateTaxiAsync(existingTaxi);
     }
 
