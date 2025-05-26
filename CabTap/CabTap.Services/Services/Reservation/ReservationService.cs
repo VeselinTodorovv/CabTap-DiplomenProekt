@@ -98,29 +98,18 @@ public class ReservationService : IReservationService
     {
         var user = await _userService.GetCurrentUserAsync();
 
-        var newTaxiId = 0;
-
         var existingReservation = await _reservationRepository.GetReservationByIdAsync(reservationViewModel.Id);
-        if (existingReservation.Taxi.CategoryId != reservationViewModel.CategoryId)
-        {
-            var taxi = await _taxiManagerService.FindAvailableTaxiAsync(reservationViewModel.CategoryId);
-            
-            var oldId = existingReservation.TaxiId;
-            newTaxiId = taxi.Id;
-            
-            await _taxiManagerService.UpdateTaxiStatusAsync(oldId, TaxiStatus.Available);
-            await _taxiManagerService.UpdateTaxiStatusAsync(newTaxiId, TaxiStatus.Busy);
-        }
+        var newTaxiId = await _taxiManagerService.GetNewTaxiIdIfCategoryChangedAsync(reservationViewModel, existingReservation);
 
         reservationViewModel.ReservationDateTime = DateTime.SpecifyKind(reservationViewModel.ReservationDateTime, DateTimeKind.Utc);
         _mapper.Map(reservationViewModel, existingReservation);
-        if (newTaxiId != 0)
+
+        if (newTaxiId.HasValue)
         {
-            existingReservation.TaxiId = newTaxiId;
+            existingReservation.TaxiId = newTaxiId.Value;
         }
 
         _auditService.SetModificationAuditInfo(existingReservation, user.UserName);
-        
         await _reservationRepository.UpdateReservationAsync(existingReservation);
     }
 

@@ -4,6 +4,7 @@ using CabTap.Contracts.Services.Taxi;
 using CabTap.Contracts.Services.Utilities;
 using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Category;
+using CabTap.Shared.Reservation;
 using CabTap.Shared.Taxi;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,21 @@ public class TaxiManagerService : ITaxiManagerService
         taxi.TaxiStatus = newStatus;
 
         await _taxiRepository.UpdateTaxiAsync(taxi);
+    }
+    
+    public async Task<int?> GetNewTaxiIdIfCategoryChangedAsync(ReservationEditViewModel reservationViewModel, Core.Entities.Reservation existingReservation)
+    {
+        if (existingReservation.Taxi.CategoryId == reservationViewModel.CategoryId)
+        {
+            return null;
+        }
+        
+        var taxi = await FindAvailableTaxiAsync(reservationViewModel.CategoryId);
+        
+        await UpdateTaxiStatusAsync(existingReservation.TaxiId, TaxiStatus.Available);
+        await UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
+        
+        return taxi.Id;
     }
     
     private static IEnumerable<CategoryPairViewModel> MapToCategoryPairViewModels(IEnumerable<CategoryPairViewModel> categories)

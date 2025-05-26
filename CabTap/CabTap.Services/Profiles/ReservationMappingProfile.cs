@@ -29,10 +29,10 @@ public class ReservationMappingProfile : Profile
         CreateMap<ReservationDetailsViewModel, ReservationDeleteViewModel>();
 
         CreateMap<ReservationCreateViewModel, Reservation>()
-            .ForMember(r => r.OriginPoint, opt => opt.MapFrom(src =>
-                ConvertToPoint(src.OriginPoint)))
-            .ForMember(r => r.DestinationPoint, opt => opt.MapFrom(src =>
-                ConvertToPoint(src.DestinationPoint)));
+            .ForMember(r => r.OriginPoint, opt =>
+                opt.MapFrom(src => ConvertToPoint(src.OriginPoint)))
+            .ForMember(r => r.DestinationPoint, opt =>
+                opt.MapFrom(src => ConvertToPoint(src.DestinationPoint)));
     }
     
     private static Point? ConvertToPoint(string pointString)
