@@ -12,7 +12,7 @@ public class ReservationRepository : IReservationRepository
         _context = context;
     }
     
-    public IQueryable<Reservation> GetReservationsQuery(string userId, string searchInput)
+    public IQueryable<Reservation> GetReservationsQuery(string? userId, string searchInput)
     {
         IQueryable<Reservation> query = _context.Reservations;
 

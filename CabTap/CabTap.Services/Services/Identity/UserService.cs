@@ -86,11 +86,11 @@ public class UserService : IUserService
         await _userManager.DeleteAsync(user);
     }
 
-    public async Task<string> GetUserId(string searchInput)
+    public async Task<string?> GetUserId(string searchInput)
     {
         var user = await _userManager.Users
             .FirstOrDefaultAsync(u => u.UserName == searchInput);
         
-        return user?.Id ?? "";
+        return user?.Id;
     }
 }

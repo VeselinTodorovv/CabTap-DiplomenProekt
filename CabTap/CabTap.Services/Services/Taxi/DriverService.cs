@@ -13,15 +13,13 @@ public class DriverService : IDriverService
 {
     private readonly IDriverRepository _driverRepository;
     private readonly IUserService _userService;
-    private readonly IDateTimeService _dateTimeService;
     private readonly IMapper _mapper;
     private readonly IAuditService _auditService;
     
-    public DriverService(IDriverRepository driverRepository, IUserService userService, IMapper mapper, IDateTimeService dateTimeService, IAuditService auditService)
+    public DriverService(IDriverRepository driverRepository, IUserService userService, IMapper mapper, IAuditService auditService)
     {
         _driverRepository = driverRepository;
         _userService = userService;
-        _dateTimeService = dateTimeService;
         _auditService = auditService;
         _mapper = mapper;
     }

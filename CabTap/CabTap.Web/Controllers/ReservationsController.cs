@@ -2,6 +2,7 @@ using AutoMapper;
 using CabTap.Contracts.Services.Analytics;
 using CabTap.Contracts.Services.Reservation;
 using CabTap.Contracts.Services.Taxi;
+using CabTap.Contracts.Services.Utilities;
 using CabTap.Core.Entities.Enums;
 using CabTap.Shared.Category;
 using CabTap.Shared.Reservation;
@@ -14,18 +15,18 @@ namespace CabTap.Web.Controllers;
 public class ReservationsController : Controller
 {
     private readonly IReservationService _reservationService;
-    private readonly ITaxiService _taxiService;
+    private readonly ITaxiManagerService _taxiManagerService;
     private readonly IStatisticService _statisticService;
     private readonly ICategoryService _categoryService;
     private readonly IMapper _mapper;
 
-    public ReservationsController(IReservationService reservationService, ITaxiService taxiService, IMapper mapper, IStatisticService statisticService, ICategoryService categoryService)
+    public ReservationsController(IReservationService reservationService, IMapper mapper, IStatisticService statisticService, ICategoryService categoryService, ITaxiManagerService taxiManagerService)
     {
         _reservationService = reservationService;
-        _taxiService = taxiService;
         _mapper = mapper;
         _statisticService = statisticService;
         _categoryService = categoryService;
+        _taxiManagerService = taxiManagerService;
     }
 
     [Authorize(Roles = "Administrator")]
@@ -104,7 +105,7 @@ public class ReservationsController : Controller
     
     public async Task<IActionResult> Create()
     {
-        var categories = await _taxiService.GetAvailableTaxiTypesAsync();
+        var categories = await _taxiManagerService.GetAvailableTaxiTypesAsync();
 
         var reservationViewModel = new ReservationCreateViewModel
         {
@@ -170,7 +171,7 @@ public class ReservationsController : Controller
         try
         {
             var reservation = await _reservationService.GetReservationByIdAsync(id);
-            var categories = (await _taxiService.GetAvailableTaxiTypesAsync()).ToList();
+            var categories = (await _taxiManagerService.GetAvailableTaxiTypesAsync()).ToList();
 
             int currentCategoryId = reservation.Taxi.CategoryId;
             string currentCategoryName = reservation.Taxi.Category.Name;
