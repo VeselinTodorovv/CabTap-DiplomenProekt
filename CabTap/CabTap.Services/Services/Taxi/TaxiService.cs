@@ -79,10 +79,6 @@ public class TaxiService : ITaxiService
     public async Task AddTaxiAsync(TaxiCreateViewModel taxiViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-        if (user == null)
-        {
-            throw new UnauthorizedAccessException("User is not logged in");
-        }
 
         var taxi = _mapper.Map<Core.Entities.Taxi>(taxiViewModel);
 
@@ -94,10 +90,6 @@ public class TaxiService : ITaxiService
     public async Task UpdateTaxiAsync(TaxiEditViewModel taxiViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-        if (user == null)
-        {
-            throw new UnauthorizedAccessException("User is not logged in");
-        }
 
         var existingTaxi = await _taxiRepository.GetTaxiByIdAsync(taxiViewModel.Id);
 

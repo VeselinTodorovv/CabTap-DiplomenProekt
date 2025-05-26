@@ -13,13 +13,7 @@ public class ReservationMappingProfile : Profile
         CreateMap<Reservation, ReservationDetailsViewModel>();
         CreateMap<Reservation, ReservationDeleteViewModel>();
         CreateMap<Reservation, ReservationCreateViewModel>().ReverseMap();
-        
-        CreateMap<Reservation, ReservationEditViewModel>()
-            .ReverseMap()
-            .ForMember(dest => dest.CreatedOn, opt => opt.Ignore())
-            .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-            .ForMember(dest => dest.LastModifiedOn, opt => opt.Ignore())
-            .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+        CreateMap<Reservation, ReservationEditViewModel>().ReverseMap();
 
         CreateMap<ReservationDetailsViewModel, ReservationEditViewModel>();
         CreateMap<ReservationDetailsViewModel, ReservationDeleteViewModel>();
@@ -34,7 +28,9 @@ public class ReservationMappingProfile : Profile
     private static Point? ConvertToPoint(string pointString)
     {
         if (string.IsNullOrEmpty(pointString))
+        {
             return new Point(0, 0);
+        }
 
         var parts = pointString.Split(',');
         if (parts.Length != 2)

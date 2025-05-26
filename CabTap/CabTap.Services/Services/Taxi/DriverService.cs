@@ -57,10 +57,6 @@ public class DriverService : IDriverService
     public async Task AddDriverAsync(DriverCreateViewModel driverViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-        if (user == null)
-        {
-            throw new UnauthorizedAccessException("User is not logged in");
-        }
 
         var driver = _mapper.Map<Driver>(driverViewModel);
 
@@ -72,10 +68,6 @@ public class DriverService : IDriverService
     public async Task UpdateDriverAsync(DriverEditViewModel driverViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-        if (user == null)
-        {
-            throw new InvalidOperationException();
-        }
 
         var existingDriver = await _driverRepository.GetDriverByIdAsync(driverViewModel.Id);
 

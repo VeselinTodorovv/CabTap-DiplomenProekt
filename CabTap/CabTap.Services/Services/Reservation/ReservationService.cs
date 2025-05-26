@@ -44,10 +44,6 @@ public class ReservationService : IReservationService
     public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsByUserNameAsync(string searchInput, string sortOption, string reservationType, int page, int pageSize)
     {
         var user = await _userService.GetCurrentUserAsync();
-        if (user == null)
-        {
-            throw new UnauthorizedAccessException("User is not logged in");
-        }
         
         var query = _reservationRepository.GetReservationsQuery(user.Id, searchInput);
 
@@ -71,10 +67,6 @@ public class ReservationService : IReservationService
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-        if (user == null)
-        {
-            throw new UnauthorizedAccessException("User is not logged in.");
-        }
 
         var taxi = await _taxiManagerService.FindAvailableTaxiAsync(reservationViewModel.CategoryId);
         if (taxi.PassengerSeats < reservationViewModel.PassengersCount)
@@ -97,17 +89,12 @@ public class ReservationService : IReservationService
         _auditService.SetCreationAuditInfo(reservation, user.UserName);
 
         await _taxiManagerService.UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
-
         await _reservationRepository.AddReservationAsync(reservation);
     }
 
     public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-        if (user == null)
-        {
-            throw new UnauthorizedAccessException("User is not logged in");
-        }
 
         var newTaxiId = 0;
 
@@ -139,7 +126,6 @@ public class ReservationService : IReservationService
         var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
         
         await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
-        
         await _reservationRepository.DeleteReservationAsync(reservationId);
     }
 
@@ -167,33 +153,28 @@ public class ReservationService : IReservationService
 
     public async Task MarkAsCompleted(string reservationId)
     {
+        await UpdateReservationStatusAsync(reservationId, RideStatus.Finished);
+    }
+
+    public async Task MarkAsCanceled(string reservationId)
+    {
+        await UpdateReservationStatusAsync(reservationId, RideStatus.Canceled);
+    }
+    
+    private async Task UpdateReservationStatusAsync(string reservationId, RideStatus newStatus)
+    {
         var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
         if (reservation.RideStatus != RideStatus.InProgress)
         {
             return;
         }
         
-        reservation.RideStatus = RideStatus.Finished;
+        reservation.RideStatus = newStatus;
         
-        var userName = (await _userService.GetCurrentUserAsync())!.UserName;
+        var userName = (await _userService.GetCurrentUserAsync()).UserName;
         _auditService.SetModificationAuditInfo(reservation, userName);
         
         await _reservationRepository.UpdateReservationAsync(reservation);
         await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
-    }
-
-    public async Task MarkAsCanceled(string reservationId)
-    {
-        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
-        if (reservation.RideStatus == RideStatus.InProgress)
-        {
-            reservation.RideStatus = RideStatus.Canceled;
-
-            var userName = (await _userService.GetCurrentUserAsync())!.UserName;
-            _auditService.SetModificationAuditInfo(reservation, userName);
-            
-            await _reservationRepository.UpdateReservationAsync(reservation);
-            await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
-        }
     }
 }

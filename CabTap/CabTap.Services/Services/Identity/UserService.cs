@@ -22,9 +22,13 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<ApplicationUser?> GetCurrentUserAsync()
+    public async Task<ApplicationUser> GetCurrentUserAsync()
     {
         var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext?.User);
+        if (user == null)
+        {
+            throw new UnauthorizedAccessException("User is not logged in");
+        }
 
         return user;
     }

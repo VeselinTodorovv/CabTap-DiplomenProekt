@@ -12,12 +12,7 @@ public class DriverMappingProfile : Profile
         CreateMap<Driver, DriverDetailsViewModel>();
         CreateMap<Driver, DriverDeleteViewModel>();
         CreateMap<Driver, DriverCreateViewModel>().ReverseMap();
-        
-        CreateMap<Driver, DriverEditViewModel>().ReverseMap()
-            .ForMember(dest => dest.CreatedOn, opt => opt.Ignore())
-            .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-            .ForMember(dest => dest.LastModifiedOn, opt => opt.Ignore())
-            .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+        CreateMap<Driver, DriverEditViewModel>().ReverseMap();
         
         CreateMap<DriverDetailsViewModel, DriverDeleteViewModel>();
         CreateMap<DriverDetailsViewModel, DriverEditViewModel>();
