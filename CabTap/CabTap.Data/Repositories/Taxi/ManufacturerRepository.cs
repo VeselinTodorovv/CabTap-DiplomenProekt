@@ -2,7 +2,7 @@ using CabTap.Contracts.Repositories.Taxi;
 using CabTap.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CabTap.Data.Repositories;
+namespace CabTap.Data.Repositories.Taxi;
 
 public class ManufacturerRepository : IManufacturerRepository
 {

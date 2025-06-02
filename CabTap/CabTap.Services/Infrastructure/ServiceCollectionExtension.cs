@@ -7,7 +7,9 @@ using CabTap.Contracts.Services.Identity;
 using CabTap.Contracts.Services.Reservation;
 using CabTap.Contracts.Services.Taxi;
 using CabTap.Contracts.Services.Utilities;
-using CabTap.Data.Repositories;
+using CabTap.Data.Repositories.Analytics;
+using CabTap.Data.Repositories.Reservation;
+using CabTap.Data.Repositories.Taxi;
 using CabTap.Services.Profiles;
 using CabTap.Services.Services.Analytics;
 using CabTap.Services.Services.Identity;
@@ -31,26 +33,26 @@ public static class ServiceCollectionExtensions
 
     public static void RegisterRepositories(this IServiceCollection services)
     {
-        services.AddTransient<ITaxiRepository, TaxiRepository>();
-        services.AddTransient<IDriverRepository, DriverRepository>();
-        services.AddTransient<IReservationRepository, ReservationRepository>();
-        services.AddTransient<ICategoryRepository, CategoryRepository>();
-        services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
-        services.AddTransient<IStatisticRepository, StatisticRepository>();
+        services.AddScoped<ITaxiRepository, TaxiRepository>();
+        services.AddScoped<IDriverRepository, DriverRepository>();
+        services.AddScoped<IReservationRepository, ReservationRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
+        services.AddScoped<IStatisticRepository, StatisticRepository>();
     }
 
     public static void RegisterServices(this IServiceCollection services)
     {
-        services.AddTransient<ITaxiService, TaxiService>();
-        services.AddTransient<IDriverService, DriverService>();
-        services.AddTransient<IReservationService, ReservationService>();
-        services.AddTransient<ICategoryService, CategoryService>();
-        services.AddTransient<IManufacturerService, ManufacturerService>();
-        services.AddTransient<IUserService, UserService>();
-        services.AddTransient<IStatisticService, StatisticService>();
-        services.AddTransient<IDateTimeService, DateTimeService>();
-        services.AddTransient<IAuditService, AuditService>();
-        services.AddTransient<ITaxiManagerService, TaxiManagerService>();
+        services.AddScoped<ITaxiService, TaxiService>();
+        services.AddScoped<IDriverService, DriverService>();
+        services.AddScoped<IReservationService, ReservationService>();
+        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IManufacturerService, ManufacturerService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IStatisticService, StatisticService>();
+        services.AddScoped<IDateTimeService, DateTimeService>();
+        services.AddScoped<IAuditService, AuditService>();
+        services.AddScoped<ITaxiManagerService, TaxiManagerService>();
     }
 
     public static void AddAutoMapperProfiles(this IServiceCollection services)

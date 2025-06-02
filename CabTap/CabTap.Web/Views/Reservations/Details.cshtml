@@ -21,7 +21,7 @@
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.Destination)</dd>
                         
                         <dt class="text-center col-md-4">Time of Reservation:</dt>
-                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.ReservationDateTime)</dd>
+                        <dd class="utc-datetime text-center col-md-8">@Html.DisplayFor(model => model.ReservationDateTime)</dd>
 
                         <dt class="text-center col-md-4">Duration:</dt>
                         <dd class="text-center col-md-8">@Html.DisplayFor(model => model.Duration) min.</dd>
@@ -56,10 +56,10 @@
                         <hr>
 
                         <dt class="text-center col-md-4">Created On:</dt>
-                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.CreatedOn)</dd>
+                        <dd class="utc-datetime text-center col-md-8">@Html.DisplayFor(model => model.CreatedOn)</dd>
 
                         <dt class="text-center col-md-4">Last Modified On:</dt>
-                        <dd class="text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedOn)</dd>
+                        <dd class="utc-datetime text-center col-md-8">@Html.DisplayFor(model => model.LastModifiedOn)</dd>
 
                         @if (User.IsInRole("Administrator"))
                         {

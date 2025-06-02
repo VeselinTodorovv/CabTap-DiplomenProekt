@@ -1,7 +1,7 @@
 using CabTap.Contracts.Repositories.Taxi;
-using CabTap.Core.Entities;
 
-namespace CabTap.Data.Repositories;
+namespace CabTap.Data.Repositories.Taxi;
+using Taxi=Core.Entities.Taxi;
 
 public class TaxiRepository : ITaxiRepository
 {

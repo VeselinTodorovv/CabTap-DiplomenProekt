@@ -1,7 +1,7 @@
 using CabTap.Contracts.Repositories.Reservation;
-using CabTap.Core.Entities;
 
-namespace CabTap.Data.Repositories;
+namespace CabTap.Data.Repositories.Reservation;
+using Reservation=Core.Entities.Reservation;
 
 public class ReservationRepository : IReservationRepository
 {

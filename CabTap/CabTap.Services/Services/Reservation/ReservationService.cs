@@ -3,9 +3,11 @@ using CabTap.Contracts.Repositories.Reservation;
 using CabTap.Contracts.Services.Identity;
 using CabTap.Contracts.Services.Reservation;
 using CabTap.Contracts.Services.Utilities;
+using CabTap.Core.Entities;
 using CabTap.Core.Entities.Enums;
 using CabTap.Services.Infrastructure;
 using CabTap.Shared.Reservation;
+using CabTap.Shared.Taxi;
 
 namespace CabTap.Services.Services.Reservation;
 
@@ -61,6 +63,7 @@ public class ReservationService : IReservationService
     {
         var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
 
+        reservation.ReservationDateTime = reservation.ReservationDateTime.ToLocalTime();
         var model = _mapper.Map<ReservationDetailsViewModel>(reservation);
 
         return model;
@@ -78,20 +81,26 @@ public class ReservationService : IReservationService
 
         var reservation = _mapper.Map<Reservation>(reservationViewModel);
         
-        var dateTime = _dateTimeService.GetCurrentDateTime();
-
-        reservation.UserId = user.Id;
-        reservation.TaxiId = taxi.Id;
-
-        if (reservation.ReservationType == ReservationType.OnDemand)
-        {
-            reservation.ReservationDateTime = dateTime;
-        }
-
+        SetReservationDetails(reservation, user, taxi);
         _auditService.SetCreationAuditInfo(reservation, user.UserName);
 
         await _taxiManagerService.UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
         await _reservationRepository.AddReservationAsync(reservation);
+    }
+    
+    private void SetReservationDetails(Reservation reservation, ApplicationUser user, TaxiAllViewModel taxi)
+    {
+        reservation.UserId = user.Id;
+        reservation.TaxiId = taxi.Id;
+
+        if (reservation.ReservationType != ReservationType.OnDemand)
+        {
+            reservation.ReservationDateTime = reservation.ReservationDateTime.ToUniversalTime();
+            return;
+        }
+        
+        var dateTime = _dateTimeService.GetCurrentDateTime();
+        reservation.ReservationDateTime = dateTime;
     }
 
     public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)

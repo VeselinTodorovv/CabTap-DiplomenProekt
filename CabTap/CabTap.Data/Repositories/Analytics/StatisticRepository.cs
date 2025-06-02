@@ -1,7 +1,7 @@
 using CabTap.Contracts.Repositories.Analytics;
 using Microsoft.EntityFrameworkCore;
 
-namespace CabTap.Data.Repositories;
+namespace CabTap.Data.Repositories.Analytics;
 
 public class StatisticRepository : IStatisticRepository
 {
