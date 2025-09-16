@@ -55,7 +55,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITaxiManagerService, TaxiManagerService>();
         
         services.AddScoped<ReservationWorkflow>();
-        services.AddScoped<IReservationService, ReservationService>();
     }
 
     public static void AddAutoMapperProfiles(this IServiceCollection services)

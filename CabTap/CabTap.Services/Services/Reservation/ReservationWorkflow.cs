@@ -63,14 +63,14 @@ public class ReservationWorkflow
         await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
     }
     
-    public async Task<int?> ChangeTaxiIfCategoryChangedAsync(ReservationEditViewModel vm, Reservation existing)
+    public async Task<int?> ChangeTaxiIfCategoryChangedAsync(ReservationEditViewModel reservationViewModel, Reservation existing)
     {
-        if (existing.Taxi.CategoryId == vm.CategoryId)
+        if (existing.Taxi.CategoryId == reservationViewModel.CategoryId)
         {
             return null;
         }
 
-        var newTaxi = await AssignTaxiAsync(vm.CategoryId, vm.PassengersCount);
+        var newTaxi = await AssignTaxiAsync(reservationViewModel.CategoryId, reservationViewModel.PassengersCount);
         await _taxiManagerService.UpdateTaxiStatusAsync(existing.TaxiId, TaxiStatus.Available);
         
         return newTaxi.Id;

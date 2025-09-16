@@ -13,25 +13,25 @@ using Reservation=Core.Entities.Reservation;
 
 public class ReservationService : IReservationService
 {
-    private readonly IReservationRepository _repo;
+    private readonly IReservationRepository _reservationRepository;
     private readonly IUserService _userService;
-    private readonly IAuditService _audit;
-    private readonly ReservationWorkflow _workflow;
+    private readonly IAuditService _auditService;
+    private readonly ReservationWorkflow _reservationWorkflow;
     private readonly IMapper _mapper;
 
-    public ReservationService(IReservationRepository repo, IUserService userService, IMapper mapper, IAuditService audit, ReservationWorkflow workflow)
+    public ReservationService(IReservationRepository reservationRepository, IUserService userService, IMapper mapper, IAuditService auditService, ReservationWorkflow reservationWorkflow)
     {
-        _repo = repo;
+        _reservationRepository = reservationRepository;
         _userService = userService;
         _mapper = mapper;
-        _audit = audit;
-        _workflow = workflow;
+        _auditService = auditService;
+        _reservationWorkflow = reservationWorkflow;
     }
     
     public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsAsync(string searchInput, string sortOption, string reservationType, int page, int pageSize)
     {
         var userId = await _userService.GetUserId(searchInput);
-        var query = _repo.GetReservationsQuery(userId, searchInput);
+        var query = _reservationRepository.GetReservationsQuery(userId, searchInput);
 
         query = ReservationQueries.ApplySorting(query, sortOption);
         query = ReservationQueries.ApplyFiltering(query, reservationType);
@@ -45,7 +45,7 @@ public class ReservationService : IReservationService
     {
         var user = await _userService.GetCurrentUserAsync();
         
-        var query = _repo.GetReservationsQuery(user.Id, searchInput);
+        var query = _reservationRepository.GetReservationsQuery(user.Id, searchInput);
 
         query = ReservationQueries.ApplySorting(query, sortOption);
         query = ReservationQueries.ApplyFiltering(query, reservationType);
@@ -57,7 +57,7 @@ public class ReservationService : IReservationService
 
     public async Task<ReservationDetailsViewModel> GetReservationByIdAsync(string reservationId)
     {
-        var reservation = await _repo.GetReservationByIdAsync(reservationId);
+        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
 
         reservation.ReservationDateTime = reservation.ReservationDateTime.ToLocalTime();
         var model = _mapper.Map<ReservationDetailsViewModel>(reservation);
@@ -65,48 +65,53 @@ public class ReservationService : IReservationService
         return model;
     }
 
-    public async Task AddReservationAsync(ReservationCreateViewModel vm)
+    public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-        var taxi = await _workflow.AssignTaxiAsync(vm.CategoryId, vm.PassengersCount);
+        var taxi = await _reservationWorkflow.AssignTaxiAsync(reservationViewModel.CategoryId, reservationViewModel.PassengersCount);
 
-        var reservation = _mapper.Map<Reservation>(vm);
+        var reservation = _mapper.Map<Reservation>(reservationViewModel);
     
-        _workflow.SetReservationDetails(reservation, user, taxi);
-        _audit.SetCreationAuditInfo(reservation, user.UserName);
+        _reservationWorkflow.SetReservationDetails(reservation, user, taxi);
+        _auditService.SetCreationAuditInfo(reservation, user.UserName);
 
-        await _repo.AddReservationAsync(reservation);
+        await _reservationRepository.AddReservationAsync(reservation);
     }
 
-    public async Task UpdateReservationAsync(ReservationEditViewModel vm)
+    public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
     {
         var user = await _userService.GetCurrentUserAsync();
-        var existing = await _repo.GetReservationByIdAsync(vm.Id);
+        var existing = await _reservationRepository.GetReservationByIdAsync(reservationViewModel.Id);
 
-        var newTaxiId = await _workflow.ChangeTaxiIfCategoryChangedAsync(vm, existing);
-        _mapper.Map(vm, existing);
-        if (newTaxiId.HasValue) existing.TaxiId = newTaxiId.Value;
+        var newTaxiId = await _reservationWorkflow.ChangeTaxiIfCategoryChangedAsync(reservationViewModel, existing);
+        _mapper.Map(reservationViewModel, existing);
 
-        _audit.SetModificationAuditInfo(existing, user.UserName);
-        await _repo.UpdateReservationAsync(existing);
+        if (newTaxiId.HasValue)
+        {
+            existing.TaxiId = newTaxiId.Value;
+        }
+
+        _auditService.SetModificationAuditInfo(existing, user.UserName);
+        await _reservationRepository.UpdateReservationAsync(existing);
     }
 
     public async Task DeleteReservationAsync(string reservationId)
     {
-        var existing = await _repo.GetReservationByIdAsync(reservationId);
-        await _workflow.UpdateReservationStatusAsync(existing, RideStatus.Canceled, _userService, _audit);
-        await _repo.DeleteReservationAsync(reservationId);
+        var existing = await _reservationRepository.GetReservationByIdAsync(reservationId);
+        
+        await _reservationWorkflow.UpdateReservationStatusAsync(existing, RideStatus.Canceled, _userService, _auditService);
+        await _reservationRepository.DeleteReservationAsync(reservationId);
     }
 
     public async Task MarkAsCompleted(string reservationId)
     {
-        var reservation = await _repo.GetReservationByIdAsync(reservationId);
-        await _workflow.UpdateReservationStatusAsync(reservation, RideStatus.Finished, _userService, _audit);
+        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
+        await _reservationWorkflow.UpdateReservationStatusAsync(reservation, RideStatus.Finished, _userService, _auditService);
     }
 
     public async Task MarkAsCanceled(string reservationId)
     {
-        var reservation = await _repo.GetReservationByIdAsync(reservationId);
-        await _workflow.UpdateReservationStatusAsync(reservation, RideStatus.Canceled, _userService, _audit);
+        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
+        await _reservationWorkflow.UpdateReservationStatusAsync(reservation, RideStatus.Canceled, _userService, _auditService);
     }
 }

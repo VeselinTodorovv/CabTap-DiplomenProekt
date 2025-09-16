@@ -1,4 +1,5 @@
 using CabTap.Core.Entities;
+using CabTap.Core.Entities.Enums;
 using CabTap.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,9 @@ public static class ApplicationBuilderExtension
 
         await SeedCategoriesAsync(context);
         await SeedManufacturersAsync(context);
+        
+        await SeedDriversAsync(context);
+        await SeedTaxisAsync(context);
     }
     
     private static async Task RoleSeeder(IServiceProvider serviceProvider)
@@ -99,6 +103,79 @@ public static class ApplicationBuilderExtension
             new Manufacturer { Name = "Honda" }
         );
 
+        await context.SaveChangesAsync();
+    }
+    
+    private static async Task SeedDriversAsync(ApplicationDbContext context)
+    {
+        if (context.Drivers.Any())
+        {
+            return;
+        }
+
+        var dateTime = DateTime.UtcNow;
+        await context.Drivers.AddRangeAsync(
+            new Driver
+            {
+                Name = "John",
+                CreatedBy = "admin",
+                CreatedOn = dateTime,
+                LastModifiedBy = "admin",
+                LastModifiedOn = dateTime
+            },
+            new Driver
+            {
+                Name = "Jane",
+                CreatedBy = "admin",
+                CreatedOn = dateTime,
+                LastModifiedBy = "admin",
+                LastModifiedOn = dateTime
+            }
+        );
+        
+        await context.SaveChangesAsync();
+    }
+
+    private static async Task SeedTaxisAsync(ApplicationDbContext context)
+    {
+        if (context.Taxis.Any())
+        {
+            return;
+        }
+
+        var drivers = context.Drivers.Take(2).ToList();
+        var categories = context.Categories.Take(3).ToList();
+
+        var dateTime = DateTime.UtcNow;
+        await context.Taxis.AddRangeAsync(
+            new Taxi
+            {
+                RegNumber = "CA1234AA",
+                DriverId = drivers[0].Id,
+                CategoryId = categories[0].Id,
+                TaxiStatus = TaxiStatus.Available,
+                PassengerSeats = 4,
+                ManufacturerId = 1,
+                CreatedBy = "admin",
+                CreatedOn = dateTime,
+                LastModifiedBy = "admin",
+                LastModifiedOn = dateTime,
+            },
+            new Taxi
+            {
+                RegNumber = "CA5678BB",
+                DriverId = drivers[1].Id,
+                CategoryId = categories[1].Id,
+                TaxiStatus = TaxiStatus.Available,
+                PassengerSeats = 4,
+                ManufacturerId = 1,
+                CreatedBy = "admin",
+                CreatedOn = dateTime,
+                LastModifiedBy = "admin",
+                LastModifiedOn = dateTime
+            }
+        );
+        
         await context.SaveChangesAsync();
     }
 }
