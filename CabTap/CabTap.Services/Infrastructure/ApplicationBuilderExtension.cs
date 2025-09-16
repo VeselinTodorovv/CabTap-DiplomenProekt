@@ -40,19 +40,22 @@ public static class ApplicationBuilderExtension
     {
         var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-        if (await userManager.FindByNameAsync("admin") == null)
+        var adminUsername = Environment.GetEnvironmentVariable("ADMIN_USERNAME");
+        var adminPassword = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+
+        if (await userManager.FindByNameAsync(adminUsername) == null)
         {
             ApplicationUser user = new()
             {
-                FirstName = "admin",
-                LastName = "admin",
-                UserName = "admin",
-                Email = "admin@admin.com",
-                Address = "admin address",
+                FirstName = adminUsername,
+                LastName = adminUsername,
+                UserName = adminUsername,
+                Email = $"{adminUsername}@admin.com",
+                Address = $"{adminUsername} address",
                 PhoneNumber = "08888888"
             };
 
-            var result = await userManager.CreateAsync(user, "@Admin12315");
+            var result = await userManager.CreateAsync(user, adminPassword);
 
             if (result.Succeeded)
             {

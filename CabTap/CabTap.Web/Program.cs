@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddEnvironmentVariables();
 
 var config = builder.Configuration;
 var postgresConnectionString = config.GetConnectionString("PostgresConnection");
@@ -68,6 +69,16 @@ builder.Services.AddAntiforgery(options =>
 });
 
 var app = builder.Build();
+
+// Apply pending Migrations
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+var context = services.GetRequiredService<ApplicationDbContext>();
+if (context.Database.GetPendingMigrations().Any())
+{
+    context.Database.Migrate();
+}
 
 app.UseResponseCompression();
 await app.PrepareDatabase();
