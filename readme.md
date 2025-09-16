@@ -22,12 +22,12 @@ CabTap is a web application that provides users with a reliable and efficient ta
 
 ## Features
 
-* **Smart Address Autocompletion** – Google Maps integration for easy location selection
+* **Smart Address Autocompletion** – Leaflet.JS integration for easy location selection
 * **Real-time Trip Calculations** – View distance and cost estimates before booking
 * **Taxi Type Selection** – Choose from various vehicle options based on your needs
 * **Reservation History** – Track and manage your past and upcoming trips
 * **Admin Dashboard** – Comprehensive management interface for reservations and system monitoring
-* **User Authentication** – Secure login and registration system
+* **User Authentication** – Secure login and registration system via ASP.NET Identity
 
 ## Getting Started
 
@@ -81,7 +81,7 @@ CabTap is a web application that provides users with a reliable and efficient ta
 * Register a new account or log in with existing credentials.
 * Use the booking interface to:
 
-    * Enter pickup and destination locations with autocomplete.
+    * Enter pickup and destination locations with address autocomplete.
     * Select preferred taxi type.
     * View calculated distance and fare.
     * Confirm your reservation.
@@ -116,7 +116,7 @@ The application follows a layered architecture pattern:
 * **Bootstrap** – Responsive UI framework
 * **Razor Pages** – Server-side templating
 * **JavaScript, jQuery** – Client-side interactivity
-* **LeafletJS** – Interactive maps, Geocoding and place autocomplete
+* **LeafletJS** – Geocoding and address autocomplete
 
 ## Database Configuration
 
@@ -144,6 +144,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 * **Database Initialization:** The PostgreSQL database is initialized with the name `CabTapDB` and the user `postgres`. The password is set via the `POSTGRES_PASSWORD` environment variable in the `docker-compose.yml` file.
 * **Data Persistence:** Data is persisted using Docker volumes. The volume `postgres-data` ensures that data is not lost when containers are stopped or removed.
-* **Health Checks:** Consider implementing health checks for the PostgreSQL container to ensure it is ready before the application attempts to connect. This can be done by adding a `healthcheck` section in the `docker-compose.yml` file.
-
-If you need further assistance or have any questions, feel free to ask!

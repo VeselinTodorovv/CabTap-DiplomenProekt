@@ -3,11 +3,9 @@ using CabTap.Contracts.Repositories.Reservation;
 using CabTap.Contracts.Services.Identity;
 using CabTap.Contracts.Services.Reservation;
 using CabTap.Contracts.Services.Utilities;
-using CabTap.Core.Entities;
 using CabTap.Core.Entities.Enums;
 using CabTap.Services.Infrastructure;
 using CabTap.Shared.Reservation;
-using CabTap.Shared.Taxi;
 
 namespace CabTap.Services.Services.Reservation;
 
@@ -15,30 +13,28 @@ using Reservation=Core.Entities.Reservation;
 
 public class ReservationService : IReservationService
 {
-    private readonly IReservationRepository _reservationRepository;
+    private readonly IReservationRepository _repo;
     private readonly IUserService _userService;
-    private readonly IDateTimeService _dateTimeService;
-    private readonly IAuditService _auditService;
-    private readonly ITaxiManagerService _taxiManagerService;
+    private readonly IAuditService _audit;
+    private readonly ReservationWorkflow _workflow;
     private readonly IMapper _mapper;
 
-    public ReservationService(IReservationRepository reservationRepository, IUserService userService, IMapper mapper, IDateTimeService dateTimeService, IAuditService auditService, ITaxiManagerService taxiManagerService)
+    public ReservationService(IReservationRepository repo, IUserService userService, IMapper mapper, IAuditService audit, ReservationWorkflow workflow)
     {
-        _reservationRepository = reservationRepository;
+        _repo = repo;
         _userService = userService;
         _mapper = mapper;
-        _dateTimeService = dateTimeService;
-        _auditService = auditService;
-        _taxiManagerService = taxiManagerService;
+        _audit = audit;
+        _workflow = workflow;
     }
     
     public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsAsync(string searchInput, string sortOption, string reservationType, int page, int pageSize)
     {
         var userId = await _userService.GetUserId(searchInput);
-        var query = _reservationRepository.GetReservationsQuery(userId, searchInput);
+        var query = _repo.GetReservationsQuery(userId, searchInput);
 
-        query = ApplySorting(query, sortOption);
-        query = ApplyFiltering(query, reservationType);
+        query = ReservationQueries.ApplySorting(query, sortOption);
+        query = ReservationQueries.ApplyFiltering(query, reservationType);
 
         var reservations = await query.PaginateAsync(page, pageSize);
         
@@ -49,10 +45,10 @@ public class ReservationService : IReservationService
     {
         var user = await _userService.GetCurrentUserAsync();
         
-        var query = _reservationRepository.GetReservationsQuery(user.Id, searchInput);
+        var query = _repo.GetReservationsQuery(user.Id, searchInput);
 
-        query = ApplySorting(query, sortOption);
-        query = ApplyFiltering(query, reservationType);
+        query = ReservationQueries.ApplySorting(query, sortOption);
+        query = ReservationQueries.ApplyFiltering(query, reservationType);
 
         var reservations = await query.PaginateAsync(page, pageSize);
 
@@ -61,7 +57,7 @@ public class ReservationService : IReservationService
 
     public async Task<ReservationDetailsViewModel> GetReservationByIdAsync(string reservationId)
     {
-        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
+        var reservation = await _repo.GetReservationByIdAsync(reservationId);
 
         reservation.ReservationDateTime = reservation.ReservationDateTime.ToLocalTime();
         var model = _mapper.Map<ReservationDetailsViewModel>(reservation);
@@ -69,113 +65,48 @@ public class ReservationService : IReservationService
         return model;
     }
 
-    public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
+    public async Task AddReservationAsync(ReservationCreateViewModel vm)
     {
         var user = await _userService.GetCurrentUserAsync();
+        var taxi = await _workflow.AssignTaxiAsync(vm.CategoryId, vm.PassengersCount);
 
-        var taxi = await _taxiManagerService.FindAvailableTaxiAsync(reservationViewModel.CategoryId);
-        if (taxi.PassengerSeats < reservationViewModel.PassengersCount)
-        {
-            reservationViewModel.PassengersCount = taxi.PassengerSeats;
-        }
-
-        var reservation = _mapper.Map<Reservation>(reservationViewModel);
-        
-        SetReservationDetails(reservation, user, taxi);
-        _auditService.SetCreationAuditInfo(reservation, user.UserName);
-
-        await _taxiManagerService.UpdateTaxiStatusAsync(taxi.Id, TaxiStatus.Busy);
-        await _reservationRepository.AddReservationAsync(reservation);
-    }
+        var reservation = _mapper.Map<Reservation>(vm);
     
-    private void SetReservationDetails(Reservation reservation, ApplicationUser user, TaxiAllViewModel taxi)
-    {
-        reservation.UserId = user.Id;
-        reservation.TaxiId = taxi.Id;
+        _workflow.SetReservationDetails(reservation, user, taxi);
+        _audit.SetCreationAuditInfo(reservation, user.UserName);
 
-        if (reservation.ReservationType != ReservationType.OnDemand)
-        {
-            reservation.ReservationDateTime = reservation.ReservationDateTime.ToUniversalTime();
-            return;
-        }
-        
-        var dateTime = _dateTimeService.GetCurrentDateTime();
-        reservation.ReservationDateTime = dateTime;
+        await _repo.AddReservationAsync(reservation);
     }
 
-    public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
+    public async Task UpdateReservationAsync(ReservationEditViewModel vm)
     {
         var user = await _userService.GetCurrentUserAsync();
+        var existing = await _repo.GetReservationByIdAsync(vm.Id);
 
-        var existingReservation = await _reservationRepository.GetReservationByIdAsync(reservationViewModel.Id);
-        var newTaxiId = await _taxiManagerService.GetNewTaxiIdIfCategoryChangedAsync(reservationViewModel, existingReservation);
+        var newTaxiId = await _workflow.ChangeTaxiIfCategoryChangedAsync(vm, existing);
+        _mapper.Map(vm, existing);
+        if (newTaxiId.HasValue) existing.TaxiId = newTaxiId.Value;
 
-        reservationViewModel.ReservationDateTime = DateTime.SpecifyKind(reservationViewModel.ReservationDateTime, DateTimeKind.Utc);
-        _mapper.Map(reservationViewModel, existingReservation);
-
-        if (newTaxiId.HasValue)
-        {
-            existingReservation.TaxiId = newTaxiId.Value;
-        }
-
-        _auditService.SetModificationAuditInfo(existingReservation, user.UserName);
-        await _reservationRepository.UpdateReservationAsync(existingReservation);
+        _audit.SetModificationAuditInfo(existing, user.UserName);
+        await _repo.UpdateReservationAsync(existing);
     }
 
     public async Task DeleteReservationAsync(string reservationId)
     {
-        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
-        
-        await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
-        await _reservationRepository.DeleteReservationAsync(reservationId);
-    }
-
-    private static IQueryable<Reservation> ApplySorting(IQueryable<Reservation> query, string sortOption)
-    {
-        return sortOption switch
-        {
-            "priceAsc" => query.OrderBy(x => x.Price),
-            "priceDesc" => query.OrderByDescending(x => x.Price),
-            "distanceAsc" => query.OrderBy(x => x.Distance),
-            "distanceDesc" => query.OrderByDescending(x => x.Distance),
-            "dateAsc" => query.OrderBy(x => x.ReservationDateTime),
-            "dateDesc" => query.OrderByDescending(x => x.ReservationDateTime),
-            "oldest" => query.OrderBy(r => r.CreatedOn),
-            _ => query.OrderByDescending(r => r.LastModifiedOn)
-        };
-    }
-
-    private static IQueryable<Reservation> ApplyFiltering(IQueryable<Reservation> query, string reservationType)
-    {
-        return !string.IsNullOrEmpty(reservationType)
-            ? query.Where(r => r.ReservationType == Enum.Parse<ReservationType>(reservationType))
-            : query;
+        var existing = await _repo.GetReservationByIdAsync(reservationId);
+        await _workflow.UpdateReservationStatusAsync(existing, RideStatus.Canceled, _userService, _audit);
+        await _repo.DeleteReservationAsync(reservationId);
     }
 
     public async Task MarkAsCompleted(string reservationId)
     {
-        await UpdateReservationStatusAsync(reservationId, RideStatus.Finished);
+        var reservation = await _repo.GetReservationByIdAsync(reservationId);
+        await _workflow.UpdateReservationStatusAsync(reservation, RideStatus.Finished, _userService, _audit);
     }
 
     public async Task MarkAsCanceled(string reservationId)
     {
-        await UpdateReservationStatusAsync(reservationId, RideStatus.Canceled);
-    }
-    
-    private async Task UpdateReservationStatusAsync(string reservationId, RideStatus newStatus)
-    {
-        var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
-        if (reservation.RideStatus != RideStatus.InProgress)
-        {
-            return;
-        }
-        
-        reservation.RideStatus = newStatus;
-        
-        var userName = (await _userService.GetCurrentUserAsync()).UserName;
-        _auditService.SetModificationAuditInfo(reservation, userName);
-        
-        await _reservationRepository.UpdateReservationAsync(reservation);
-        await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
+        var reservation = await _repo.GetReservationByIdAsync(reservationId);
+        await _workflow.UpdateReservationStatusAsync(reservation, RideStatus.Canceled, _userService, _audit);
     }
 }
