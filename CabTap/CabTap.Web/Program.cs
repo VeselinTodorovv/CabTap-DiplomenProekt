@@ -1,44 +1,13 @@
-using CabTap.Core.Entities;
 using CabTap.Data;
-using CabTap.Services.Infrastructure;
-using Microsoft.AspNetCore.Identity;
+using CabTap.Web.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddEnvironmentVariables();
 
-var config = builder.Configuration;
-var postgresConnectionString = config.GetConnectionString("PostgresConnection");
-var dbPassword = Environment.GetEnvironmentVariable("CabTapDBPassword");
+builder.Services.AddDatabaseExtensions(builder.Configuration);
+builder.Services.AddApplicationIdentity();
+builder.Services.AddApplicationServices();
 
-if (string.IsNullOrWhiteSpace(dbPassword))
-{
-    throw new InvalidOperationException("CabTapDBPassword is not set.");
-}
-
-var connBuilder = new NpgsqlConnectionStringBuilder(postgresConnectionString)
-{
-    Password = dbPassword
-};
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options
-        .UseLazyLoadingProxies()
-        .UseNpgsql(connBuilder.ConnectionString,
-            o => o.UseNetTopologySuite()))
-    .AddHealthChecks()
-    .AddNpgSql(connBuilder.ConnectionString);
-
-builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
-    {
-        options.Password.RequiredLength = 8;
-        options.Password.RequiredUniqueChars = 1;
-        
-        options.User.RequireUniqueEmail = true;
-    })
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
@@ -47,41 +16,40 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     options.MinimumSameSitePolicy = SameSiteMode.Strict;
 });
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
 
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
-builder.Services.AddAutoMapperProfiles();
+// TODO: Ensure CSP is effective against XSS attacks
+// A strong Content Security Policy (CSP) significantly reduces the risk of cross-site scripting (XSS) attacks. Learn how to use a CSP to prevent XSS
 
-builder.Services.RegisterRepositories();
-builder.Services.RegisterServices();
+// TODO: Use a strong HSTS policy
+// Deployment of the HSTS header significantly reduces the risk of downgrading HTTP connections and eavesdropping attacks.
+// A rollout in stages, starting with a low max-age is recommended.
 
-// Add response compression
-builder.Services.AddResponseCompression(options =>
-{
-    options.EnableForHttps = true;
-});
+// TODO: Ensure proper origin isolation with COOP
+// The Cross-Origin-Opener-Policy (COOP) can be used to isolate the top-level window from other documents such as pop-ups.
 
-builder.Services.AddAntiforgery(options =>
-{
-    options.HeaderName = "X-XSRF-TOKEN";
-    options.SuppressXFrameOptionsHeader = false;
-});
+// TODO: Mitigate clickjacking with XFO or CSP
+// The X-Frame-Options (XFO) header or the frame-ancestors directive in the Content-Security-Policy (CSP) header control where a page can be embedded.
+// These can mitigate clickjacking attacks by blocking some or all sites from embedding the page.
+
+// TODO: Mitigate DOM-based XSS with Trusted Types
+// The require-trusted-types-for directive in the Content-Security-Policy (CSP) header instructs user agents to control the data passed to DOM XSS sink functions.
+
 
 var app = builder.Build();
 
 // Apply pending Migrations
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
-
-var context = services.GetRequiredService<ApplicationDbContext>();
-if (context.Database.GetPendingMigrations().Any())
+using (var scope = app.Services.CreateScope())
 {
-    context.Database.Migrate();
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    if (context.Database.GetPendingMigrations().Any())
+    {
+        context.Database.Migrate();
+    }
+    
+    await app.PrepareDatabase();
 }
 
 app.UseResponseCompression();
-await app.PrepareDatabase();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

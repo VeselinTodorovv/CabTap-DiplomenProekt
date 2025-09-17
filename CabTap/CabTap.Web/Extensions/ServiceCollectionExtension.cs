@@ -16,9 +16,8 @@ using CabTap.Services.Services.Identity;
 using CabTap.Services.Services.Reservation;
 using CabTap.Services.Services.Taxi;
 using CabTap.Services.Services.Utilities;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace CabTap.Services.Infrastructure;
+namespace CabTap.Web.Extensions;
 
 public static class ServiceCollectionExtensions
 {
@@ -31,7 +30,31 @@ public static class ServiceCollectionExtensions
         new CategoryMappingProfile()
     };
 
-    public static void RegisterRepositories(this IServiceCollection services)
+    public static void AddApplicationServices(this IServiceCollection services)
+    {
+        services.AddControllersWithViews();
+        services.AddRazorPages();
+
+        services.AddAutoMapper(typeof(Program).Assembly);
+        services.AddAutoMapperProfiles();
+
+        services.RegisterRepositories();
+        services.RegisterServices();
+
+        // Add response compression
+        services.AddResponseCompression(options =>
+        {
+            options.EnableForHttps = true;
+        });
+
+        services.AddAntiforgery(options =>
+        {
+            options.HeaderName = "X-XSRF-TOKEN";
+            options.SuppressXFrameOptionsHeader = false;
+        });
+    }
+
+    private static void RegisterRepositories(this IServiceCollection services)
     {
         services.AddScoped<ITaxiRepository, TaxiRepository>();
         services.AddScoped<IDriverRepository, DriverRepository>();
@@ -41,7 +64,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IStatisticRepository, StatisticRepository>();
     }
 
-    public static void RegisterServices(this IServiceCollection services)
+    private static void RegisterServices(this IServiceCollection services)
     {
         services.AddScoped<ITaxiService, TaxiService>();
         services.AddScoped<IDriverService, DriverService>();
@@ -57,7 +80,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ReservationWorkflow>();
     }
 
-    public static void AddAutoMapperProfiles(this IServiceCollection services)
+    private static void AddAutoMapperProfiles(this IServiceCollection services)
     {
         var config = new MapperConfiguration(cfg =>
         {

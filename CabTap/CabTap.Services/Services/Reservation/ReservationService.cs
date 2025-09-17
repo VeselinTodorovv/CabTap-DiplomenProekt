@@ -67,6 +67,10 @@ public class ReservationService : IReservationService
 
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
     {
+        //TODO: Research DB Transactions & Unit Of Work.
+        //Current implementation updates the taxi stats first, then tries to create a reservation. If creating a reservation fails, the taxi remains busy for no reason.
+        //Transactions provide a way to have either all succeed or fail, no in between.
+        
         var user = await _userService.GetCurrentUserAsync();
         var taxi = await _reservationWorkflow.AssignTaxiAsync(reservationViewModel.CategoryId, reservationViewModel.PassengersCount);
 
