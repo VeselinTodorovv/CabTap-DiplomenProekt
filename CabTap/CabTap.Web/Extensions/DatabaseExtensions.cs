@@ -29,4 +29,15 @@ public static class DatabaseExtensions
             .AddHealthChecks()
             .AddNpgSql(connBuilder.ConnectionString);
     }
+
+    public static async Task ApplyPendingMigrationsAsync(this IServiceProvider services)
+    {
+        using var scope = services.CreateScope();
+        
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        if ((await context.Database.GetPendingMigrationsAsync()).Any())
+        {
+            await context.Database.MigrateAsync();
+        }
+    }
 }

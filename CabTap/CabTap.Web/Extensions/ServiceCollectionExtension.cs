@@ -33,6 +33,7 @@ public static class ServiceCollectionExtensions
     public static void AddApplicationServices(this IServiceCollection services)
     {
         services.AddControllersWithViews();
+        services.AddHttpContextAccessor();
         services.AddRazorPages();
 
         services.AddAutoMapper(typeof(Program).Assembly);
@@ -71,13 +72,14 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IReservationService, ReservationService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IManufacturerService, ManufacturerService>();
-        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IStatisticService, StatisticService>();
         services.AddScoped<IDateTimeService, DateTimeService>();
         services.AddScoped<IAuditService, AuditService>();
         services.AddScoped<ITaxiManagerService, TaxiManagerService>();
         
         services.AddScoped<ReservationWorkflow>();
+        
+        services.AddTransient<IUserService, UserService>();
     }
 
     private static void AddAutoMapperProfiles(this IServiceCollection services)
