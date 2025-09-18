@@ -26,6 +26,8 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - cabtap-network
+    ports:
+      - "5433:5432"
 
 networks:
   cabtap-network:

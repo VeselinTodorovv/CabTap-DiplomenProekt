@@ -57,15 +57,14 @@ public class ReservationWorkflow
         reservation.RideStatus = newStatus;
         
         var currentUser = await userService.GetCurrentUserAsync();
-        var userName = currentUser.UserName;
         
-        audit.SetModificationAuditInfo(reservation, userName);
+        audit.SetModificationAuditInfo(reservation, currentUser.UserName);
         await _taxiManagerService.UpdateTaxiStatusAsync(reservation.TaxiId, TaxiStatus.Available);
     }
     
     public async Task<int?> ChangeTaxiIfCategoryChangedAsync(ReservationEditViewModel reservationViewModel, Reservation existing)
     {
-        if (existing.Taxi.CategoryId == reservationViewModel.CategoryId)
+        if (reservationViewModel.CategoryId == existing.Taxi.CategoryId)
         {
             return null;
         }

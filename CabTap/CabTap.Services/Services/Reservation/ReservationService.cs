@@ -44,7 +44,6 @@ public class ReservationService : IReservationService
     public async Task<IEnumerable<ReservationAllViewModel>> GetPaginatedReservationsByUserNameAsync(string searchInput, string sortOption, string reservationType, int page, int pageSize)
     {
         var user = await _userService.GetCurrentUserAsync();
-        
         var query = _reservationRepository.GetReservationsQuery(user.Id, searchInput);
 
         query = ReservationQueries.ApplySorting(query, sortOption);
@@ -59,7 +58,6 @@ public class ReservationService : IReservationService
     {
         var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
 
-        reservation.ReservationDateTime = reservation.ReservationDateTime.ToLocalTime();
         var model = _mapper.Map<ReservationDetailsViewModel>(reservation);
 
         return model;
@@ -67,10 +65,6 @@ public class ReservationService : IReservationService
 
     public async Task AddReservationAsync(ReservationCreateViewModel reservationViewModel)
     {
-        //TODO: Research DB Transactions & Unit Of Work.
-        //Current implementation updates the taxi stats first, then tries to create a reservation. If creating a reservation fails, the taxi remains busy for no reason.
-        //Transactions provide a way to have either all succeed or fail, no in between.
-        
         var user = await _userService.GetCurrentUserAsync();
         var taxi = await _reservationWorkflow.AssignTaxiAsync(reservationViewModel.CategoryId, reservationViewModel.PassengersCount);
 
@@ -84,6 +78,10 @@ public class ReservationService : IReservationService
 
     public async Task UpdateReservationAsync(ReservationEditViewModel reservationViewModel)
     {
+        //TODO: Research DB Transactions & Unit Of Work.
+        //Current implementation updates the taxi stats first, then tries to create a reservation. If creating a reservation fails, the taxi remains busy for no reason.
+        //Transactions provide a way to have either all succeed or fail, no in between.
+        
         var user = await _userService.GetCurrentUserAsync();
         var existing = await _reservationRepository.GetReservationByIdAsync(reservationViewModel.Id);
 
