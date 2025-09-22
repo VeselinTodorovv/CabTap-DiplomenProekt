@@ -30,4 +30,13 @@ public static class SecurityExtensions
             options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
         });
     }
+    
+    public static void ConfigureAntiforgery(this IServiceCollection services)
+    {
+        services.AddAntiforgery(options =>
+        {
+            options.HeaderName = "X-XSRF-TOKEN";
+            options.SuppressXFrameOptionsHeader = false;
+        });
+    }
 }

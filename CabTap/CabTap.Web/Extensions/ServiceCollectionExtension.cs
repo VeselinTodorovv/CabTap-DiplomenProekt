@@ -47,12 +47,6 @@ public static class ServiceCollectionExtensions
         {
             options.EnableForHttps = true;
         });
-
-        services.AddAntiforgery(options =>
-        {
-            options.HeaderName = "X-XSRF-TOKEN";
-            options.SuppressXFrameOptionsHeader = false;
-        });
     }
 
     private static void RegisterRepositories(this IServiceCollection services)
@@ -76,10 +70,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDateTimeService, DateTimeService>();
         services.AddScoped<IAuditService, AuditService>();
         services.AddScoped<ITaxiManagerService, TaxiManagerService>();
+        services.AddScoped<IUserService, UserService>();
         
         services.AddScoped<ReservationWorkflow>();
-        
-        services.AddTransient<IUserService, UserService>();
     }
 
     private static void AddAutoMapperProfiles(this IServiceCollection services)

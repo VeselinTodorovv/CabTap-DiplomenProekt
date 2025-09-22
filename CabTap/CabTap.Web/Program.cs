@@ -11,6 +11,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.ConfigureHsts();
 builder.Services.ConfigureHttpsRedirection();
 builder.Services.ConfigureCookies();
+builder.Services.ConfigureAntiforgery();
 
 var app = builder.Build();
 
